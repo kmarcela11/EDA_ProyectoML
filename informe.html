@@ -60,6 +60,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'informe';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Modelos de regresión" href="modelos.html" />
     <link rel="prev" title="Análisis de Series de Tiempo de Variables Meteorológicas" href="Intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -180,6 +181,7 @@
         </ul>
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>Análisis Exploratorio de Datos (EDA)</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="modelos.html"><strong>Modelos de regresión</strong></a></li>
 </ul>
 
     </div>
@@ -375,16 +377,17 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduccion"><strong>Introducción</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contextualizacion-de-los-datos"><strong>Contextualización de los datos</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#introduccion"><strong>Introducción</strong></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#descripcion-del-conjunto-de-datos"><strong>Descripción del Conjunto de Datos</strong></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#estrategia-del-analisis-exploratorio-de-datos"><strong>Estrategia del Análisis Exploratorio de Datos</strong></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#importancia-del-eda-en-el-proyecto"><strong>Importancia del EDA en el proyecto</strong></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#importacion-de-librerias-necesarias"><strong>Importación de librerías necesarias</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#importacion-y-exploracion-inicial-del-conjunto-de-datos"><strong>Importación y exploración inicial del conjunto de datos</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#librerias-y-modulos-necesarios"><strong>Librerías y modulos necesarios</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conjunto-de-datos"><strong>Conjunto de datos</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reorganizacion-del-conjunto-de-datos"><strong>Reorganización del conjunto de datos</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reduccion-de-dimensionalidad"><strong>Reducción de Dimensionalidad</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reduccion-de-dimensionalidad-vif"><strong>Reducción de Dimensionalidad (VIF)</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preparacion-y-analisis-de-subconjuntos-de-velocidad-del-viento"><strong>Preparación y Análisis de Subconjuntos de Velocidad del Viento</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizacion-de-la-direccion-y-velocidad-del-viento-en-diferentes-alturas"><strong>Visualización de la Dirección y Velocidad del Viento en Diferentes Alturas</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizacion-de-la-temperatura-a-diferentes-alturas"><strong>Visualización de la Temperatura a Diferentes Alturas</strong></a></li>
@@ -419,9 +422,12 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="analisis-exploratorio-de-datos-eda">
 <h1><strong>Análisis Exploratorio de Datos (EDA)</strong><a class="headerlink" href="#analisis-exploratorio-de-datos-eda" title="Link to this heading">#</a></h1>
+<section id="contextualizacion-de-los-datos">
+<h2><strong>Contextualización de los datos</strong><a class="headerlink" href="#contextualizacion-de-los-datos" title="Link to this heading">#</a></h2>
 <section id="introduccion">
-<h2><strong>Introducción</strong><a class="headerlink" href="#introduccion" title="Link to this heading">#</a></h2>
+<h3><strong>Introducción</strong><a class="headerlink" href="#introduccion" title="Link to this heading">#</a></h3>
 <p>El análisis exploratorio de datos (EDA) es un paso fundamental en la comprensión y preparación de los datos para su análisis posterior y modelado. En este proyecto, el objetivo principal es analizar las características y comportamientos de las variables relacionadas con el monitoreo del viento y el clima en distintas alturas, utilizando un conjunto de datos recogidos de sensores ubicados a diferentes alturas: 40 m, 60 m, 80 m y 100 m. El conjunto de datos incluye variables clave como velocidad y dirección del viento, temperatura, presión y humedad.</p>
+</section>
 <section id="descripcion-del-conjunto-de-datos">
 <h3><strong>Descripción del Conjunto de Datos</strong><a class="headerlink" href="#descripcion-del-conjunto-de-datos" title="Link to this heading">#</a></h3>
 <p>El conjunto de datos utilizado en este proyecto incluye mediciones climáticas y de velocidad del viento tomadas en intervalos regulares a lo largo de un año. Cada sensor está ubicado a una altura específica, permitiendo la captura de datos relevantes a diferentes niveles de la atmósfera:</p>
@@ -450,13 +456,11 @@ document.write(`
 <p>En resumen, el EDA de este proyecto establece una base sólida para cualquier análisis y modelado futuro, asegurando la integridad y relevancia de los datos en el contexto del monitoreo climático y del viento.</p>
 </section>
 </section>
-<section id="importacion-de-librerias-necesarias">
-<h2><strong>Importación de librerías necesarias</strong><a class="headerlink" href="#importacion-de-librerias-necesarias" title="Link to this heading">#</a></h2>
-<p>A continuación se realiza la correspondiente importación de librerías necesarias para el correcto funcionamiento del código.</p>
+<section id="librerias-y-modulos-necesarios">
+<h2><strong>Librerías y modulos necesarios</strong><a class="headerlink" href="#librerias-y-modulos-necesarios" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Importación de librerías necesarias</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
@@ -473,215 +477,284 @@ document.write(`
 <span class="kn">from</span> <span class="nn">sklearn.impute</span> <span class="kn">import</span> <span class="n">SimpleImputer</span>
 <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
 <span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">product</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A module that was compiled using NumPy 1.x cannot be run in
-NumPy 2.0.2 as it may crash. To support both 1.x and 2.x
-versions of NumPy, modules must be compiled with NumPy 2.0.
-Some module may need to rebuild instead e.g. with &#39;pybind11&gt;=2.12&#39;.
-
-If you are a user of the module, the easiest solution will be to
-downgrade to &#39;numpy&lt;2&#39; or try to upgrade the affected module.
-We expect that some modules will need time to support NumPy 2.
-
-Traceback (most recent call last):  File &quot;C:\Users\kamac\miniconda3\envs\ml_venv\lib\runpy.py&quot;, line 197, in _run_module_as_main
-    return _run_code(code, main_globals, None,
-  File &quot;C:\Users\kamac\miniconda3\envs\ml_venv\lib\runpy.py&quot;, line 87, in _run_code
-    exec(code, run_globals)
-  File &quot;C:\Users\kamac\miniconda3\envs\ml_venv\lib\site-packages\ipykernel_launcher.py&quot;, line 17, in &lt;module&gt;
-    app.launch_new_instance()
-  File &quot;C:\Users\kamac\miniconda3\envs\ml_venv\lib\site-packages\traitlets\config\application.py&quot;, line 1043, in launch_instance
-    app.start()
-  File &quot;C:\Users\kamac\miniconda3\envs\ml_venv\lib\site-packages\ipykernel\kernelapp.py&quot;, line 736, in start
-    self.io_loop.start()
-  File &quot;C:\Users\kamac\miniconda3\envs\ml_venv\lib\site-packages\tornado\platform\asyncio.py&quot;, line 195, in start
-    self.asyncio_loop.run_forever()
-  File &quot;C:\Users\kamac\miniconda3\envs\ml_venv\lib\asyncio\base_events.py&quot;, line 601, in run_forever
-    self._run_once()
-  File &quot;C:\Users\kamac\miniconda3\envs\ml_venv\lib\asyncio\base_events.py&quot;, line 1905, in _run_once
-    handle._run()
-  File &quot;C:\Users\kamac\miniconda3\envs\ml_venv\lib\asyncio\events.py&quot;, line 80, in _run
-    self._context.run(self._callback, *self._args)
-  File &quot;C:\Users\kamac\miniconda3\envs\ml_venv\lib\site-packages\ipykernel\kernelbase.py&quot;, line 516, in dispatch_queue
-    await self.process_one()
-  File &quot;C:\Users\kamac\miniconda3\envs\ml_venv\lib\site-packages\ipykernel\kernelbase.py&quot;, line 505, in process_one
-    await dispatch(*args)
-  File &quot;C:\Users\kamac\miniconda3\envs\ml_venv\lib\site-packages\ipykernel\kernelbase.py&quot;, line 412, in dispatch_shell
-    await result
-  File &quot;C:\Users\kamac\miniconda3\envs\ml_venv\lib\site-packages\ipykernel\kernelbase.py&quot;, line 740, in execute_request
-    reply_content = await reply_content
-  File &quot;C:\Users\kamac\miniconda3\envs\ml_venv\lib\site-packages\ipykernel\ipkernel.py&quot;, line 422, in do_execute
-    res = shell.run_cell(
-  File &quot;C:\Users\kamac\miniconda3\envs\ml_venv\lib\site-packages\ipykernel\zmqshell.py&quot;, line 546, in run_cell
-    return super().run_cell(*args, **kwargs)
-  File &quot;C:\Users\kamac\miniconda3\envs\ml_venv\lib\site-packages\IPython\core\interactiveshell.py&quot;, line 3024, in run_cell
-    result = self._run_cell(
-  File &quot;C:\Users\kamac\miniconda3\envs\ml_venv\lib\site-packages\IPython\core\interactiveshell.py&quot;, line 3079, in _run_cell
-    result = runner(coro)
-  File &quot;C:\Users\kamac\miniconda3\envs\ml_venv\lib\site-packages\IPython\core\async_helpers.py&quot;, line 129, in _pseudo_sync_runner
-    coro.send(None)
-  File &quot;C:\Users\kamac\miniconda3\envs\ml_venv\lib\site-packages\IPython\core\interactiveshell.py&quot;, line 3284, in run_cell_async
-    has_raised = await self.run_ast_nodes(code_ast.body, cell_name,
-  File &quot;C:\Users\kamac\miniconda3\envs\ml_venv\lib\site-packages\IPython\core\interactiveshell.py&quot;, line 3466, in run_ast_nodes
-    if await self.run_code(code, result, async_=asy):
-  File &quot;C:\Users\kamac\miniconda3\envs\ml_venv\lib\site-packages\IPython\core\interactiveshell.py&quot;, line 3526, in run_code
-    exec(code_obj, self.user_global_ns, self.user_ns)
-  File &quot;C:\Users\kamac\AppData\Local\Temp\ipykernel_31532\2824715037.py&quot;, line 4, in &lt;module&gt;
-    import matplotlib.pyplot as plt
-  File &quot;C:\Users\kamac\miniconda3\envs\ml_venv\lib\site-packages\matplotlib\__init__.py&quot;, line 109, in &lt;module&gt;
-    from . import _api, _version, cbook, docstring, rcsetup
-  File &quot;C:\Users\kamac\miniconda3\envs\ml_venv\lib\site-packages\matplotlib\rcsetup.py&quot;, line 27, in &lt;module&gt;
-    from matplotlib.colors import Colormap, is_color_like
-  File &quot;C:\Users\kamac\miniconda3\envs\ml_venv\lib\site-packages\matplotlib\colors.py&quot;, line 56, in &lt;module&gt;
-    from matplotlib import _api, cbook, scale
-  File &quot;C:\Users\kamac\miniconda3\envs\ml_venv\lib\site-packages\matplotlib\scale.py&quot;, line 23, in &lt;module&gt;
-    from matplotlib.ticker import (
-  File &quot;C:\Users\kamac\miniconda3\envs\ml_venv\lib\site-packages\matplotlib\ticker.py&quot;, line 136, in &lt;module&gt;
-    from matplotlib import transforms as mtransforms
-  File &quot;C:\Users\kamac\miniconda3\envs\ml_venv\lib\site-packages\matplotlib\transforms.py&quot;, line 46, in &lt;module&gt;
-    from matplotlib._path import (
-</pre></div>
-</div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">AttributeError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
-<span class="ne">AttributeError</span>: _ARRAY_API not found
-</pre></div>
-</div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ImportError</span><span class="g g-Whitespace">                               </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">4</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="ne">----&gt; </span><span class="mi">4</span> <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="kn">import</span> <span class="nn">folium</span> 
-
-<span class="n">File</span> <span class="o">~</span>\<span class="n">miniconda3</span>\<span class="n">envs</span>\<span class="n">ml_venv</span>\<span class="n">lib</span>\<span class="n">site</span><span class="o">-</span><span class="n">packages</span>\<span class="n">matplotlib</span>\<span class="fm">__init__</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">109</span>
-<span class="g g-Whitespace">    </span><span class="mi">105</span> <span class="kn">from</span> <span class="nn">packaging.version</span> <span class="kn">import</span> <span class="n">parse</span> <span class="k">as</span> <span class="n">parse_version</span>
-<span class="g g-Whitespace">    </span><span class="mi">107</span> <span class="c1"># cbook must import matplotlib only within function</span>
-<span class="g g-Whitespace">    </span><span class="mi">108</span> <span class="c1"># definitions, so it is safe to import from it here.</span>
-<span class="ne">--&gt; </span><span class="mi">109</span> <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">_api</span><span class="p">,</span> <span class="n">_version</span><span class="p">,</span> <span class="n">cbook</span><span class="p">,</span> <span class="n">docstring</span><span class="p">,</span> <span class="n">rcsetup</span>
-<span class="g g-Whitespace">    </span><span class="mi">110</span> <span class="kn">from</span> <span class="nn">matplotlib.cbook</span> <span class="kn">import</span> <span class="n">MatplotlibDeprecationWarning</span><span class="p">,</span> <span class="n">sanitize_sequence</span>
-<span class="g g-Whitespace">    </span><span class="mi">111</span> <span class="kn">from</span> <span class="nn">matplotlib.cbook</span> <span class="kn">import</span> <span class="n">mplDeprecation</span>  <span class="c1"># deprecated</span>
-
-<span class="n">File</span> <span class="o">~</span>\<span class="n">miniconda3</span>\<span class="n">envs</span>\<span class="n">ml_venv</span>\<span class="n">lib</span>\<span class="n">site</span><span class="o">-</span><span class="n">packages</span>\<span class="n">matplotlib</span>\<span class="n">rcsetup</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">27</span>
-<span class="g g-Whitespace">     </span><span class="mi">25</span> <span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">_api</span><span class="p">,</span> <span class="n">cbook</span>
-<span class="g g-Whitespace">     </span><span class="mi">26</span> <span class="kn">from</span> <span class="nn">matplotlib.cbook</span> <span class="kn">import</span> <span class="n">ls_mapper</span>
-<span class="ne">---&gt; </span><span class="mi">27</span> <span class="kn">from</span> <span class="nn">matplotlib.colors</span> <span class="kn">import</span> <span class="n">Colormap</span><span class="p">,</span> <span class="n">is_color_like</span>
-<span class="g g-Whitespace">     </span><span class="mi">28</span> <span class="kn">from</span> <span class="nn">matplotlib.fontconfig_pattern</span> <span class="kn">import</span> <span class="n">parse_fontconfig_pattern</span>
-<span class="g g-Whitespace">     </span><span class="mi">29</span> <span class="kn">from</span> <span class="nn">matplotlib._enums</span> <span class="kn">import</span> <span class="n">JoinStyle</span><span class="p">,</span> <span class="n">CapStyle</span>
-
-<span class="n">File</span> <span class="o">~</span>\<span class="n">miniconda3</span>\<span class="n">envs</span>\<span class="n">ml_venv</span>\<span class="n">lib</span>\<span class="n">site</span><span class="o">-</span><span class="n">packages</span>\<span class="n">matplotlib</span>\<span class="n">colors</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">56</span>
-<span class="g g-Whitespace">     </span><span class="mi">54</span> <span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
-<span class="g g-Whitespace">     </span><span class="mi">55</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="ne">---&gt; </span><span class="mi">56</span> <span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">_api</span><span class="p">,</span> <span class="n">cbook</span><span class="p">,</span> <span class="n">scale</span>
-<span class="g g-Whitespace">     </span><span class="mi">57</span> <span class="kn">from</span> <span class="nn">._color_data</span> <span class="kn">import</span> <span class="n">BASE_COLORS</span><span class="p">,</span> <span class="n">TABLEAU_COLORS</span><span class="p">,</span> <span class="n">CSS4_COLORS</span><span class="p">,</span> <span class="n">XKCD_COLORS</span>
-<span class="g g-Whitespace">     </span><span class="mi">60</span> <span class="k">class</span> <span class="nc">_ColorMapping</span><span class="p">(</span><span class="nb">dict</span><span class="p">):</span>
-
-<span class="n">File</span> <span class="o">~</span>\<span class="n">miniconda3</span>\<span class="n">envs</span>\<span class="n">ml_venv</span>\<span class="n">lib</span>\<span class="n">site</span><span class="o">-</span><span class="n">packages</span>\<span class="n">matplotlib</span>\<span class="n">scale</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">23</span>
-<span class="g g-Whitespace">     </span><span class="mi">21</span> <span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
-<span class="g g-Whitespace">     </span><span class="mi">22</span> <span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">_api</span><span class="p">,</span> <span class="n">docstring</span>
-<span class="ne">---&gt; </span><span class="mi">23</span> <span class="kn">from</span> <span class="nn">matplotlib.ticker</span> <span class="kn">import</span> <span class="p">(</span>
-<span class="g g-Whitespace">     </span><span class="mi">24</span>     <span class="n">NullFormatter</span><span class="p">,</span> <span class="n">ScalarFormatter</span><span class="p">,</span> <span class="n">LogFormatterSciNotation</span><span class="p">,</span> <span class="n">LogitFormatter</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">25</span>     <span class="n">NullLocator</span><span class="p">,</span> <span class="n">LogLocator</span><span class="p">,</span> <span class="n">AutoLocator</span><span class="p">,</span> <span class="n">AutoMinorLocator</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">26</span>     <span class="n">SymmetricalLogLocator</span><span class="p">,</span> <span class="n">LogitLocator</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">27</span> <span class="kn">from</span> <span class="nn">matplotlib.transforms</span> <span class="kn">import</span> <span class="n">Transform</span><span class="p">,</span> <span class="n">IdentityTransform</span>
-<span class="g g-Whitespace">     </span><span class="mi">30</span> <span class="k">class</span> <span class="nc">ScaleBase</span><span class="p">:</span>
-
-<span class="n">File</span> <span class="o">~</span>\<span class="n">miniconda3</span>\<span class="n">envs</span>\<span class="n">ml_venv</span>\<span class="n">lib</span>\<span class="n">site</span><span class="o">-</span><span class="n">packages</span>\<span class="n">matplotlib</span>\<span class="n">ticker</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">136</span>
-<span class="g g-Whitespace">    </span><span class="mi">134</span> <span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
-<span class="g g-Whitespace">    </span><span class="mi">135</span> <span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">_api</span><span class="p">,</span> <span class="n">cbook</span>
-<span class="ne">--&gt; </span><span class="mi">136</span> <span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">transforms</span> <span class="k">as</span> <span class="n">mtransforms</span>
-<span class="g g-Whitespace">    </span><span class="mi">138</span> <span class="n">_log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">140</span> <span class="n">__all__</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;TickHelper&#39;</span><span class="p">,</span> <span class="s1">&#39;Formatter&#39;</span><span class="p">,</span> <span class="s1">&#39;FixedFormatter&#39;</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">141</span>            <span class="s1">&#39;NullFormatter&#39;</span><span class="p">,</span> <span class="s1">&#39;FuncFormatter&#39;</span><span class="p">,</span> <span class="s1">&#39;FormatStrFormatter&#39;</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">142</span>            <span class="s1">&#39;StrMethodFormatter&#39;</span><span class="p">,</span> <span class="s1">&#39;ScalarFormatter&#39;</span><span class="p">,</span> <span class="s1">&#39;LogFormatter&#39;</span><span class="p">,</span>
-   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">148</span>            <span class="s1">&#39;MultipleLocator&#39;</span><span class="p">,</span> <span class="s1">&#39;MaxNLocator&#39;</span><span class="p">,</span> <span class="s1">&#39;AutoMinorLocator&#39;</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">149</span>            <span class="s1">&#39;SymmetricalLogLocator&#39;</span><span class="p">,</span> <span class="s1">&#39;LogitLocator&#39;</span><span class="p">)</span>
-
-<span class="n">File</span> <span class="o">~</span>\<span class="n">miniconda3</span>\<span class="n">envs</span>\<span class="n">ml_venv</span>\<span class="n">lib</span>\<span class="n">site</span><span class="o">-</span><span class="n">packages</span>\<span class="n">matplotlib</span>\<span class="n">transforms</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">46</span>
-<span class="g g-Whitespace">     </span><span class="mi">43</span> <span class="kn">from</span> <span class="nn">numpy.linalg</span> <span class="kn">import</span> <span class="n">inv</span>
-<span class="g g-Whitespace">     </span><span class="mi">45</span> <span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">_api</span>
-<span class="ne">---&gt; </span><span class="mi">46</span> <span class="kn">from</span> <span class="nn">matplotlib._path</span> <span class="kn">import</span> <span class="p">(</span>
-<span class="g g-Whitespace">     </span><span class="mi">47</span>     <span class="n">affine_transform</span><span class="p">,</span> <span class="n">count_bboxes_overlapping_bbox</span><span class="p">,</span> <span class="n">update_path_extents</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">48</span> <span class="kn">from</span> <span class="nn">.path</span> <span class="kn">import</span> <span class="n">Path</span>
-<span class="g g-Whitespace">     </span><span class="mi">50</span> <span class="n">DEBUG</span> <span class="o">=</span> <span class="kc">False</span>
-
-<span class="ne">ImportError</span>: numpy.core.multiarray failed to import
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 </section>
-<section id="importacion-y-exploracion-inicial-del-conjunto-de-datos">
-<h2><strong>Importación y exploración inicial del conjunto de datos</strong><a class="headerlink" href="#importacion-y-exploracion-inicial-del-conjunto-de-datos" title="Link to this heading">#</a></h2>
+<section id="conjunto-de-datos">
+<h2><strong>Conjunto de datos</strong><a class="headerlink" href="#conjunto-de-datos" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-
-<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;DATA.xlsx&#39;</span><span class="p">)</span>
-<span class="n">display</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">file_path</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;C:\Users\kamac\OneDrive\Desktop\MachineLearningUN\DATA.xlsx&#39;</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;bound method NDFrame.head of            SoftwareVersion   VarName2  VarName3  VarName4  VarName5  \
-0      2022-01-01 00:00:00  16.060860  0.958639  13.15692  18.76164   
-1      2022-01-01 00:10:00  16.156927  0.885824  13.48116  18.06684   
-2      2022-01-01 00:20:00  16.473571  0.911763  13.48116  18.48372   
-3      2022-01-01 00:30:00  16.660009  0.860070  14.31492  19.27116   
-4      2022-01-01 00:40:00  16.519613  0.903333  13.89804  19.31748   
-...                    ...        ...       ...       ...       ...   
-38443  2022-10-01 23:10:00   0.233640  0.000000   0.23364   0.23364   
-38444  2022-10-01 23:20:00   0.233640  0.000000   0.23364   0.23364   
-38445  2022-10-01 23:30:00   0.233640  0.000000   0.23364   0.23364   
-38446  2022-10-01 23:40:00   0.233640  0.000000   0.23364   0.23364   
-38447  2022-10-01 23:50:00   0.233640  0.000000   0.23364   0.23364   
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
-        VarName6   VarName7  VarName8  VarName9  VarName10  ...  VarName51  \
-0      18.468434  15.830104  0.959005  12.85460   18.23426  ...   0.000000   
-1      17.850526  15.972642  0.891046  13.59028   18.41818  ...   0.000000   
-2      18.298440  16.287375  0.914220  13.49832   18.37220  ...   0.000000   
-3      18.931634  16.451707  0.842721  13.77420   18.69406  ...   0.000000   
-4      18.561074  16.353678  0.889667  13.63626   19.15386  ...   0.000000   
-...          ...        ...       ...       ...        ...  ...        ...   
-38443   0.233640   0.210100  0.000000   0.21010    0.21010  ...   0.000305   
-38444   0.233640   0.210100  0.000000   0.21010    0.21010  ...   0.000305   
-38445   0.233640   0.210100  0.000000   0.21010    0.21010  ...   0.000305   
-38446   0.233640   0.210100  0.000000   0.21010    0.21010  ...   0.000305   
-38447   0.233640   0.210100  0.000000   0.21010    0.21010  ...   0.000305   
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
 
-       VarName52  VarName53  VarName54  VarName55  VarName56  VarName57  \
-0       0.000000   0.000000   0.000076      61.08       3.08      143.8   
-1       0.000000   0.000000   0.000076      61.08       2.83      143.8   
-2       0.000000   0.000000   0.000076      60.42       2.74      143.8   
-3       0.000000   0.000000   0.000000      60.88       2.83      143.8   
-4       0.000000   0.000000   0.000076      59.99       2.59      143.8   
-...          ...        ...        ...        ...        ...        ...   
-38443   0.000000   0.000153   0.000534     143.81       0.02      143.8   
-38444   0.000000   0.000153   0.000534     143.82       0.02      143.8   
-38445   0.000076   0.000153   0.000534     143.82       0.02      143.8   
-38446   0.000076   0.000153   0.000534     143.81       0.02      143.8   
-38447   0.000076   0.000153   0.000610     143.82       0.02      143.8   
-
-       VarName58  VarName59  VarName60  
-0          61.21       3.39      143.8  
-1          61.49       3.36      143.8  
-2          60.65       3.11      143.8  
-3          61.19       3.16      143.8  
-4          60.26       3.21      143.8  
-...          ...        ...        ...  
-38443      61.53       0.04      143.8  
-38444      61.53       0.04      143.8  
-38445      61.53       0.03      143.8  
-38446      61.54       0.04      143.8  
-38447      61.54       0.03      143.8  
-
-[38448 rows x 60 columns]&gt;
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>SoftwareVersion</th>
+      <th>buildbuiltbyCIserver20210728</th>
+      <th>VarName3</th>
+      <th>VarName4</th>
+      <th>VarName5</th>
+      <th>VarName6</th>
+      <th>VarName7</th>
+      <th>VarName8</th>
+      <th>VarName9</th>
+      <th>VarName10</th>
+      <th>...</th>
+      <th>VarName51</th>
+      <th>VarName52</th>
+      <th>VarName53</th>
+      <th>VarName54</th>
+      <th>VarName55</th>
+      <th>VarName56</th>
+      <th>VarName57</th>
+      <th>VarName58</th>
+      <th>VarName59</th>
+      <th>VarName60</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2022-01-01 00:00:00</td>
+      <td>16.060860</td>
+      <td>0.958639</td>
+      <td>13.15692</td>
+      <td>18.76164</td>
+      <td>18.468434</td>
+      <td>15.830104</td>
+      <td>0.959005</td>
+      <td>12.85460</td>
+      <td>18.23426</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000076</td>
+      <td>61.08</td>
+      <td>3.08</td>
+      <td>143.8</td>
+      <td>61.21</td>
+      <td>3.39</td>
+      <td>143.8</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2022-01-01 00:10:00</td>
+      <td>16.156927</td>
+      <td>0.885824</td>
+      <td>13.48116</td>
+      <td>18.06684</td>
+      <td>17.850526</td>
+      <td>15.972642</td>
+      <td>0.891046</td>
+      <td>13.59028</td>
+      <td>18.41818</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000076</td>
+      <td>61.08</td>
+      <td>2.83</td>
+      <td>143.8</td>
+      <td>61.49</td>
+      <td>3.36</td>
+      <td>143.8</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2022-01-01 00:20:00</td>
+      <td>16.473571</td>
+      <td>0.911763</td>
+      <td>13.48116</td>
+      <td>18.48372</td>
+      <td>18.298440</td>
+      <td>16.287375</td>
+      <td>0.914220</td>
+      <td>13.49832</td>
+      <td>18.37220</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000076</td>
+      <td>60.42</td>
+      <td>2.74</td>
+      <td>143.8</td>
+      <td>60.65</td>
+      <td>3.11</td>
+      <td>143.8</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2022-01-01 00:30:00</td>
+      <td>16.660009</td>
+      <td>0.860070</td>
+      <td>14.31492</td>
+      <td>19.27116</td>
+      <td>18.931634</td>
+      <td>16.451707</td>
+      <td>0.842721</td>
+      <td>13.77420</td>
+      <td>18.69406</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>60.88</td>
+      <td>2.83</td>
+      <td>143.8</td>
+      <td>61.19</td>
+      <td>3.16</td>
+      <td>143.8</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2022-01-01 00:40:00</td>
+      <td>16.519613</td>
+      <td>0.903333</td>
+      <td>13.89804</td>
+      <td>19.31748</td>
+      <td>18.561074</td>
+      <td>16.353678</td>
+      <td>0.889667</td>
+      <td>13.63626</td>
+      <td>19.15386</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000076</td>
+      <td>59.99</td>
+      <td>2.59</td>
+      <td>143.8</td>
+      <td>60.26</td>
+      <td>3.21</td>
+      <td>143.8</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 60 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(38448, 60)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Nótese que la base de datos contiene <strong>60</strong> variables y <strong>38448</strong> observaciones.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 38448 entries, 0 to 38447
+Data columns (total 60 columns):
+ #   Column                        Non-Null Count  Dtype  
+---  ------                        --------------  -----  
+ 0   SoftwareVersion               38448 non-null  object 
+ 1   buildbuiltbyCIserver20210728  38448 non-null  float64
+ 2   VarName3                      38448 non-null  float64
+ 3   VarName4                      38448 non-null  float64
+ 4   VarName5                      38448 non-null  float64
+ 5   VarName6                      38448 non-null  float64
+ 6   VarName7                      38448 non-null  float64
+ 7   VarName8                      38448 non-null  float64
+ 8   VarName9                      38448 non-null  float64
+ 9   VarName10                     38448 non-null  float64
+ 10  VarName11                     38448 non-null  float64
+ 11  VarName12                     38448 non-null  float64
+ 12  VarName13                     38448 non-null  float64
+ 13  VarName14                     38448 non-null  float64
+ 14  VarName15                     38448 non-null  float64
+ 15  VarName16                     38448 non-null  float64
+ 16  VarName17                     38448 non-null  float64
+ 17  VarName18                     38448 non-null  float64
+ 18  VarName19                     38448 non-null  float64
+ 19  VarName20                     38448 non-null  float64
+ 20  VarName21                     38448 non-null  float64
+ 21  VarName22                     38448 non-null  float64
+ 22  VarName23                     38448 non-null  float64
+ 23  VarName24                     38448 non-null  float64
+ 24  VarName25                     38448 non-null  float64
+ 25  VarName26                     38448 non-null  float64
+ 26  VarName27                     38448 non-null  float64
+ 27  VarName28                     38448 non-null  float64
+ 28  VarName29                     38448 non-null  float64
+ 29  VarName30                     38448 non-null  float64
+ 30  VarName31                     38448 non-null  float64
+ 31  VarName32                     38448 non-null  float64
+ 32  VarName33                     38448 non-null  float64
+ 33  VarName34                     38448 non-null  float64
+ 34  VarName35                     38448 non-null  float64
+ 35  VarName36                     38448 non-null  float64
+ 36  VarName37                     38448 non-null  float64
+ 37  VarName38                     38448 non-null  float64
+ 38  VarName39                     38448 non-null  float64
+ 39  VarName40                     38448 non-null  float64
+ 40  VarName41                     38448 non-null  float64
+ 41  VarName42                     38448 non-null  float64
+ 42  VarName43                     38448 non-null  float64
+ 43  VarName44                     38448 non-null  float64
+ 44  VarName45                     38448 non-null  float64
+ 45  VarName46                     38448 non-null  float64
+ 46  VarName47                     38448 non-null  float64
+ 47  VarName48                     38448 non-null  float64
+ 48  VarName49                     38448 non-null  float64
+ 49  VarName50                     38448 non-null  float64
+ 50  VarName51                     38448 non-null  float64
+ 51  VarName52                     38448 non-null  float64
+ 52  VarName53                     38448 non-null  float64
+ 53  VarName54                     38448 non-null  float64
+ 54  VarName55                     38448 non-null  float64
+ 55  VarName56                     38448 non-null  float64
+ 56  VarName57                     38448 non-null  float64
+ 57  VarName58                     38448 non-null  float64
+ 58  VarName59                     38448 non-null  float64
+ 59  VarName60                     38448 non-null  float64
+dtypes: float64(59), object(1)
+memory usage: 17.6+ MB
 </pre></div>
 </div>
 </div>
@@ -689,11 +762,11 @@ Traceback (most recent call last):  File &quot;C:\Users\kamac\miniconda3\envs\ml
 </section>
 <section id="reorganizacion-del-conjunto-de-datos">
 <h2><strong>Reorganización del conjunto de datos</strong><a class="headerlink" href="#reorganizacion-del-conjunto-de-datos" title="Link to this heading">#</a></h2>
-<p>Dado a la naturaleza de los datos previamente vista, se tomó la decisión de dividir y reorganizar la base de datos en subconjuntos correspondientes a distintas partes y características de esta; permitiendo así un mejor manejo de los datos a modelar.</p>
+<p>Dado a la naturaleza de los datos previamente vista, se tomó la decisión de dividir y reorganizar la base de datos en subconjuntos correspondientes a distintas partes y características de esta; permitiendo así un mejor manejo de los datos a modelar. También se convierte la columna <code class="docutils literal notranslate"><span class="pre">SoftwareVersion</span></code> en formato de fecha utilizando datetime para facilitar el análisis temporal de los datos.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;buildbuiltbyCIserver20210728&#39;</span><span class="p">:</span> <span class="s1">&#39;VarName2&#39;</span><span class="p">},</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;buildbuiltbyCIserver20210728&#39;</span><span class="p">:</span> <span class="s1">&#39;VarName2&#39;</span><span class="p">},</span> <span class="n">inplace</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">data</span><span class="p">[</span><span class="s1">&#39;Fecha&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;SoftwareVersion&#39;</span><span class="p">])</span>
 <span class="n">subconjuntos</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">&#39;Wind speed 100 m (sensor 1)&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;VarName2&#39;</span><span class="p">,</span> <span class="s1">&#39;VarName3&#39;</span><span class="p">,</span> <span class="s1">&#39;VarName4&#39;</span><span class="p">,</span> <span class="s1">&#39;VarName5&#39;</span><span class="p">,</span> <span class="s1">&#39;VarName6&#39;</span><span class="p">],</span>
     <span class="s1">&#39;Wind speed 100 m (sensor 2)&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;VarName7&#39;</span><span class="p">,</span> <span class="s1">&#39;VarName8&#39;</span><span class="p">,</span> <span class="s1">&#39;VarName9&#39;</span><span class="p">,</span> <span class="s1">&#39;VarName10&#39;</span><span class="p">,</span> <span class="s1">&#39;VarName11&#39;</span><span class="p">],</span>
@@ -715,15 +788,157 @@ Traceback (most recent call last):  File &quot;C:\Users\kamac\miniconda3\envs\ml
 </div>
 </div>
 </div>
+<p>Así se verían los subconjuntos:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Wind speed 100 m (sensor 1)</p></th>
+<th class="head"><p>Wind speed 100 m (sensor 2)</p></th>
+<th class="head"><p>Wind speed 80 m (sensor 1)</p></th>
+<th class="head"><p>Wind speed 80 m (sensor 2)</p></th>
+<th class="head"><p>Wind speed 60 m</p></th>
+<th class="head"><p>Wind speed 40 m</p></th>
+<th class="head"><p>Wind direction 60 m</p></th>
+<th class="head"><p>Wind direction 100 m</p></th>
+<th class="head"><p>Wind direction 80 m</p></th>
+<th class="head"><p>Presión</p></th>
+<th class="head"><p>Humedad</p></th>
+<th class="head"><p>Temperature</p></th>
+<th class="head"><p>Canal vacío</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>VarName2</p></td>
+<td><p>VarName7</p></td>
+<td><p>VarName12</p></td>
+<td><p>VarName17</p></td>
+<td><p>VarName22</p></td>
+<td><p>VarName27</p></td>
+<td><p>VarName32</p></td>
+<td><p>VarName55</p></td>
+<td><p>VarName58</p></td>
+<td><p>VarName35</p></td>
+<td><p>VarName39</p></td>
+<td><p>VarName43</p></td>
+<td><p>VarName51</p></td>
+</tr>
+<tr class="row-odd"><td><p>VarName3</p></td>
+<td><p>VarName8</p></td>
+<td><p>VarName13</p></td>
+<td><p>VarName18</p></td>
+<td><p>VarName23</p></td>
+<td><p>VarName28</p></td>
+<td><p>VarName33</p></td>
+<td><p>VarName56</p></td>
+<td><p>VarName59</p></td>
+<td><p>VarName36</p></td>
+<td><p>VarName40</p></td>
+<td><p>VarName44</p></td>
+<td><p>VarName52</p></td>
+</tr>
+<tr class="row-even"><td><p>VarName4</p></td>
+<td><p>VarName9</p></td>
+<td><p>VarName14</p></td>
+<td><p>VarName19</p></td>
+<td><p>VarName24</p></td>
+<td><p>VarName29</p></td>
+<td><p>VarName34</p></td>
+<td><p>VarName57</p></td>
+<td><p>VarName60</p></td>
+<td><p>VarName37</p></td>
+<td><p>VarName41</p></td>
+<td><p>VarName45</p></td>
+<td><p>VarName53</p></td>
+</tr>
+<tr class="row-odd"><td><p>VarName5</p></td>
+<td><p>VarName10</p></td>
+<td><p>VarName15</p></td>
+<td><p>VarName20</p></td>
+<td><p>VarName25</p></td>
+<td><p>VarName30</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>VarName38</p></td>
+<td><p>VarName42</p></td>
+<td><p>VarName46</p></td>
+<td><p>VarName54</p></td>
+</tr>
+<tr class="row-even"><td><p>VarName6</p></td>
+<td><p>VarName11</p></td>
+<td><p>VarName16</p></td>
+<td><p>VarName21</p></td>
+<td><p>VarName26</p></td>
+<td><p>VarName31</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>VarName47</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>VarName48</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>VarName49</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>VarName50</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
 </section>
-<section id="reduccion-de-dimensionalidad">
-<h2><strong>Reducción de Dimensionalidad</strong><a class="headerlink" href="#reduccion-de-dimensionalidad" title="Link to this heading">#</a></h2>
+<section id="reduccion-de-dimensionalidad-vif">
+<h2><strong>Reducción de Dimensionalidad (VIF)</strong><a class="headerlink" href="#reduccion-de-dimensionalidad-vif" title="Link to this heading">#</a></h2>
 <p>La reducción de dimensionalidad es una técnica crucial en el análisis de datos, especialmente cuando se trabaja con conjuntos de datos de alta dimensión que pueden contener información redundante o colineal. Uno de los métodos más utilizados para este propósito es la eliminación basada en el <strong>Factor de Inflación de Varianza</strong> (VIF, por sus siglas en inglés). El VIF mide cuánto la varianza de un coeficiente de regresión estimado se incrementa debido a la colinealidad entre las variables predictoras. Valores altos de VIF (por encima de 10) indican que la multicolinealidad es un problema y que la variable asociada debe ser considerada para su eliminación del modelo para reducir el sesgo y mejorar la interpretabilidad del modelo (Kutner et al., 2004).</p>
 <p>En este proceso, se define una función <code class="docutils literal notranslate"><span class="pre">eliminar_vif_alto()</span></code> que recursivamente elimina las variables con un VIF más alto que un umbral predefinido, en este caso, 10.0. Este umbral se selecciona generalmente como una guía práctica para identificar colinealidad potencialmente peligrosa que podría distorsionar los resultados del análisis de regresión (Gujarati, 2009). A través de un bucle iterativo, la función calcula el VIF para todas las variables en el DataFrame de entrada, identifica la variable con el VIF más alto y la elimina. Este proceso se repite hasta que todas las variables restantes tengan un VIF dentro del umbral aceptable.</p>
 <p>Una vez definida la función, se aplica a varios subconjuntos de datos para eliminar la multicolinealidad. Como resultado, obtenemos subconjuntos reformados donde cada uno contiene solo las variables que son menos colineales, lo que facilita un análisis de datos más preciso y confiable. La eliminación de variables redundantes también ayuda a mejorar la eficiencia computacional y a prevenir el sobreajuste, lo cual es esencial para obtener modelos predictivos robustos y generalizables.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">eliminar_vif_alto</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">10.0</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">eliminar_vif_alto</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">threshold</span> <span class="o">=</span> <span class="mf">10.0</span><span class="p">):</span>
+    <span class="c1"># Imprimir variables y VIF iniciales</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Variables iniciales y VIFs:&quot;</span><span class="p">)</span>
+    <span class="n">vif_data_inicial</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+    <span class="n">vif_data_inicial</span><span class="p">[</span><span class="s2">&quot;Variable&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span>
+    <span class="n">vif_data_inicial</span><span class="p">[</span><span class="s2">&quot;VIF&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">variance_inflation_factor</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])]</span>
+    <span class="n">display</span><span class="p">(</span><span class="n">vif_data_inicial</span><span class="p">)</span>  <span class="c1"># Mostrar el DataFrame inicial con los VIFs</span>
+
+    <span class="c1"># Proceso de eliminación de variables con VIF alto</span>
     <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
         <span class="c1"># Calcula el VIF para todas las variables en el DataFrame</span>
         <span class="n">vif_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
@@ -741,20 +956,28 @@ Traceback (most recent call last):  File &quot;C:\Users\kamac\miniconda3\envs\ml
         <span class="n">max_vif_variable</span> <span class="o">=</span> <span class="n">vif_data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">vif_data</span><span class="p">[</span><span class="s1">&#39;VIF&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">idxmax</span><span class="p">(),</span> <span class="s1">&#39;Variable&#39;</span><span class="p">]</span>
         <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="n">max_vif_variable</span><span class="p">])</span>
     
+    <span class="c1"># Imprimir variables y VIF finales</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Variables finales y VIFs:&quot;</span><span class="p">)</span>
+    <span class="n">vif_data_final</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+    <span class="n">vif_data_final</span><span class="p">[</span><span class="s2">&quot;Variable&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span>
+    <span class="n">vif_data_final</span><span class="p">[</span><span class="s2">&quot;VIF&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">variance_inflation_factor</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])]</span>
+    <span class="n">display</span><span class="p">(</span><span class="n">vif_data_final</span><span class="p">)</span>  <span class="c1"># Mostrar el DataFrame final con los VIFs</span>
+
     <span class="k">return</span> <span class="n">df</span>
 
+<span class="c1"># Procesar los subconjuntos de datos</span>
 <span class="n">subdatasets_reformados</span> <span class="o">=</span> <span class="p">{}</span>  
 
 <span class="k">for</span> <span class="n">nombre</span><span class="p">,</span> <span class="n">df</span> <span class="ow">in</span> <span class="n">subdatasets</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Conjunto: &#39;</span><span class="si">{</span><span class="n">nombre</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
     <span class="n">df_reducido</span> <span class="o">=</span> <span class="n">eliminar_vif_alto</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
     <span class="n">subdatasets_reformados</span><span class="p">[</span><span class="n">nombre</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_reducido</span>  
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Head del subconjunto reformado &#39;</span><span class="si">{</span><span class="n">nombre</span><span class="si">}</span><span class="s2">&#39;:&quot;</span><span class="p">)</span>
-    <span class="n">display</span><span class="p">(</span><span class="n">df_reducido</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Head del subconjunto reformado &#39;Wind speed 100 m (sensor 1)&#39;:
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Conjunto: &#39;Wind speed 100 m (sensor 1)&#39;
+Variables iniciales y VIFs:
 </pre></div>
 </div>
 <div class="output text_html"><div>
@@ -775,39 +998,39 @@ Traceback (most recent call last):  File &quot;C:\Users\kamac\miniconda3\envs\ml
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>VarName3</th>
-      <th>VarName4</th>
+      <th>Variable</th>
+      <th>VIF</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
-      <td>0.958639</td>
-      <td>13.15692</td>
+      <td>VarName2</td>
+      <td>2291.736117</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>0.885824</td>
-      <td>13.48116</td>
+      <td>VarName3</td>
+      <td>87.957520</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>0.911763</td>
-      <td>13.48116</td>
+      <td>VarName4</td>
+      <td>642.533095</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>0.860070</td>
-      <td>14.31492</td>
+      <td>VarName5</td>
+      <td>17260.886568</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>0.903333</td>
-      <td>13.89804</td>
+      <td>VarName6</td>
+      <td>20079.885032</td>
     </tr>
   </tbody>
 </table>
-</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Head del subconjunto reformado &#39;Wind speed 100 m (sensor 2)&#39;:
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Variables finales y VIFs:
 </pre></div>
 </div>
 <div class="output text_html"><div>
@@ -828,39 +1051,25 @@ Traceback (most recent call last):  File &quot;C:\Users\kamac\miniconda3\envs\ml
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>VarName8</th>
-      <th>VarName9</th>
+      <th>Variable</th>
+      <th>VIF</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
-      <td>0.959005</td>
-      <td>12.85460</td>
+      <td>VarName3</td>
+      <td>8.498604</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>0.891046</td>
-      <td>13.59028</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>0.914220</td>
-      <td>13.49832</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>0.842721</td>
-      <td>13.77420</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>0.889667</td>
-      <td>13.63626</td>
+      <td>VarName4</td>
+      <td>8.498604</td>
     </tr>
   </tbody>
 </table>
-</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Head del subconjunto reformado &#39;Wind speed 80 m (sensor 1)&#39;:
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Conjunto: &#39;Wind speed 100 m (sensor 2)&#39;
+Variables iniciales y VIFs:
 </pre></div>
 </div>
 <div class="output text_html"><div>
@@ -881,39 +1090,39 @@ Traceback (most recent call last):  File &quot;C:\Users\kamac\miniconda3\envs\ml
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>VarName13</th>
-      <th>VarName14</th>
+      <th>Variable</th>
+      <th>VIF</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
-      <td>1.053900</td>
-      <td>12.16520</td>
+      <td>VarName7</td>
+      <td>2280.024973</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>0.961708</td>
-      <td>11.75075</td>
+      <td>VarName8</td>
+      <td>89.836652</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>0.904054</td>
-      <td>13.13225</td>
+      <td>VarName9</td>
+      <td>627.732951</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>1.020468</td>
-      <td>12.57965</td>
+      <td>VarName10</td>
+      <td>17451.161077</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>0.933756</td>
-      <td>12.99410</td>
+      <td>VarName11</td>
+      <td>20226.815471</td>
     </tr>
   </tbody>
 </table>
-</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Head del subconjunto reformado &#39;Wind speed 80 m (sensor 2)&#39;:
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Variables finales y VIFs:
 </pre></div>
 </div>
 <div class="output text_html"><div>
@@ -934,39 +1143,25 @@ Traceback (most recent call last):  File &quot;C:\Users\kamac\miniconda3\envs\ml
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>VarName18</th>
-      <th>VarName19</th>
+      <th>Variable</th>
+      <th>VIF</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
-      <td>1.093242</td>
-      <td>12.06270</td>
+      <td>VarName8</td>
+      <td>8.550307</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>0.923871</td>
-      <td>12.56815</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>0.949419</td>
-      <td>12.10865</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>0.960033</td>
-      <td>13.11955</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>0.911740</td>
-      <td>12.79790</td>
+      <td>VarName9</td>
+      <td>8.550307</td>
     </tr>
   </tbody>
 </table>
-</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Head del subconjunto reformado &#39;Wind speed 60 m&#39;:
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Conjunto: &#39;Wind speed 80 m (sensor 1)&#39;
+Variables iniciales y VIFs:
 </pre></div>
 </div>
 <div class="output text_html"><div>
@@ -987,39 +1182,39 @@ Traceback (most recent call last):  File &quot;C:\Users\kamac\miniconda3\envs\ml
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>VarName23</th>
-      <th>VarName24</th>
+      <th>Variable</th>
+      <th>VIF</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
-      <td>1.066736</td>
-      <td>11.55796</td>
+      <td>VarName12</td>
+      <td>802.876908</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>1.100209</td>
-      <td>11.37404</td>
+      <td>VarName13</td>
+      <td>31.096841</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>1.040206</td>
-      <td>11.64992</td>
+      <td>VarName14</td>
+      <td>319.375320</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>1.169731</td>
-      <td>11.46600</td>
+      <td>VarName15</td>
+      <td>14274.108227</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>1.101221</td>
-      <td>11.37404</td>
+      <td>VarName16</td>
+      <td>15227.429695</td>
     </tr>
   </tbody>
 </table>
-</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Head del subconjunto reformado &#39;Wind speed 40 m&#39;:
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Variables finales y VIFs:
 </pre></div>
 </div>
 <div class="output text_html"><div>
@@ -1040,39 +1235,25 @@ Traceback (most recent call last):  File &quot;C:\Users\kamac\miniconda3\envs\ml
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>VarName28</th>
-      <th>VarName29</th>
+      <th>Variable</th>
+      <th>VIF</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
-      <td>1.183065</td>
-      <td>9.31244</td>
+      <td>VarName13</td>
+      <td>5.022897</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>1.393149</td>
-      <td>8.94500</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>1.250536</td>
-      <td>10.00139</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>1.405642</td>
-      <td>9.77174</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>1.349883</td>
-      <td>9.81767</td>
+      <td>VarName14</td>
+      <td>5.022897</td>
     </tr>
   </tbody>
 </table>
-</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Head del subconjunto reformado &#39;Wind direction 60 m&#39;:
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Conjunto: &#39;Wind speed 80 m (sensor 2)&#39;
+Variables iniciales y VIFs:
 </pre></div>
 </div>
 <div class="output text_html"><div>
@@ -1093,45 +1274,39 @@ Traceback (most recent call last):  File &quot;C:\Users\kamac\miniconda3\envs\ml
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>VarName32</th>
-      <th>VarName33</th>
-      <th>VarName34</th>
+      <th>Variable</th>
+      <th>VIF</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
-      <td>61.98</td>
-      <td>4.27</td>
-      <td>62.37</td>
+      <td>VarName17</td>
+      <td>1049.923158</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>62.29</td>
-      <td>4.37</td>
-      <td>66.08</td>
+      <td>VarName18</td>
+      <td>33.233140</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>61.18</td>
-      <td>3.90</td>
-      <td>66.43</td>
+      <td>VarName19</td>
+      <td>292.416163</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>62.20</td>
-      <td>3.94</td>
-      <td>62.72</td>
+      <td>VarName20</td>
+      <td>14177.936294</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>61.26</td>
-      <td>4.26</td>
-      <td>61.42</td>
+      <td>VarName21</td>
+      <td>15614.989445</td>
     </tr>
   </tbody>
 </table>
-</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Head del subconjunto reformado &#39;Presión&#39;:
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Variables finales y VIFs:
 </pre></div>
 </div>
 <div class="output text_html"><div>
@@ -1152,39 +1327,25 @@ Traceback (most recent call last):  File &quot;C:\Users\kamac\miniconda3\envs\ml
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>VarName35</th>
-      <th>VarName36</th>
+      <th>Variable</th>
+      <th>VIF</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
-      <td>1005.963541</td>
-      <td>0.149044</td>
+      <td>VarName18</td>
+      <td>4.333816</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>1005.795867</td>
-      <td>0.204935</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>1005.739976</td>
-      <td>0.186304</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>1005.684085</td>
-      <td>0.204935</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>1005.609563</td>
-      <td>0.204935</td>
+      <td>VarName19</td>
+      <td>4.333816</td>
     </tr>
   </tbody>
 </table>
-</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Head del subconjunto reformado &#39;Humedad&#39;:
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Conjunto: &#39;Wind speed 60 m&#39;
+Variables iniciales y VIFs:
 </pre></div>
 </div>
 <div class="output text_html"><div>
@@ -1205,39 +1366,39 @@ Traceback (most recent call last):  File &quot;C:\Users\kamac\miniconda3\envs\ml
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>VarName39</th>
-      <th>VarName40</th>
+      <th>Variable</th>
+      <th>VIF</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
-      <td>75.042725</td>
-      <td>0.556946</td>
+      <td>VarName22</td>
+      <td>925.291857</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>73.509216</td>
-      <td>0.411987</td>
+      <td>VarName23</td>
+      <td>37.699615</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>72.914124</td>
-      <td>0.259399</td>
+      <td>VarName24</td>
+      <td>254.590939</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>73.165894</td>
-      <td>0.221252</td>
+      <td>VarName25</td>
+      <td>12165.431088</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>73.791504</td>
-      <td>0.381470</td>
+      <td>VarName26</td>
+      <td>13329.097312</td>
     </tr>
   </tbody>
 </table>
-</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Head del subconjunto reformado &#39;Temperature&#39;:
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Variables finales y VIFs:
 </pre></div>
 </div>
 <div class="output text_html"><div>
@@ -1258,51 +1419,25 @@ Traceback (most recent call last):  File &quot;C:\Users\kamac\miniconda3\envs\ml
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>VarName43</th>
-      <th>VarName44</th>
-      <th>VarName47</th>
-      <th>VarName48</th>
+      <th>Variable</th>
+      <th>VIF</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
-      <td>26.922913</td>
-      <td>0.015259</td>
-      <td>26.707773</td>
-      <td>0.010241</td>
+      <td>VarName23</td>
+      <td>4.972137</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>27.006836</td>
-      <td>0.007629</td>
-      <td>26.772633</td>
-      <td>0.030723</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>26.991577</td>
-      <td>0.030518</td>
-      <td>26.772633</td>
-      <td>0.047791</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>26.877136</td>
-      <td>0.022888</td>
-      <td>26.659982</td>
-      <td>0.023896</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>26.770325</td>
-      <td>0.038147</td>
-      <td>26.601949</td>
-      <td>0.047791</td>
+      <td>VarName24</td>
+      <td>4.972137</td>
     </tr>
   </tbody>
 </table>
-</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Head del subconjunto reformado &#39;Canal vacío&#39;:
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Conjunto: &#39;Wind speed 40 m&#39;
+Variables iniciales y VIFs:
 </pre></div>
 </div>
 <div class="output text_html"><div>
@@ -1323,39 +1458,39 @@ Traceback (most recent call last):  File &quot;C:\Users\kamac\miniconda3\envs\ml
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>VarName52</th>
-      <th>VarName53</th>
+      <th>Variable</th>
+      <th>VIF</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
-      <td>0.0</td>
-      <td>0.0</td>
+      <td>VarName27</td>
+      <td>642.536672</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>0.0</td>
-      <td>0.0</td>
+      <td>VarName28</td>
+      <td>42.988817</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>0.0</td>
-      <td>0.0</td>
+      <td>VarName29</td>
+      <td>200.923925</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>0.0</td>
-      <td>0.0</td>
+      <td>VarName30</td>
+      <td>9383.197647</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>0.0</td>
-      <td>0.0</td>
+      <td>VarName31</td>
+      <td>10143.591044</td>
     </tr>
   </tbody>
 </table>
-</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Head del subconjunto reformado &#39;Wind direction 100 m&#39;:
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Variables finales y VIFs:
 </pre></div>
 </div>
 <div class="output text_html"><div>
@@ -1376,45 +1511,25 @@ Traceback (most recent call last):  File &quot;C:\Users\kamac\miniconda3\envs\ml
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>VarName55</th>
-      <th>VarName56</th>
-      <th>VarName57</th>
+      <th>Variable</th>
+      <th>VIF</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
-      <td>61.08</td>
-      <td>3.08</td>
-      <td>143.8</td>
+      <td>VarName28</td>
+      <td>5.621536</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>61.08</td>
-      <td>2.83</td>
-      <td>143.8</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>60.42</td>
-      <td>2.74</td>
-      <td>143.8</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>60.88</td>
-      <td>2.83</td>
-      <td>143.8</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>59.99</td>
-      <td>2.59</td>
-      <td>143.8</td>
+      <td>VarName29</td>
+      <td>5.621536</td>
     </tr>
   </tbody>
 </table>
-</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Head del subconjunto reformado &#39;Wind direction 80 m&#39;:
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Conjunto: &#39;Wind direction 60 m&#39;
+Variables iniciales y VIFs:
 </pre></div>
 </div>
 <div class="output text_html"><div>
@@ -1435,41 +1550,620 @@ Traceback (most recent call last):  File &quot;C:\Users\kamac\miniconda3\envs\ml
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>VarName58</th>
-      <th>VarName59</th>
-      <th>VarName60</th>
+      <th>Variable</th>
+      <th>VIF</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
-      <td>61.21</td>
-      <td>3.39</td>
-      <td>143.8</td>
+      <td>VarName32</td>
+      <td>3.348355</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>61.49</td>
-      <td>3.36</td>
-      <td>143.8</td>
+      <td>VarName33</td>
+      <td>2.365891</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>60.65</td>
-      <td>3.11</td>
-      <td>143.8</td>
+      <td>VarName34</td>
+      <td>3.898307</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Variables finales y VIFs:
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Variable</th>
+      <th>VIF</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>VarName32</td>
+      <td>3.348355</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>VarName33</td>
+      <td>2.365891</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>VarName34</td>
+      <td>3.898307</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Conjunto: &#39;Presión&#39;
+Variables iniciales y VIFs:
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Variable</th>
+      <th>VIF</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>VarName35</td>
+      <td>176374.244739</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>VarName36</td>
+      <td>5.452265</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>VarName37</td>
+      <td>211366.968721</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>61.19</td>
-      <td>3.16</td>
-      <td>143.8</td>
+      <td>VarName38</td>
+      <td>114438.452324</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Variables finales y VIFs:
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Variable</th>
+      <th>VIF</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>VarName35</td>
+      <td>1.003174</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>VarName36</td>
+      <td>1.003174</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Conjunto: &#39;Humedad&#39;
+Variables iniciales y VIFs:
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Variable</th>
+      <th>VIF</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>VarName39</td>
+      <td>2151.399503</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>VarName40</td>
+      <td>16.957309</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>VarName41</td>
+      <td>3118.283395</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>VarName42</td>
+      <td>726.845593</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Variables finales y VIFs:
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Variable</th>
+      <th>VIF</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>VarName39</td>
+      <td>1.009959</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>VarName40</td>
+      <td>1.009959</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Conjunto: &#39;Temperature&#39;
+Variables iniciales y VIFs:
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Variable</th>
+      <th>VIF</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>VarName43</td>
+      <td>740.950812</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>VarName44</td>
+      <td>25.877133</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>VarName45</td>
+      <td>1309.893163</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>VarName46</td>
+      <td>369.303605</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>60.26</td>
-      <td>3.21</td>
-      <td>143.8</td>
+      <td>VarName47</td>
+      <td>14061.751521</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>VarName48</td>
+      <td>12.276590</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>VarName49</td>
+      <td>20310.535995</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>VarName50</td>
+      <td>10206.541062</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Variables finales y VIFs:
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Variable</th>
+      <th>VIF</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>VarName43</td>
+      <td>1.265405</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>VarName44</td>
+      <td>1.024404</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>VarName47</td>
+      <td>1.297925</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>VarName48</td>
+      <td>1.023865</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Conjunto: &#39;Canal vacío&#39;
+Variables iniciales y VIFs:
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Variable</th>
+      <th>VIF</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>VarName51</td>
+      <td>36.940124</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>VarName52</td>
+      <td>38.503121</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>VarName53</td>
+      <td>37.388791</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>VarName54</td>
+      <td>39.818795</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Variables finales y VIFs:
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Variable</th>
+      <th>VIF</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>VarName52</td>
+      <td>1.003042</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>VarName53</td>
+      <td>1.003042</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Conjunto: &#39;Wind direction 100 m&#39;
+Variables iniciales y VIFs:
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Variable</th>
+      <th>VIF</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>VarName55</td>
+      <td>1.017947</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>VarName56</td>
+      <td>1.017947</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>VarName57</td>
+      <td>3.420726</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Variables finales y VIFs:
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Variable</th>
+      <th>VIF</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>VarName55</td>
+      <td>1.017947</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>VarName56</td>
+      <td>1.017947</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>VarName57</td>
+      <td>3.420726</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Conjunto: &#39;Wind direction 80 m&#39;
+Variables iniciales y VIFs:
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Variable</th>
+      <th>VIF</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>VarName58</td>
+      <td>1.047045</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>VarName59</td>
+      <td>1.047045</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>VarName60</td>
+      <td>3.843550</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Variables finales y VIFs:
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Variable</th>
+      <th>VIF</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>VarName58</td>
+      <td>1.047045</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>VarName59</td>
+      <td>1.047045</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>VarName60</td>
+      <td>3.843550</td>
     </tr>
   </tbody>
 </table>
@@ -1478,7 +2172,6 @@ Traceback (most recent call last):  File &quot;C:\Users\kamac\miniconda3\envs\ml
 </section>
 <section id="preparacion-y-analisis-de-subconjuntos-de-velocidad-del-viento">
 <h2><strong>Preparación y Análisis de Subconjuntos de Velocidad del Viento</strong><a class="headerlink" href="#preparacion-y-analisis-de-subconjuntos-de-velocidad-del-viento" title="Link to this heading">#</a></h2>
-<p>En esta sección, comenzamos por convertir la columna SoftwareVersion en formato de fecha utilizando datetime para facilitar el análisis temporal de los datos. Posteriormente, se definieron subconjuntos de datos específicos para las diferentes alturas y sensores de velocidad del viento (100 m, 80 m, 60 m y 40 m), asegurando que cada subconjunto incluyera la columna de fechas.</p>
 <p>Para optimizar los conjuntos de datos y eliminar variables redundantes que podrían introducir colinealidad en los análisis posteriores, implementamos una función para eliminar variables con un <strong>Factor de Inflación de Varianza (VIF)</strong> alto. Esta función identifica y elimina iterativamente las variables cuyo VIF excede un umbral de 10, asegurando que solo se conserven las variables más relevantes y que no estén altamente correlacionadas.</p>
 <p>Finalmente, visualizamos los datos de cada subconjunto después de la reducción de dimensionalidad. Para ello, se crearon gráficos de líneas que representan las diferentes variables de velocidad del viento, permitiendo una comparación visual clara de su comportamiento en el tiempo. Estos gráficos, organizados en un formato de subgráficos, proporcionan una visión general de las tendencias y patrones para cada sensor y altura, facilitando la interpretación de los datos y los efectos de la reducción dimensional aplicada.</p>
 <div class="cell docutils container">
@@ -1768,7 +2461,7 @@ Traceback (most recent call last):  File &quot;C:\Users\kamac\miniconda3\envs\ml
 <img alt="_images/5b349b4814ecaae917d5c9bc92ee1c33cfa6e14795ba92ed5e2adac20547a0d8.png" src="_images/5b349b4814ecaae917d5c9bc92ee1c33cfa6e14795ba92ed5e2adac20547a0d8.png" />
 <img alt="_images/a2f8f7d751563b52cf601870a86226f98a86c27ca5f25a8e71af014dc0c661e7.png" src="_images/a2f8f7d751563b52cf601870a86226f98a86c27ca5f25a8e71af014dc0c661e7.png" />
 <img alt="_images/83559f4f1f4341cb4a81bcf25473f21e62a48756e67294eed6e724ad7f7c4982.png" src="_images/83559f4f1f4341cb4a81bcf25473f21e62a48756e67294eed6e724ad7f7c4982.png" />
-<img alt="_images/aaecb401c94b0ccaaec66748df03033dadf909221cca01cf9f3f07f5628378ed.png" src="_images/aaecb401c94b0ccaaec66748df03033dadf909221cca01cf9f3f07f5628378ed.png" />
+<img alt="_images/37b892dc308dfb8b12b01480b870da1a66e04dd5904ec5bcd7260daa14c83540.png" src="_images/37b892dc308dfb8b12b01480b870da1a66e04dd5904ec5bcd7260daa14c83540.png" />
 <img alt="_images/619ea1e87e54dfc6536814abf737759a830e2fd5d71ae44c95eb4b3c94aa57cf.png" src="_images/619ea1e87e54dfc6536814abf737759a830e2fd5d71ae44c95eb4b3c94aa57cf.png" />
 </div>
 </div>
@@ -2255,7 +2948,7 @@ Traceback (most recent call last):  File &quot;C:\Users\kamac\miniconda3\envs\ml
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/14da8efa5b3247699362e99a83e86cb78b121dcb8e9115964dcdd351bcad5403.png" src="_images/14da8efa5b3247699362e99a83e86cb78b121dcb8e9115964dcdd351bcad5403.png" />
+<img alt="_images/35772c4d05e359b71a1c38e0255c8be42dbc512ac47e1049aacebd8cf8eea6fc.png" src="_images/35772c4d05e359b71a1c38e0255c8be42dbc512ac47e1049aacebd8cf8eea6fc.png" />
 </div>
 </div>
 </section>
@@ -2336,218 +3029,28 @@ Traceback (most recent call last):  File &quot;C:\Users\kamac\miniconda3\envs\ml
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\Users\EMANUEL\miniconda3\envs\Eda\lib\site-packages\statsmodels\tsa\base\tsa_model.py:473: ValueWarning: A date index has been provided, but it has no associated frequency information and so will be ignored when e.g. forecasting.
-  self._init_dates(dates, freq)
-c:\Users\EMANUEL\miniconda3\envs\Eda\lib\site-packages\statsmodels\tsa\base\tsa_model.py:473: ValueWarning: A date index has been provided, but it has no associated frequency information and so will be ignored when e.g. forecasting.
-  self._init_dates(dates, freq)
-c:\Users\EMANUEL\miniconda3\envs\Eda\lib\site-packages\statsmodels\tsa\base\tsa_model.py:473: ValueWarning: A date index has been provided, but it has no associated frequency information and so will be ignored when e.g. forecasting.
-  self._init_dates(dates, freq)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ARIMA(0, 0, 0) - AIC: 109821.72338134718
+ARIMA(0, 0, 1) - AIC: 91115.02290914956
+ARIMA(0, 0, 2) - AIC: 81362.39791727629
+ARIMA(0, 1, 0) - AIC: 63718.7642603795
+ARIMA(0, 1, 1) - AIC: 59663.414574988834
+ARIMA(0, 1, 2) - AIC: 59632.88735173687
+ARIMA(1, 0, 0) - AIC: 62975.20195288572
+ARIMA(1, 0, 1) - AIC: 59477.724822638134
+ARIMA(1, 0, 2) - AIC: 59460.912994174796
+ARIMA(1, 1, 0) - AIC: 60582.34279301629
+ARIMA(1, 1, 1) - AIC: 59629.81891282395
+ARIMA(1, 1, 2) - AIC: 59621.40855961847
+ARIMA(2, 0, 0) - AIC: 60228.67722266141
+ARIMA(2, 0, 1) - AIC: 59459.850018788056
+ARIMA(2, 0, 2) - AIC: 59459.73027572419
+ARIMA(2, 1, 0) - AIC: 59933.705626148876
+ARIMA(2, 1, 1) - AIC: 59623.23942924064
+ARIMA(2, 1, 2) - AIC: 59466.92047961635
+Mejor modelo ARIMA: (2, 0, 2) con AIC: 59459.73027572419
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ARIMA(0, 0, 0) - AIC: 109821.7233813472
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\Users\EMANUEL\miniconda3\envs\Eda\lib\site-packages\statsmodels\tsa\base\tsa_model.py:473: ValueWarning: A date index has been provided, but it has no associated frequency information and so will be ignored when e.g. forecasting.
-  self._init_dates(dates, freq)
-c:\Users\EMANUEL\miniconda3\envs\Eda\lib\site-packages\statsmodels\tsa\base\tsa_model.py:473: ValueWarning: A date index has been provided, but it has no associated frequency information and so will be ignored when e.g. forecasting.
-  self._init_dates(dates, freq)
-c:\Users\EMANUEL\miniconda3\envs\Eda\lib\site-packages\statsmodels\tsa\base\tsa_model.py:473: ValueWarning: A date index has been provided, but it has no associated frequency information and so will be ignored when e.g. forecasting.
-  self._init_dates(dates, freq)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ARIMA(0, 0, 1) - AIC: 91115.02290914953
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\Users\EMANUEL\miniconda3\envs\Eda\lib\site-packages\statsmodels\tsa\base\tsa_model.py:473: ValueWarning: A date index has been provided, but it has no associated frequency information and so will be ignored when e.g. forecasting.
-  self._init_dates(dates, freq)
-c:\Users\EMANUEL\miniconda3\envs\Eda\lib\site-packages\statsmodels\tsa\base\tsa_model.py:473: ValueWarning: A date index has been provided, but it has no associated frequency information and so will be ignored when e.g. forecasting.
-  self._init_dates(dates, freq)
-c:\Users\EMANUEL\miniconda3\envs\Eda\lib\site-packages\statsmodels\tsa\base\tsa_model.py:473: ValueWarning: A date index has been provided, but it has no associated frequency information and so will be ignored when e.g. forecasting.
-  self._init_dates(dates, freq)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ARIMA(0, 0, 2) - AIC: 81362.3979172763
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\Users\EMANUEL\miniconda3\envs\Eda\lib\site-packages\statsmodels\tsa\base\tsa_model.py:473: ValueWarning: A date index has been provided, but it has no associated frequency information and so will be ignored when e.g. forecasting.
-  self._init_dates(dates, freq)
-c:\Users\EMANUEL\miniconda3\envs\Eda\lib\site-packages\statsmodels\tsa\base\tsa_model.py:473: ValueWarning: A date index has been provided, but it has no associated frequency information and so will be ignored when e.g. forecasting.
-  self._init_dates(dates, freq)
-c:\Users\EMANUEL\miniconda3\envs\Eda\lib\site-packages\statsmodels\tsa\base\tsa_model.py:473: ValueWarning: A date index has been provided, but it has no associated frequency information and so will be ignored when e.g. forecasting.
-  self._init_dates(dates, freq)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ARIMA(0, 1, 0) - AIC: 63718.76426037948
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\Users\EMANUEL\miniconda3\envs\Eda\lib\site-packages\statsmodels\tsa\base\tsa_model.py:473: ValueWarning: A date index has been provided, but it has no associated frequency information and so will be ignored when e.g. forecasting.
-  self._init_dates(dates, freq)
-c:\Users\EMANUEL\miniconda3\envs\Eda\lib\site-packages\statsmodels\tsa\base\tsa_model.py:473: ValueWarning: A date index has been provided, but it has no associated frequency information and so will be ignored when e.g. forecasting.
-  self._init_dates(dates, freq)
-c:\Users\EMANUEL\miniconda3\envs\Eda\lib\site-packages\statsmodels\tsa\base\tsa_model.py:473: ValueWarning: A date index has been provided, but it has no associated frequency information and so will be ignored when e.g. forecasting.
-  self._init_dates(dates, freq)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ARIMA(0, 1, 1) - AIC: 59663.41457498868
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\Users\EMANUEL\miniconda3\envs\Eda\lib\site-packages\statsmodels\tsa\base\tsa_model.py:473: ValueWarning: A date index has been provided, but it has no associated frequency information and so will be ignored when e.g. forecasting.
-  self._init_dates(dates, freq)
-c:\Users\EMANUEL\miniconda3\envs\Eda\lib\site-packages\statsmodels\tsa\base\tsa_model.py:473: ValueWarning: A date index has been provided, but it has no associated frequency information and so will be ignored when e.g. forecasting.
-  self._init_dates(dates, freq)
-c:\Users\EMANUEL\miniconda3\envs\Eda\lib\site-packages\statsmodels\tsa\base\tsa_model.py:473: ValueWarning: A date index has been provided, but it has no associated frequency information and so will be ignored when e.g. forecasting.
-  self._init_dates(dates, freq)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ARIMA(0, 1, 2) - AIC: 59632.887351736936
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\Users\EMANUEL\miniconda3\envs\Eda\lib\site-packages\statsmodels\tsa\base\tsa_model.py:473: ValueWarning: A date index has been provided, but it has no associated frequency information and so will be ignored when e.g. forecasting.
-  self._init_dates(dates, freq)
-c:\Users\EMANUEL\miniconda3\envs\Eda\lib\site-packages\statsmodels\tsa\base\tsa_model.py:473: ValueWarning: A date index has been provided, but it has no associated frequency information and so will be ignored when e.g. forecasting.
-  self._init_dates(dates, freq)
-c:\Users\EMANUEL\miniconda3\envs\Eda\lib\site-packages\statsmodels\tsa\base\tsa_model.py:473: ValueWarning: A date index has been provided, but it has no associated frequency information and so will be ignored when e.g. forecasting.
-  self._init_dates(dates, freq)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ARIMA(1, 0, 0) - AIC: 62975.20195288571
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\Users\EMANUEL\miniconda3\envs\Eda\lib\site-packages\statsmodels\tsa\base\tsa_model.py:473: ValueWarning: A date index has been provided, but it has no associated frequency information and so will be ignored when e.g. forecasting.
-  self._init_dates(dates, freq)
-c:\Users\EMANUEL\miniconda3\envs\Eda\lib\site-packages\statsmodels\tsa\base\tsa_model.py:473: ValueWarning: A date index has been provided, but it has no associated frequency information and so will be ignored when e.g. forecasting.
-  self._init_dates(dates, freq)
-c:\Users\EMANUEL\miniconda3\envs\Eda\lib\site-packages\statsmodels\tsa\base\tsa_model.py:473: ValueWarning: A date index has been provided, but it has no associated frequency information and so will be ignored when e.g. forecasting.
-  self._init_dates(dates, freq)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ARIMA(1, 0, 1) - AIC: 59477.72482263828
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\Users\EMANUEL\miniconda3\envs\Eda\lib\site-packages\statsmodels\tsa\base\tsa_model.py:473: ValueWarning: A date index has been provided, but it has no associated frequency information and so will be ignored when e.g. forecasting.
-  self._init_dates(dates, freq)
-c:\Users\EMANUEL\miniconda3\envs\Eda\lib\site-packages\statsmodels\tsa\base\tsa_model.py:473: ValueWarning: A date index has been provided, but it has no associated frequency information and so will be ignored when e.g. forecasting.
-  self._init_dates(dates, freq)
-c:\Users\EMANUEL\miniconda3\envs\Eda\lib\site-packages\statsmodels\tsa\base\tsa_model.py:473: ValueWarning: A date index has been provided, but it has no associated frequency information and so will be ignored when e.g. forecasting.
-  self._init_dates(dates, freq)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ARIMA(1, 0, 2) - AIC: 59460.912994175684
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\Users\EMANUEL\miniconda3\envs\Eda\lib\site-packages\statsmodels\tsa\base\tsa_model.py:473: ValueWarning: A date index has been provided, but it has no associated frequency information and so will be ignored when e.g. forecasting.
-  self._init_dates(dates, freq)
-c:\Users\EMANUEL\miniconda3\envs\Eda\lib\site-packages\statsmodels\tsa\base\tsa_model.py:473: ValueWarning: A date index has been provided, but it has no associated frequency information and so will be ignored when e.g. forecasting.
-  self._init_dates(dates, freq)
-c:\Users\EMANUEL\miniconda3\envs\Eda\lib\site-packages\statsmodels\tsa\base\tsa_model.py:473: ValueWarning: A date index has been provided, but it has no associated frequency information and so will be ignored when e.g. forecasting.
-  self._init_dates(dates, freq)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ARIMA(1, 1, 0) - AIC: 60582.34279257427
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\Users\EMANUEL\miniconda3\envs\Eda\lib\site-packages\statsmodels\tsa\base\tsa_model.py:473: ValueWarning: A date index has been provided, but it has no associated frequency information and so will be ignored when e.g. forecasting.
-  self._init_dates(dates, freq)
-c:\Users\EMANUEL\miniconda3\envs\Eda\lib\site-packages\statsmodels\tsa\base\tsa_model.py:473: ValueWarning: A date index has been provided, but it has no associated frequency information and so will be ignored when e.g. forecasting.
-  self._init_dates(dates, freq)
-c:\Users\EMANUEL\miniconda3\envs\Eda\lib\site-packages\statsmodels\tsa\base\tsa_model.py:473: ValueWarning: A date index has been provided, but it has no associated frequency information and so will be ignored when e.g. forecasting.
-  self._init_dates(dates, freq)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ARIMA(1, 1, 1) - AIC: 59629.81891282342
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\Users\EMANUEL\miniconda3\envs\Eda\lib\site-packages\statsmodels\tsa\base\tsa_model.py:473: ValueWarning: A date index has been provided, but it has no associated frequency information and so will be ignored when e.g. forecasting.
-  self._init_dates(dates, freq)
-c:\Users\EMANUEL\miniconda3\envs\Eda\lib\site-packages\statsmodels\tsa\base\tsa_model.py:473: ValueWarning: A date index has been provided, but it has no associated frequency information and so will be ignored when e.g. forecasting.
-  self._init_dates(dates, freq)
-c:\Users\EMANUEL\miniconda3\envs\Eda\lib\site-packages\statsmodels\tsa\base\tsa_model.py:473: ValueWarning: A date index has been provided, but it has no associated frequency information and so will be ignored when e.g. forecasting.
-  self._init_dates(dates, freq)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ARIMA(1, 1, 2) - AIC: 59621.408559610485
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\Users\EMANUEL\miniconda3\envs\Eda\lib\site-packages\statsmodels\tsa\base\tsa_model.py:473: ValueWarning: A date index has been provided, but it has no associated frequency information and so will be ignored when e.g. forecasting.
-  self._init_dates(dates, freq)
-c:\Users\EMANUEL\miniconda3\envs\Eda\lib\site-packages\statsmodels\tsa\base\tsa_model.py:473: ValueWarning: A date index has been provided, but it has no associated frequency information and so will be ignored when e.g. forecasting.
-  self._init_dates(dates, freq)
-c:\Users\EMANUEL\miniconda3\envs\Eda\lib\site-packages\statsmodels\tsa\base\tsa_model.py:473: ValueWarning: A date index has been provided, but it has no associated frequency information and so will be ignored when e.g. forecasting.
-  self._init_dates(dates, freq)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ARIMA(2, 0, 0) - AIC: 60228.67722264716
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\Users\EMANUEL\miniconda3\envs\Eda\lib\site-packages\statsmodels\tsa\base\tsa_model.py:473: ValueWarning: A date index has been provided, but it has no associated frequency information and so will be ignored when e.g. forecasting.
-  self._init_dates(dates, freq)
-c:\Users\EMANUEL\miniconda3\envs\Eda\lib\site-packages\statsmodels\tsa\base\tsa_model.py:473: ValueWarning: A date index has been provided, but it has no associated frequency information and so will be ignored when e.g. forecasting.
-  self._init_dates(dates, freq)
-c:\Users\EMANUEL\miniconda3\envs\Eda\lib\site-packages\statsmodels\tsa\base\tsa_model.py:473: ValueWarning: A date index has been provided, but it has no associated frequency information and so will be ignored when e.g. forecasting.
-  self._init_dates(dates, freq)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ARIMA(2, 0, 1) - AIC: 59459.85001879436
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\Users\EMANUEL\miniconda3\envs\Eda\lib\site-packages\statsmodels\tsa\base\tsa_model.py:473: ValueWarning: A date index has been provided, but it has no associated frequency information and so will be ignored when e.g. forecasting.
-  self._init_dates(dates, freq)
-c:\Users\EMANUEL\miniconda3\envs\Eda\lib\site-packages\statsmodels\tsa\base\tsa_model.py:473: ValueWarning: A date index has been provided, but it has no associated frequency information and so will be ignored when e.g. forecasting.
-  self._init_dates(dates, freq)
-c:\Users\EMANUEL\miniconda3\envs\Eda\lib\site-packages\statsmodels\tsa\base\tsa_model.py:473: ValueWarning: A date index has been provided, but it has no associated frequency information and so will be ignored when e.g. forecasting.
-  self._init_dates(dates, freq)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ARIMA(2, 0, 2) - AIC: 59459.73027475112
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\Users\EMANUEL\miniconda3\envs\Eda\lib\site-packages\statsmodels\tsa\base\tsa_model.py:473: ValueWarning: A date index has been provided, but it has no associated frequency information and so will be ignored when e.g. forecasting.
-  self._init_dates(dates, freq)
-c:\Users\EMANUEL\miniconda3\envs\Eda\lib\site-packages\statsmodels\tsa\base\tsa_model.py:473: ValueWarning: A date index has been provided, but it has no associated frequency information and so will be ignored when e.g. forecasting.
-  self._init_dates(dates, freq)
-c:\Users\EMANUEL\miniconda3\envs\Eda\lib\site-packages\statsmodels\tsa\base\tsa_model.py:473: ValueWarning: A date index has been provided, but it has no associated frequency information and so will be ignored when e.g. forecasting.
-  self._init_dates(dates, freq)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ARIMA(2, 1, 0) - AIC: 59933.70562611455
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\Users\EMANUEL\miniconda3\envs\Eda\lib\site-packages\statsmodels\tsa\base\tsa_model.py:473: ValueWarning: A date index has been provided, but it has no associated frequency information and so will be ignored when e.g. forecasting.
-  self._init_dates(dates, freq)
-c:\Users\EMANUEL\miniconda3\envs\Eda\lib\site-packages\statsmodels\tsa\base\tsa_model.py:473: ValueWarning: A date index has been provided, but it has no associated frequency information and so will be ignored when e.g. forecasting.
-  self._init_dates(dates, freq)
-c:\Users\EMANUEL\miniconda3\envs\Eda\lib\site-packages\statsmodels\tsa\base\tsa_model.py:473: ValueWarning: A date index has been provided, but it has no associated frequency information and so will be ignored when e.g. forecasting.
-  self._init_dates(dates, freq)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ARIMA(2, 1, 1) - AIC: 59623.23942923719
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\Users\EMANUEL\miniconda3\envs\Eda\lib\site-packages\statsmodels\tsa\base\tsa_model.py:473: ValueWarning: A date index has been provided, but it has no associated frequency information and so will be ignored when e.g. forecasting.
-  self._init_dates(dates, freq)
-c:\Users\EMANUEL\miniconda3\envs\Eda\lib\site-packages\statsmodels\tsa\base\tsa_model.py:473: ValueWarning: A date index has been provided, but it has no associated frequency information and so will be ignored when e.g. forecasting.
-  self._init_dates(dates, freq)
-c:\Users\EMANUEL\miniconda3\envs\Eda\lib\site-packages\statsmodels\tsa\base\tsa_model.py:473: ValueWarning: A date index has been provided, but it has no associated frequency information and so will be ignored when e.g. forecasting.
-  self._init_dates(dates, freq)
-c:\Users\EMANUEL\miniconda3\envs\Eda\lib\site-packages\statsmodels\base\model.py:607: ConvergenceWarning: Maximum Likelihood optimization failed to converge. Check mle_retvals
-  warnings.warn(&quot;Maximum Likelihood optimization failed to &quot;
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ARIMA(2, 1, 2) - AIC: 59401.0438626493
-Mejor modelo ARIMA: (2, 1, 2) con AIC: 59401.0438626493
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\Users\EMANUEL\miniconda3\envs\Eda\lib\site-packages\statsmodels\tsa\base\tsa_model.py:473: ValueWarning: A date index has been provided, but it has no associated frequency information and so will be ignored when e.g. forecasting.
-  self._init_dates(dates, freq)
-c:\Users\EMANUEL\miniconda3\envs\Eda\lib\site-packages\statsmodels\tsa\base\tsa_model.py:473: ValueWarning: A date index has been provided, but it has no associated frequency information and so will be ignored when e.g. forecasting.
-  self._init_dates(dates, freq)
-c:\Users\EMANUEL\miniconda3\envs\Eda\lib\site-packages\statsmodels\tsa\base\tsa_model.py:473: ValueWarning: A date index has been provided, but it has no associated frequency information and so will be ignored when e.g. forecasting.
-  self._init_dates(dates, freq)
-c:\Users\EMANUEL\miniconda3\envs\Eda\lib\site-packages\statsmodels\base\model.py:607: ConvergenceWarning: Maximum Likelihood optimization failed to converge. Check mle_retvals
-  warnings.warn(&quot;Maximum Likelihood optimization failed to &quot;
-</pre></div>
-</div>
-<img alt="_images/75bc7ca0c53a66310a507e832c413a5d1f2f751638580c847bd0540fc30b0536.png" src="_images/75bc7ca0c53a66310a507e832c413a5d1f2f751638580c847bd0540fc30b0536.png" />
+<img alt="_images/6c88aa6020fb03c78bf4b0a98a14f730f1ef945c79cd1924e7caf125050eda73.png" src="_images/6c88aa6020fb03c78bf4b0a98a14f730f1ef945c79cd1924e7caf125050eda73.png" />
 </div>
 </div>
 <p>La gráfica muestra el resultado del proceso de imputación de datos faltantes utilizando el modelo ARIMA para la serie temporal de velocidad del viento (<code class="docutils literal notranslate"><span class="pre">80_m2</span></code>). Los datos originales se representan con una línea punteada azul, mientras que los datos imputados por ARIMA se presentan en una línea continua de color naranja.</p>
@@ -2618,35 +3121,7 @@ c:\Users\EMANUEL\miniconda3\envs\Eda\lib\site-packages\statsmodels\base\model.py
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\Users\EMANUEL\miniconda3\envs\Eda\lib\site-packages\statsmodels\tsa\base\tsa_model.py:473: ValueWarning: A date index has been provided, but it has no associated frequency information and so will be ignored when e.g. forecasting.
-  self._init_dates(dates, freq)
-c:\Users\EMANUEL\miniconda3\envs\Eda\lib\site-packages\statsmodels\tsa\base\tsa_model.py:473: ValueWarning: A date index has been provided, but it has no associated frequency information and so will be ignored when e.g. forecasting.
-  self._init_dates(dates, freq)
-c:\Users\EMANUEL\miniconda3\envs\Eda\lib\site-packages\statsmodels\tsa\base\tsa_model.py:473: ValueWarning: A date index has been provided, but it has no associated frequency information and so will be ignored when e.g. forecasting.
-  self._init_dates(dates, freq)
-c:\Users\EMANUEL\miniconda3\envs\Eda\lib\site-packages\statsmodels\base\model.py:607: ConvergenceWarning: Maximum Likelihood optimization failed to converge. Check mle_retvals
-  warnings.warn(&quot;Maximum Likelihood optimization failed to &quot;
-c:\Users\EMANUEL\miniconda3\envs\Eda\lib\site-packages\statsmodels\tsa\base\tsa_model.py:473: ValueWarning: A date index has been provided, but it has no associated frequency information and so will be ignored when e.g. forecasting.
-  self._init_dates(dates, freq)
-c:\Users\EMANUEL\miniconda3\envs\Eda\lib\site-packages\statsmodels\tsa\base\tsa_model.py:473: ValueWarning: A date index has been provided, but it has no associated frequency information and so will be ignored when e.g. forecasting.
-  self._init_dates(dates, freq)
-c:\Users\EMANUEL\miniconda3\envs\Eda\lib\site-packages\statsmodels\tsa\base\tsa_model.py:473: ValueWarning: A date index has been provided, but it has no associated frequency information and so will be ignored when e.g. forecasting.
-  self._init_dates(dates, freq)
-c:\Users\EMANUEL\miniconda3\envs\Eda\lib\site-packages\statsmodels\tsa\base\tsa_model.py:473: ValueWarning: A date index has been provided, but it has no associated frequency information and so will be ignored when e.g. forecasting.
-  self._init_dates(dates, freq)
-c:\Users\EMANUEL\miniconda3\envs\Eda\lib\site-packages\statsmodels\tsa\base\tsa_model.py:473: ValueWarning: A date index has been provided, but it has no associated frequency information and so will be ignored when e.g. forecasting.
-  self._init_dates(dates, freq)
-c:\Users\EMANUEL\miniconda3\envs\Eda\lib\site-packages\statsmodels\tsa\base\tsa_model.py:473: ValueWarning: A date index has been provided, but it has no associated frequency information and so will be ignored when e.g. forecasting.
-  self._init_dates(dates, freq)
-c:\Users\EMANUEL\miniconda3\envs\Eda\lib\site-packages\statsmodels\tsa\base\tsa_model.py:473: ValueWarning: A date index has been provided, but it has no associated frequency information and so will be ignored when e.g. forecasting.
-  self._init_dates(dates, freq)
-c:\Users\EMANUEL\miniconda3\envs\Eda\lib\site-packages\statsmodels\tsa\base\tsa_model.py:473: ValueWarning: A date index has been provided, but it has no associated frequency information and so will be ignored when e.g. forecasting.
-  self._init_dates(dates, freq)
-c:\Users\EMANUEL\miniconda3\envs\Eda\lib\site-packages\statsmodels\tsa\base\tsa_model.py:473: ValueWarning: A date index has been provided, but it has no associated frequency information and so will be ignored when e.g. forecasting.
-  self._init_dates(dates, freq)
-</pre></div>
-</div>
-<img alt="_images/13a3e8e27f94bccbeabfb7e3a4c4b309667970233a030c29ec2ee861530f0d61.png" src="_images/13a3e8e27f94bccbeabfb7e3a4c4b309667970233a030c29ec2ee861530f0d61.png" />
+<img alt="_images/e34d81a9df74a8c7d7cce7632ace8ca1446e3d99d38db6613689abd2a4c50b6f.png" src="_images/e34d81a9df74a8c7d7cce7632ace8ca1446e3d99d38db6613689abd2a4c50b6f.png" />
 <img alt="_images/eab051190c436188b2a7ff23f7b1196806ad6d7a5f90a7b0348850888bf7ae1c.png" src="_images/eab051190c436188b2a7ff23f7b1196806ad6d7a5f90a7b0348850888bf7ae1c.png" />
 <img alt="_images/78321d7ccde78a154740e0e1129ebdf01965ca217aa846f1cb74e91ee8dc9473.png" src="_images/78321d7ccde78a154740e0e1129ebdf01965ca217aa846f1cb74e91ee8dc9473.png" />
 <img alt="_images/d67a85ef360b353c7c9acd2ccaceeb7c37b6c8a6b55df13cd09567be4e3bb2d1.png" src="_images/d67a85ef360b353c7c9acd2ccaceeb7c37b6c8a6b55df13cd09567be4e3bb2d1.png" />
@@ -2722,7 +3197,7 @@ c:\Users\EMANUEL\miniconda3\envs\Eda\lib\site-packages\statsmodels\tsa\base\tsa_
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/62192417afa7a39fe320cf7452e4ece759ebaef67d6cb69bf9c06803c5be6324.png" src="_images/62192417afa7a39fe320cf7452e4ece759ebaef67d6cb69bf9c06803c5be6324.png" />
+<img alt="_images/d340f837f11dd69001af3ba16a708ee7dea7748509169df299770df87d35b7b3.png" src="_images/d340f837f11dd69001af3ba16a708ee7dea7748509169df299770df87d35b7b3.png" />
 </div>
 </div>
 </section>
@@ -2807,7 +3282,7 @@ c:\Users\EMANUEL\miniconda3\envs\Eda\lib\site-packages\statsmodels\tsa\base\tsa_
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/a629c65de77cdf3eb4e768f7572e6dde46552215438829c73bf25b8314557f4e.png" src="_images/a629c65de77cdf3eb4e768f7572e6dde46552215438829c73bf25b8314557f4e.png" />
+<img alt="_images/4bac8209a4f47026af23b09bdb8b48f8fab184ff2bb536de8869dac9858aeba7.png" src="_images/4bac8209a4f47026af23b09bdb8b48f8fab184ff2bb536de8869dac9858aeba7.png" />
 </div>
 </div>
 </section>
@@ -2924,6 +3399,15 @@ c:\Users\EMANUEL\miniconda3\envs\Eda\lib\site-packages\statsmodels\tsa\base\tsa_
         <p class="prev-next-title">Análisis de Series de Tiempo de Variables Meteorológicas</p>
       </div>
     </a>
+    <a class="right-next"
+       href="modelos.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><strong>Modelos de regresión</strong></p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
@@ -2940,16 +3424,17 @@ c:\Users\EMANUEL\miniconda3\envs\Eda\lib\site-packages\statsmodels\tsa\base\tsa_
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduccion"><strong>Introducción</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contextualizacion-de-los-datos"><strong>Contextualización de los datos</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#introduccion"><strong>Introducción</strong></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#descripcion-del-conjunto-de-datos"><strong>Descripción del Conjunto de Datos</strong></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#estrategia-del-analisis-exploratorio-de-datos"><strong>Estrategia del Análisis Exploratorio de Datos</strong></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#importancia-del-eda-en-el-proyecto"><strong>Importancia del EDA en el proyecto</strong></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#importacion-de-librerias-necesarias"><strong>Importación de librerías necesarias</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#importacion-y-exploracion-inicial-del-conjunto-de-datos"><strong>Importación y exploración inicial del conjunto de datos</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#librerias-y-modulos-necesarios"><strong>Librerías y modulos necesarios</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conjunto-de-datos"><strong>Conjunto de datos</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reorganizacion-del-conjunto-de-datos"><strong>Reorganización del conjunto de datos</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reduccion-de-dimensionalidad"><strong>Reducción de Dimensionalidad</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reduccion-de-dimensionalidad-vif"><strong>Reducción de Dimensionalidad (VIF)</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preparacion-y-analisis-de-subconjuntos-de-velocidad-del-viento"><strong>Preparación y Análisis de Subconjuntos de Velocidad del Viento</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizacion-de-la-direccion-y-velocidad-del-viento-en-diferentes-alturas"><strong>Visualización de la Dirección y Velocidad del Viento en Diferentes Alturas</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizacion-de-la-temperatura-a-diferentes-alturas"><strong>Visualización de la Temperatura a Diferentes Alturas</strong></a></li>

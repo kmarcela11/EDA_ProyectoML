@@ -1,0 +1,96 @@
+Traceback (most recent call last):
+  File "C:\Users\kamac\miniconda3\envs\ml_venv\lib\site-packages\jupyter_cache\executors\utils.py", line 58, in single_nb_execution
+    executenb(
+  File "C:\Users\kamac\miniconda3\envs\ml_venv\lib\site-packages\nbclient\client.py", line 1305, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "C:\Users\kamac\miniconda3\envs\ml_venv\lib\site-packages\jupyter_core\utils\__init__.py", line 166, in wrapped
+    return loop.run_until_complete(inner)
+  File "C:\Users\kamac\miniconda3\envs\ml_venv\lib\asyncio\base_events.py", line 647, in run_until_complete
+    return future.result()
+  File "C:\Users\kamac\miniconda3\envs\ml_venv\lib\site-packages\nbclient\client.py", line 705, in async_execute
+    await self.async_execute_cell(
+  File "C:\Users\kamac\miniconda3\envs\ml_venv\lib\site-packages\nbclient\client.py", line 1058, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "C:\Users\kamac\miniconda3\envs\ml_venv\lib\site-packages\nbclient\client.py", line 914, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+import pandas as pd
+import numpy as np
+from sklearn.linear_model import LinearRegression
+from sklearn.neighbors import KNeighborsRegressor
+from sklearn.linear_model import Ridge, Lasso
+from scipy.stats import jarque_bera
+import matplotlib.pyplot as plt
+from statsmodels.stats.diagnostic import acorr_ljungbox
+from sklearn.metrics import mean_squared_error
+from sklearn.metrics import mean_squared_error, r2_score
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
+from sklearn.model_selection import GridSearchCV, TimeSeriesSplit
+import warnings
+warnings.filterwarnings("ignore")
+------------------
+
+
+[1;31m---------------------------------------------------------------------------[0m
+[1;31mImportError[0m                               Traceback (most recent call last)
+Cell [1;32mIn[1], line 3[0m
+[0;32m      1[0m [38;5;28;01mimport[39;00m [38;5;21;01mpandas[39;00m [38;5;28;01mas[39;00m [38;5;21;01mpd[39;00m
+[0;32m      2[0m [38;5;28;01mimport[39;00m [38;5;21;01mnumpy[39;00m [38;5;28;01mas[39;00m [38;5;21;01mnp[39;00m
+[1;32m----> 3[0m [38;5;28;01mfrom[39;00m [38;5;21;01msklearn[39;00m[38;5;21;01m.[39;00m[38;5;21;01mlinear_model[39;00m [38;5;28;01mimport[39;00m LinearRegression
+[0;32m      4[0m [38;5;28;01mfrom[39;00m [38;5;21;01msklearn[39;00m[38;5;21;01m.[39;00m[38;5;21;01mneighbors[39;00m [38;5;28;01mimport[39;00m KNeighborsRegressor
+[0;32m      5[0m [38;5;28;01mfrom[39;00m [38;5;21;01msklearn[39;00m[38;5;21;01m.[39;00m[38;5;21;01mlinear_model[39;00m [38;5;28;01mimport[39;00m Ridge, Lasso
+
+File [1;32m~\miniconda3\envs\ml_venv\lib\site-packages\sklearn\__init__.py:83[0m
+[0;32m     69[0m     [38;5;66;03m# We are not importing the rest of scikit-learn during the build[39;00m
+[0;32m     70[0m     [38;5;66;03m# process, as it may not be compiled yet[39;00m
+[0;32m     71[0m [38;5;28;01melse[39;00m:
+[1;32m   (...)[0m
+[0;32m     77[0m     [38;5;66;03m# later is linked to the OpenMP runtime to make it possible to introspect[39;00m
+[0;32m     78[0m     [38;5;66;03m# it and importing it first would fail if the OpenMP dll cannot be found.[39;00m
+[0;32m     79[0m     [38;5;28;01mfrom[39;00m [38;5;21;01m.[39;00m [38;5;28;01mimport[39;00m (
+[0;32m     80[0m         __check_build,  [38;5;66;03m# noqa: F401[39;00m
+[0;32m     81[0m         _distributor_init,  [38;5;66;03m# noqa: F401[39;00m
+[0;32m     82[0m     )
+[1;32m---> 83[0m     [38;5;28;01mfrom[39;00m [38;5;21;01m.[39;00m[38;5;21;01mbase[39;00m [38;5;28;01mimport[39;00m clone
+[0;32m     84[0m     [38;5;28;01mfrom[39;00m [38;5;21;01m.[39;00m[38;5;21;01mutils[39;00m[38;5;21;01m.[39;00m[38;5;21;01m_show_versions[39;00m [38;5;28;01mimport[39;00m show_versions
+[0;32m     86[0m     __all__ [38;5;241m=[39m [
+[0;32m     87[0m         [38;5;124m"[39m[38;5;124mcalibration[39m[38;5;124m"[39m,
+[0;32m     88[0m         [38;5;124m"[39m[38;5;124mcluster[39m[38;5;124m"[39m,
+[1;32m   (...)[0m
+[0;32m    129[0m         [38;5;124m"[39m[38;5;124mshow_versions[39m[38;5;124m"[39m,
+[0;32m    130[0m     ]
+
+File [1;32m~\miniconda3\envs\ml_venv\lib\site-packages\sklearn\base.py:19[0m
+[0;32m     17[0m [38;5;28;01mfrom[39;00m [38;5;21;01m.[39;00m[38;5;21;01m_config[39;00m [38;5;28;01mimport[39;00m config_context, get_config
+[0;32m     18[0m [38;5;28;01mfrom[39;00m [38;5;21;01m.[39;00m[38;5;21;01mexceptions[39;00m [38;5;28;01mimport[39;00m InconsistentVersionWarning
+[1;32m---> 19[0m [38;5;28;01mfrom[39;00m [38;5;21;01m.[39;00m[38;5;21;01mutils[39;00m [38;5;28;01mimport[39;00m _IS_32BIT
+[0;32m     20[0m [38;5;28;01mfrom[39;00m [38;5;21;01m.[39;00m[38;5;21;01mutils[39;00m[38;5;21;01m.[39;00m[38;5;21;01m_estimator_html_repr[39;00m [38;5;28;01mimport[39;00m estimator_html_repr
+[0;32m     21[0m [38;5;28;01mfrom[39;00m [38;5;21;01m.[39;00m[38;5;21;01mutils[39;00m[38;5;21;01m.[39;00m[38;5;21;01m_metadata_requests[39;00m [38;5;28;01mimport[39;00m _MetadataRequester
+
+File [1;32m~\miniconda3\envs\ml_venv\lib\site-packages\sklearn\utils\__init__.py:22[0m
+[0;32m     20[0m [38;5;28;01mfrom[39;00m [38;5;21;01m.[39;00m[38;5;21;01m_bunch[39;00m [38;5;28;01mimport[39;00m Bunch
+[0;32m     21[0m [38;5;28;01mfrom[39;00m [38;5;21;01m.[39;00m[38;5;21;01m_estimator_html_repr[39;00m [38;5;28;01mimport[39;00m estimator_html_repr
+[1;32m---> 22[0m [38;5;28;01mfrom[39;00m [38;5;21;01m.[39;00m[38;5;21;01m_param_validation[39;00m [38;5;28;01mimport[39;00m Interval, validate_params
+[0;32m     23[0m [38;5;28;01mfrom[39;00m [38;5;21;01m.[39;00m[38;5;21;01mclass_weight[39;00m [38;5;28;01mimport[39;00m compute_class_weight, compute_sample_weight
+[0;32m     24[0m [38;5;28;01mfrom[39;00m [38;5;21;01m.[39;00m[38;5;21;01mdeprecation[39;00m [38;5;28;01mimport[39;00m deprecated
+
+File [1;32m~\miniconda3\envs\ml_venv\lib\site-packages\sklearn\utils\_param_validation.py:15[0m
+[0;32m     12[0m [38;5;28;01mfrom[39;00m [38;5;21;01mscipy[39;00m[38;5;21;01m.[39;00m[38;5;21;01msparse[39;00m [38;5;28;01mimport[39;00m csr_matrix, issparse
+[0;32m     14[0m [38;5;28;01mfrom[39;00m [38;5;21;01m.[39;00m[38;5;21;01m.[39;00m[38;5;21;01m_config[39;00m [38;5;28;01mimport[39;00m config_context, get_config
+[1;32m---> 15[0m [38;5;28;01mfrom[39;00m [38;5;21;01m.[39;00m[38;5;21;01mvalidation[39;00m [38;5;28;01mimport[39;00m _is_arraylike_not_scalar
+[0;32m     18[0m [38;5;28;01mclass[39;00m [38;5;21;01mInvalidParameterError[39;00m([38;5;167;01mValueError[39;00m, [38;5;167;01mTypeError[39;00m):
+[0;32m     19[0m [38;5;250m    [39m[38;5;124;03m"""Custom exception to be raised when the parameter of a class/method/function[39;00m
+[0;32m     20[0m [38;5;124;03m    does not have a valid type or value.[39;00m
+[0;32m     21[0m [38;5;124;03m    """[39;00m
+
+File [1;32m~\miniconda3\envs\ml_venv\lib\site-packages\sklearn\utils\validation.py:24[0m
+[0;32m     21[0m [38;5;28;01mimport[39;00m [38;5;21;01mscipy[39;00m[38;5;21;01m.[39;00m[38;5;21;01msparse[39;00m [38;5;28;01mas[39;00m [38;5;21;01msp[39;00m
+[0;32m     23[0m [38;5;66;03m# mypy error: Module 'numpy.core.numeric' has no attribute 'ComplexWarning'[39;00m
+[1;32m---> 24[0m [38;5;28;01mfrom[39;00m [38;5;21;01mnumpy[39;00m[38;5;21;01m.[39;00m[38;5;21;01mcore[39;00m[38;5;21;01m.[39;00m[38;5;21;01mnumeric[39;00m [38;5;28;01mimport[39;00m ComplexWarning  [38;5;66;03m# type: ignore[39;00m
+[0;32m     26[0m [38;5;28;01mfrom[39;00m [38;5;21;01m.[39;00m[38;5;21;01m.[39;00m [38;5;28;01mimport[39;00m get_config [38;5;28;01mas[39;00m _get_config
+[0;32m     27[0m [38;5;28;01mfrom[39;00m [38;5;21;01m.[39;00m[38;5;21;01m.[39;00m[38;5;21;01mexceptions[39;00m [38;5;28;01mimport[39;00m DataConversionWarning, NotFittedError, PositiveSpectrumWarning
+
+[1;31mImportError[0m: cannot import name 'ComplexWarning' from 'numpy.core.numeric' (C:\Users\kamac\miniconda3\envs\ml_venv\lib\site-packages\numpy\core\numeric.py)
+

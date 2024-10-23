@@ -1,0 +1,1702 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Modelos de regresión &#8212; EDA PROYECTO FINAL</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'modelos';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Análisis Exploratorio de Datos (EDA)" href="informe.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="Intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.jpeg" class="logo__image only-light" alt="EDA PROYECTO FINAL - Home"/>
+    <script>document.write(`<img src="_static/logo.jpeg" class="logo__image only-dark" alt="EDA PROYECTO FINAL - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="Intro.html">
+                    Análisis de Series de Tiempo de Variables Meteorológicas
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="informe.html"><strong>Análisis Exploratorio de Datos (EDA)</strong></a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>Modelos de regresión</strong></a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fmodelos.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/modelos.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Modelos de regresión</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#librerias-y-modulos-necesarios"><strong>Librerías y modulos necesarios</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#datos"><strong>Datos</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#caracteristicas-principales-de-la-base-de-datos"><strong>Características principales de la base de datos</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#diccionario-de-variables"><strong>Diccionario de variables</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelos"><strong>Modelos</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-para-evaluar-los-modelos-usando-ventanas-de-prediccion"><strong>Método para evaluar los modelos usando ventanas de predicción</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-para-realizar-las-graficas"><strong>Método para realizar las gráficas</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-1-wind-speed-100-metros-sensor-1"><strong>Modelo 1: Wind speed 100 metros (Sensor 1)</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modelos-usando-ventanas-de-prediccion"><strong>Modelos usando ventanas de predicción</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#grafica-del-mejor-modelo"><strong>Gráfica del mejor modelo</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-2-wind-speed-100-metros-sensor-2"><strong>Modelo 2: Wind speed 100 metros (Sensor 2)</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"><strong>Modelos usando ventanas de predicción</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#graficas"><strong>Gráficas</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-3-wind-speed-80-metros-sensor-1"><strong>Modelo 3: Wind speed 80 metros (Sensor 1)</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2"><strong>Modelos usando ventanas de predicción</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3"><strong>Gráficas</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-4-wind-speed-80-metros-sensor-2"><strong>Modelo 4: Wind speed 80 metros (Sensor 2)</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4"><strong>Modelos usando ventanas de predicción</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5"><strong>Gráficas</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-5-wind-speed-60-metros"><strong>Modelo 5: Wind speed 60 metros</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6"><strong>Modelos usando ventanas de predicción</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7"><strong>Gráfica del mejor modelo</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion"><strong>Conclusión</strong></a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="modelos-de-regresion">
+<h1><strong>Modelos de regresión</strong><a class="headerlink" href="#modelos-de-regresion" title="Link to this heading">#</a></h1>
+<p>En este trabajo se presentan diversos modelos de regresión con el objetivo de predecir la velocidad del viento utilizando datos históricos. La predicción de variables continuas, como en este caso la velocidad del viento, es un desafío clave en muchos ámbitos, desde la meteorología hasta la energía renovable. Para abordar este problema, se han implementado y evaluado varios enfoques de aprendizaje automático.</p>
+<section id="librerias-y-modulos-necesarios">
+<h2><strong>Librerías y modulos necesarios</strong><a class="headerlink" href="#librerias-y-modulos-necesarios" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span>
+<span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <span class="n">KNeighborsRegressor</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">Ridge</span><span class="p">,</span> <span class="n">Lasso</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">jarque_bera</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">statsmodels.stats.diagnostic</span> <span class="kn">import</span> <span class="n">acorr_ljungbox</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">mean_squared_error</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">mean_squared_error</span><span class="p">,</span> <span class="n">r2_score</span>
+<span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">Pipeline</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">GridSearchCV</span><span class="p">,</span> <span class="n">TimeSeriesSplit</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="datos">
+<h2><strong>Datos</strong><a class="headerlink" href="#datos" title="Link to this heading">#</a></h2>
+<p>Inicialmente importamos el conjunto de datos que utilizaremos para el desarrollo de los modelos.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">file_path</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;C:\Users\kamac\OneDrive\Desktop\MachineLearningUN\modelos.xlsx&#39;</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="caracteristicas-principales-de-la-base-de-datos">
+<h3><strong>Características principales de la base de datos</strong><a class="headerlink" href="#caracteristicas-principales-de-la-base-de-datos" title="Link to this heading">#</a></h3>
+<p>Aquí podemos ver las primeras cinco filas de nuestro dataset, que será utilizado para la construcción de los modelos de regresión lineal.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;SoftwareVersion&#39;</span><span class="p">:</span> <span class="s1">&#39;Fecha&#39;</span><span class="p">},</span> <span class="n">inplace</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Fecha</th>
+      <th>WindSpeed100_1</th>
+      <th>WindSpeed100_2</th>
+      <th>WindSpeed80_1</th>
+      <th>WindSpeed80_2</th>
+      <th>WindSpeed60</th>
+      <th>Presion</th>
+      <th>humedad</th>
+      <th>temperatura 100m</th>
+      <th>temperatura 21 m</th>
+      <th>canal vacio</th>
+      <th>WindDirection100</th>
+      <th>WindDirection80</th>
+      <th>WindDirection60</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2022-01-01 00:00:00</td>
+      <td>16.060860</td>
+      <td>15.830104</td>
+      <td>15.145418</td>
+      <td>15.125038</td>
+      <td>14.300989</td>
+      <td>1005.963541</td>
+      <td>75.042725</td>
+      <td>26.922913</td>
+      <td>26.707773</td>
+      <td>0.0</td>
+      <td>61.08</td>
+      <td>61.21</td>
+      <td>61.98</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2022-01-01 00:10:00</td>
+      <td>16.156927</td>
+      <td>15.972642</td>
+      <td>15.290614</td>
+      <td>15.352352</td>
+      <td>14.533556</td>
+      <td>1005.795867</td>
+      <td>73.509216</td>
+      <td>27.006836</td>
+      <td>26.772633</td>
+      <td>0.0</td>
+      <td>61.08</td>
+      <td>61.49</td>
+      <td>62.29</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2022-01-01 00:20:00</td>
+      <td>16.473571</td>
+      <td>16.287375</td>
+      <td>15.599149</td>
+      <td>15.562022</td>
+      <td>14.808378</td>
+      <td>1005.739976</td>
+      <td>72.914124</td>
+      <td>26.991577</td>
+      <td>26.772633</td>
+      <td>0.0</td>
+      <td>60.42</td>
+      <td>60.65</td>
+      <td>61.18</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2022-01-01 00:30:00</td>
+      <td>16.660009</td>
+      <td>16.451707</td>
+      <td>15.801446</td>
+      <td>15.779687</td>
+      <td>15.170287</td>
+      <td>1005.684085</td>
+      <td>73.165894</td>
+      <td>26.877136</td>
+      <td>26.659982</td>
+      <td>0.0</td>
+      <td>60.88</td>
+      <td>61.19</td>
+      <td>62.20</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2022-01-01 00:40:00</td>
+      <td>16.519613</td>
+      <td>16.353678</td>
+      <td>15.851963</td>
+      <td>15.749131</td>
+      <td>14.927282</td>
+      <td>1005.609563</td>
+      <td>73.791504</td>
+      <td>26.770325</td>
+      <td>26.601949</td>
+      <td>0.0</td>
+      <td>59.99</td>
+      <td>60.26</td>
+      <td>61.26</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(19109, 14)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">columns</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;Fecha&#39;, &#39;WindSpeed100_1&#39;, &#39;WindSpeed100_2&#39;, &#39;WindSpeed80_1&#39;,
+       &#39;WindSpeed80_2&#39;, &#39;WindSpeed60&#39;, &#39;Presion&#39;, &#39;humedad&#39;,
+       &#39;temperatura 100m&#39;, &#39;temperatura 21 m&#39;, &#39;canal vacio&#39;,
+       &#39;WindDirection100&#39;, &#39;WindDirection80&#39;, &#39;WindDirection60&#39;],
+      dtype=&#39;object&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Actualmente, la base de datos cuenta con <strong>19109</strong> observaciones y <strong>14 variables</strong></p>
+</section>
+<section id="diccionario-de-variables">
+<h3><strong>Diccionario de variables</strong><a class="headerlink" href="#diccionario-de-variables" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>Variable</strong></p></th>
+<th class="head"><p><strong>Descripción</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Fecha</span></code></p></td>
+<td><p>Fecha de la medición</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">WindSpeed100_1</span></code></p></td>
+<td><p>Velocidad del viento a 100 metros, primer sensor</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">WindSpeed100_2</span></code></p></td>
+<td><p>Velocidad del viento a 100 metros, segundo sensor</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">WindSpeed80_1</span></code></p></td>
+<td><p>Velocidad del viento a 80 metros, primer sensor</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">WindSpeed80_2</span></code></p></td>
+<td><p>Velocidad del viento a 80 metros, segundo sensor</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">WindSpeed60</span></code></p></td>
+<td><p>Velocidad del viento a 60 metros</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Presion</span></code></p></td>
+<td><p>Presión atmosférica en la ubicación de la medición</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">humedad</span></code></p></td>
+<td><p>Humedad relativa (%) en la ubicación de la medición</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">temperatura</span> <span class="pre">100m</span></code></p></td>
+<td><p>Temperatura a 100 metros de altura</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">temperatura</span> <span class="pre">21</span> <span class="pre">m</span></code></p></td>
+<td><p>Temperatura a 21 metros de altura</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">canal</span> <span class="pre">vacio</span></code></p></td>
+<td><p>Variable de canal no utilizada, sin datos disponibles</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">WindDirection100</span></code></p></td>
+<td><p>Dirección del viento a 100 metros</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">WindDirection80</span></code></p></td>
+<td><p>Dirección del viento a 80 metros</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">WindDirection60</span></code></p></td>
+<td><p>Dirección del viento a 60 metros</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>WindSpeed100_1</th>
+      <th>WindSpeed100_2</th>
+      <th>WindSpeed80_1</th>
+      <th>WindSpeed80_2</th>
+      <th>WindSpeed60</th>
+      <th>Presion</th>
+      <th>humedad</th>
+      <th>temperatura 100m</th>
+      <th>temperatura 21 m</th>
+      <th>canal vacio</th>
+      <th>WindDirection100</th>
+      <th>WindDirection80</th>
+      <th>WindDirection60</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>19109.000000</td>
+      <td>19109.000000</td>
+      <td>19109.000000</td>
+      <td>19109.000000</td>
+      <td>19109.000000</td>
+      <td>19109.000000</td>
+      <td>19109.000000</td>
+      <td>19109.000000</td>
+      <td>19109.000000</td>
+      <td>19109.000000</td>
+      <td>19109.000000</td>
+      <td>19109.000000</td>
+      <td>19109.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>12.296970</td>
+      <td>12.163011</td>
+      <td>11.920289</td>
+      <td>11.917167</td>
+      <td>11.593188</td>
+      <td>1006.204855</td>
+      <td>84.493337</td>
+      <td>26.270771</td>
+      <td>26.493075</td>
+      <td>0.000009</td>
+      <td>66.112650</td>
+      <td>66.410915</td>
+      <td>67.392467</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>4.469506</td>
+      <td>4.420862</td>
+      <td>4.304419</td>
+      <td>4.293623</td>
+      <td>4.138086</td>
+      <td>1.824193</td>
+      <td>4.348405</td>
+      <td>0.938770</td>
+      <td>0.951333</td>
+      <td>0.000031</td>
+      <td>48.967489</td>
+      <td>48.835108</td>
+      <td>48.687563</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>0.233640</td>
+      <td>0.210100</td>
+      <td>0.192200</td>
+      <td>0.207600</td>
+      <td>0.200900</td>
+      <td>1001.417712</td>
+      <td>0.038147</td>
+      <td>-29.923706</td>
+      <td>22.700129</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.030000</td>
+      <td>0.230000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>9.775792</td>
+      <td>9.682210</td>
+      <td>9.563467</td>
+      <td>9.573910</td>
+      <td>9.399659</td>
+      <td>1004.901606</td>
+      <td>81.642151</td>
+      <td>25.709839</td>
+      <td>25.823634</td>
+      <td>0.000000</td>
+      <td>47.860000</td>
+      <td>47.910000</td>
+      <td>48.860000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>12.934908</td>
+      <td>12.802183</td>
+      <td>12.547323</td>
+      <td>12.551746</td>
+      <td>12.218785</td>
+      <td>1006.112585</td>
+      <td>84.640503</td>
+      <td>26.068420</td>
+      <td>26.328856</td>
+      <td>0.000000</td>
+      <td>55.310000</td>
+      <td>55.580000</td>
+      <td>56.490000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>15.553748</td>
+      <td>15.377155</td>
+      <td>15.028911</td>
+      <td>15.013977</td>
+      <td>14.557603</td>
+      <td>1007.435347</td>
+      <td>87.669373</td>
+      <td>26.587219</td>
+      <td>26.997935</td>
+      <td>0.000000</td>
+      <td>63.040000</td>
+      <td>63.430000</td>
+      <td>64.460000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>22.301553</td>
+      <td>22.027242</td>
+      <td>21.730798</td>
+      <td>21.769775</td>
+      <td>21.140790</td>
+      <td>1012.428307</td>
+      <td>94.093323</td>
+      <td>33.903809</td>
+      <td>34.596755</td>
+      <td>0.000305</td>
+      <td>359.950000</td>
+      <td>359.890000</td>
+      <td>359.900000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+</section>
+<section id="modelos">
+<h2><strong>Modelos</strong><a class="headerlink" href="#modelos" title="Link to this heading">#</a></h2>
+<p>Ahora, veamos los modelos. Dado que nuestro objetivo es predecir la velocidad del viento, y encontramos varias variables objetivo (específicamente 5), que corresponden a las velocidades del viento medidas a diferentes alturas y con diferentes sensores, realizaremos los 4 modelos de regresión seleccionados: Regresión K-NN, Regresión Ridge, Regresión Lasso y Regresión Lineal para cada una de las variables objetivo identificadas.</p>
+<p>Para evaluar el desempeño de los modelos, utilizaremos varias métricas, entre ellas el Mean Absolute Percentage Error (MAPE), que nos permitirá medir el error porcentual promedio entre los valores predichos y los valores reales. Esto es especialmente útil cuando se trata de comparaciones de modelos de predicción, ya que el MAPE es intuitivo y fácil de interpretar.</p>
+<p>El código para calcular el MAPE se presenta a continuación:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">MAPE</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">):</span>
+    <span class="c1"># Convertimos las entradas a arrays de numpy para facilitar el cálculo vectorizado</span>
+    <span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">y_true</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">y_pred</span><span class="p">)</span>
+
+    <span class="c1"># Evitar la división por cero, ignorando los valores donde y_true es 0</span>
+    <span class="c1"># Creamos un filtro para seleccionar solo los índices donde y_true no sea igual a 0</span>
+    <span class="n">non_zero_indices</span> <span class="o">=</span> <span class="n">y_true</span> <span class="o">!=</span> <span class="mi">0</span>
+
+    <span class="c1"># Calculamos el MAPE solo para los valores donde y_true no es cero.</span>
+    <span class="c1"># La fórmula del MAPE es el promedio del valor absoluto del error porcentual entre y_true y y_pred</span>
+    <span class="c1"># Multiplicamos por 100 para convertirlo en porcentaje</span>
+    <span class="n">mape</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">((</span><span class="n">y_true</span><span class="p">[</span><span class="n">non_zero_indices</span><span class="p">]</span> <span class="o">-</span> <span class="n">y_pred</span><span class="p">[</span><span class="n">non_zero_indices</span><span class="p">])</span> <span class="o">/</span> <span class="n">y_true</span><span class="p">[</span><span class="n">non_zero_indices</span><span class="p">]))</span> <span class="o">*</span> <span class="mi">100</span>
+
+    <span class="c1"># Retornamos el valor del MAPE</span>
+    <span class="k">return</span> <span class="n">mape</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Este método garantiza que los valores donde el valor verdadero es cero no se incluyan en el cálculo, evitando errores de división por cero y proporcionando una evaluación más precisa del desempeño de los modelos. A continuación, aplicaremos esta métrica, junto con otras como el <span class="math notranslate nohighlight">\(RMSE\)</span> y el <span class="math notranslate nohighlight">\(R^2\)</span>, para evaluar el desempeño de cada uno de los modelos en las distintas variables objetivo.</p>
+<section id="metodo-para-evaluar-los-modelos-usando-ventanas-de-prediccion">
+<h3><strong>Método para evaluar los modelos usando ventanas de predicción</strong><a class="headerlink" href="#metodo-para-evaluar-los-modelos-usando-ventanas-de-prediccion" title="Link to this heading">#</a></h3>
+<p>A continuación, se presenta la función evaluar_modelos, que nos permite entrenar y evaluar varios modelos de regresión para predecir la velocidad del viento, utilizando ventanas temporales de distintos tamaños (7, 14, 21 y 28 días). La función implementa cuatro modelos principales: <strong>Regresión K-NN</strong>, <strong>Regresión Lineal</strong>, <strong>Regresión Ridge</strong> y <strong>Regresión Lasso</strong>. Cada uno de estos modelos se evalúa utilizando métricas clave como <strong>RMSE, MAPE y <span class="math notranslate nohighlight">\(R^2\)</span></strong>, junto con pruebas estadísticas adicionales como el test de <strong>Jarque-Bera</strong> y <strong>Ljung-Box</strong> para evaluar la normalidad y autocorrelación de los residuos.</p>
+<p>La evaluación se realiza en bloques de entrenamiento y prueba definidos por las ventanas de tiempo, lo que permite una estimación más robusta de su capacidad predictiva. A continuación, se presenta el código correspondiente para esta evaluación.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">evaluar_modelos</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">ventanas_tiempo</span><span class="o">=</span><span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">28</span><span class="p">]):</span>
+    <span class="n">modelos</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;Regresión K-NN&#39;</span><span class="p">:</span> <span class="n">KNeighborsRegressor</span><span class="p">(),</span>
+        <span class="s1">&#39;Regresión Lineal&#39;</span><span class="p">:</span> <span class="n">LinearRegression</span><span class="p">(),</span>
+        <span class="s1">&#39;Regresión Ridge&#39;</span><span class="p">:</span> <span class="n">Ridge</span><span class="p">(),</span>
+        <span class="s1">&#39;Regresión Lasso&#39;</span><span class="p">:</span> <span class="n">Lasso</span><span class="p">(</span><span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.011</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="n">indices_modelos</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;Regresión K-NN&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;index&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">},</span>
+        <span class="s1">&#39;Regresión Lineal&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;index&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">},</span>
+        <span class="s1">&#39;Regresión Ridge&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;index&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">},</span>
+        <span class="s1">&#39;Regresión Lasso&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;index&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="n">mejores</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="mi">4</span>
+    <span class="n">menor_RMSE</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1000</span><span class="p">]</span> <span class="o">*</span> <span class="mi">4</span>
+    <span class="n">resultados</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">ventana</span> <span class="ow">in</span> <span class="n">ventanas_tiempo</span><span class="p">:</span>
+        <span class="n">inicio</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="k">while</span> <span class="n">inicio</span> <span class="o">+</span> <span class="p">(</span><span class="n">ventana</span> <span class="o">*</span> <span class="mi">6</span> <span class="o">*</span> <span class="mi">24</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="mi">6</span> <span class="o">*</span> <span class="mi">24</span><span class="p">)</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
+            <span class="n">fin</span> <span class="o">=</span> <span class="n">inicio</span> <span class="o">+</span> <span class="p">(</span><span class="n">ventana</span> <span class="o">*</span> <span class="mi">6</span> <span class="o">*</span> <span class="mi">24</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">fin</span> <span class="o">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> <span class="ow">or</span> <span class="n">fin</span> <span class="o">+</span> <span class="p">(</span><span class="mi">6</span> <span class="o">*</span> <span class="mi">24</span><span class="p">)</span> <span class="o">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
+                <span class="k">break</span>
+
+            <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">inicio</span><span class="p">:</span><span class="n">fin</span><span class="p">],</span> <span class="n">y</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">inicio</span><span class="p">:</span><span class="n">fin</span><span class="p">]</span>
+            <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">fin</span><span class="p">:</span><span class="n">fin</span> <span class="o">+</span> <span class="p">(</span><span class="mi">6</span> <span class="o">*</span> <span class="mi">24</span><span class="p">)],</span> <span class="n">y</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">fin</span><span class="p">:</span><span class="n">fin</span> <span class="o">+</span> <span class="p">(</span><span class="mi">6</span> <span class="o">*</span> <span class="mi">24</span><span class="p">)]</span>
+
+            <span class="c1"># Iterar sobre cada modelo</span>
+            <span class="k">for</span> <span class="n">nombre_modelo</span><span class="p">,</span> <span class="n">modelo</span> <span class="ow">in</span> <span class="n">modelos</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="n">idx</span> <span class="o">=</span> <span class="n">indices_modelos</span><span class="p">[</span><span class="n">nombre_modelo</span><span class="p">][</span><span class="s1">&#39;index&#39;</span><span class="p">]</span>
+
+                <span class="n">modelo</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+                <span class="n">y_pred</span><span class="p">,</span> <span class="n">y_train_pred</span> <span class="o">=</span> <span class="n">modelo</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">),</span> <span class="n">modelo</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+
+                <span class="n">residuals</span> <span class="o">=</span> <span class="n">y_test</span> <span class="o">-</span> <span class="n">y_pred</span>
+                <span class="n">RMSE</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">squared</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+                <span class="n">MAPE_value</span> <span class="o">=</span> <span class="n">MAPE</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+                <span class="n">R2</span> <span class="o">=</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+
+                <span class="n">jb_test_stat</span><span class="p">,</span> <span class="n">jb_p_value</span> <span class="o">=</span> <span class="n">jarque_bera</span><span class="p">(</span><span class="n">residuals</span><span class="p">)</span>
+                <span class="n">lb_test</span> <span class="o">=</span> <span class="n">acorr_ljungbox</span><span class="p">(</span><span class="n">residuals</span><span class="p">,</span> <span class="n">lags</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">],</span> <span class="n">return_df</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                <span class="n">ljung_box_p_value</span> <span class="o">=</span> <span class="n">lb_test</span><span class="p">[</span><span class="s1">&#39;lb_pvalue&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+                <span class="c1"># Actualizar si este modelo tiene menor RMSE</span>
+                <span class="k">if</span> <span class="n">RMSE</span> <span class="o">&lt;</span> <span class="n">menor_RMSE</span><span class="p">[</span><span class="n">idx</span><span class="p">]:</span>
+                    <span class="n">mejores</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span> <span class="n">menor_RMSE</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">y_train</span><span class="p">,</span> <span class="n">y_train_pred</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">nombre_modelo</span><span class="p">],</span> <span class="n">RMSE</span>
+
+                <span class="c1"># Almacenar los resultados para cada modelo</span>
+                <span class="n">resultados</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+                    <span class="s2">&quot;Modelo&quot;</span><span class="p">:</span> <span class="n">nombre_modelo</span><span class="p">,</span>
+                    <span class="s2">&quot;MAPE&quot;</span><span class="p">:</span> <span class="n">MAPE_value</span><span class="p">,</span>
+                    <span class="s2">&quot;RMSE&quot;</span><span class="p">:</span> <span class="n">RMSE</span><span class="p">,</span>
+                    <span class="s2">&quot;R^2&quot;</span><span class="p">:</span> <span class="n">R2</span><span class="p">,</span>
+                    <span class="s2">&quot;Ljung-Box p-value&quot;</span><span class="p">:</span> <span class="n">ljung_box_p_value</span><span class="p">,</span>
+                    <span class="s2">&quot;Jarque-Bera p-value&quot;</span><span class="p">:</span> <span class="n">jb_p_value</span>
+                <span class="p">})</span>
+
+            <span class="n">inicio</span> <span class="o">=</span> <span class="n">fin</span>
+
+    <span class="c1"># Convertir resultados a DataFrame</span>
+    <span class="n">resultados_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">resultados</span><span class="p">)</span>
+
+    <span class="c1"># Seleccionar los mejores modelos según RMSE</span>
+    <span class="n">mejores_modelos</span> <span class="o">=</span> <span class="n">resultados_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">resultados_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Modelo&#39;</span><span class="p">)[</span><span class="s1">&#39;RMSE&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">idxmin</span><span class="p">()]</span>
+
+    <span class="k">return</span> <span class="n">mejores_modelos</span><span class="p">,</span> <span class="n">mejores</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="metodo-para-realizar-las-graficas">
+<h3><strong>Método para realizar las gráficas</strong><a class="headerlink" href="#metodo-para-realizar-las-graficas" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">grafica</span><span class="p">(</span><span class="n">y_train</span><span class="p">,</span> <span class="n">y_train_pred</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">y_test_pred</span><span class="p">,</span> <span class="n">nombre_modelo</span><span class="p">):</span>
+    <span class="c1"># Calcular R² y RMSE para el conjunto de entrenamiento</span>
+    <span class="n">r2_train</span> <span class="o">=</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">y_train</span><span class="p">,</span> <span class="n">y_train_pred</span><span class="p">)</span>
+    <span class="n">r2_test</span> <span class="o">=</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_test_pred</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+    <span class="c1"># Gráfico del conjunto de entrenamiento</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">y_train</span><span class="p">)),</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Velocidad original&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#FF69B4&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>  <span class="c1"># Rosa brillante</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">y_train_pred</span><span class="p">)),</span> <span class="n">y_train_pred</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Velocidad predicha&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#FF1493&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>  <span class="c1"># Rosa oscuro</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Índice&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Velocidad del viento&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">nombre_modelo</span><span class="si">}</span><span class="s2"> (Entrenamiento)</span><span class="se">\n</span><span class="s2">R²: </span><span class="si">{</span><span class="n">r2_train</span><span class="si">:</span><span class="s2">.5f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># Gráfico del conjunto de prueba</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">y_test</span><span class="p">)),</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Velocidad original&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#FFB6C1&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>  <span class="c1"># Rosa claro</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">y_test_pred</span><span class="p">)),</span> <span class="n">y_test_pred</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Velocidad predicha&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#DB7093&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>  <span class="c1"># Rosa medio</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Índice&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Velocidad del viento&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">nombre_modelo</span><span class="si">}</span><span class="s2"> (Prueba)</span><span class="se">\n</span><span class="s2">R²: </span><span class="si">{</span><span class="n">r2_test</span><span class="si">:</span><span class="s2">.5f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="modelo-1-wind-speed-100-metros-sensor-1">
+<h2><strong>Modelo 1: Wind speed 100 metros (Sensor 1)</strong><a class="headerlink" href="#modelo-1-wind-speed-100-metros-sensor-1" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X1</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Fecha&#39;</span><span class="p">,</span> <span class="s1">&#39;WindSpeed100_1&#39;</span><span class="p">,</span> <span class="s1">&#39;WindSpeed100_2&#39;</span><span class="p">,</span> <span class="s1">&#39;WindSpeed80_1&#39;</span><span class="p">,</span> <span class="s1">&#39;WindSpeed80_2&#39;</span><span class="p">,</span> <span class="s1">&#39;WindSpeed60&#39;</span><span class="p">,</span> <span class="s1">&#39;WindDirection80&#39;</span><span class="p">,</span> <span class="s1">&#39;WindDirection60&#39;</span><span class="p">])</span>
+<span class="n">y1</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;WindSpeed100_1&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="modelos-usando-ventanas-de-prediccion">
+<h3><strong>Modelos usando ventanas de predicción</strong><a class="headerlink" href="#modelos-usando-ventanas-de-prediccion" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tabla</span><span class="p">,</span> <span class="n">mejores</span> <span class="o">=</span> <span class="n">evaluar_modelos</span><span class="p">(</span><span class="n">X1</span><span class="p">,</span> <span class="n">y1</span><span class="p">)</span>
+<span class="n">tabla</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Modelo</th>
+      <th>MAPE</th>
+      <th>RMSE</th>
+      <th>R^2</th>
+      <th>Ljung-Box p-value</th>
+      <th>Jarque-Bera p-value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>24</th>
+      <td>Regresión K-NN</td>
+      <td>5.894020</td>
+      <td>1.227196</td>
+      <td>0.510433</td>
+      <td>1.169459e-22</td>
+      <td>0.000070</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>Regresión Lasso</td>
+      <td>4.030474</td>
+      <td>0.851866</td>
+      <td>0.764100</td>
+      <td>3.756088e-67</td>
+      <td>0.219406</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>Regresión Lineal</td>
+      <td>4.013425</td>
+      <td>0.845024</td>
+      <td>0.767875</td>
+      <td>1.306806e-63</td>
+      <td>0.248818</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>Regresión Ridge</td>
+      <td>4.013893</td>
+      <td>0.846827</td>
+      <td>0.766883</td>
+      <td>7.620692e-65</td>
+      <td>0.241076</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>En esta sección se analizan los modelos utilizando el sensor 1 a 100 metros de altura. Los modelos de <strong>Regresión Lasso</strong> y <strong>Ridge</strong> destacan con los menores valores de <strong>MAPE</strong> (aproximadamente <strong>4%</strong>), indicando que sus predicciones están más cerca de los valores reales. También muestran los valores más bajos de <strong>RMSE</strong>, alrededor de <strong>0.85</strong>, lo que sugiere mejor precisión. En términos de <strong>R²</strong>, ambos tienen valores altos, entre <strong>0.764 y 0.766</strong>, lo que indica que capturan bien la variabilidad en los datos. Aunque K-NN presenta un <strong>Ljung-Box p-value</strong> bajo, sugiriendo autocorrelación en los residuos, Lasso, Lineal y Ridge tienen p-valores más favorables. Además, el <strong>Jarque-Bera p-value</strong> revela que K-NN no sigue una distribución normal, mientras que los otros modelos muestran un mejor comportamiento. En conclusión, <strong>Lasso</strong> y <strong>Ridge</strong> son las mejores opciones para predecir la velocidad del viento en este análisis.</p>
+</section>
+<section id="grafica-del-mejor-modelo">
+<h3><strong>Gráfica del mejor modelo</strong><a class="headerlink" href="#grafica-del-mejor-modelo" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+    <span class="n">plt</span> <span class="o">=</span> <span class="n">grafica</span><span class="p">(</span><span class="n">mejores</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">mejores</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">mejores</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">2</span><span class="p">],</span> <span class="n">mejores</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">3</span><span class="p">],</span> <span class="n">mejores</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">4</span><span class="p">])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/23496ba7c8a0f6e70f108240ed1d04bff7352b39de93cf2f940fa017c279b5e5.png" src="_images/23496ba7c8a0f6e70f108240ed1d04bff7352b39de93cf2f940fa017c279b5e5.png" />
+<img alt="_images/06bbf9901a1f47aff242926c23847c31471acac492466bee288f10f85e563111.png" src="_images/06bbf9901a1f47aff242926c23847c31471acac492466bee288f10f85e563111.png" />
+<img alt="_images/32db6807af923f62f3dd28157380a11dc60508198e2d285136210271a1502998.png" src="_images/32db6807af923f62f3dd28157380a11dc60508198e2d285136210271a1502998.png" />
+<img alt="_images/f3ba4ff4364372b153d7b09eb63f7da302edb8b329aacb0754613b3d206688cc.png" src="_images/f3ba4ff4364372b153d7b09eb63f7da302edb8b329aacb0754613b3d206688cc.png" />
+</div>
+</div>
+<p>La gráfica muestra que el modelo K-NN tiene un buen ajuste en el conjunto de entrenamiento, con un <strong>R² de 0.87547</strong>, lo que indica que predice con precisión los datos de entrenamiento. Sin embargo, en el conjunto de prueba, el rendimiento disminuye significativamente, con un <strong>R² de 0.51043</strong>, lo que sugiere que el modelo no generaliza bien y está posiblemente sobreajustado. Esto es común cuando se utilizan modelos que no son adecuados para capturar dependencias temporales, como el K-NN en series de tiempo.</p>
+</section>
+</section>
+<section id="modelo-2-wind-speed-100-metros-sensor-2">
+<h2><strong>Modelo 2: Wind speed 100 metros (Sensor 2)</strong><a class="headerlink" href="#modelo-2-wind-speed-100-metros-sensor-2" title="Link to this heading">#</a></h2>
+<section id="id1">
+<h3><strong>Modelos usando ventanas de predicción</strong><a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X2</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Fecha&#39;</span><span class="p">,</span> <span class="s1">&#39;WindSpeed100_1&#39;</span><span class="p">,</span> <span class="s1">&#39;WindSpeed100_2&#39;</span><span class="p">,</span> <span class="s1">&#39;WindSpeed80_1&#39;</span><span class="p">,</span> <span class="s1">&#39;WindSpeed80_2&#39;</span><span class="p">,</span> <span class="s1">&#39;WindSpeed60&#39;</span><span class="p">,</span> <span class="s1">&#39;WindDirection80&#39;</span><span class="p">,</span> <span class="s1">&#39;WindDirection60&#39;</span><span class="p">])</span>
+<span class="n">y2</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;WindSpeed100_2&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tabla</span><span class="p">,</span> <span class="n">mejores</span> <span class="o">=</span> <span class="n">evaluar_modelos</span><span class="p">(</span><span class="n">X2</span><span class="p">,</span> <span class="n">y2</span><span class="p">)</span>
+<span class="n">tabla</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Modelo</th>
+      <th>MAPE</th>
+      <th>RMSE</th>
+      <th>R^2</th>
+      <th>Ljung-Box p-value</th>
+      <th>Jarque-Bera p-value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>24</th>
+      <td>Regresión K-NN</td>
+      <td>5.832642</td>
+      <td>1.204380</td>
+      <td>0.517706</td>
+      <td>8.404607e-23</td>
+      <td>0.000114</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>Regresión Lasso</td>
+      <td>4.015778</td>
+      <td>0.837676</td>
+      <td>0.766688</td>
+      <td>3.521004e-67</td>
+      <td>0.173372</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>Regresión Lineal</td>
+      <td>3.996092</td>
+      <td>0.830596</td>
+      <td>0.770615</td>
+      <td>1.214976e-63</td>
+      <td>0.198714</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>Regresión Ridge</td>
+      <td>3.996013</td>
+      <td>0.832460</td>
+      <td>0.769584</td>
+      <td>7.349954e-65</td>
+      <td>0.191579</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>En esta sección se evalúan los modelos utilizando el sensor 2, correspondiente a 100 metros de altura. El modelo de <strong>Regresión Lasso</strong> muestra el mejor desempeño, con un <strong>RMSE bajo de 0.837676</strong> y un <strong>R² de 0.766688</strong>, lo que indica una buena capacidad predictiva. Además, tiene un <strong>MAPE</strong> de aproximadamente <strong>4%</strong>, lo que sugiere que sus predicciones son relativamente precisas. Tanto la <strong>Regresión Ridge</strong> como la <strong>Regresión Lineal</strong> presentan resultados similares, con valores de <strong>R² cercanos a 0.76</strong>, lo que indica que también son buenos modelos para predecir esta variable. En contraste, el modelo <strong>K-NN</strong> muestra un <strong>MAPE elevado de 5.83%</strong> y un menor <strong>R² de 0.517706</strong>, lo que lo hace menos efectivo en la predicción de los datos. En resumen, los modelos lineales como Lasso y Ridge superan claramente a K-NN en precisión y capacidad predictiva para esta variable objetivo.</p>
+</section>
+<section id="graficas">
+<h3><strong>Gráficas</strong><a class="headerlink" href="#graficas" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+    <span class="n">plt</span> <span class="o">=</span> <span class="n">grafica</span><span class="p">(</span><span class="n">mejores</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">mejores</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">mejores</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">2</span><span class="p">],</span> <span class="n">mejores</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">3</span><span class="p">],</span> <span class="n">mejores</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">4</span><span class="p">])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/f189a859bdfa627363cc551467ddca4ad94723c2647de8df87295e9cf6b39143.png" src="_images/f189a859bdfa627363cc551467ddca4ad94723c2647de8df87295e9cf6b39143.png" />
+<img alt="_images/dba8f1ab37d533a45f3a13f2236e55b98c070182b2f8510e27109845b4a1380b.png" src="_images/dba8f1ab37d533a45f3a13f2236e55b98c070182b2f8510e27109845b4a1380b.png" />
+<img alt="_images/8f91ad14469de54736d1e1e4e2ff822056d6179fad13b0b372f2b47c8587a309.png" src="_images/8f91ad14469de54736d1e1e4e2ff822056d6179fad13b0b372f2b47c8587a309.png" />
+<img alt="_images/3ae34847b26b66c9ddecc59c048a794c34d2c15ace96e2cf79ada2251075af51.png" src="_images/3ae34847b26b66c9ddecc59c048a794c34d2c15ace96e2cf79ada2251075af51.png" />
+</div>
+</div>
+<p>La gráfica muestra el desempeño del modelo de <strong>Regresión K-NN</strong> para la predicción de la velocidad del viento, comparando el conjunto de entrenamiento (izquierda) con el de prueba (derecha). En el conjunto de entrenamiento, el modelo presenta un <strong>R² de 0.87554</strong>, indicando un buen ajuste, ya que las predicciones (cruces) siguen de cerca los valores reales (puntos). Sin embargo, este alto rendimiento puede ser un signo de <strong>sobreajuste</strong>, dado que K-NN es muy sensible a los datos de entrenamiento. Por otro lado, en el conjunto de prueba, el rendimiento del modelo es significativamente menor, con un <strong>R² de 0.51771</strong>. Aunque las predicciones aún siguen las tendencias generales, hay mayor variabilidad y errores en comparación con los valores reales, lo que refuerza la posibilidad de sobreajuste. En resumen, aunque el modelo se ajusta bien a los datos de entrenamiento, su capacidad para generalizar a nuevos datos es limitada, lo que se refleja en su menor rendimiento en el conjunto de prueba.</p>
+</section>
+</section>
+<section id="modelo-3-wind-speed-80-metros-sensor-1">
+<h2><strong>Modelo 3: Wind speed 80 metros (Sensor 1)</strong><a class="headerlink" href="#modelo-3-wind-speed-80-metros-sensor-1" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X3</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Fecha&#39;</span><span class="p">,</span> <span class="s1">&#39;WindSpeed100_1&#39;</span><span class="p">,</span> <span class="s1">&#39;WindSpeed100_2&#39;</span><span class="p">,</span> <span class="s1">&#39;WindSpeed80_1&#39;</span><span class="p">,</span> <span class="s1">&#39;WindSpeed80_2&#39;</span><span class="p">,</span> <span class="s1">&#39;WindSpeed60&#39;</span><span class="p">,</span> <span class="s1">&#39;WindDirection100&#39;</span><span class="p">,</span> <span class="s1">&#39;WindDirection60&#39;</span><span class="p">])</span>
+<span class="n">y3</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;WindSpeed80_1&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="id2">
+<h3><strong>Modelos usando ventanas de predicción</strong><a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tabla</span><span class="p">,</span> <span class="n">mejores</span> <span class="o">=</span> <span class="n">evaluar_modelos</span><span class="p">(</span><span class="n">X3</span><span class="p">,</span> <span class="n">y3</span><span class="p">)</span>
+<span class="n">tabla</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Modelo</th>
+      <th>MAPE</th>
+      <th>RMSE</th>
+      <th>R^2</th>
+      <th>Ljung-Box p-value</th>
+      <th>Jarque-Bera p-value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>24</th>
+      <td>Regresión K-NN</td>
+      <td>6.751773</td>
+      <td>1.363591</td>
+      <td>0.369181</td>
+      <td>1.042822e-32</td>
+      <td>0.000104</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>Regresión Lasso</td>
+      <td>4.232456</td>
+      <td>0.872926</td>
+      <td>0.741481</td>
+      <td>5.546813e-63</td>
+      <td>0.269785</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>Regresión Lineal</td>
+      <td>4.219102</td>
+      <td>0.864644</td>
+      <td>0.746364</td>
+      <td>9.800919e-60</td>
+      <td>0.375339</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>Regresión Ridge</td>
+      <td>4.214576</td>
+      <td>0.866600</td>
+      <td>0.745215</td>
+      <td>8.855226e-61</td>
+      <td>0.339695</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>En este análisis, se evaluaron los modelos para predecir la <strong>velocidad del viento a 80 metros (Sensor 1)</strong> utilizando varios modelos de regresión. La <strong>Regresión K-NN</strong> presentó el peor desempeño, con un <strong>MAPE de 6.75%</strong> y un <strong>RMSE de 1.363591</strong>, lo que indica un error considerable en sus predicciones. Además, su <strong>R² de 0.369181</strong> sugiere que no explica bien la variabilidad en los datos. En contraste, tanto la <strong>Regresión Lasso</strong> como la <strong>Regresión Ridge</strong> mostraron un desempeño muy similar; <strong>Lasso</strong> tuvo un <strong>RMSE de 0.872926</strong> y un <strong>R² de 0.741481</strong>, mientras que <strong>Ridge</strong> presentó un <strong>RMSE de 0.866060</strong> y un <strong>R² de 0.745215</strong>, colocándolos entre los mejores modelos en términos de precisión. La <strong>Regresión Lineal</strong> también se destacó con un <strong>R² de 0.746364</strong> y un <strong>RMSE de 0.864644</strong>, mostrando resultados muy similares a Lasso y Ridge, lo que sugiere que los modelos lineales son los más apropiados para este conjunto de datos.</p>
+</section>
+<section id="id3">
+<h3><strong>Gráficas</strong><a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+    <span class="n">plt</span> <span class="o">=</span> <span class="n">grafica</span><span class="p">(</span><span class="n">mejores</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">mejores</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">mejores</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">2</span><span class="p">],</span> <span class="n">mejores</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">3</span><span class="p">],</span> <span class="n">mejores</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">4</span><span class="p">])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/6e9f5e2b26d48987d194dcd238f61ce9bfa00e75b26ddc30bf0a3adbc60f73cb.png" src="_images/6e9f5e2b26d48987d194dcd238f61ce9bfa00e75b26ddc30bf0a3adbc60f73cb.png" />
+<img alt="_images/b2fb5e8a6c78899e384383064de0cbad617cd6c24b4abc670e962a8bd0d7edbe.png" src="_images/b2fb5e8a6c78899e384383064de0cbad617cd6c24b4abc670e962a8bd0d7edbe.png" />
+<img alt="_images/1d293610664e955dc054d197a6e62670f3ee751033e38024d748df2141b43730.png" src="_images/1d293610664e955dc054d197a6e62670f3ee751033e38024d748df2141b43730.png" />
+<img alt="_images/c9ec1871c943bb01f6063936dd6fe05558cb59f2bdd6d51c2a8d40ffca9da8d8.png" src="_images/c9ec1871c943bb01f6063936dd6fe05558cb59f2bdd6d51c2a8d40ffca9da8d8.png" />
+</div>
+</div>
+<p>Los resultados muestran diferencias claras entre los modelos evaluados para predecir la velocidad del viento. La <strong>Regresión K-NN</strong> tiene un <strong>R² de 0.86184</strong> en el entrenamiento, pero cae a <strong>0.36918</strong> en el conjunto de prueba, indicando <strong>sobreajuste</strong>. En cambio, los <strong>modelos lineales</strong> (Regresión Lineal, Ridge y Lasso) ofrecen un rendimiento más equilibrado, con un ajuste moderado en el entrenamiento (aproximadamente <strong>0.53</strong>) y un desempeño superior en la prueba, con <strong>R² cercanos a 0.74</strong>. Esto sugiere que los modelos lineales son más efectivos para capturar tendencias y generalizar a nuevos datos. En conclusión, aunque K-NN tiene buen desempeño en el entrenamiento, los modelos lineales son las mejores opciones para predecir la velocidad del viento.</p>
+</section>
+</section>
+<section id="modelo-4-wind-speed-80-metros-sensor-2">
+<h2><strong>Modelo 4: Wind speed 80 metros (Sensor 2)</strong><a class="headerlink" href="#modelo-4-wind-speed-80-metros-sensor-2" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X4</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Fecha&#39;</span><span class="p">,</span> <span class="s1">&#39;WindSpeed100_1&#39;</span><span class="p">,</span> <span class="s1">&#39;WindSpeed100_2&#39;</span><span class="p">,</span> <span class="s1">&#39;WindSpeed80_1&#39;</span><span class="p">,</span> <span class="s1">&#39;WindSpeed80_2&#39;</span><span class="p">,</span> <span class="s1">&#39;WindSpeed60&#39;</span><span class="p">,</span> <span class="s1">&#39;WindDirection100&#39;</span><span class="p">,</span> <span class="s1">&#39;WindDirection60&#39;</span><span class="p">])</span>
+<span class="n">y4</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;WindSpeed80_2&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="id4">
+<h3><strong>Modelos usando ventanas de predicción</strong><a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tabla</span><span class="p">,</span> <span class="n">mejores</span> <span class="o">=</span> <span class="n">evaluar_modelos</span><span class="p">(</span><span class="n">X4</span><span class="p">,</span> <span class="n">y4</span><span class="p">)</span>
+<span class="n">tabla</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Modelo</th>
+      <th>MAPE</th>
+      <th>RMSE</th>
+      <th>R^2</th>
+      <th>Ljung-Box p-value</th>
+      <th>Jarque-Bera p-value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>24</th>
+      <td>Regresión K-NN</td>
+      <td>6.684306</td>
+      <td>1.351586</td>
+      <td>0.377391</td>
+      <td>8.968552e-32</td>
+      <td>0.000067</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>Regresión Lasso</td>
+      <td>4.206317</td>
+      <td>0.865937</td>
+      <td>0.744436</td>
+      <td>4.300009e-63</td>
+      <td>0.252943</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>Regresión Lineal</td>
+      <td>4.203377</td>
+      <td>0.857570</td>
+      <td>0.749351</td>
+      <td>7.246420e-60</td>
+      <td>0.344181</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>Regresión Ridge</td>
+      <td>4.196624</td>
+      <td>0.859552</td>
+      <td>0.748190</td>
+      <td>6.662610e-61</td>
+      <td>0.314146</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="id5">
+<h3><strong>Gráficas</strong><a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+    <span class="n">plt</span> <span class="o">=</span> <span class="n">grafica</span><span class="p">(</span><span class="n">mejores</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">mejores</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">mejores</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">2</span><span class="p">],</span> <span class="n">mejores</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">3</span><span class="p">],</span> <span class="n">mejores</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">4</span><span class="p">])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/1a28a228336630856dd133e2a572cdb0d80c7c2a0b7a67438dbdb842fe97a707.png" src="_images/1a28a228336630856dd133e2a572cdb0d80c7c2a0b7a67438dbdb842fe97a707.png" />
+<img alt="_images/1295408cab96022f5706c7faf883a1eb53ad7a3787a4f3f8d92c499eaa9e5095.png" src="_images/1295408cab96022f5706c7faf883a1eb53ad7a3787a4f3f8d92c499eaa9e5095.png" />
+<img alt="_images/92e66af145f91518648e800865d8aca72e23721971561d887d42ef56770f0a31.png" src="_images/92e66af145f91518648e800865d8aca72e23721971561d887d42ef56770f0a31.png" />
+<img alt="_images/b11702dbeac06cbeba0483c136e18dd0a96ee448c16e2aee8bb3cec543066668.png" src="_images/b11702dbeac06cbeba0483c136e18dd0a96ee448c16e2aee8bb3cec543066668.png" />
+</div>
+</div>
+<p>En este análisis, se evaluaron los modelos para predecir la <strong>velocidad del viento a 80 metros</strong>. La <strong>Regresión K-NN</strong> mostró un buen desempeño en el conjunto de entrenamiento, con un <strong>R² de 0.86187</strong>, pero su rendimiento en el conjunto de prueba cayó considerablemente a un <strong>R² de 0.37739</strong>, lo que sugiere un <strong>sobreajuste</strong> y una mala generalización. En contraste, los <strong>modelos lineales</strong> (Lineal, Ridge y Lasso) presentaron un rendimiento más equilibrado; aunque su <strong>R² en el entrenamiento</strong> fue menor, alrededor de <strong>0.53</strong>, su desempeño en el conjunto de prueba mejoró significativamente, alcanzando un <strong>R² cercano a 0.74</strong>. Esto indica que, aunque los modelos lineales están menos ajustados en el entrenamiento, generalizan mucho mejor en los datos de prueba. En conclusión, los modelos lineales (Lineal, Ridge y Lasso) ofrecen un mejor equilibrio entre ajuste y generalización en comparación con K-NN, lo que los convierte en la mejor opción para la predicción de la velocidad del viento en este conjunto de datos.</p>
+</section>
+</section>
+<section id="modelo-5-wind-speed-60-metros">
+<h2><strong>Modelo 5: Wind speed 60 metros</strong><a class="headerlink" href="#modelo-5-wind-speed-60-metros" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X5</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Fecha&#39;</span><span class="p">,</span> <span class="s1">&#39;WindSpeed100_1&#39;</span><span class="p">,</span> <span class="s1">&#39;WindSpeed100_2&#39;</span><span class="p">,</span> <span class="s1">&#39;WindSpeed80_1&#39;</span><span class="p">,</span> <span class="s1">&#39;WindSpeed80_2&#39;</span><span class="p">,</span> <span class="s1">&#39;WindSpeed60&#39;</span><span class="p">,</span> <span class="s1">&#39;WindDirection100&#39;</span><span class="p">,</span> <span class="s1">&#39;WindDirection80&#39;</span><span class="p">])</span>
+<span class="n">y5</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;WindSpeed60&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="id6">
+<h3><strong>Modelos usando ventanas de predicción</strong><a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tabla</span><span class="p">,</span> <span class="n">mejores</span> <span class="o">=</span> <span class="n">evaluar_modelos</span><span class="p">(</span><span class="n">X5</span><span class="p">,</span> <span class="n">y5</span><span class="p">)</span>
+<span class="n">tabla</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Modelo</th>
+      <th>MAPE</th>
+      <th>RMSE</th>
+      <th>R^2</th>
+      <th>Ljung-Box p-value</th>
+      <th>Jarque-Bera p-value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>24</th>
+      <td>Regresión K-NN</td>
+      <td>6.876112</td>
+      <td>1.332056</td>
+      <td>0.349680</td>
+      <td>8.837886e-33</td>
+      <td>1.308209e-08</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>Regresión Lasso</td>
+      <td>4.445645</td>
+      <td>0.890595</td>
+      <td>0.709302</td>
+      <td>8.780533e-59</td>
+      <td>3.338686e-01</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>Regresión Lineal</td>
+      <td>4.439774</td>
+      <td>0.880800</td>
+      <td>0.715661</td>
+      <td>1.000130e-55</td>
+      <td>4.692246e-01</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>Regresión Ridge</td>
+      <td>4.436869</td>
+      <td>0.882914</td>
+      <td>0.714294</td>
+      <td>1.275099e-56</td>
+      <td>4.269807e-01</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>En este análisis, se evaluaron los modelos para predecir la <strong>velocidad del viento a 60 metros</strong>, y los resultados revelan conclusiones significativas. La <strong>Regresión K-NN</strong> obtuvo el peor desempeño, con un <strong>MAPE de 6.87%</strong>, un <strong>RMSE de 1.332056</strong> y un <strong>R² de 0.349680</strong>, lo que indica una alta tasa de error y una incapacidad para capturar los patrones de los datos. En contraste, la <strong>Regresión Lasso</strong> demostró un rendimiento notablemente mejor, con un <strong>MAPE de 4.44%</strong>, un <strong>RMSE de 0.890595</strong> y un <strong>R² de 0.709302</strong>, evidenciando una buena capacidad predictiva y una reducción significativa del error en comparación con K-NN. La <strong>Regresión Lineal</strong> se destacó como el modelo más preciso, logrando un <strong>R² de 0.715661</strong> y un <strong>RMSE de 0.880080</strong>. La <strong>Regresión Ridge</strong> también mostró un rendimiento competitivo, con un <strong>R² de 0.714294</strong> y un <strong>RMSE de 0.882914</strong>, muy cercano al de la Regresión Lineal. En conclusión, los modelos lineales, especialmente la <strong>Regresión Lineal</strong> y la <strong>Regresión Ridge</strong>, ofrecen el mejor rendimiento, logrando un buen equilibrio entre ajuste y generalización, mientras que <strong>K-NN</strong> sigue siendo el modelo menos adecuado para predecir la velocidad del viento a esta altura.</p>
+</section>
+<section id="id7">
+<h3><strong>Gráfica del mejor modelo</strong><a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+    <span class="n">plt</span> <span class="o">=</span> <span class="n">grafica</span><span class="p">(</span><span class="n">mejores</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">mejores</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">mejores</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">2</span><span class="p">],</span> <span class="n">mejores</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">3</span><span class="p">],</span> <span class="n">mejores</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">4</span><span class="p">])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/cc7d33feeed323e529b2b12ab147ef6128e36abe86482c4db9dac5ca928b1129.png" src="_images/cc7d33feeed323e529b2b12ab147ef6128e36abe86482c4db9dac5ca928b1129.png" />
+<img alt="_images/da118ee0a2816b6b4a125e9e9d8282c7878e496ac6cae4717e5aae907b7898ee.png" src="_images/da118ee0a2816b6b4a125e9e9d8282c7878e496ac6cae4717e5aae907b7898ee.png" />
+<img alt="_images/949489e611bd21f7878cfc1a5c23b4d36f3d32f0b0967db87a73651fcd383a1f.png" src="_images/949489e611bd21f7878cfc1a5c23b4d36f3d32f0b0967db87a73651fcd383a1f.png" />
+<img alt="_images/97aba8468d73307b41b7354671cdabecdc36cddb5edfb41123e604023155e690.png" src="_images/97aba8468d73307b41b7354671cdabecdc36cddb5edfb41123e604023155e690.png" />
+</div>
+</div>
+<p>Las gráficas que acompañan el análisis de los modelos de predicción de la velocidad del viento a 60 metros revelan varias observaciones clave. En el caso de la <strong>Regresión K-NN</strong>, el modelo muestra un buen ajuste en el entrenamiento con un <strong>R² de 0.85224</strong>, pero cae significativamente en la prueba, con un <strong>R² de 0.34968</strong>, indicando <strong>sobreajuste</strong> y <strong>mala generalización</strong>. La <strong>Regresión Lineal</strong> presenta un <strong>R² de 0.52999</strong> en el entrenamiento y mejora en la prueba con un <strong>R² de 0.71566</strong>, capturando <strong>patrones más precisos</strong>. La <strong>Regresión Ridge</strong> muestra un comportamiento similar, con un <strong>R² de 0.52978</strong> en el entrenamiento y un <strong>R² de 0.71429</strong> en la prueba, confirmando su <strong>buen rendimiento</strong>. Por su parte, la <strong>Regresión Lasso</strong> tiene un <strong>R² de 0.52788</strong> en el entrenamiento y un <strong>R² de 0.70930</strong> en la prueba, siendo competitivo pero ligeramente inferior a los modelos Lineal y Ridge. En conclusión, los <strong>modelos lineales</strong>, especialmente la <strong>Regresión Lineal</strong>, <strong>Ridge</strong> y <strong>Lasso</strong>, ofrecen un <strong>mejor balance entre ajuste y generalización</strong>, con <strong>R² superiores a 0.70</strong> en los datos de prueba, mientras que <strong>K-NN muestra un claro sobreajuste</strong>, siendo el <strong>menos adecuado</strong> para este caso.</p>
+</section>
+</section>
+<section id="conclusion">
+<h2><strong>Conclusión</strong><a class="headerlink" href="#conclusion" title="Link to this heading">#</a></h2>
+<p>Los modelos lineales (Regresión Lineal, Ridge y Lasso) demuestran ser los más apropiados para predecir la velocidad del viento en los diferentes sensores y alturas. Logran un equilibrio entre un ajuste adecuado en los datos de entrenamiento y una buena capacidad de generalización en los datos de prueba. Por otro lado, K-NN, a pesar de su alto rendimiento en entrenamiento, no es adecuado para esta tarea debido a su tendencia a sobreajustarse y su baja capacidad de generalización. Para futuros análisis, esperamos utilizar modelos específicos para series de tiempo y así ver mejor el comportamiento de nuestro conjunto de datos.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="informe.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><strong>Análisis Exploratorio de Datos (EDA)</strong></p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#librerias-y-modulos-necesarios"><strong>Librerías y modulos necesarios</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#datos"><strong>Datos</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#caracteristicas-principales-de-la-base-de-datos"><strong>Características principales de la base de datos</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#diccionario-de-variables"><strong>Diccionario de variables</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelos"><strong>Modelos</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-para-evaluar-los-modelos-usando-ventanas-de-prediccion"><strong>Método para evaluar los modelos usando ventanas de predicción</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-para-realizar-las-graficas"><strong>Método para realizar las gráficas</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-1-wind-speed-100-metros-sensor-1"><strong>Modelo 1: Wind speed 100 metros (Sensor 1)</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modelos-usando-ventanas-de-prediccion"><strong>Modelos usando ventanas de predicción</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#grafica-del-mejor-modelo"><strong>Gráfica del mejor modelo</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-2-wind-speed-100-metros-sensor-2"><strong>Modelo 2: Wind speed 100 metros (Sensor 2)</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"><strong>Modelos usando ventanas de predicción</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#graficas"><strong>Gráficas</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-3-wind-speed-80-metros-sensor-1"><strong>Modelo 3: Wind speed 80 metros (Sensor 1)</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2"><strong>Modelos usando ventanas de predicción</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3"><strong>Gráficas</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-4-wind-speed-80-metros-sensor-2"><strong>Modelo 4: Wind speed 80 metros (Sensor 2)</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4"><strong>Modelos usando ventanas de predicción</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5"><strong>Gráficas</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-5-wind-speed-60-metros"><strong>Modelo 5: Wind speed 60 metros</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6"><strong>Modelos usando ventanas de predicción</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7"><strong>Gráfica del mejor modelo</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion"><strong>Conclusión</strong></a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Kanery Camargo-Emanuel Carbonell
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
