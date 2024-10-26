@@ -62,7 +62,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'Intro';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Análisis Exploratorio de Datos (EDA)" href="informe.html" />
+    <link rel="next" title="Modelos de regresión" href="modelos.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -183,7 +183,6 @@
             </li>
         </ul>
         <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="informe.html"><strong>Análisis Exploratorio de Datos (EDA)</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="modelos.html"><strong>Modelos de regresión</strong></a></li>
 </ul>
 
@@ -239,7 +238,7 @@
       
       
       
-      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+      <li><a href="https://github.com/kmarcela11/ProyectoFinal_EnergiaEolica" target="_blank"
    class="btn btn-sm btn-source-repository-button dropdown-item"
    title="Source repository"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -256,7 +255,7 @@
       
       
       
-      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FIntro.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/kmarcela11/ProyectoFinal_EnergiaEolica/issues/new?title=Issue%20on%20page%20%2FIntro.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -357,9 +356,7 @@ document.write(`
   </button>
 `);
 </script>
-<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="fa-solid fa-list"></span>
-</button>
+
 </div></div>
       
     </div>
@@ -375,22 +372,6 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
-            <div>
-                <h2> Contents </h2>
-            </div>
-            <nav aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduccion">Introducción</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objetivos-del-proyecto">Objetivos del proyecto</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#objetivo-general">Objetivo general</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#objetivos-especificos">Objetivos específicos</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodologia">Metodología</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resultados-esperados">Resultados Esperados</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusiones-y-futuras-direcciones">Conclusiones y Futuras Direcciones</a></li>
-</ul>
-            </nav>
         </div>
     </div>
 </div>
@@ -402,74 +383,10 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="analisis-de-series-de-tiempo-de-variables-meteorologicas">
 <h1>Análisis de Series de Tiempo de Variables Meteorológicas<a class="headerlink" href="#analisis-de-series-de-tiempo-de-variables-meteorologicas" title="Link to this heading">#</a></h1>
-<section id="introduccion">
-<h2>Introducción<a class="headerlink" href="#introduccion" title="Link to this heading">#</a></h2>
-<p>Se ha instalado un sistema de monitoreo de variables atmosféricas en una región costera. Este sistema recoge datos de diversas variables como la velocidad y dirección del viento, temperatura del aire, presión atmosférica y humedad relativa con una frecuencia de muestreo de 10 minutos. Estos datos son críticos para cuantificar los recursos energéticos eólicos, monitorear las condiciones climáticas para navegación segura, y estudiar la dispersión de nutrientes, contaminantes y sedimentos transportados por un importante río en el mar cercano. En este proyecto, se realizará un análisis exhaustivo de estas series de tiempo utilizando técnicas de visualización de datos y Machine Learning.</p>
-</section>
-<section id="objetivos-del-proyecto">
-<h2>Objetivos del proyecto<a class="headerlink" href="#objetivos-del-proyecto" title="Link to this heading">#</a></h2>
-<section id="objetivo-general">
-<h3>Objetivo general<a class="headerlink" href="#objetivo-general" title="Link to this heading">#</a></h3>
-<p>Analizar y modelar series de tiempo de variables meteorológicas recopiladas por el sistema de monitoreo para identificar patrones, tendencias, y realizar predicciones que puedan mejorar la toma de decisiones estratégicas en la gestión de recursos energéticos.</p>
-</section>
-<section id="objetivos-especificos">
-<h3>Objetivos específicos<a class="headerlink" href="#objetivos-especificos" title="Link to this heading">#</a></h3>
-<ol class="arabic simple">
-<li><p>Realizar un Análisis Exploratorio de Datos (EDA) para comprender las características y comportamiento de las series de tiempo de las variables monitoreadas.</p></li>
-<li><p>Identificar patrones estacionales, tendencias, y anomalías en las series de tiempo de la velocidad y dirección del viento, temperatura, presión atmosférica y humedad relativa.</p></li>
-<li><p>Aplicar modelos de Machine Learning y métodos de series de tiempo como ARIMA, Prophet y LSTM para predecir el comportamiento de las variables clave.</p></li>
-<li><p>Evaluar la precisión de los modelos predictivos y optimizar su desempeño para aplicaciones prácticas en la gestión de recursos energéticos eólicos.</p></li>
-<li><p>Desarrollar visualizaciones interactivas y dashboards que permitan tomar decisiones informadas basadas en los datos.</p></li>
-</ol>
-</section>
-</section>
-<section id="metodologia">
-<h2>Metodología<a class="headerlink" href="#metodologia" title="Link to this heading">#</a></h2>
-<p>La metodología del proyecto se estructurará en las siguientes fases:</p>
-<ol class="arabic simple">
-<li><p>Recolección y preparación de los datos:</p>
-<ul class="simple">
-<li><p>Importar y procesar los datos de medición del sistema de monitoreo.</p></li>
-<li><p>Realizar un preprocesamiento de datos para manejar valores faltantes, errores de sensor y transformaciones necesarias para el análisis.</p></li>
-</ul>
-</li>
-<li><p>Análisis Exploratorio de Datos (EDA):</p>
-<ul class="simple">
-<li><p>Visualizar series de tiempo utilizando gráficos de líneas, diagramas de caja, histogramas, entre otros, para cada variable.</p></li>
-<li><p>Realizar análisis estadísticos para detectar patrones estacionales, tendencias a largo plazo, y posibles anomalías.</p></li>
-</ul>
-</li>
-<li><p>Modelado de Series de Tiempo:</p>
-<ul class="simple">
-<li><p>Implementar modelos de Machine Learning y series de tiempo como ARIMA, SARIMA, Prophet y Redes Neuronales LSTM para pronosticar las variables seleccionadas.</p></li>
-<li><p>Validar y comparar los resultados de los modelos utilizando métricas de error como RMSE, MAE y MAPE.</p></li>
-</ul>
-</li>
-<li><p>Desarrollo de Visualizaciones Interactivas:</p>
-<ul class="simple">
-<li><p>Crear dashboards y visualizaciones interactivas que resuman los resultados del análisis y las predicciones para facilitar la interpretación de los datos.</p></li>
-</ul>
-</li>
-</ol>
-</section>
-<section id="resultados-esperados">
-<h2>Resultados Esperados<a class="headerlink" href="#resultados-esperados" title="Link to this heading">#</a></h2>
-<ul class="simple">
-<li><p>Identificación de patrones temporales y estacionales en las variables meteorológicas que afectan la generación de energía eólica.</p></li>
-<li><p>Modelos predictivos precisos para la velocidad y dirección del viento, que pueden ser utilizados para optimizar la generación de energía.</p></li>
-<li><p>Herramientas de visualización interactivas que permitan a los operadores tomar decisiones en tiempo real basadas en los datos.</p></li>
-</ul>
-</section>
-<section id="conclusiones-y-futuras-direcciones">
-<h2>Conclusiones y Futuras Direcciones<a class="headerlink" href="#conclusiones-y-futuras-direcciones" title="Link to this heading">#</a></h2>
-<p>Este proyecto proporcionará una comprensión profunda de las dinámicas atmosféricas en la zona de estudio y permitirá mejorar la eficiencia y seguridad de las operaciones. En futuras investigaciones, se podrían integrar más variables externas, como datos oceanográficos y meteorológicos de otras fuentes, para mejorar la precisión de los modelos y su aplicabilidad.</p>
+<p><img alt="Imagen" src="%22C:%5CUsers%5Ckamac%5COneDrive%5CDesktop%5CMachineLearningUN%5CEDA%5Cdocs%5Cintro.png%22" /></p>
+<p>Este informe, desarrollado por los estudiantes de Ciencia de Datos Kanery Camargo y Emanuel Carbonell, presenta un análisis detallado de datos meteorológicos recolectados en una región costera, con el objetivo de predecir la velocidad del viento para optimizar la producción de energía eólica. A través de técnicas avanzadas de visualización y modelos de Machine Learning, el proyecto busca identificar patrones clave y realizar predicciones precisas sobre la velocidad y dirección del viento, así como sobre variables como temperatura, presión y humedad relativa. Esto permitirá mejorar la gestión de recursos energéticos y la toma de decisiones en seguridad y sostenibilidad. A lo largo del informe, se documentará el proceso de recolección y análisis de datos y se presentarán dashboards interactivos que facilitan la exploración y comprensión detallada de las condiciones atmosféricas en la región estudiada.</p>
 <div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="informe.html"><strong>Análisis Exploratorio de Datos (EDA)</strong></a></li>
-<li class="toctree-l1"><a class="reference internal" href="modelos.html"><strong>Modelos de regresión</strong></a></li>
-</ul>
 </div>
-</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -503,11 +420,11 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="right-next"
-       href="informe.html"
+       href="modelos.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><strong>Análisis Exploratorio de Datos (EDA)</strong></p>
+        <p class="prev-next-title"><strong>Modelos de regresión</strong></p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -518,29 +435,6 @@ document.write(`
             
             
               
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> Contents
-  </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduccion">Introducción</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objetivos-del-proyecto">Objetivos del proyecto</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#objetivo-general">Objetivo general</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#objetivos-especificos">Objetivos específicos</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodologia">Metodología</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resultados-esperados">Resultados Esperados</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusiones-y-futuras-direcciones">Conclusiones y Futuras Direcciones</a></li>
-</ul>
-  </nav></div>
-
-</div></div>
-              
             
           </div>
           <footer class="bd-footer-content">
@@ -550,7 +444,7 @@ document.write(`
   <div class="footer-item">
     
 <p class="component-author">
-By Kanery Camargo-Emanuel Carbonell
+By Kanery Camargo y Emanuel Carbonell
 </p>
 
   </div>
