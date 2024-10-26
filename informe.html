@@ -61,7 +61,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Modelos de regresión" href="modelos.html" />
-    <link rel="prev" title="&lt;no title&gt;" href="Intro.html" />
+    <link rel="prev" title="Contextualización del Proyecto" href="Intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -175,7 +175,7 @@
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="Intro.html">
-                    <no title>
+                    Contextualización del Proyecto
                 </a>
             </li>
         </ul>
@@ -377,14 +377,8 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contextualizacion-de-los-datos"><strong>Contextualización de los datos</strong></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#introduccion"><strong>Introducción</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#descripcion-del-conjunto-de-datos"><strong>Descripción del Conjunto de Datos</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#estrategia-del-analisis-exploratorio-de-datos"><strong>Estrategia del Análisis Exploratorio de Datos</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#importancia-del-eda-en-el-proyecto"><strong>Importancia del EDA en el proyecto</strong></a></li>
-</ul>
-</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#librerias-y-modulos-necesarios"><strong>Librerías y modulos necesarios</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contextualizacion-de-los-datos"><strong>Contextualización de los datos</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conjunto-de-datos"><strong>Conjunto de datos</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reorganizacion-del-conjunto-de-datos"><strong>Reorganización del conjunto de datos</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reduccion-de-dimensionalidad-vif"><strong>Reducción de Dimensionalidad (VIF)</strong></a></li>
@@ -422,40 +416,6 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="analisis-exploratorio-de-datos-eda">
 <h1><strong>Análisis Exploratorio de Datos (EDA)</strong><a class="headerlink" href="#analisis-exploratorio-de-datos-eda" title="Link to this heading">#</a></h1>
-<section id="contextualizacion-de-los-datos">
-<h2><strong>Contextualización de los datos</strong><a class="headerlink" href="#contextualizacion-de-los-datos" title="Link to this heading">#</a></h2>
-<section id="introduccion">
-<h3><strong>Introducción</strong><a class="headerlink" href="#introduccion" title="Link to this heading">#</a></h3>
-<p>El análisis exploratorio de datos (EDA) es un paso fundamental en la comprensión y preparación de los datos para su análisis posterior y modelado. En este proyecto, el objetivo principal es analizar las características y comportamientos de las variables relacionadas con el monitoreo del viento y el clima en distintas alturas, utilizando un conjunto de datos recogidos de sensores ubicados a diferentes alturas: 40 m, 60 m, 80 m y 100 m. El conjunto de datos incluye variables clave como velocidad y dirección del viento, temperatura, presión y humedad.</p>
-</section>
-<section id="descripcion-del-conjunto-de-datos">
-<h3><strong>Descripción del Conjunto de Datos</strong><a class="headerlink" href="#descripcion-del-conjunto-de-datos" title="Link to this heading">#</a></h3>
-<p>El conjunto de datos utilizado en este proyecto incluye mediciones climáticas y de velocidad del viento tomadas en intervalos regulares a lo largo de un año. Cada sensor está ubicado a una altura específica, permitiendo la captura de datos relevantes a diferentes niveles de la atmósfera:</p>
-<ul class="simple">
-<li><p>Velocidad del Viento: Medida en m/s a 40 m, 60 m, 80 m y 100 m, proporcionada por sensores ubicados en diferentes alturas.</p></li>
-<li><p>Dirección del Viento: Ángulo de dirección del viento correspondiente a cada altura.</p></li>
-<li><p>Temperatura: Temperatura media y desviación estándar registradas a 20 m y 100 m.</p></li>
-<li><p>Presión y Humedad: Valores de presión atmosférica y humedad relativa registrados por los sensores.</p></li>
-</ul>
-</section>
-<section id="estrategia-del-analisis-exploratorio-de-datos">
-<h3><strong>Estrategia del Análisis Exploratorio de Datos</strong><a class="headerlink" href="#estrategia-del-analisis-exploratorio-de-datos" title="Link to this heading">#</a></h3>
-<p>El EDA se lleva a cabo en varias etapas, utilizando técnicas estadísticas y visuales para identificar patrones, relaciones y anomalías en los datos:</p>
-<ul class="simple">
-<li><p>Visualización de Series Temporales: Se analizan las series temporales de las variables clave para entender las tendencias generales, la estacionalidad y la variabilidad a lo largo del tiempo.</p></li>
-<li><p>Análisis de Correlación: Se examinan las relaciones entre variables como la velocidad del viento a diferentes alturas y otros parámetros climáticos como temperatura, presión y humedad. Este análisis es fundamental para entender la dinámica del comportamiento del viento y su interacción con otros factores meteorológicos.</p></li>
-<li><p>Imputación de Datos Faltantes: Se emplean técnicas de modelado ARIMA y regresión lineal para la imputación de datos faltantes. Se exploran modelos de series temporales y correlaciones inter-altitudinales para mejorar la calidad de los datos.</p></li>
-<li><p>Reducción de Dimensionalidad: Se utiliza el Factor de Inflación de la Varianza (VIF) para eliminar la multicolinealidad en los datos, asegurando un conjunto de variables optimizado para análisis posteriores.</p></li>
-<li><p>Descomposición Estacional: Para entender mejor los patrones de las series temporales, se utiliza la descomposición estacional para separar las componentes de tendencia, estacionalidad y ruido de las series temporales.</p></li>
-<li><p>Visualización Avanzada: Además de los gráficos de líneas y dispersión, se utilizan gráficos de caja y de rosa de los vientos para explorar las distribuciones de las variables y las direcciones del viento.</p></li>
-</ul>
-</section>
-<section id="importancia-del-eda-en-el-proyecto">
-<h3><strong>Importancia del EDA en el proyecto</strong><a class="headerlink" href="#importancia-del-eda-en-el-proyecto" title="Link to this heading">#</a></h3>
-<p>El análisis exploratorio de datos permite obtener una comprensión profunda del conjunto de datos, sus características intrínsecas y posibles desafíos que podrían surgir durante el modelado. Este proceso es crucial para asegurar la calidad de los datos y para definir las mejores estrategias para su modelado y predicción en futuros trabajos, como en la creación de dashboards interactivos o en la aplicación de modelos predictivos avanzados.</p>
-<p>En resumen, el EDA de este proyecto establece una base sólida para cualquier análisis y modelado futuro, asegurando la integridad y relevancia de los datos en el contexto del monitoreo climático y del viento.</p>
-</section>
-</section>
 <section id="librerias-y-modulos-necesarios">
 <h2><strong>Librerías y modulos necesarios</strong><a class="headerlink" href="#librerias-y-modulos-necesarios" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
@@ -483,6 +443,9 @@ document.write(`
 </div>
 </div>
 </div>
+</section>
+<section id="contextualizacion-de-los-datos">
+<h2><strong>Contextualización de los datos</strong><a class="headerlink" href="#contextualizacion-de-los-datos" title="Link to this heading">#</a></h2>
 </section>
 <section id="conjunto-de-datos">
 <h2><strong>Conjunto de datos</strong><a class="headerlink" href="#conjunto-de-datos" title="Link to this heading">#</a></h2>
@@ -3396,7 +3359,7 @@ Mejor modelo ARIMA: (2, 0, 2) con AIC: 59459.73027572419
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">&lt;no title&gt;</p>
+        <p class="prev-next-title"><strong>Contextualización del Proyecto</strong></p>
       </div>
     </a>
     <a class="right-next"
@@ -3424,14 +3387,8 @@ Mejor modelo ARIMA: (2, 0, 2) con AIC: 59459.73027572419
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contextualizacion-de-los-datos"><strong>Contextualización de los datos</strong></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#introduccion"><strong>Introducción</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#descripcion-del-conjunto-de-datos"><strong>Descripción del Conjunto de Datos</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#estrategia-del-analisis-exploratorio-de-datos"><strong>Estrategia del Análisis Exploratorio de Datos</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#importancia-del-eda-en-el-proyecto"><strong>Importancia del EDA en el proyecto</strong></a></li>
-</ul>
-</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#librerias-y-modulos-necesarios"><strong>Librerías y modulos necesarios</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contextualizacion-de-los-datos"><strong>Contextualización de los datos</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conjunto-de-datos"><strong>Conjunto de datos</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reorganizacion-del-conjunto-de-datos"><strong>Reorganización del conjunto de datos</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reduccion-de-dimensionalidad-vif"><strong>Reducción de Dimensionalidad (VIF)</strong></a></li>
