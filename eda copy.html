@@ -1,0 +1,2494 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Análisis Exploratorio de Datos (EDA) &#8212; EDA PROYECTO FINAL</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'eda copy';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="Intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.jpeg" class="logo__image only-light" alt="EDA PROYECTO FINAL - Home"/>
+    <script>document.write(`<img src="_static/logo.jpeg" class="logo__image only-dark" alt="EDA PROYECTO FINAL - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="Intro.html">
+                    Contextualización del Proyecto
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="eda.html"><strong>Análisis Exploratorio de Datos (EDA)</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="modelos.html"><strong>Modelos de regresión</strong></a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/kmarcela11/ProyectoFinal_EnergiaEolica" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/kmarcela11/ProyectoFinal_EnergiaEolica/issues/new?title=Issue%20on%20page%20%2Feda copy.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/eda copy.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Análisis Exploratorio de Datos (EDA)</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#librerias-y-modulos-necesarios"><strong>Librerías y modulos necesarios</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contextualizacion-de-los-datos"><strong>Contextualización de los datos</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conjunto-de-datos"><strong>Conjunto de datos</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#caracteristicas-del-conjunto-de-datos"><strong>Características del conjunto de datos</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reorganizacion-del-conjunto-de-datos"><strong>Reorganización del conjunto de datos</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reduccion-de-dimensionalidad"><strong>Reducción de Dimensionalidad</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#renombrado-de-variables"><strong>Renombrado de variables</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#diccionario-de-variables"><strong>Diccionario de variables</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#datos-faltantes"><strong>Datos faltantes</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reporte-de-fallas-de-sensores"><strong>Reporte de fallas de sensores</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#imputacion-de-datos-faltantes-usando-el-modelo-arima"><strong>Imputación de datos faltantes usando el modelo ARIMA</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-por-variable"><strong>Análisis por variable</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variable-velocidad-del-viento-a-100m"><strong>Variable: Velocidad del viento a 100m</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#serie-original"><strong>Serie original</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#autocorrelacion-y-autocorrelacion-parcial"><strong>Autocorrelación y autocorrelación parcial</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#descomposicion-de-la-serie"><strong>Descomposición de la serie</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#distribucion-de-la-variable"><strong>Distribución de la variable</strong></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variable-velocidad-del-viento-a-80m"><strong>Variable: Velocidad del viento a 80m</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"><strong>Serie original</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id2"><strong>Autocorrelación y autocorrelación parcial</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id3"><strong>Descomposición de la serie</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id4"><strong>Distribución de la variable</strong></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variable-velocidad-del-viento-a-60m"><strong>Variable: Velocidad del viento a 60m</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id5"><strong>Serie original</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id6"><strong>Autocorrelación y autocorrelación parcial</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id7"><strong>Descomposición de la serie</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id8"><strong>Distribución de la variable</strong></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variable-velocidad-del-viento-a-40m"><strong>Variable: Velocidad del viento a 40m</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id9"><strong>Serie original</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id10"><strong>Autocorrelación y autocorrelación parcial</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id11"><strong>Descomposición de la serie</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id12"><strong>Distribución de la variable</strong></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variables-direccion-del-viento-a-100m-80m-y-60m"><strong>Variables: Dirección del viento a 100m, 80m y 60m</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variable-presion"><strong>Variable: Presión</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id13"><strong>Distribución de la variable</strong></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variable-humedad"><strong>Variable: Humedad</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id14"><strong>Distribución de la variable</strong></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variables-temperatura-a-100m-y-20m"><strong>Variables: Temperatura a 100m y 20m</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#test-de-dickey-fuller"><strong>Test de Dickey-Fuller</strong></a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="analisis-exploratorio-de-datos-eda">
+<h1><strong>Análisis Exploratorio de Datos (EDA)</strong><a class="headerlink" href="#analisis-exploratorio-de-datos-eda" title="Link to this heading">#</a></h1>
+<section id="librerias-y-modulos-necesarios">
+<h2><strong>Librerías y modulos necesarios</strong><a class="headerlink" href="#librerias-y-modulos-necesarios" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">matplotlib.cm</span> <span class="k">as</span> <span class="nn">cm</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display</span>
+<span class="kn">from</span> <span class="nn">statsmodels.tsa.seasonal</span> <span class="kn">import</span> <span class="n">seasonal_decompose</span>
+<span class="kn">import</span> <span class="nn">missingno</span> <span class="k">as</span> <span class="nn">msno</span>
+<span class="kn">from</span> <span class="nn">statsmodels.stats.outliers_influence</span> <span class="kn">import</span> <span class="n">variance_inflation_factor</span>
+<span class="kn">from</span> <span class="nn">windrose</span> <span class="kn">import</span> <span class="n">WindroseAxes</span>
+<span class="kn">from</span> <span class="nn">statsmodels.tsa.stattools</span> <span class="kn">import</span> <span class="n">adfuller</span>
+<span class="kn">from</span> <span class="nn">statsmodels.graphics.tsaplots</span> <span class="kn">import</span> <span class="n">plot_acf</span><span class="p">,</span> <span class="n">plot_pacf</span>
+<span class="kn">from</span> <span class="nn">statsmodels.tsa.arima.model</span> <span class="kn">import</span> <span class="n">ARIMA</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span>
+<span class="kn">from</span> <span class="nn">sklearn.impute</span> <span class="kn">import</span> <span class="n">SimpleImputer</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">product</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="contextualizacion-de-los-datos">
+<h2><strong>Contextualización de los datos</strong><a class="headerlink" href="#contextualizacion-de-los-datos" title="Link to this heading">#</a></h2>
+<p>El conjunto de datos a tratar cuenta con información sobre variables climáticas esenciales capturadas en una región costera mediante un sistema de monitoreo atmosférico que comenzó a operar el <strong>1 de enero de 2022</strong>. Este sistema incluye anemómetros acústicos ubicados a 100 m, 80 m, 60 m y 40 m de altura para registrar la velocidad del viento, así como veletas que miden su dirección a esas mismas alturas. También dispone de sensores de temperatura a 100 m y 20 m, y sensores de presión atmosférica y humedad relativa. Las mediciones se toman a intervalos de <strong>10 minutos</strong>, permitiendo la captura de datos en alta frecuencia y con un alto grado de detalle. Gracias a esta estructura de monitoreo, el conjunto de datos proporciona una base sólida para desarrollar modelos predictivos y analizar el comportamiento del viento y sus variaciones en tiempo real, fundamentales para la gestión y optimización de recursos energéticos eólicos en la región de estudio.</p>
+</section>
+<section id="conjunto-de-datos">
+<h2><strong>Conjunto de datos</strong><a class="headerlink" href="#conjunto-de-datos" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">file_path</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;C:\Users\kamac\OneDrive\Desktop\MachineLearningUN\EDA\DATA.xlsx&quot;</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="caracteristicas-del-conjunto-de-datos">
+<h3><strong>Características del conjunto de datos</strong><a class="headerlink" href="#caracteristicas-del-conjunto-de-datos" title="Link to this heading">#</a></h3>
+<p>Inicialmente, se observan las primeras <strong>5 observaciones</strong> del conjunto de datos con el uso del método <code class="docutils literal notranslate"><span class="pre">.head()</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>SoftwareVersion</th>
+      <th>buildbuiltbyCIserver20210728</th>
+      <th>VarName3</th>
+      <th>VarName4</th>
+      <th>VarName5</th>
+      <th>VarName6</th>
+      <th>VarName7</th>
+      <th>VarName8</th>
+      <th>VarName9</th>
+      <th>VarName10</th>
+      <th>...</th>
+      <th>VarName51</th>
+      <th>VarName52</th>
+      <th>VarName53</th>
+      <th>VarName54</th>
+      <th>VarName55</th>
+      <th>VarName56</th>
+      <th>VarName57</th>
+      <th>VarName58</th>
+      <th>VarName59</th>
+      <th>VarName60</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2022-01-01 00:00:00</td>
+      <td>16.060860</td>
+      <td>0.958639</td>
+      <td>13.15692</td>
+      <td>18.76164</td>
+      <td>18.468434</td>
+      <td>15.830104</td>
+      <td>0.959005</td>
+      <td>12.85460</td>
+      <td>18.23426</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000076</td>
+      <td>61.08</td>
+      <td>3.08</td>
+      <td>143.8</td>
+      <td>61.21</td>
+      <td>3.39</td>
+      <td>143.8</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2022-01-01 00:10:00</td>
+      <td>16.156927</td>
+      <td>0.885824</td>
+      <td>13.48116</td>
+      <td>18.06684</td>
+      <td>17.850526</td>
+      <td>15.972642</td>
+      <td>0.891046</td>
+      <td>13.59028</td>
+      <td>18.41818</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000076</td>
+      <td>61.08</td>
+      <td>2.83</td>
+      <td>143.8</td>
+      <td>61.49</td>
+      <td>3.36</td>
+      <td>143.8</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2022-01-01 00:20:00</td>
+      <td>16.473571</td>
+      <td>0.911763</td>
+      <td>13.48116</td>
+      <td>18.48372</td>
+      <td>18.298440</td>
+      <td>16.287375</td>
+      <td>0.914220</td>
+      <td>13.49832</td>
+      <td>18.37220</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000076</td>
+      <td>60.42</td>
+      <td>2.74</td>
+      <td>143.8</td>
+      <td>60.65</td>
+      <td>3.11</td>
+      <td>143.8</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2022-01-01 00:30:00</td>
+      <td>16.660009</td>
+      <td>0.860070</td>
+      <td>14.31492</td>
+      <td>19.27116</td>
+      <td>18.931634</td>
+      <td>16.451707</td>
+      <td>0.842721</td>
+      <td>13.77420</td>
+      <td>18.69406</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>60.88</td>
+      <td>2.83</td>
+      <td>143.8</td>
+      <td>61.19</td>
+      <td>3.16</td>
+      <td>143.8</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2022-01-01 00:40:00</td>
+      <td>16.519613</td>
+      <td>0.903333</td>
+      <td>13.89804</td>
+      <td>19.31748</td>
+      <td>18.561074</td>
+      <td>16.353678</td>
+      <td>0.889667</td>
+      <td>13.63626</td>
+      <td>19.15386</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000076</td>
+      <td>59.99</td>
+      <td>2.59</td>
+      <td>143.8</td>
+      <td>60.26</td>
+      <td>3.21</td>
+      <td>143.8</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 60 columns</p>
+</div></div></div>
+</div>
+<p>Observamos que la mayoría de las variables en el conjunto de datos son de tipo numérico, con una excepción de tipo categórico. Además, los nombres de las columnas son poco descriptivos, lo cual dificulta su comprensión; por lo tanto, se plantea la posibilidad de renombrar las variables más adelante para mejorar la claridad del análisis.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(38448, 60)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Al usar el método <code class="docutils literal notranslate"><span class="pre">.shape</span></code> observamos que el conjunto de datos contiene <strong>60</strong> variables y <strong>38448</strong> observaciones.</p>
+</section>
+</section>
+<section id="reorganizacion-del-conjunto-de-datos">
+<h2><strong>Reorganización del conjunto de datos</strong><a class="headerlink" href="#reorganizacion-del-conjunto-de-datos" title="Link to this heading">#</a></h2>
+<p>Dado a la naturaleza de los datos previamente vista, se tomó la decisión de dividir y reorganizar la base de datos en subconjuntos correspondientes a distintas partes y características de esta; permitiendo así un mejor manejo de los datos a modelar. También se convierte la columna <code class="docutils literal notranslate"><span class="pre">SoftwareVersion</span></code> en formato de fecha utilizando datetime para facilitar el análisis temporal de los datos.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;buildbuiltbyCIserver20210728&#39;</span><span class="p">:</span> <span class="s1">&#39;VarName2&#39;</span><span class="p">},</span> <span class="n">inplace</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">data</span><span class="p">[</span><span class="s1">&#39;Fecha&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;SoftwareVersion&#39;</span><span class="p">])</span>
+<span class="n">subconjuntos</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;Wind speed 100 m (sensor 1)&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;VarName2&#39;</span><span class="p">,</span> <span class="s1">&#39;VarName3&#39;</span><span class="p">,</span> <span class="s1">&#39;VarName4&#39;</span><span class="p">,</span> <span class="s1">&#39;VarName5&#39;</span><span class="p">,</span> <span class="s1">&#39;VarName6&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Wind speed 100 m (sensor 2)&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;VarName7&#39;</span><span class="p">,</span> <span class="s1">&#39;VarName8&#39;</span><span class="p">,</span> <span class="s1">&#39;VarName9&#39;</span><span class="p">,</span> <span class="s1">&#39;VarName10&#39;</span><span class="p">,</span> <span class="s1">&#39;VarName11&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Wind speed 80 m (sensor 1)&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;VarName12&#39;</span><span class="p">,</span> <span class="s1">&#39;VarName13&#39;</span><span class="p">,</span> <span class="s1">&#39;VarName14&#39;</span><span class="p">,</span> <span class="s1">&#39;VarName15&#39;</span><span class="p">,</span> <span class="s1">&#39;VarName16&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Wind speed 80 m (sensor 2)&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;VarName17&#39;</span><span class="p">,</span> <span class="s1">&#39;VarName18&#39;</span><span class="p">,</span> <span class="s1">&#39;VarName19&#39;</span><span class="p">,</span> <span class="s1">&#39;VarName20&#39;</span><span class="p">,</span> <span class="s1">&#39;VarName21&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Wind speed 60 m&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;VarName22&#39;</span><span class="p">,</span> <span class="s1">&#39;VarName23&#39;</span><span class="p">,</span> <span class="s1">&#39;VarName24&#39;</span><span class="p">,</span> <span class="s1">&#39;VarName25&#39;</span><span class="p">,</span> <span class="s1">&#39;VarName26&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Wind speed 40 m&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;VarName27&#39;</span><span class="p">,</span> <span class="s1">&#39;VarName28&#39;</span><span class="p">,</span> <span class="s1">&#39;VarName29&#39;</span><span class="p">,</span> <span class="s1">&#39;VarName30&#39;</span><span class="p">,</span> <span class="s1">&#39;VarName31&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Wind direction 60 m&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;VarName32&#39;</span><span class="p">,</span> <span class="s1">&#39;VarName33&#39;</span><span class="p">,</span> <span class="s1">&#39;VarName34&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Presión&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;VarName35&#39;</span><span class="p">,</span> <span class="s1">&#39;VarName36&#39;</span><span class="p">,</span> <span class="s1">&#39;VarName37&#39;</span><span class="p">,</span> <span class="s1">&#39;VarName38&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Humedad&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;VarName39&#39;</span><span class="p">,</span> <span class="s1">&#39;VarName40&#39;</span><span class="p">,</span> <span class="s1">&#39;VarName41&#39;</span><span class="p">,</span> <span class="s1">&#39;VarName42&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Temperatura 100 m&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;VarName43&#39;</span><span class="p">,</span> <span class="s1">&#39;VarName44&#39;</span><span class="p">,</span> <span class="s1">&#39;VarName45&#39;</span><span class="p">,</span> <span class="s1">&#39;VarName46&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Temperatura 21 m&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;VarName47&#39;</span><span class="p">,</span> <span class="s1">&#39;VarName48&#39;</span><span class="p">,</span> <span class="s1">&#39;VarName49&#39;</span><span class="p">,</span> <span class="s1">&#39;VarName50&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Canal vacío&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;VarName51&#39;</span><span class="p">,</span> <span class="s1">&#39;VarName52&#39;</span><span class="p">,</span> <span class="s1">&#39;VarName53&#39;</span><span class="p">,</span> <span class="s1">&#39;VarName54&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Wind direction 100 m&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;VarName55&#39;</span><span class="p">,</span> <span class="s1">&#39;VarName56&#39;</span><span class="p">,</span> <span class="s1">&#39;VarName57&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Wind direction 80 m&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;VarName58&#39;</span><span class="p">,</span> <span class="s1">&#39;VarName59&#39;</span><span class="p">,</span> <span class="s1">&#39;VarName60&#39;</span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Así se verían los subconjuntos:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>Variable</strong></p></th>
+<th class="head"><p><strong>Wind speed 100 m (sensor 1)</strong></p></th>
+<th class="head"><p><strong>Wind speed 100 m (sensor 2)</strong></p></th>
+<th class="head"><p><strong>Wind speed 80 m (sensor 1)</strong></p></th>
+<th class="head"><p><strong>Wind speed 80 m (sensor 2)</strong></p></th>
+<th class="head"><p><strong>Wind speed 60 m</strong></p></th>
+<th class="head"><p><strong>Wind speed 40 m</strong></p></th>
+<th class="head"><p><strong>Wind direction 60 m</strong></p></th>
+<th class="head"><p><strong>Wind direction 100 m</strong></p></th>
+<th class="head"><p><strong>Wind direction 80 m</strong></p></th>
+<th class="head"><p><strong>Presión</strong></p></th>
+<th class="head"><p><strong>Humedad</strong></p></th>
+<th class="head"><p><strong>Temperature 100 m</strong></p></th>
+<th class="head"><p><strong>Temperature 21 m</strong></p></th>
+<th class="head"><p><strong>Canal vacío</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>1. Promedio (AVG)</strong></p></td>
+<td><p>VarName2</p></td>
+<td><p>VarName7</p></td>
+<td><p>VarName12</p></td>
+<td><p>VarName17</p></td>
+<td><p>VarName22</p></td>
+<td><p>VarName27</p></td>
+<td><p>VarName32</p></td>
+<td><p>VarName55</p></td>
+<td><p>VarName58</p></td>
+<td><p>VarName35</p></td>
+<td><p>VarName39</p></td>
+<td><p>VarName43</p></td>
+<td><p>VarName47</p></td>
+<td><p>VarName51</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>2. Desviación Estándar (SD)</strong></p></td>
+<td><p>VarName3</p></td>
+<td><p>VarName8</p></td>
+<td><p>VarName13</p></td>
+<td><p>VarName18</p></td>
+<td><p>VarName23</p></td>
+<td><p>VarName28</p></td>
+<td><p>VarName33</p></td>
+<td><p>VarName56</p></td>
+<td><p>VarName59</p></td>
+<td><p>VarName36</p></td>
+<td><p>VarName40</p></td>
+<td><p>VarName44</p></td>
+<td><p>VarName48</p></td>
+<td><p>VarName52</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>3. Valor Mínimo (Min)</strong></p></td>
+<td><p>VarName4</p></td>
+<td><p>VarName9</p></td>
+<td><p>VarName14</p></td>
+<td><p>VarName19</p></td>
+<td><p>VarName24</p></td>
+<td><p>VarName29</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>VarName37</p></td>
+<td><p>VarName41</p></td>
+<td><p>VarName45</p></td>
+<td><p>VarName49</p></td>
+<td><p>VarName53</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>4. Valor Máximo (Max)</strong></p></td>
+<td><p>VarName5</p></td>
+<td><p>VarName10</p></td>
+<td><p>VarName15</p></td>
+<td><p>VarName20</p></td>
+<td><p>VarName25</p></td>
+<td><p>VarName30</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>VarName38</p></td>
+<td><p>VarName42</p></td>
+<td><p>VarName46</p></td>
+<td><p>VarName50</p></td>
+<td><p>VarName54</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>5. Ráfaga Máxima (Gust)</strong></p></td>
+<td><p>VarName6</p></td>
+<td><p>VarName11</p></td>
+<td><p>VarName16</p></td>
+<td><p>VarName21</p></td>
+<td><p>VarName26</p></td>
+<td><p>VarName31</p></td>
+<td><p>VarName34</p></td>
+<td><p>VarName57</p></td>
+<td><p>VarName60</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="reduccion-de-dimensionalidad">
+<h3><strong>Reducción de Dimensionalidad</strong><a class="headerlink" href="#reduccion-de-dimensionalidad" title="Link to this heading">#</a></h3>
+<p>Para simplificar el análisis y reducir la dimensionalidad del conjunto de datos, se opta por conservar únicamente la variable de <strong>promedio (AVG)</strong> para cada medición. El promedio proporciona una medida representativa del comportamiento general de las variables (como velocidad del viento, temperatura, presión, etc.) en cada intervalo de 10 minutos. Además, se eliminará la variable de <strong>Canal Vacío</strong>, ya que esta columna no contiene información relevante o valores de medición que puedan aportar al análisis. Mantenerla solo añadiría ruido al conjunto de datos, complicando innecesariamente el procesamiento y análisis de las variables significativas.</p>
+<p>No se aplicará el <strong>Factor de Inflación de Varianza (VIF)</strong>, ya que su uso podría eliminar de forma inconsistente diferentes estadísticas en cada variable, como el promedio en algunas y la desviación estándar en otras. Esto resultaría en un conjunto de datos inconsistente, donde las variables no tendrían el mismo tipo de estadístico representativo, lo cual dificultaría el análisis y la interpretación. Al mantener solo el promedio, se asegura que todas las variables posean un valor consistente y representativo, facilitando una interpretación coherente y un análisis robusto de las tendencias generales.</p>
+<p>Entonces, contariamos con las siguientes variables:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>Variable</strong></p></th>
+<th class="head"><p><strong>Valor</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Wind speed 100 m (sensor 1)</strong></p></td>
+<td><p>VarName2</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Wind speed 100 m (sensor 2)</strong></p></td>
+<td><p>VarName7</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Wind speed 80 m (sensor 1)</strong></p></td>
+<td><p>VarName12</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Wind speed 80 m (sensor 2)</strong></p></td>
+<td><p>VarName17</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Wind speed 60 m</strong></p></td>
+<td><p>VarName22</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Wind speed 40 m</strong></p></td>
+<td><p>VarName27</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Wind direction 60 m</strong></p></td>
+<td><p>VarName32</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Wind direction 100 m</strong></p></td>
+<td><p>VarName55</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Wind direction 80 m</strong></p></td>
+<td><p>VarName58</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Presión</strong></p></td>
+<td><p>VarName35</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Humedad</strong></p></td>
+<td><p>VarName39</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Temperature 100 m</strong></p></td>
+<td><p>VarName43</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Temperature 21 m</strong></p></td>
+<td><p>VarName47</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Ahora, filtramos el conjunto de datos para conservar únicamente las variables de interés:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">variables</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;Fecha&#39;</span><span class="p">,</span> <span class="s1">&#39;VarName2&#39;</span><span class="p">,</span> <span class="s1">&#39;VarName7&#39;</span><span class="p">,</span> <span class="s1">&#39;VarName12&#39;</span><span class="p">,</span> <span class="s1">&#39;VarName17&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;VarName22&#39;</span><span class="p">,</span> <span class="s1">&#39;VarName27&#39;</span><span class="p">,</span> <span class="s1">&#39;VarName32&#39;</span><span class="p">,</span> <span class="s1">&#39;VarName55&#39;</span><span class="p">,</span> <span class="s1">&#39;VarName58&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;VarName35&#39;</span><span class="p">,</span> <span class="s1">&#39;VarName39&#39;</span><span class="p">,</span> <span class="s1">&#39;VarName43&#39;</span><span class="p">,</span> <span class="s1">&#39;VarName47&#39;</span>
+<span class="p">]</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">variables</span><span class="p">]</span>
+<span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Fecha</th>
+      <th>VarName2</th>
+      <th>VarName7</th>
+      <th>VarName12</th>
+      <th>VarName17</th>
+      <th>VarName22</th>
+      <th>VarName27</th>
+      <th>VarName32</th>
+      <th>VarName55</th>
+      <th>VarName58</th>
+      <th>VarName35</th>
+      <th>VarName39</th>
+      <th>VarName43</th>
+      <th>VarName47</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2022-01-01 00:00:00</td>
+      <td>16.060860</td>
+      <td>15.830104</td>
+      <td>15.145418</td>
+      <td>15.125038</td>
+      <td>14.300989</td>
+      <td>13.199266</td>
+      <td>61.98</td>
+      <td>61.08</td>
+      <td>61.21</td>
+      <td>1005.963541</td>
+      <td>75.042725</td>
+      <td>26.922913</td>
+      <td>26.707773</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2022-01-01 00:10:00</td>
+      <td>16.156927</td>
+      <td>15.972642</td>
+      <td>15.290614</td>
+      <td>15.352352</td>
+      <td>14.533556</td>
+      <td>13.511498</td>
+      <td>62.29</td>
+      <td>61.08</td>
+      <td>61.49</td>
+      <td>1005.795867</td>
+      <td>73.509216</td>
+      <td>27.006836</td>
+      <td>26.772633</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2022-01-01 00:20:00</td>
+      <td>16.473571</td>
+      <td>16.287375</td>
+      <td>15.599149</td>
+      <td>15.562022</td>
+      <td>14.808378</td>
+      <td>13.595550</td>
+      <td>61.18</td>
+      <td>60.42</td>
+      <td>60.65</td>
+      <td>1005.739976</td>
+      <td>72.914124</td>
+      <td>26.991577</td>
+      <td>26.772633</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2022-01-01 00:30:00</td>
+      <td>16.660009</td>
+      <td>16.451707</td>
+      <td>15.801446</td>
+      <td>15.779687</td>
+      <td>15.170287</td>
+      <td>14.082179</td>
+      <td>62.20</td>
+      <td>60.88</td>
+      <td>61.19</td>
+      <td>1005.684085</td>
+      <td>73.165894</td>
+      <td>26.877136</td>
+      <td>26.659982</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2022-01-01 00:40:00</td>
+      <td>16.519613</td>
+      <td>16.353678</td>
+      <td>15.851963</td>
+      <td>15.749131</td>
+      <td>14.927282</td>
+      <td>13.761358</td>
+      <td>61.26</td>
+      <td>59.99</td>
+      <td>60.26</td>
+      <td>1005.609563</td>
+      <td>73.791504</td>
+      <td>26.770325</td>
+      <td>26.601949</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="renombrado-de-variables">
+<h3><strong>Renombrado de variables</strong><a class="headerlink" href="#renombrado-de-variables" title="Link to this heading">#</a></h3>
+<p>A continuación, realizaremos un renombrado de variables en nuestro conjunto de datos para facilitar su identificación y comprensión. Este cambio permitirá que cada variable tenga un nombre más descriptivo, reflejando su contenido y las características específicas de las mediciones, lo cual facilitará el análisis y la interpretación de los datos en los siguientes pasos del proyecto.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;Fecha&#39;</span><span class="p">:</span> <span class="s1">&#39;Fecha&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;VarName2&#39;</span><span class="p">:</span> <span class="s1">&#39;VelViento100m_1&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;VarName7&#39;</span><span class="p">:</span> <span class="s1">&#39;VelViento100m_2&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;VarName12&#39;</span><span class="p">:</span> <span class="s1">&#39;VelViento80m_1&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;VarName17&#39;</span><span class="p">:</span> <span class="s1">&#39;VelViento80m_2&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;VarName22&#39;</span><span class="p">:</span> <span class="s1">&#39;VelViento60m&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;VarName27&#39;</span><span class="p">:</span> <span class="s1">&#39;VelViento40m&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;VarName32&#39;</span><span class="p">:</span> <span class="s1">&#39;DirViento60m&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;VarName55&#39;</span><span class="p">:</span> <span class="s1">&#39;DirViento100m&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;VarName58&#39;</span><span class="p">:</span> <span class="s1">&#39;DirViento80m&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;VarName35&#39;</span><span class="p">:</span> <span class="s1">&#39;Presion&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;VarName39&#39;</span><span class="p">:</span> <span class="s1">&#39;Humedad&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;VarName43&#39;</span><span class="p">:</span> <span class="s1">&#39;Temp100m&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;VarName47&#39;</span><span class="p">:</span> <span class="s1">&#39;Temp21m&#39;</span>
+<span class="p">})</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Fecha</th>
+      <th>VelViento100m_1</th>
+      <th>VelViento100m_2</th>
+      <th>VelViento80m_1</th>
+      <th>VelViento80m_2</th>
+      <th>VelViento60m</th>
+      <th>VelViento40m</th>
+      <th>DirViento60m</th>
+      <th>DirViento100m</th>
+      <th>DirViento80m</th>
+      <th>Presion</th>
+      <th>Humedad</th>
+      <th>Temp100m</th>
+      <th>Temp21m</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2022-01-01 00:00:00</td>
+      <td>16.060860</td>
+      <td>15.830104</td>
+      <td>15.145418</td>
+      <td>15.125038</td>
+      <td>14.300989</td>
+      <td>13.199266</td>
+      <td>61.98</td>
+      <td>61.08</td>
+      <td>61.21</td>
+      <td>1005.963541</td>
+      <td>75.042725</td>
+      <td>26.922913</td>
+      <td>26.707773</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2022-01-01 00:10:00</td>
+      <td>16.156927</td>
+      <td>15.972642</td>
+      <td>15.290614</td>
+      <td>15.352352</td>
+      <td>14.533556</td>
+      <td>13.511498</td>
+      <td>62.29</td>
+      <td>61.08</td>
+      <td>61.49</td>
+      <td>1005.795867</td>
+      <td>73.509216</td>
+      <td>27.006836</td>
+      <td>26.772633</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2022-01-01 00:20:00</td>
+      <td>16.473571</td>
+      <td>16.287375</td>
+      <td>15.599149</td>
+      <td>15.562022</td>
+      <td>14.808378</td>
+      <td>13.595550</td>
+      <td>61.18</td>
+      <td>60.42</td>
+      <td>60.65</td>
+      <td>1005.739976</td>
+      <td>72.914124</td>
+      <td>26.991577</td>
+      <td>26.772633</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2022-01-01 00:30:00</td>
+      <td>16.660009</td>
+      <td>16.451707</td>
+      <td>15.801446</td>
+      <td>15.779687</td>
+      <td>15.170287</td>
+      <td>14.082179</td>
+      <td>62.20</td>
+      <td>60.88</td>
+      <td>61.19</td>
+      <td>1005.684085</td>
+      <td>73.165894</td>
+      <td>26.877136</td>
+      <td>26.659982</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2022-01-01 00:40:00</td>
+      <td>16.519613</td>
+      <td>16.353678</td>
+      <td>15.851963</td>
+      <td>15.749131</td>
+      <td>14.927282</td>
+      <td>13.761358</td>
+      <td>61.26</td>
+      <td>59.99</td>
+      <td>60.26</td>
+      <td>1005.609563</td>
+      <td>73.791504</td>
+      <td>26.770325</td>
+      <td>26.601949</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Cada observación en el conjunto de datos representa el <strong>promedio de las mediciones</strong> tomadas durante un intervalo de 10 minutos para cada una de las variables monitoreadas. Estas incluyen la velocidad del viento a distintas alturas (40 m, 60 m, 80 m, y 100 m), la dirección del viento, la presión atmosférica, la humedad relativa y la temperatura en diferentes niveles.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(38448, 14)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Luego de la reorganización de variables, nos quedamos con un conjunto de datos de <strong>38,448 observaciones y 14 variables</strong>. Este conjunto de datos incluye las mediciones promedio tomadas cada 10 minutos para las variables seleccionadas, permitiendo un análisis más enfocado y manejable de las condiciones atmosféricas en la región de estudio.</p>
+</section>
+<section id="diccionario-de-variables">
+<h3><strong>Diccionario de variables</strong><a class="headerlink" href="#diccionario-de-variables" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>Nombre</strong></p></th>
+<th class="head"><p><strong>Descripción</strong></p></th>
+<th class="head"><p><strong>Unidad de Medida</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Fecha</span></code></p></td>
+<td><p>Fecha y hora de la medición</p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">VelViento100m_1</span></code></p></td>
+<td><p>Velocidad del viento a 100 m (sensor 1)</p></td>
+<td><p>m/s</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">VelViento100m_2</span></code></p></td>
+<td><p>Velocidad del viento a 100 m (sensor 2)</p></td>
+<td><p>m/s</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">VelViento80m_1</span></code></p></td>
+<td><p>Velocidad del viento a 80 m (sensor 1)</p></td>
+<td><p>m/s</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">VelViento80m_2</span></code></p></td>
+<td><p>Velocidad del viento a 80 m (sensor 2)</p></td>
+<td><p>m/s</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">VelViento60m</span></code></p></td>
+<td><p>Velocidad del viento a 60 m</p></td>
+<td><p>m/s</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">VelViento40m</span></code></p></td>
+<td><p>Velocidad del viento a 40 m</p></td>
+<td><p>m/s</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">DirViento60m</span></code></p></td>
+<td><p>Dirección del viento a 60 m</p></td>
+<td><p>Grados (°)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">DirViento100m</span></code></p></td>
+<td><p>Dirección del viento a 100 m</p></td>
+<td><p>Grados (°)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">DirViento80m</span></code></p></td>
+<td><p>Dirección del viento a 80 m</p></td>
+<td><p>Grados (°)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Presion</span></code></p></td>
+<td><p>Presión atmosférica</p></td>
+<td><p>hPa</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Humedad</span></code></p></td>
+<td><p>Humedad relativa</p></td>
+<td><p>%</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Temp100m</span></code></p></td>
+<td><p>Temperatura a 100 m</p></td>
+<td><p>°C</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Temp21m</span></code></p></td>
+<td><p>Temperatura a 21 m</p></td>
+<td><p>°C</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<section id="datos-faltantes">
+<h2><strong>Datos faltantes</strong><a class="headerlink" href="#datos-faltantes" title="Link to this heading">#</a></h2>
+<p>En esta sección, se examina el porcentaje de valores faltantes en las principales variables seleccionadas del dataset. El análisis gráfico de los valores faltantes proporciona una visión clara de la magnitud y distribución de los datos faltantes en cada variable, permitiendo identificar posibles problemas de calidad de datos que podrían afectar el análisis.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">missing_percentage</span> <span class="o">=</span> <span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">))</span> <span class="o">*</span> <span class="mi">100</span>
+<span class="n">missing_percentage</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fecha              0.0
+VelViento100m_1    0.0
+VelViento100m_2    0.0
+VelViento80m_1     0.0
+VelViento80m_2     0.0
+VelViento60m       0.0
+VelViento40m       0.0
+DirViento60m       0.0
+DirViento100m      0.0
+DirViento80m       0.0
+Presion            0.0
+Humedad            0.0
+Temp100m           0.0
+Temp21m            0.0
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">msno</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;#00B2EE&quot;</span><span class="p">,</span> <span class="n">sort</span> <span class="o">=</span> <span class="s1">&#39;ascending&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Datos Faltantes por variable&#39;</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">16</span><span class="p">,</span> <span class="n">fontweight</span> <span class="o">=</span> <span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Columnas&#39;</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Porcentaje de Datos Faltantes&#39;</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span> <span class="o">=</span> <span class="mi">45</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/6fa124469ed3669f0d51fe1d4d81bfd87cc69559b95458f9a0d4e0ae45d26de9.png" src="_images/6fa124469ed3669f0d51fe1d4d81bfd87cc69559b95458f9a0d4e0ae45d26de9.png" />
+</div>
+</div>
+<section id="reporte-de-fallas-de-sensores">
+<h3><strong>Reporte de fallas de sensores</strong><a class="headerlink" href="#reporte-de-fallas-de-sensores" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Supongamos que &#39;data&#39; es tu DataFrame y &#39;Fecha&#39; es la columna de fechas</span>
+<span class="n">data</span><span class="p">[</span><span class="s1">&#39;Fecha&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;Fecha&#39;</span><span class="p">])</span>
+
+<span class="c1"># 1. Periodo de registros completos desde el 21 de diciembre de 2021 hasta el 17 de mayo a las 9:30 pm</span>
+<span class="c1"># No hay cambios para este periodo</span>
+
+<span class="c1"># 2. Del 17 de mayo a las 9:30 pm hasta el 1 de junio a las 12:40 pm</span>
+<span class="c1"># Se registran solo las variables de velocidad del viento a 40 m y dirección del viento a 60 m y 80 m</span>
+<span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;Fecha&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="s1">&#39;2022-05-17 21:30:00&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;Fecha&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="s1">&#39;2022-06-01 12:40:00&#39;</span><span class="p">),</span> 
+         <span class="p">[</span><span class="s1">&#39;VelViento100m_1&#39;</span><span class="p">,</span> <span class="s1">&#39;VelViento100m_2&#39;</span><span class="p">,</span> <span class="s1">&#39;VelViento80m_1&#39;</span><span class="p">,</span> <span class="s1">&#39;VelViento80m_2&#39;</span><span class="p">,</span> 
+          <span class="s1">&#39;VelViento60m&#39;</span><span class="p">,</span> <span class="s1">&#39;DirViento100m&#39;</span><span class="p">,</span> <span class="s1">&#39;Temp100m&#39;</span><span class="p">,</span> <span class="s1">&#39;Temp21m&#39;</span><span class="p">,</span> <span class="s1">&#39;Humedad&#39;</span><span class="p">,</span> <span class="s1">&#39;Presion&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+
+<span class="c1"># 3. Del 1 de junio a las 12:40 pm en adelante</span>
+<span class="c1"># Se registran solo las variables de velocidad del viento a 60 m y 80 m (Sensor 1)</span>
+<span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;Fecha&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="s1">&#39;2022-06-01 12:40:00&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;Fecha&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="s1">&#39;2022-08-05 05:20:00&#39;</span><span class="p">),</span> 
+         <span class="p">[</span><span class="s1">&#39;VelViento100m_1&#39;</span><span class="p">,</span> <span class="s1">&#39;VelViento100m_2&#39;</span><span class="p">,</span><span class="s1">&#39;VelViento80m_2&#39;</span> <span class="p">,</span><span class="s1">&#39;DirViento100m&#39;</span><span class="p">,</span> <span class="s1">&#39;Temp100m&#39;</span><span class="p">,</span> <span class="s1">&#39;Humedad&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+
+<span class="c1"># 4. A partir del 5 de agosto a las 5:20 am</span>
+<span class="c1"># Se pierden los datos de velocidad del viento a 60 m y 80 m, dirección del viento a 100 m, temperatura a 100 m y humedad</span>
+<span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;Fecha&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="s1">&#39;2022-08-05 05:20:00&#39;</span><span class="p">,</span> 
+         <span class="p">[</span><span class="s1">&#39;VelViento60m&#39;</span><span class="p">,</span> <span class="s1">&#39;VelViento80m_1&#39;</span><span class="p">,</span> <span class="s1">&#39;VelViento80m_2&#39;</span><span class="p">,</span> <span class="s1">&#39;DirViento100m&#39;</span><span class="p">,</span> <span class="s1">&#39;Temp100m&#39;</span><span class="p">,</span> <span class="s1">&#39;Humedad&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+
+<span class="c1"># 5. Desde el 5 de agosto en adelante, quedan solo los datos de velocidad del viento a 40 m, dirección del viento a 60 m, temperatura a 20 m y presión atmosférica</span>
+<span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;Fecha&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="s1">&#39;2022-08-05 05:20:00&#39;</span><span class="p">,</span> 
+         <span class="p">[</span><span class="s1">&#39;VelViento100m_1&#39;</span><span class="p">,</span> <span class="s1">&#39;VelViento100m_2&#39;</span><span class="p">,</span> <span class="s1">&#39;VelViento80m_1&#39;</span><span class="p">,</span> <span class="s1">&#39;VelViento80m_2&#39;</span><span class="p">,</span> <span class="s1">&#39;DirViento80m&#39;</span><span class="p">,</span> 
+          <span class="s1">&#39;Temp100m&#39;</span><span class="p">,</span> <span class="s1">&#39;Humedad&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+
+<span class="c1"># Verificar las modificaciones</span>
+<span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Fecha</th>
+      <th>VelViento100m_1</th>
+      <th>VelViento100m_2</th>
+      <th>VelViento80m_1</th>
+      <th>VelViento80m_2</th>
+      <th>VelViento60m</th>
+      <th>VelViento40m</th>
+      <th>DirViento60m</th>
+      <th>DirViento100m</th>
+      <th>DirViento80m</th>
+      <th>Presion</th>
+      <th>Humedad</th>
+      <th>Temp100m</th>
+      <th>Temp21m</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2022-01-01 00:00:00</td>
+      <td>16.060860</td>
+      <td>15.830104</td>
+      <td>15.145418</td>
+      <td>15.125038</td>
+      <td>14.300989</td>
+      <td>13.199266</td>
+      <td>61.98</td>
+      <td>61.08</td>
+      <td>61.21</td>
+      <td>1005.963541</td>
+      <td>75.042725</td>
+      <td>26.922913</td>
+      <td>26.707773</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2022-01-01 00:10:00</td>
+      <td>16.156927</td>
+      <td>15.972642</td>
+      <td>15.290614</td>
+      <td>15.352352</td>
+      <td>14.533556</td>
+      <td>13.511498</td>
+      <td>62.29</td>
+      <td>61.08</td>
+      <td>61.49</td>
+      <td>1005.795867</td>
+      <td>73.509216</td>
+      <td>27.006836</td>
+      <td>26.772633</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2022-01-01 00:20:00</td>
+      <td>16.473571</td>
+      <td>16.287375</td>
+      <td>15.599149</td>
+      <td>15.562022</td>
+      <td>14.808378</td>
+      <td>13.595550</td>
+      <td>61.18</td>
+      <td>60.42</td>
+      <td>60.65</td>
+      <td>1005.739976</td>
+      <td>72.914124</td>
+      <td>26.991577</td>
+      <td>26.772633</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2022-01-01 00:30:00</td>
+      <td>16.660009</td>
+      <td>16.451707</td>
+      <td>15.801446</td>
+      <td>15.779687</td>
+      <td>15.170287</td>
+      <td>14.082179</td>
+      <td>62.20</td>
+      <td>60.88</td>
+      <td>61.19</td>
+      <td>1005.684085</td>
+      <td>73.165894</td>
+      <td>26.877136</td>
+      <td>26.659982</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2022-01-01 00:40:00</td>
+      <td>16.519613</td>
+      <td>16.353678</td>
+      <td>15.851963</td>
+      <td>15.749131</td>
+      <td>14.927282</td>
+      <td>13.761358</td>
+      <td>61.26</td>
+      <td>59.99</td>
+      <td>60.26</td>
+      <td>1005.609563</td>
+      <td>73.791504</td>
+      <td>26.770325</td>
+      <td>26.601949</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">missing_percentage</span> <span class="o">=</span> <span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">))</span> <span class="o">*</span> <span class="mi">100</span>
+<span class="n">missing_percentage</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>VelViento100m_1    50.223679
+VelViento100m_2    50.223679
+VelViento80m_2     50.223679
+DirViento100m      50.223679
+Humedad            50.223679
+Temp100m           50.223679
+VelViento80m_1     26.370682
+VelViento60m       26.370682
+DirViento80m       21.639617
+Presion             4.731065
+Temp21m             4.731065
+Fecha               0.000000
+VelViento40m        0.000000
+DirViento60m        0.000000
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Eliminar filas con cualquier valor nulo</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+
+<span class="c1"># Eliminar filas donde todas las columnas son nulas</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">how</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(19138, 14)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calcula el porcentaje de valores faltantes</span>
+<span class="n">missing_percentages</span> <span class="o">=</span> <span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># Crea un DataFrame para el gráfico de barras apiladas</span>
+<span class="n">missing_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;Faltante&#39;</span><span class="p">:</span> <span class="n">missing_percentages</span><span class="p">,</span> <span class="s1">&#39;No Faltante&#39;</span><span class="p">:</span> <span class="mi">100</span> <span class="o">-</span> <span class="n">missing_percentages</span><span class="p">})</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span> 
+<span class="n">missing_data</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="n">stacked</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;#08306b&#39;</span><span class="p">,</span><span class="s1">&#39;#c6dbef&#39;</span><span class="p">],</span> <span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">())</span> 
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Porcentaje de Valores Faltantes por Variable&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Variables del Dataset&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Porcentaje de Valores&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>  
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;Faltante&#39;</span><span class="p">,</span> <span class="s1">&#39;No Faltante&#39;</span><span class="p">],</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper right&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/a0b0369fe1e39c38d494ff7b26ace3d619027bbe8cd990eba54108217b1a0f70.png" src="_images/a0b0369fe1e39c38d494ff7b26ace3d619027bbe8cd990eba54108217b1a0f70.png" />
+</div>
+</div>
+</section>
+<section id="imputacion-de-datos-faltantes-usando-el-modelo-arima">
+<h3><strong>Imputación de datos faltantes usando el modelo ARIMA</strong><a class="headerlink" href="#imputacion-de-datos-faltantes-usando-el-modelo-arima" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">missing_percentage</span> <span class="o">=</span> <span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">))</span> <span class="o">*</span> <span class="mi">100</span>
+<span class="n">missing_percentage</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fecha              0.0
+VelViento100m_1    0.0
+VelViento100m_2    0.0
+VelViento80m_1     0.0
+VelViento80m_2     0.0
+VelViento60m       0.0
+VelViento40m       0.0
+DirViento60m       0.0
+DirViento100m      0.0
+DirViento80m       0.0
+Presion            0.0
+Humedad            0.0
+Temp100m           0.0
+Temp21m            0.0
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">serie_interes</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fecha
+2022-01-01 00:00:00    16.060860
+2022-01-01 00:10:00    16.156927
+2022-01-01 00:20:00    16.473571
+2022-01-01 00:30:00    16.660009
+2022-01-01 00:40:00    16.519613
+Name: VelViento100m_1, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="analisis-por-variable">
+<h2><strong>Análisis por variable</strong><a class="headerlink" href="#analisis-por-variable" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_acf_pacf</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">column</span><span class="p">,</span> <span class="n">lags</span> <span class="o">=</span> <span class="mi">40</span><span class="p">,</span> <span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">):</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+    
+    <span class="c1"># Gráfico de Autocorrelación (ACF)</span>
+    <span class="n">plot_acf</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">column</span><span class="p">],</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">lags</span> <span class="o">=</span> <span class="n">lags</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Autocorrelación (ACF) - </span><span class="si">{</span><span class="n">title</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    
+    <span class="c1"># Gráfico de Autocorrelación Parcial (PACF)</span>
+    <span class="n">plot_pacf</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">column</span><span class="p">],</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">lags</span> <span class="o">=</span> <span class="n">lags</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Autocorrelación Parcial (PACF) - </span><span class="si">{</span><span class="n">title</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">descomponer_serie</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">columna</span><span class="p">,</span> <span class="n">periodo</span><span class="p">,</span> <span class="n">modelo</span> <span class="o">=</span> <span class="s1">&#39;additive&#39;</span><span class="p">,</span> <span class="n">titulo</span> <span class="o">=</span> <span class="s1">&#39;Serie de tiempo&#39;</span><span class="p">):</span>
+
+    <span class="c1"># Descomposición de la serie temporal</span>
+    <span class="n">descomposicion</span> <span class="o">=</span> <span class="n">seasonal_decompose</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">columna</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span> <span class="n">period</span><span class="o">=</span><span class="n">periodo</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="n">modelo</span><span class="p">)</span>
+
+    <span class="c1"># Configuración de gráficos</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">axarr</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">set_size_inches</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">14</span><span class="p">)</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">set_theme</span><span class="p">()</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">set_context</span><span class="p">(</span><span class="s2">&quot;paper&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Gráfico de la serie original</span>
+    <span class="n">data</span><span class="p">[</span><span class="n">columna</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">axarr</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">)</span>
+    <span class="n">axarr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">titulo</span><span class="si">}</span><span class="s1"> - Serie original&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Gráfico del componente de tendencia</span>
+    <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">descomposicion</span><span class="o">.</span><span class="n">trend</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">index</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axarr</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">axarr</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Componente tendencial&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Gráfico del componente estacional</span>
+    <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">descomposicion</span><span class="o">.</span><span class="n">seasonal</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">index</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axarr</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+    <span class="n">axarr</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Componente estacional&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Gráfico del componente de ruido (residual)</span>
+    <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">descomposicion</span><span class="o">.</span><span class="n">resid</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">index</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axarr</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+    <span class="n">axarr</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Variaciones irregulares (Ruido)&#39;</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_histogram_and_boxplot</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">column</span><span class="p">,</span> <span class="n">title</span><span class="p">):</span>
+
+    <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+    <span class="c1"># Histograma con KDE</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">column</span><span class="p">],</span> <span class="n">kde</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#473C8B&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Distribución de </span><span class="si">{</span><span class="n">title</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="n">column</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Frecuencia&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Diagrama de cajas horizontal</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="n">column</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#473C8B&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">orient</span><span class="o">=</span><span class="s1">&#39;h&#39;</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Diagrama de Cajas de </span><span class="si">{</span><span class="n">title</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="n">column</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="variable-velocidad-del-viento-a-100m">
+<h3><strong>Variable: Velocidad del viento a 100m</strong><a class="headerlink" href="#variable-velocidad-del-viento-a-100m" title="Link to this heading">#</a></h3>
+<section id="serie-original">
+<h4><strong>Serie original</strong><a class="headerlink" href="#serie-original" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">set_theme</span><span class="p">()</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set_context</span><span class="p">(</span><span class="s2">&quot;paper&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span>  <span class="n">data</span><span class="p">[</span><span class="s1">&#39;Fecha&#39;</span><span class="p">],</span> <span class="n">y</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;VelViento100m_1&#39;</span><span class="p">],</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Sensor 1 (100m)&#39;</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;#00008B&#39;</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;Fecha&#39;</span><span class="p">],</span> <span class="n">y</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;VelViento100m_2&#39;</span><span class="p">],</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Sensor 2 (100m)&#39;</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;#00B2EE&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Serie Original - Velocidad del Viento a 100 m (sensor 1 y 2)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Fecha&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Velocidad del Viento (m/s)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;Sensores&#39;</span><span class="p">,</span> <span class="n">loc</span> <span class="o">=</span> <span class="s1">&#39;upper right&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/761d379cc476327b24234e68c6d401828fecffaa3d02e8e41a7fe117c7ce19bd.png" src="_images/761d379cc476327b24234e68c6d401828fecffaa3d02e8e41a7fe117c7ce19bd.png" />
+</div>
+</div>
+</section>
+<section id="autocorrelacion-y-autocorrelacion-parcial">
+<h4><strong>Autocorrelación y autocorrelación parcial</strong><a class="headerlink" href="#autocorrelacion-y-autocorrelacion-parcial" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_acf_pacf</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">column</span> <span class="o">=</span> <span class="s1">&#39;VelViento100m_1&#39;</span><span class="p">,</span> <span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;VelViento100m_1&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/378d153aa412675386cc6247d4436e54ef731282ba40887958fad683dee2e9b8.png" src="_images/378d153aa412675386cc6247d4436e54ef731282ba40887958fad683dee2e9b8.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_acf_pacf</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">column</span> <span class="o">=</span> <span class="s1">&#39;VelViento100m_2&#39;</span><span class="p">,</span> <span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;VelViento100m_2&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/72afb24cc2c0ab43233abc90bada6d5f0fe9a747d65fe18c06cf79db8fb8be80.png" src="_images/72afb24cc2c0ab43233abc90bada6d5f0fe9a747d65fe18c06cf79db8fb8be80.png" />
+</div>
+</div>
+</section>
+<section id="descomposicion-de-la-serie">
+<h4><strong>Descomposición de la serie</strong><a class="headerlink" href="#descomposicion-de-la-serie" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">descomponer_serie</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">columna</span> <span class="o">=</span> <span class="s1">&#39;VelViento100m_1&#39;</span><span class="p">,</span> <span class="n">periodo</span> <span class="o">=</span> <span class="mi">365</span><span class="p">,</span> <span class="n">modelo</span> <span class="o">=</span> <span class="s1">&#39;additive&#39;</span><span class="p">,</span> <span class="n">titulo</span> <span class="o">=</span> <span class="s1">&#39;Velocidad del Viento a 100 m (Sensor 1)&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/21bfbb450557ef9c827a021c298a81f699b3c7febfe5d798c3921f24343f7bde.png" src="_images/21bfbb450557ef9c827a021c298a81f699b3c7febfe5d798c3921f24343f7bde.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">descomponer_serie</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">columna</span> <span class="o">=</span> <span class="s1">&#39;VelViento100m_2&#39;</span><span class="p">,</span> <span class="n">periodo</span> <span class="o">=</span> <span class="mi">365</span><span class="p">,</span> <span class="n">modelo</span> <span class="o">=</span> <span class="s1">&#39;additive&#39;</span><span class="p">,</span> <span class="n">titulo</span> <span class="o">=</span> <span class="s1">&#39;Velocidad del Viento a 100 m (Sensor 2)&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/1c3ea0e5c180717aec6d0e2bb746b93c54e15ec4d463d3029bff8e3250aacd1f.png" src="_images/1c3ea0e5c180717aec6d0e2bb746b93c54e15ec4d463d3029bff8e3250aacd1f.png" />
+</div>
+</div>
+</section>
+<section id="distribucion-de-la-variable">
+<h4><strong>Distribución de la variable</strong><a class="headerlink" href="#distribucion-de-la-variable" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_histogram_and_boxplot</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="s1">&#39;VelViento100m_1&#39;</span><span class="p">,</span> <span class="s1">&#39;Velocidad del Viento a 100 m (Sensor 1)&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/02b6ae663c4a1c26e1dc9d0f15760107c2fd80ee586fb7f18ad44fe547c54254.png" src="_images/02b6ae663c4a1c26e1dc9d0f15760107c2fd80ee586fb7f18ad44fe547c54254.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_histogram_and_boxplot</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="s1">&#39;VelViento100m_2&#39;</span><span class="p">,</span> <span class="s1">&#39;Velocidad del Viento a 100 m (Sensor 2)&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/84fd7c2d989fb01f9eacef7d794f8b3c7f0353612f22737ab6fcaaae4e062cee.png" src="_images/84fd7c2d989fb01f9eacef7d794f8b3c7f0353612f22737ab6fcaaae4e062cee.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="variable-velocidad-del-viento-a-80m">
+<h3><strong>Variable: Velocidad del viento a 80m</strong><a class="headerlink" href="#variable-velocidad-del-viento-a-80m" title="Link to this heading">#</a></h3>
+<section id="id1">
+<h4><strong>Serie original</strong><a class="headerlink" href="#id1" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">set_theme</span><span class="p">()</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set_context</span><span class="p">(</span><span class="s2">&quot;paper&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span>  <span class="n">data</span><span class="p">[</span><span class="s1">&#39;Fecha&#39;</span><span class="p">],</span> <span class="n">y</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;VelViento80m_1&#39;</span><span class="p">],</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Sensor 1 (80m)&#39;</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;#00008B&#39;</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;Fecha&#39;</span><span class="p">],</span> <span class="n">y</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;VelViento80m_2&#39;</span><span class="p">],</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Sensor 2 (80m)&#39;</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;#00B2EE&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Serie Original - Velocidad del Viento a 80 m (sensor 1 y 2)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Fecha&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Velocidad del Viento (m/s)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;Sensores&#39;</span><span class="p">,</span> <span class="n">loc</span> <span class="o">=</span> <span class="s1">&#39;upper right&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/e0d7bab66723fdee90ea2891c7a13a6094c35607fe236db258f07f5a5867447f.png" src="_images/e0d7bab66723fdee90ea2891c7a13a6094c35607fe236db258f07f5a5867447f.png" />
+</div>
+</div>
+</section>
+<section id="id2">
+<h4><strong>Autocorrelación y autocorrelación parcial</strong><a class="headerlink" href="#id2" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_acf_pacf</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">column</span> <span class="o">=</span> <span class="s1">&#39;VelViento80m_1&#39;</span><span class="p">,</span> <span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;VelViento80m_1&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/b0d2f5a7ae047a141915f9cad8f67fb2bb1df927be5d4f912bff90174b85b515.png" src="_images/b0d2f5a7ae047a141915f9cad8f67fb2bb1df927be5d4f912bff90174b85b515.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_acf_pacf</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">column</span> <span class="o">=</span> <span class="s1">&#39;VelViento80m_2&#39;</span><span class="p">,</span> <span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;VelViento80m_2&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/baa0ad8b3be351f7bb46b141dc852f0ddd50e0614fe39e07732b64b7d56065c3.png" src="_images/baa0ad8b3be351f7bb46b141dc852f0ddd50e0614fe39e07732b64b7d56065c3.png" />
+</div>
+</div>
+</section>
+<section id="id3">
+<h4><strong>Descomposición de la serie</strong><a class="headerlink" href="#id3" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">descomponer_serie</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">columna</span> <span class="o">=</span> <span class="s1">&#39;VelViento80m_1&#39;</span><span class="p">,</span> <span class="n">periodo</span> <span class="o">=</span> <span class="mi">365</span><span class="p">,</span> <span class="n">modelo</span> <span class="o">=</span> <span class="s1">&#39;additive&#39;</span><span class="p">,</span> <span class="n">titulo</span> <span class="o">=</span> <span class="s1">&#39;Velocidad del Viento a 80 m (Sensor 1)&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/3c6cb38315098f4eecd9e6fed871b8a19109ff384e780e2eecdbaa2fcfcbebed.png" src="_images/3c6cb38315098f4eecd9e6fed871b8a19109ff384e780e2eecdbaa2fcfcbebed.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">descomponer_serie</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">columna</span> <span class="o">=</span> <span class="s1">&#39;VelViento80m_2&#39;</span><span class="p">,</span> <span class="n">periodo</span> <span class="o">=</span> <span class="mi">365</span><span class="p">,</span> <span class="n">modelo</span> <span class="o">=</span> <span class="s1">&#39;additive&#39;</span><span class="p">,</span> <span class="n">titulo</span> <span class="o">=</span> <span class="s1">&#39;Velocidad del Viento a 80 m (Sensor 2)&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/c0dc5bac040c897e4c722db0917d03e3aa2c79e965be0e90e448b1d2de7ac3c8.png" src="_images/c0dc5bac040c897e4c722db0917d03e3aa2c79e965be0e90e448b1d2de7ac3c8.png" />
+</div>
+</div>
+</section>
+<section id="id4">
+<h4><strong>Distribución de la variable</strong><a class="headerlink" href="#id4" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_histogram_and_boxplot</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="s1">&#39;VelViento80m_1&#39;</span><span class="p">,</span> <span class="s1">&#39;Velocidad del Viento a 80 m (Sensor 1)&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/281d824a49ea9d29ef519058b8e15448e9ab97845bdf333bd88e8605f1d60da0.png" src="_images/281d824a49ea9d29ef519058b8e15448e9ab97845bdf333bd88e8605f1d60da0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_histogram_and_boxplot</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="s1">&#39;VelViento80m_2&#39;</span><span class="p">,</span> <span class="s1">&#39;Velocidad del Viento a 80 m (Sensor )&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/06b992bd46d509df5a450e9e58fc91bf74a60cd937f5971562dada467e52e12e.png" src="_images/06b992bd46d509df5a450e9e58fc91bf74a60cd937f5971562dada467e52e12e.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="variable-velocidad-del-viento-a-60m">
+<h3><strong>Variable: Velocidad del viento a 60m</strong><a class="headerlink" href="#variable-velocidad-del-viento-a-60m" title="Link to this heading">#</a></h3>
+<section id="id5">
+<h4><strong>Serie original</strong><a class="headerlink" href="#id5" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">set_theme</span><span class="p">()</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set_context</span><span class="p">(</span><span class="s2">&quot;paper&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span>  <span class="n">data</span><span class="p">[</span><span class="s1">&#39;Fecha&#39;</span><span class="p">],</span> <span class="n">y</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;VelViento60m&#39;</span><span class="p">],</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Sensor 1&#39;</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;#00008B&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Serie Original - Velocidad del Viento a 60m&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Fecha&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Velocidad del Viento (m/s)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;Sensores&#39;</span><span class="p">,</span> <span class="n">loc</span> <span class="o">=</span> <span class="s1">&#39;upper right&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/8560d6f821f285bb9dc4f9fd2703eaa75fdcf26d0201fddbd070e35880f4ffdd.png" src="_images/8560d6f821f285bb9dc4f9fd2703eaa75fdcf26d0201fddbd070e35880f4ffdd.png" />
+</div>
+</div>
+</section>
+<section id="id6">
+<h4><strong>Autocorrelación y autocorrelación parcial</strong><a class="headerlink" href="#id6" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_acf_pacf</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">column</span> <span class="o">=</span> <span class="s1">&#39;VelViento60m&#39;</span><span class="p">,</span> <span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;VelViento60m&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/8b6ddfa254e2547d65c4dd8d8ee431555c70bbfe5bc900bd3ad7d49d2ab7d975.png" src="_images/8b6ddfa254e2547d65c4dd8d8ee431555c70bbfe5bc900bd3ad7d49d2ab7d975.png" />
+</div>
+</div>
+</section>
+<section id="id7">
+<h4><strong>Descomposición de la serie</strong><a class="headerlink" href="#id7" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">descomponer_serie</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">columna</span> <span class="o">=</span> <span class="s1">&#39;VelViento60m&#39;</span><span class="p">,</span> <span class="n">periodo</span> <span class="o">=</span> <span class="mi">365</span><span class="p">,</span> <span class="n">modelo</span> <span class="o">=</span> <span class="s1">&#39;additive&#39;</span><span class="p">,</span> <span class="n">titulo</span> <span class="o">=</span> <span class="s1">&#39;Velocidad del Viento a 60m&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/b4df60e9864c29534e39a126e4076d4e995123424bab289e47aab5a0dec13bef.png" src="_images/b4df60e9864c29534e39a126e4076d4e995123424bab289e47aab5a0dec13bef.png" />
+</div>
+</div>
+</section>
+<section id="id8">
+<h4><strong>Distribución de la variable</strong><a class="headerlink" href="#id8" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_histogram_and_boxplot</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="s1">&#39;VelViento60m&#39;</span><span class="p">,</span> <span class="s1">&#39;Velocidad del Viento a 60m&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/f411a38cf7c6280def55a235fb7881371a6a4613d846372295e82ae23cb17fa6.png" src="_images/f411a38cf7c6280def55a235fb7881371a6a4613d846372295e82ae23cb17fa6.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="variable-velocidad-del-viento-a-40m">
+<h3><strong>Variable: Velocidad del viento a 40m</strong><a class="headerlink" href="#variable-velocidad-del-viento-a-40m" title="Link to this heading">#</a></h3>
+<section id="id9">
+<h4><strong>Serie original</strong><a class="headerlink" href="#id9" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">set_theme</span><span class="p">()</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set_context</span><span class="p">(</span><span class="s2">&quot;paper&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span>  <span class="n">data</span><span class="p">[</span><span class="s1">&#39;Fecha&#39;</span><span class="p">],</span> <span class="n">y</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;VelViento40m&#39;</span><span class="p">],</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Sensor 1&#39;</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;#00008B&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Serie Original - Velocidad del Viento a 40m&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Fecha&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Velocidad del Viento (m/s)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;Sensores&#39;</span><span class="p">,</span> <span class="n">loc</span> <span class="o">=</span> <span class="s1">&#39;upper right&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/babf5e9bc0efcad9731dd9c5c8d585e9a05f106654a90df802b4fb6d57e7cfd0.png" src="_images/babf5e9bc0efcad9731dd9c5c8d585e9a05f106654a90df802b4fb6d57e7cfd0.png" />
+</div>
+</div>
+</section>
+<section id="id10">
+<h4><strong>Autocorrelación y autocorrelación parcial</strong><a class="headerlink" href="#id10" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_acf_pacf</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">column</span> <span class="o">=</span> <span class="s1">&#39;VelViento40m&#39;</span><span class="p">,</span> <span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;VelViento40m&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/ce6b37b9200da155bc4407506e6469a47e166cabb120be416dedd017a8192bc1.png" src="_images/ce6b37b9200da155bc4407506e6469a47e166cabb120be416dedd017a8192bc1.png" />
+</div>
+</div>
+</section>
+<section id="id11">
+<h4><strong>Descomposición de la serie</strong><a class="headerlink" href="#id11" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">descomponer_serie</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">columna</span> <span class="o">=</span> <span class="s1">&#39;VelViento40m&#39;</span><span class="p">,</span> <span class="n">periodo</span> <span class="o">=</span> <span class="mi">365</span><span class="p">,</span> <span class="n">modelo</span> <span class="o">=</span> <span class="s1">&#39;additive&#39;</span><span class="p">,</span> <span class="n">titulo</span> <span class="o">=</span> <span class="s1">&#39;Velocidad del Viento a 40m&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/f5e85c1459e73c3575250af9acd22c05a5defe03391922aaa64f90713710fec8.png" src="_images/f5e85c1459e73c3575250af9acd22c05a5defe03391922aaa64f90713710fec8.png" />
+</div>
+</div>
+</section>
+<section id="id12">
+<h4><strong>Distribución de la variable</strong><a class="headerlink" href="#id12" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_histogram_and_boxplot</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="s1">&#39;VelViento40m&#39;</span><span class="p">,</span> <span class="s1">&#39;Velocidad del Viento a 40m&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/7881793d452e88ac3a38565d68699d7e858f389f49d34c2dde4dc0cf8a46f810.png" src="_images/7881793d452e88ac3a38565d68699d7e858f389f49d34c2dde4dc0cf8a46f810.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="variables-direccion-del-viento-a-100m-80m-y-60m">
+<h3><strong>Variables: Dirección del viento a 100m, 80m y 60m</strong><a class="headerlink" href="#variables-direccion-del-viento-a-100m-80m-y-60m" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Configura el tamaño de la figura y establece los subgráficos</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">18</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="n">subplot_kw</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="s1">&#39;windrose&#39;</span><span class="p">))</span>
+<span class="n">color_palette</span> <span class="o">=</span> <span class="n">cm</span><span class="o">.</span><span class="n">viridis</span> 
+
+<span class="c1"># Gráfico de dirección del viento a 100 m</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;DirViento100m&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;VelViento100m_1&#39;</span><span class="p">],</span> <span class="n">normed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">opening</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">color_palette</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Dirección del viento con respecto a la velocidad a 100 m&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_legend</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Velocidad del Viento (m/s)&#39;</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;lower left&#39;</span><span class="p">)</span>
+
+<span class="c1"># Gráfico de dirección del viento a 80 m</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;DirViento80m&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;VelViento80m_1&#39;</span><span class="p">],</span> <span class="n">normed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">opening</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">color_palette</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Dirección del viento con respecto a la velocidad a 80 m&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_legend</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Velocidad del Viento (m/s)&#39;</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;lower left&#39;</span><span class="p">)</span>
+
+<span class="c1"># Gráfico de dirección del viento a 60 m</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;DirViento60m&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;VelViento60m&#39;</span><span class="p">],</span> <span class="n">normed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">opening</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">color_palette</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Dirección del viento con respecto a la velocidad a 60 m&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_legend</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Velocidad del Viento (m/s)&#39;</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;lower left&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/5fab50fa73011bde232d64e726884bd1bc839334d6ae91c661e7f8be50025b8a.png" src="_images/5fab50fa73011bde232d64e726884bd1bc839334d6ae91c661e7f8be50025b8a.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+
+<span class="c1"># Crear una figura con tres filas y dos columnas</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">18</span><span class="p">))</span>
+
+<span class="c1"># Configuración para DirViento60m</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;DirViento60m&#39;</span><span class="p">],</span> <span class="n">kde</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#1f77b4&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Distribución de Dirección del Viento a 60 m&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Dirección (°)&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Frecuencia&#39;</span><span class="p">)</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;DirViento60m&#39;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#1f77b4&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">orient</span><span class="o">=</span><span class="s1">&#39;h&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Diagrama de Cajas de Dirección del Viento a 60 m&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Dirección (°)&#39;</span><span class="p">)</span>
+
+<span class="c1"># Configuración para DirViento80m</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;DirViento80m&#39;</span><span class="p">],</span> <span class="n">kde</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#2ca02c&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Distribución de Dirección del Viento a 80 m&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Dirección (°)&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Frecuencia&#39;</span><span class="p">)</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;DirViento80m&#39;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#2ca02c&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">orient</span><span class="o">=</span><span class="s1">&#39;h&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Diagrama de Cajas de Dirección del Viento a 80 m&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Dirección (°)&#39;</span><span class="p">)</span>
+
+<span class="c1"># Configuración para DirViento100m</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;DirViento100m&#39;</span><span class="p">],</span> <span class="n">kde</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#d62728&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Distribución de Dirección del Viento a 100 m&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Dirección (°)&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Frecuencia&#39;</span><span class="p">)</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;DirViento100m&#39;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#d62728&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">orient</span><span class="o">=</span><span class="s1">&#39;h&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Diagrama de Cajas de Dirección del Viento a 100 m&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Dirección (°)&#39;</span><span class="p">)</span>
+
+<span class="c1"># Ajustar el diseño</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/413a8a93d361f72d7276398944722e2464e7d8c470f10018ff7134a5e2d0e275.png" src="_images/413a8a93d361f72d7276398944722e2464e7d8c470f10018ff7134a5e2d0e275.png" />
+</div>
+</div>
+</section>
+<section id="variable-presion">
+<h3><strong>Variable: Presión</strong><a class="headerlink" href="#variable-presion" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;Fecha&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;Presion&#39;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Presión (hPa)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Fecha&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Valor&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Evolución de la Presión Atmosférica&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/dd4c8dec43b7108c02bcd36446f31478057291583a55d5b5b6a75e92ec29a92b.png" src="_images/dd4c8dec43b7108c02bcd36446f31478057291583a55d5b5b6a75e92ec29a92b.png" />
+</div>
+</div>
+<section id="id13">
+<h4><strong>Distribución de la variable</strong><a class="headerlink" href="#id13" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_histogram_and_boxplot</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="s1">&#39;Presion&#39;</span><span class="p">,</span> <span class="s1">&#39;Presión Atmosférica&#39;</span><span class="p">)</span>	
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/36eff83723030d445a986a7ea6864f6e0137f279b101a98b7f49b23b27df3bf9.png" src="_images/36eff83723030d445a986a7ea6864f6e0137f279b101a98b7f49b23b27df3bf9.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="variable-humedad">
+<h3><strong>Variable: Humedad</strong><a class="headerlink" href="#variable-humedad" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;Fecha&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;Humedad&#39;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Humedad (%)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Fecha&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Valor&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Evolución de la Humedad&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/734b83dd082fabf5aa8cff1a0a987566cfda555393a69bb0784b135e3e622c29.png" src="_images/734b83dd082fabf5aa8cff1a0a987566cfda555393a69bb0784b135e3e622c29.png" />
+</div>
+</div>
+<section id="id14">
+<h4><strong>Distribución de la variable</strong><a class="headerlink" href="#id14" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_histogram_and_boxplot</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="s1">&#39;Humedad&#39;</span><span class="p">,</span> <span class="s1">&#39;Humedad&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/9928d93cda89c88332833a847f26d73d2469ebb591e9de8d523a40f251c04e3a.png" src="_images/9928d93cda89c88332833a847f26d73d2469ebb591e9de8d523a40f251c04e3a.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="variables-temperatura-a-100m-y-20m">
+<h3><strong>Variables: Temperatura a 100m y 20m</strong><a class="headerlink" href="#variables-temperatura-a-100m-y-20m" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+
+<span class="c1"># 1. Gráfico de Temperatura AVG a 100 m</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;Fecha&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;Temp100m&#39;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#00008B&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Temperatura AVG a 100 m&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Fecha&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Temperatura (°C)&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># 2. Gráfico de Temperatura AVG a 20 m</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;Fecha&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;Temp21m&#39;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#00008B&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Temperatura AVG a 20 m&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Fecha&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Temperatura (°C)&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/64ed7fdf92b8c22073e2f251fc06d28f40c04d24481c76720fb1e15c52546b8d.png" src="_images/64ed7fdf92b8c22073e2f251fc06d28f40c04d24481c76720fb1e15c52546b8d.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">18</span><span class="p">))</span>
+
+<span class="c1"># Configuración para Temp100m</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;Temp100m&#39;</span><span class="p">],</span> <span class="n">kde</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#473C8B&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Distribución de Temperatura a 100 m&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Temperatura (°C)&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Frecuencia&#39;</span><span class="p">)</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;Temp100m&#39;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#473C8B&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">orient</span><span class="o">=</span><span class="s1">&#39;h&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Diagrama de Cajas de Temperatura a 100 m&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Temperatura (°C)&#39;</span><span class="p">)</span>
+
+<span class="c1"># Configuración para Temp21m</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;Temp21m&#39;</span><span class="p">],</span> <span class="n">kde</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#006400&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Distribución de Temperatura a 21 m&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Temperatura (°C)&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Frecuencia&#39;</span><span class="p">)</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;Temp21m&#39;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#006400&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">orient</span><span class="o">=</span><span class="s1">&#39;h&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Diagrama de Cajas de Temperatura a 21 m&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Temperatura (°C)&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/467db63daee5a87f87bb740bd1fb9b579c4b897c62a0b025c750b31fe4735c18.png" src="_images/467db63daee5a87f87bb740bd1fb9b579c4b897c62a0b025c750b31fe4735c18.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="test-de-dickey-fuller">
+<h2><strong>Test de Dickey-Fuller</strong><a class="headerlink" href="#test-de-dickey-fuller" title="Link to this heading">#</a></h2>
+<p>En esta parte se realiza el planteamiento de hipótes de la prueba de <code class="docutils literal notranslate"><span class="pre">Dickey-Fuller</span></code> para verificar si cada una de las series de tiempo (correspondientes a cada variable) es estacionaria o no.</p>
+<ul class="simple">
+<li><p><strong>Hipótesis Nula (H₀)</strong>: La serie de tiempo es NO estacionaria (tiene una raíz unitaria)</p></li>
+<li><p><strong>Hipótesis Alternativa (H₁)</strong>: La serie de tiempo es estacionaria (no tiene una raíz unitaria)</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">resultados_adf</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="c1"># Realizar la prueba de Dickey-Fuller Aumentada para cada variable</span>
+<span class="k">for</span> <span class="n">variable</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+    <span class="n">serie</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">variable</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>  
+    <span class="n">adf_result</span> <span class="o">=</span> <span class="n">adfuller</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">variable</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+    
+    <span class="n">resultados_adf</span><span class="p">[</span><span class="n">variable</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;Estadístico ADF&#39;</span><span class="p">:</span> <span class="n">adf_result</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+        <span class="s1">&#39;p-value&#39;</span><span class="p">:</span> <span class="n">adf_result</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="p">}</span>
+
+<span class="n">resultados_adf_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">resultados_adf</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+<span class="n">resultados_adf_df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Estadístico ADF</th>
+      <th>p-value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>VelViento100m_1</th>
+      <td>-8.506317</td>
+      <td>1.200228e-13</td>
+    </tr>
+    <tr>
+      <th>VelViento100m_2</th>
+      <td>-8.530400</td>
+      <td>1.041451e-13</td>
+    </tr>
+    <tr>
+      <th>VelViento80m_1</th>
+      <td>-8.637280</td>
+      <td>5.546831e-14</td>
+    </tr>
+    <tr>
+      <th>VelViento80m_2</th>
+      <td>-8.686185</td>
+      <td>4.157365e-14</td>
+    </tr>
+    <tr>
+      <th>VelViento60m</th>
+      <td>-8.812831</td>
+      <td>1.970116e-14</td>
+    </tr>
+    <tr>
+      <th>VelViento40m</th>
+      <td>-8.973487</td>
+      <td>7.641693e-15</td>
+    </tr>
+    <tr>
+      <th>DirViento60m</th>
+      <td>-10.254852</td>
+      <td>4.388450e-18</td>
+    </tr>
+    <tr>
+      <th>DirViento100m</th>
+      <td>-11.337024</td>
+      <td>1.077418e-20</td>
+    </tr>
+    <tr>
+      <th>DirViento80m</th>
+      <td>-10.040999</td>
+      <td>1.496421e-17</td>
+    </tr>
+    <tr>
+      <th>Presion</th>
+      <td>-5.517637</td>
+      <td>1.909065e-06</td>
+    </tr>
+    <tr>
+      <th>Humedad</th>
+      <td>-12.517276</td>
+      <td>2.594758e-23</td>
+    </tr>
+    <tr>
+      <th>Temp100m</th>
+      <td>-8.252900</td>
+      <td>5.331596e-13</td>
+    </tr>
+    <tr>
+      <th>Temp21m</th>
+      <td>-12.971731</td>
+      <td>3.071135e-24</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#librerias-y-modulos-necesarios"><strong>Librerías y modulos necesarios</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contextualizacion-de-los-datos"><strong>Contextualización de los datos</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conjunto-de-datos"><strong>Conjunto de datos</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#caracteristicas-del-conjunto-de-datos"><strong>Características del conjunto de datos</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reorganizacion-del-conjunto-de-datos"><strong>Reorganización del conjunto de datos</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reduccion-de-dimensionalidad"><strong>Reducción de Dimensionalidad</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#renombrado-de-variables"><strong>Renombrado de variables</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#diccionario-de-variables"><strong>Diccionario de variables</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#datos-faltantes"><strong>Datos faltantes</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reporte-de-fallas-de-sensores"><strong>Reporte de fallas de sensores</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#imputacion-de-datos-faltantes-usando-el-modelo-arima"><strong>Imputación de datos faltantes usando el modelo ARIMA</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-por-variable"><strong>Análisis por variable</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variable-velocidad-del-viento-a-100m"><strong>Variable: Velocidad del viento a 100m</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#serie-original"><strong>Serie original</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#autocorrelacion-y-autocorrelacion-parcial"><strong>Autocorrelación y autocorrelación parcial</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#descomposicion-de-la-serie"><strong>Descomposición de la serie</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#distribucion-de-la-variable"><strong>Distribución de la variable</strong></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variable-velocidad-del-viento-a-80m"><strong>Variable: Velocidad del viento a 80m</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"><strong>Serie original</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id2"><strong>Autocorrelación y autocorrelación parcial</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id3"><strong>Descomposición de la serie</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id4"><strong>Distribución de la variable</strong></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variable-velocidad-del-viento-a-60m"><strong>Variable: Velocidad del viento a 60m</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id5"><strong>Serie original</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id6"><strong>Autocorrelación y autocorrelación parcial</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id7"><strong>Descomposición de la serie</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id8"><strong>Distribución de la variable</strong></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variable-velocidad-del-viento-a-40m"><strong>Variable: Velocidad del viento a 40m</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id9"><strong>Serie original</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id10"><strong>Autocorrelación y autocorrelación parcial</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id11"><strong>Descomposición de la serie</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id12"><strong>Distribución de la variable</strong></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variables-direccion-del-viento-a-100m-80m-y-60m"><strong>Variables: Dirección del viento a 100m, 80m y 60m</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variable-presion"><strong>Variable: Presión</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id13"><strong>Distribución de la variable</strong></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variable-humedad"><strong>Variable: Humedad</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id14"><strong>Distribución de la variable</strong></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variables-temperatura-a-100m-y-20m"><strong>Variables: Temperatura a 100m y 20m</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#test-de-dickey-fuller"><strong>Test de Dickey-Fuller</strong></a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Kanery Camargo y Emanuel Carbonell
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
