@@ -390,27 +390,27 @@ document.write(`
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-1-wind-speed-100-metros-sensor-1"><strong>Modelo 1: Wind speed 100 metros (Sensor 1)</strong></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modelos-usando-ventanas-de-prediccion"><strong>Modelos usando ventanas de predicción</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#grafica-del-mejor-modelo"><strong>Gráfica del mejor modelo</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#graficas-de-los-modelos"><strong>Gráficas de los modelos</strong></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-2-wind-speed-100-metros-sensor-2"><strong>Modelo 2: Wind speed 100 metros (Sensor 2)</strong></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"><strong>Modelos usando ventanas de predicción</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#graficas"><strong>Gráficas</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2"><strong>Gráficas de los modelos</strong></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-3-wind-speed-80-metros-sensor-1"><strong>Modelo 3: Wind speed 80 metros (Sensor 1)</strong></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2"><strong>Modelos usando ventanas de predicción</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3"><strong>Gráficas</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3"><strong>Modelos usando ventanas de predicción</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4"><strong>Gráficas de los modelos</strong></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-4-wind-speed-80-metros-sensor-2"><strong>Modelo 4: Wind speed 80 metros (Sensor 2)</strong></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4"><strong>Modelos usando ventanas de predicción</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5"><strong>Gráficas</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5"><strong>Modelos usando ventanas de predicción</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6"><strong>Gráficas de los modelos</strong></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-5-wind-speed-60-metros"><strong>Modelo 5: Wind speed 60 metros</strong></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6"><strong>Modelos usando ventanas de predicción</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7"><strong>Gráfica del mejor modelo</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7"><strong>Modelos usando ventanas de predicción</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#grafica-de-los-modelos"><strong>Gráfica de los modelos</strong></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion"><strong>Conclusión</strong></a></li>
@@ -442,6 +442,10 @@ document.write(`
 <span class="kn">from</span> <span class="nn">statsmodels.stats.diagnostic</span> <span class="kn">import</span> <span class="n">acorr_ljungbox</span>
 <span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">mean_squared_error</span>
 <span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">mean_squared_error</span><span class="p">,</span> <span class="n">r2_score</span>
+<span class="kn">from</span> <span class="nn">sklearn.tree</span> <span class="kn">import</span> <span class="n">DecisionTreeRegressor</span>
+<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestRegressor</span>
+<span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="kn">import</span> <span class="n">SVR</span>
+<span class="kn">from</span> <span class="nn">xgboost</span> <span class="kn">import</span> <span class="n">XGBRegressor</span>
 <span class="kn">import</span> <span class="nn">warnings</span>
 <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
 </pre></div>
@@ -595,17 +599,185 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(19105, 13)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(19083, 13)
 </pre></div>
 </div>
 </div>
 </div>
-<p>El conjunto de datos cuenta con <strong>13</strong> variables y <strong>19105</strong> observaciones.</p>
+<p>El conjunto de datos cuenta con <strong>13</strong> variables y <strong>19083</strong> observaciones.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">describe</span><span class="p">(</span><span class="n">include</span> <span class="o">=</span> <span class="s1">&#39;number&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>VelViento100m_1</th>
+      <th>VelViento100m_2</th>
+      <th>VelViento80m_1</th>
+      <th>VelViento80m_2</th>
+      <th>VelViento60m</th>
+      <th>DirViento60m</th>
+      <th>DirViento100m</th>
+      <th>DirViento80m</th>
+      <th>Presion</th>
+      <th>Humedad</th>
+      <th>Temp100m</th>
+      <th>Temp21m</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>19083.000000</td>
+      <td>19083.000000</td>
+      <td>19083.000000</td>
+      <td>19083.000000</td>
+      <td>19083.000000</td>
+      <td>19083.000000</td>
+      <td>19083.000000</td>
+      <td>19083.000000</td>
+      <td>19083.000000</td>
+      <td>19083.000000</td>
+      <td>19083.000000</td>
+      <td>19083.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>12.312852</td>
+      <td>12.178773</td>
+      <td>11.935864</td>
+      <td>11.932547</td>
+      <td>11.607971</td>
+      <td>67.265740</td>
+      <td>65.990962</td>
+      <td>66.286775</td>
+      <td>1006.202742</td>
+      <td>84.492969</td>
+      <td>26.273377</td>
+      <td>26.493438</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>4.451743</td>
+      <td>4.403151</td>
+      <td>4.286567</td>
+      <td>4.276207</td>
+      <td>4.121395</td>
+      <td>48.492877</td>
+      <td>48.712525</td>
+      <td>48.584865</td>
+      <td>1.823561</td>
+      <td>4.303362</td>
+      <td>0.846383</td>
+      <td>0.951527</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>0.532543</td>
+      <td>0.500556</td>
+      <td>0.500413</td>
+      <td>0.504115</td>
+      <td>0.292860</td>
+      <td>0.230000</td>
+      <td>0.000000</td>
+      <td>0.030000</td>
+      <td>1001.417712</td>
+      <td>63.072205</td>
+      <td>23.710938</td>
+      <td>22.700129</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>9.794922</td>
+      <td>9.695314</td>
+      <td>9.577789</td>
+      <td>9.588132</td>
+      <td>9.416717</td>
+      <td>48.860000</td>
+      <td>47.860000</td>
+      <td>47.910000</td>
+      <td>1004.901606</td>
+      <td>81.642151</td>
+      <td>25.709839</td>
+      <td>25.823634</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>12.941995</td>
+      <td>12.808712</td>
+      <td>12.555704</td>
+      <td>12.558730</td>
+      <td>12.223383</td>
+      <td>56.480000</td>
+      <td>55.300000</td>
+      <td>55.580000</td>
+      <td>1006.112585</td>
+      <td>84.640503</td>
+      <td>26.068420</td>
+      <td>26.328856</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>15.559608</td>
+      <td>15.380787</td>
+      <td>15.031122</td>
+      <td>15.017974</td>
+      <td>14.560523</td>
+      <td>64.440000</td>
+      <td>63.005000</td>
+      <td>63.390000</td>
+      <td>1007.435347</td>
+      <td>87.669373</td>
+      <td>26.587219</td>
+      <td>26.997935</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>22.301553</td>
+      <td>22.027242</td>
+      <td>21.730798</td>
+      <td>21.769775</td>
+      <td>21.140790</td>
+      <td>359.900000</td>
+      <td>359.950000</td>
+      <td>359.890000</td>
+      <td>1012.428307</td>
+      <td>94.093323</td>
+      <td>33.903809</td>
+      <td>34.596755</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>A partir del análisis estadístico de las variables presentadas en el resumen descriptivo, se puede observar que no hay valores erróneos en los datos de velocidad del viento, presión atmosférica, humedad relativa, temperatura y dirección del viento. Esto se debe a que se han aplicado previamente criterios específicos de limpieza para garantizar la calidad de la base de datos.</p>
+<p>Para identificar y eliminar los datos erróneos, se emplearon las siguientes reglas: en la <strong>velocidad del viento</strong>, cualquier valor menor a 0.5 m/s que permanezca fijo en el tiempo se considera un error. Para la <strong>presión atmosférica</strong>, valores por debajo de 980 hPa se identifican como erróneos. En el caso de la <strong>humedad relativa</strong>, valores menores a 60% son inválidos, y para la <strong>temperatura</strong>, cualquier valor inferior a 20°C también es considerado un error, con la particularidad de que los errores en humedad y temperatura suelen coincidir en el tiempo.</p>
+<p>Por otro lado, la <strong>dirección del viento</strong> presenta desafíos adicionales en su evaluación, ya que es una variable circular en la que 360° equivale a 0°. Por lo tanto, valores altos no son necesariamente erróneos ni atípicos; en su lugar, los errores en esta variable se detectan cuando la serie permanece fija en un valor específico de manera prolongada.</p>
+<p>Con estos filtros aplicados, los valores descriptivos en el resumen indican que la base de datos está limpia y lista para desarrollar y aplicar modelos de regresión para cada una de las variables de velocidad del viento a diferentes alturas.</p>
 </section>
 </section>
 <section id="modelos">
 <h2><strong>Modelos</strong><a class="headerlink" href="#modelos" title="Link to this heading">#</a></h2>
-<p>Ahora, veamos los modelos. Dado que nuestro objetivo es predecir la velocidad del viento, y encontramos varias variables objetivo (específicamente 5), que corresponden a las velocidades del viento medidas a diferentes alturas y con diferentes sensores, realizaremos los 4 modelos de regresión seleccionados: Regresión K-NN, Regresión Ridge, Regresión Lasso y Regresión Lineal para cada una de las variables objetivo identificadas.</p>
+<p>Ahora, veamos los modelos. Dado que nuestro objetivo es predecir la velocidad del viento, y encontramos varias variables objetivo (específicamente 5), que corresponden a las velocidades del viento medidas a diferentes alturas y con diferentes sensores, aplicaremos los 8 modelos de regresión seleccionados: Regresión K-NN, Regresión Ridge, Regresión Lasso, Regresión Lineal, Árboles de decisión para regresión, Random Forest, XGboost Y SVR  para cada una de las variables objetivo identificadas.</p>
 <p>Para evaluar el desempeño de los modelos, utilizaremos varias métricas, entre ellas el Mean Absolute Percentage Error (MAPE), que nos permitirá medir el error porcentual promedio entre los valores predichos y los valores reales. Esto es especialmente útil cuando se trata de comparaciones de modelos de predicción, ya que el MAPE es intuitivo y fácil de interpretar.</p>
 <p>El código para calcular el MAPE se presenta a continuación:</p>
 <div class="cell docutils container">
@@ -641,18 +813,24 @@ document.write(`
         <span class="s1">&#39;Regresión K-NN&#39;</span><span class="p">:</span> <span class="n">KNeighborsRegressor</span><span class="p">(),</span>
         <span class="s1">&#39;Regresión Lineal&#39;</span><span class="p">:</span> <span class="n">LinearRegression</span><span class="p">(),</span>
         <span class="s1">&#39;Regresión Ridge&#39;</span><span class="p">:</span> <span class="n">Ridge</span><span class="p">(),</span>
-        <span class="s1">&#39;Regresión Lasso&#39;</span><span class="p">:</span> <span class="n">Lasso</span><span class="p">(</span><span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.011</span><span class="p">)</span>
+        <span class="s1">&#39;Regresión Lasso&#39;</span><span class="p">:</span> <span class="n">Lasso</span><span class="p">(</span><span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.011</span><span class="p">),</span>
+        <span class="s1">&#39;Random Forest&#39;</span><span class="p">:</span> <span class="n">RandomForestRegressor</span><span class="p">(</span><span class="n">random_state</span> <span class="o">=</span> <span class="mi">11</span><span class="p">),</span>
+        <span class="s1">&#39;XGboost&#39;</span><span class="p">:</span> <span class="n">XGBRegressor</span><span class="p">(</span><span class="n">random_state</span> <span class="o">=</span> <span class="mi">11</span><span class="p">),</span>
+        <span class="c1">#&#39;SVR&#39;: SVR(kernel = &#39;rbf&#39;)</span>
     <span class="p">}</span>
 
     <span class="n">indices_modelos</span> <span class="o">=</span> <span class="p">{</span>
         <span class="s1">&#39;Regresión K-NN&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;index&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">},</span>
         <span class="s1">&#39;Regresión Lineal&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;index&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">},</span>
         <span class="s1">&#39;Regresión Ridge&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;index&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">},</span>
-        <span class="s1">&#39;Regresión Lasso&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;index&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">}</span>
+        <span class="s1">&#39;Regresión Lasso&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;index&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">},</span>
+        <span class="s1">&#39;Random Forest&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;index&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">},</span>
+        <span class="s1">&#39;XGboost&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;index&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">},</span>
+       <span class="c1"># &#39;SVR&#39;: {&#39;index&#39;: 6}</span>
     <span class="p">}</span>
 
-    <span class="n">mejores</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="mi">4</span>
-    <span class="n">menor_RMSE</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1000</span><span class="p">]</span> <span class="o">*</span> <span class="mi">4</span>
+    <span class="n">mejores</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="mi">6</span>
+    <span class="n">mayor_R2</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mi">6</span>  
     <span class="n">resultados</span> <span class="o">=</span> <span class="p">[]</span>
 
     <span class="k">for</span> <span class="n">ventana</span> <span class="ow">in</span> <span class="n">ventanas_tiempo</span><span class="p">:</span>
@@ -683,8 +861,8 @@ document.write(`
                 <span class="n">ljung_box_p_value</span> <span class="o">=</span> <span class="n">lb_test</span><span class="p">[</span><span class="s1">&#39;lb_pvalue&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
                 <span class="c1"># Actualizar si este modelo tiene menor RMSE</span>
-                <span class="k">if</span> <span class="n">RMSE</span> <span class="o">&lt;</span> <span class="n">menor_RMSE</span><span class="p">[</span><span class="n">idx</span><span class="p">]:</span>
-                    <span class="n">mejores</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span> <span class="n">menor_RMSE</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">y_train</span><span class="p">,</span> <span class="n">y_train_pred</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">nombre_modelo</span><span class="p">],</span> <span class="n">RMSE</span>
+                <span class="k">if</span> <span class="n">R2</span> <span class="o">&gt;</span> <span class="n">mayor_R2</span><span class="p">[</span><span class="n">idx</span><span class="p">]:</span>
+                    <span class="n">mejores</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span> <span class="n">mayor_R2</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">y_train</span><span class="p">,</span> <span class="n">y_train_pred</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">nombre_modelo</span><span class="p">],</span> <span class="n">R2</span>
 
                 <span class="c1"># Almacenar los resultados para cada modelo</span>
                 <span class="n">resultados</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
@@ -701,8 +879,8 @@ document.write(`
     <span class="c1"># Convertir resultados a DataFrame</span>
     <span class="n">resultados_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">resultados</span><span class="p">)</span>
 
-    <span class="c1"># Seleccionar los mejores modelos según RMSE</span>
-    <span class="n">mejores_modelos</span> <span class="o">=</span> <span class="n">resultados_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">resultados_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Modelo&#39;</span><span class="p">)[</span><span class="s1">&#39;RMSE&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">idxmin</span><span class="p">()]</span>
+    <span class="c1"># Seleccionar los mejores modelos según R2</span>
+    <span class="n">mejores_modelos</span> <span class="o">=</span> <span class="n">resultados_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">resultados_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Modelo&#39;</span><span class="p">)[</span><span class="s1">&#39;R^2&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">idxmax</span><span class="p">()]</span>
 
     <span class="k">return</span> <span class="n">mejores_modelos</span><span class="p">,</span> <span class="n">mejores</span>
 </pre></div>
@@ -796,65 +974,102 @@ document.write(`
   </thead>
   <tbody>
     <tr>
-      <th>24</th>
+      <th>60</th>
+      <td>Random Forest</td>
+      <td>14.308942</td>
+      <td>1.802617</td>
+      <td>0.728470</td>
+      <td>4.393750e-65</td>
+      <td>9.903668e-09</td>
+    </tr>
+    <tr>
+      <th>56</th>
       <td>Regresión K-NN</td>
-      <td>5.894020</td>
-      <td>1.227196</td>
-      <td>0.510433</td>
-      <td>1.169459e-22</td>
-      <td>0.000070</td>
+      <td>17.234822</td>
+      <td>2.153089</td>
+      <td>0.612622</td>
+      <td>9.104624e-93</td>
+      <td>8.177224e-21</td>
     </tr>
     <tr>
-      <th>27</th>
+      <th>45</th>
       <td>Regresión Lasso</td>
-      <td>4.030474</td>
-      <td>0.851866</td>
-      <td>0.764100</td>
-      <td>3.756088e-67</td>
-      <td>0.219406</td>
+      <td>4.030323</td>
+      <td>0.851835</td>
+      <td>0.764118</td>
+      <td>3.836433e-67</td>
+      <td>2.194810e-01</td>
     </tr>
     <tr>
-      <th>25</th>
+      <th>43</th>
       <td>Regresión Lineal</td>
       <td>4.013425</td>
       <td>0.845024</td>
       <td>0.767875</td>
       <td>1.306806e-63</td>
-      <td>0.248818</td>
+      <td>2.488181e-01</td>
     </tr>
     <tr>
-      <th>26</th>
+      <th>44</th>
       <td>Regresión Ridge</td>
       <td>4.013893</td>
       <td>0.846827</td>
       <td>0.766883</td>
       <td>7.620692e-65</td>
-      <td>0.241076</td>
+      <td>2.410755e-01</td>
+    </tr>
+    <tr>
+      <th>69</th>
+      <td>SVR</td>
+      <td>20.681334</td>
+      <td>2.744486</td>
+      <td>-0.001105</td>
+      <td>1.247995e-234</td>
+      <td>1.078668e-03</td>
+    </tr>
+    <tr>
+      <th>61</th>
+      <td>XGboost</td>
+      <td>14.851156</td>
+      <td>1.838088</td>
+      <td>0.717679</td>
+      <td>5.337349e-73</td>
+      <td>9.994743e-16</td>
     </tr>
   </tbody>
 </table>
 </div></div></div>
 </div>
-<p>En esta sección se analizan los modelos utilizando el sensor 1 a 100 metros de altura. Los modelos de <strong>Regresión Lasso</strong> y <strong>Ridge</strong> destacan con los menores valores de <strong>MAPE</strong> (aproximadamente <strong>4%</strong>), indicando que sus predicciones están más cerca de los valores reales. También muestran los valores más bajos de <strong>RMSE</strong>, alrededor de <strong>0.85</strong>, lo que sugiere mejor precisión. En términos de <strong>R²</strong>, ambos tienen valores altos, entre <strong>0.764 y 0.766</strong>, lo que indica que capturan bien la variabilidad en los datos. Aunque K-NN presenta un <strong>Ljung-Box p-value</strong> bajo, sugiriendo autocorrelación en los residuos, Lasso, Lineal y Ridge tienen p-valores más favorables. Además, el <strong>Jarque-Bera p-value</strong> revela que K-NN no sigue una distribución normal, mientras que los otros modelos muestran un mejor comportamiento. En conclusión, <strong>Lasso</strong> y <strong>Ridge</strong> son las mejores opciones para predecir la velocidad del viento en este análisis.</p>
 </section>
-<section id="grafica-del-mejor-modelo">
-<h3><strong>Gráfica del mejor modelo</strong><a class="headerlink" href="#grafica-del-mejor-modelo" title="Link to this heading">#</a></h3>
+<section id="graficas-de-los-modelos">
+<h3><strong>Gráficas de los modelos</strong><a class="headerlink" href="#graficas-de-los-modelos" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">7</span><span class="p">):</span>
     <span class="n">plt</span> <span class="o">=</span> <span class="n">grafica</span><span class="p">(</span><span class="n">mejores</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">mejores</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">mejores</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">2</span><span class="p">],</span> <span class="n">mejores</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">3</span><span class="p">],</span> <span class="n">mejores</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">4</span><span class="p">])</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/23496ba7c8a0f6e70f108240ed1d04bff7352b39de93cf2f940fa017c279b5e5.png" src="_images/23496ba7c8a0f6e70f108240ed1d04bff7352b39de93cf2f940fa017c279b5e5.png" />
+<img alt="_images/fd37614252149b141f17aa31eae4bf0b897d78ca542f3c670481952e1210ee1e.png" src="_images/fd37614252149b141f17aa31eae4bf0b897d78ca542f3c670481952e1210ee1e.png" />
 <img alt="_images/06bbf9901a1f47aff242926c23847c31471acac492466bee288f10f85e563111.png" src="_images/06bbf9901a1f47aff242926c23847c31471acac492466bee288f10f85e563111.png" />
 <img alt="_images/32db6807af923f62f3dd28157380a11dc60508198e2d285136210271a1502998.png" src="_images/32db6807af923f62f3dd28157380a11dc60508198e2d285136210271a1502998.png" />
-<img alt="_images/f3ba4ff4364372b153d7b09eb63f7da302edb8b329aacb0754613b3d206688cc.png" src="_images/f3ba4ff4364372b153d7b09eb63f7da302edb8b329aacb0754613b3d206688cc.png" />
+<img alt="_images/bdb7f18cdd51ab97340b40f2ae9bcfb5019dc859f052ef9efa0315d7b3c60225.png" src="_images/bdb7f18cdd51ab97340b40f2ae9bcfb5019dc859f052ef9efa0315d7b3c60225.png" />
+<img alt="_images/865d99cb617b9044dcb539e45e8520a1bfd6bab7bceff8ab1f9cd2c9f03bc64d.png" src="_images/865d99cb617b9044dcb539e45e8520a1bfd6bab7bceff8ab1f9cd2c9f03bc64d.png" />
+<img alt="_images/2c799bb197b0065b717be89fbd50a929a02d0741dea36a7e92934dff9a4db09e.png" src="_images/2c799bb197b0065b717be89fbd50a929a02d0741dea36a7e92934dff9a4db09e.png" />
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">77</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">7</span><span class="p">):</span>
+<span class="ne">----&gt; </span><span class="mi">2</span>     <span class="n">plt</span> <span class="o">=</span> <span class="n">grafica</span><span class="p">(</span><span class="n">mejores</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">mejores</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">mejores</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">2</span><span class="p">],</span> <span class="n">mejores</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">3</span><span class="p">],</span> <span class="n">mejores</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">4</span><span class="p">])</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span>     <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="ne">TypeError</span>: &#39;NoneType&#39; object is not subscriptable
+</pre></div>
 </div>
 </div>
-<p>La gráfica muestra que el modelo K-NN tiene un buen ajuste en el conjunto de entrenamiento, con un <strong>R² de 0.87547</strong>, lo que indica que predice con precisión los datos de entrenamiento. Sin embargo, en el conjunto de prueba, el rendimiento disminuye significativamente, con un <strong>R² de 0.51043</strong>, lo que sugiere que el modelo no generaliza bien y está posiblemente sobreajustado. Esto es común cuando se utilizan modelos que no son adecuados para capturar dependencias temporales, como el K-NN en series de tiempo.</p>
+</div>
 </section>
 </section>
 <section id="modelo-2-wind-speed-100-metros-sensor-2">
@@ -905,62 +1120,91 @@ document.write(`
   </thead>
   <tbody>
     <tr>
-      <th>24</th>
+      <th>61</th>
+      <td>Random Forest</td>
+      <td>13.948897</td>
+      <td>1.743095</td>
+      <td>0.742372</td>
+      <td>5.265379e-65</td>
+      <td>4.671781e-10</td>
+    </tr>
+    <tr>
+      <th>56</th>
       <td>Regresión K-NN</td>
-      <td>5.832642</td>
-      <td>1.204380</td>
-      <td>0.517706</td>
-      <td>8.404607e-23</td>
-      <td>0.000114</td>
+      <td>17.236783</td>
+      <td>2.132634</td>
+      <td>0.614360</td>
+      <td>1.303018e-91</td>
+      <td>2.569998e-21</td>
     </tr>
     <tr>
-      <th>27</th>
+      <th>45</th>
       <td>Regresión Lasso</td>
-      <td>4.015778</td>
-      <td>0.837676</td>
-      <td>0.766688</td>
-      <td>3.521004e-67</td>
-      <td>0.173372</td>
+      <td>4.015628</td>
+      <td>0.837644</td>
+      <td>0.766706</td>
+      <td>3.595775e-67</td>
+      <td>1.734285e-01</td>
     </tr>
     <tr>
-      <th>25</th>
+      <th>43</th>
       <td>Regresión Lineal</td>
       <td>3.996092</td>
       <td>0.830596</td>
       <td>0.770615</td>
       <td>1.214976e-63</td>
-      <td>0.198714</td>
+      <td>1.987139e-01</td>
     </tr>
     <tr>
-      <th>26</th>
+      <th>44</th>
       <td>Regresión Ridge</td>
       <td>3.996013</td>
       <td>0.832460</td>
       <td>0.769584</td>
       <td>7.349954e-65</td>
-      <td>0.191579</td>
+      <td>1.915789e-01</td>
+    </tr>
+    <tr>
+      <th>60</th>
+      <td>Tree Decision</td>
+      <td>16.090168</td>
+      <td>2.048057</td>
+      <td>0.644341</td>
+      <td>7.250496e-39</td>
+      <td>1.956860e-05</td>
+    </tr>
+    <tr>
+      <th>62</th>
+      <td>XGboost</td>
+      <td>14.675502</td>
+      <td>1.750468</td>
+      <td>0.740189</td>
+      <td>2.246286e-64</td>
+      <td>6.108926e-08</td>
     </tr>
   </tbody>
 </table>
 </div></div></div>
 </div>
-<p>En esta sección se evalúan los modelos utilizando el sensor 2, correspondiente a 100 metros de altura. El modelo de <strong>Regresión Lasso</strong> muestra el mejor desempeño, con un <strong>RMSE bajo de 0.837676</strong> y un <strong>R² de 0.766688</strong>, lo que indica una buena capacidad predictiva. Además, tiene un <strong>MAPE</strong> de aproximadamente <strong>4%</strong>, lo que sugiere que sus predicciones son relativamente precisas. Tanto la <strong>Regresión Ridge</strong> como la <strong>Regresión Lineal</strong> presentan resultados similares, con valores de <strong>R² cercanos a 0.76</strong>, lo que indica que también son buenos modelos para predecir esta variable. En contraste, el modelo <strong>K-NN</strong> muestra un <strong>MAPE elevado de 5.83%</strong> y un menor <strong>R² de 0.517706</strong>, lo que lo hace menos efectivo en la predicción de los datos. En resumen, los modelos lineales como Lasso y Ridge superan claramente a K-NN en precisión y capacidad predictiva para esta variable objetivo.</p>
 </section>
-<section id="graficas">
-<h3><strong>Gráficas</strong><a class="headerlink" href="#graficas" title="Link to this heading">#</a></h3>
+<section id="id2">
+<h3><strong>Gráficas de los modelos</strong><a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">7</span><span class="p">):</span>
     <span class="n">plt</span> <span class="o">=</span> <span class="n">grafica</span><span class="p">(</span><span class="n">mejores</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">mejores</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">mejores</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">2</span><span class="p">],</span> <span class="n">mejores</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">3</span><span class="p">],</span> <span class="n">mejores</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">4</span><span class="p">])</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/f189a859bdfa627363cc551467ddca4ad94723c2647de8df87295e9cf6b39143.png" src="_images/f189a859bdfa627363cc551467ddca4ad94723c2647de8df87295e9cf6b39143.png" />
+<img alt="_images/4492cad39358a28db6c9172d58b87d96507d997c3c7b9036858fbaa13e469822.png" src="_images/4492cad39358a28db6c9172d58b87d96507d997c3c7b9036858fbaa13e469822.png" />
 <img alt="_images/dba8f1ab37d533a45f3a13f2236e55b98c070182b2f8510e27109845b4a1380b.png" src="_images/dba8f1ab37d533a45f3a13f2236e55b98c070182b2f8510e27109845b4a1380b.png" />
 <img alt="_images/8f91ad14469de54736d1e1e4e2ff822056d6179fad13b0b372f2b47c8587a309.png" src="_images/8f91ad14469de54736d1e1e4e2ff822056d6179fad13b0b372f2b47c8587a309.png" />
-<img alt="_images/3ae34847b26b66c9ddecc59c048a794c34d2c15ace96e2cf79ada2251075af51.png" src="_images/3ae34847b26b66c9ddecc59c048a794c34d2c15ace96e2cf79ada2251075af51.png" />
+<img alt="_images/d8b69ce399626dae4cf9e10390bb675dcd7b67ff2c347959ff43da893bdf94a0.png" src="_images/d8b69ce399626dae4cf9e10390bb675dcd7b67ff2c347959ff43da893bdf94a0.png" />
+<img alt="_images/172b16d994b1eae97e19439139817ba10c3268474e0505a23a10d2d7e5e32022.png" src="_images/172b16d994b1eae97e19439139817ba10c3268474e0505a23a10d2d7e5e32022.png" />
+<img alt="_images/db601e5fea55a8fba909bb2b3b6c14dd913a5c5877c79c214ff54bc4179993a5.png" src="_images/db601e5fea55a8fba909bb2b3b6c14dd913a5c5877c79c214ff54bc4179993a5.png" />
+<img alt="_images/6199e3bbaef5f07674f81ed5e3258406233d37e6bb8f741a3d0c7eb97a1380be.png" src="_images/6199e3bbaef5f07674f81ed5e3258406233d37e6bb8f741a3d0c7eb97a1380be.png" />
 </div>
 </div>
 <p>La gráfica muestra el desempeño del modelo de <strong>Regresión K-NN</strong> para la predicción de la velocidad del viento, comparando el conjunto de entrenamiento (izquierda) con el de prueba (derecha). En el conjunto de entrenamiento, el modelo presenta un <strong>R² de 0.87554</strong>, indicando un buen ajuste, ya que las predicciones (cruces) siguen de cerca los valores reales (puntos). Sin embargo, este alto rendimiento puede ser un signo de <strong>sobreajuste</strong>, dado que K-NN es muy sensible a los datos de entrenamiento. Por otro lado, en el conjunto de prueba, el rendimiento del modelo es significativamente menor, con un <strong>R² de 0.51771</strong>. Aunque las predicciones aún siguen las tendencias generales, hay mayor variabilidad y errores en comparación con los valores reales, lo que refuerza la posibilidad de sobreajuste. En resumen, aunque el modelo se ajusta bien a los datos de entrenamiento, su capacidad para generalizar a nuevos datos es limitada, lo que se refleja en su menor rendimiento en el conjunto de prueba.</p>
@@ -976,8 +1220,8 @@ document.write(`
 </div>
 </div>
 </div>
-<section id="id2">
-<h3><strong>Modelos usando ventanas de predicción</strong><a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<section id="id3">
+<h3><strong>Modelos usando ventanas de predicción</strong><a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tabla</span><span class="p">,</span> <span class="n">mejores</span> <span class="o">=</span> <span class="n">evaluar_modelos</span><span class="p">(</span><span class="n">X3</span><span class="p">,</span> <span class="n">y3</span><span class="p">)</span>
@@ -1014,52 +1258,78 @@ document.write(`
   </thead>
   <tbody>
     <tr>
-      <th>24</th>
+      <th>194</th>
+      <td>Random Forest</td>
+      <td>6.214552</td>
+      <td>1.099491</td>
+      <td>0.033025</td>
+      <td>1.392043e-58</td>
+      <td>9.073786e-01</td>
+    </tr>
+    <tr>
+      <th>42</th>
       <td>Regresión K-NN</td>
       <td>6.751773</td>
       <td>1.363591</td>
       <td>0.369181</td>
       <td>1.042822e-32</td>
-      <td>0.000104</td>
+      <td>1.041046e-04</td>
     </tr>
     <tr>
-      <th>27</th>
+      <th>45</th>
       <td>Regresión Lasso</td>
-      <td>4.232456</td>
-      <td>0.872926</td>
-      <td>0.741481</td>
-      <td>5.546813e-63</td>
-      <td>0.269785</td>
+      <td>4.232337</td>
+      <td>0.872895</td>
+      <td>0.741500</td>
+      <td>5.655773e-63</td>
+      <td>2.699373e-01</td>
     </tr>
     <tr>
-      <th>25</th>
+      <th>43</th>
       <td>Regresión Lineal</td>
       <td>4.219102</td>
       <td>0.864644</td>
       <td>0.746364</td>
       <td>9.800919e-60</td>
-      <td>0.375339</td>
+      <td>3.753386e-01</td>
     </tr>
     <tr>
-      <th>26</th>
+      <th>44</th>
       <td>Regresión Ridge</td>
       <td>4.214576</td>
       <td>0.866600</td>
       <td>0.745215</td>
       <td>8.855226e-61</td>
-      <td>0.339695</td>
+      <td>3.396947e-01</td>
+    </tr>
+    <tr>
+      <th>46</th>
+      <td>Tree Decision</td>
+      <td>7.219316</td>
+      <td>1.496871</td>
+      <td>0.239839</td>
+      <td>7.911801e-36</td>
+      <td>1.650671e-02</td>
+    </tr>
+    <tr>
+      <th>48</th>
+      <td>XGboost</td>
+      <td>6.541622</td>
+      <td>1.372894</td>
+      <td>0.360544</td>
+      <td>1.983742e-53</td>
+      <td>7.028256e-08</td>
     </tr>
   </tbody>
 </table>
 </div></div></div>
 </div>
-<p>En este análisis, se evaluaron los modelos para predecir la <strong>velocidad del viento a 80 metros (Sensor 1)</strong> utilizando varios modelos de regresión. La <strong>Regresión K-NN</strong> presentó el peor desempeño, con un <strong>MAPE de 6.75%</strong> y un <strong>RMSE de 1.363591</strong>, lo que indica un error considerable en sus predicciones. Además, su <strong>R² de 0.369181</strong> sugiere que no explica bien la variabilidad en los datos. En contraste, tanto la <strong>Regresión Lasso</strong> como la <strong>Regresión Ridge</strong> mostraron un desempeño muy similar; <strong>Lasso</strong> tuvo un <strong>RMSE de 0.872926</strong> y un <strong>R² de 0.741481</strong>, mientras que <strong>Ridge</strong> presentó un <strong>RMSE de 0.866060</strong> y un <strong>R² de 0.745215</strong>, colocándolos entre los mejores modelos en términos de precisión. La <strong>Regresión Lineal</strong> también se destacó con un <strong>R² de 0.746364</strong> y un <strong>RMSE de 0.864644</strong>, mostrando resultados muy similares a Lasso y Ridge, lo que sugiere que los modelos lineales son los más apropiados para este conjunto de datos.</p>
 </section>
-<section id="id3">
-<h3><strong>Gráficas</strong><a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<section id="id4">
+<h3><strong>Gráficas de los modelos</strong><a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">7</span><span class="p">):</span>
     <span class="n">plt</span> <span class="o">=</span> <span class="n">grafica</span><span class="p">(</span><span class="n">mejores</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">mejores</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">mejores</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">2</span><span class="p">],</span> <span class="n">mejores</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">3</span><span class="p">],</span> <span class="n">mejores</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">4</span><span class="p">])</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
@@ -1072,7 +1342,6 @@ document.write(`
 <img alt="_images/c9ec1871c943bb01f6063936dd6fe05558cb59f2bdd6d51c2a8d40ffca9da8d8.png" src="_images/c9ec1871c943bb01f6063936dd6fe05558cb59f2bdd6d51c2a8d40ffca9da8d8.png" />
 </div>
 </div>
-<p>Los resultados muestran diferencias claras entre los modelos evaluados para predecir la velocidad del viento. La <strong>Regresión K-NN</strong> tiene un <strong>R² de 0.86184</strong> en el entrenamiento, pero cae a <strong>0.36918</strong> en el conjunto de prueba, indicando <strong>sobreajuste</strong>. En cambio, los <strong>modelos lineales</strong> (Regresión Lineal, Ridge y Lasso) ofrecen un rendimiento más equilibrado, con un ajuste moderado en el entrenamiento (aproximadamente <strong>0.53</strong>) y un desempeño superior en la prueba, con <strong>R² cercanos a 0.74</strong>. Esto sugiere que los modelos lineales son más efectivos para capturar tendencias y generalizar a nuevos datos. En conclusión, aunque K-NN tiene buen desempeño en el entrenamiento, los modelos lineales son las mejores opciones para predecir la velocidad del viento.</p>
 </section>
 </section>
 <section id="modelo-4-wind-speed-80-metros-sensor-2">
@@ -1085,8 +1354,8 @@ document.write(`
 </div>
 </div>
 </div>
-<section id="id4">
-<h3><strong>Modelos usando ventanas de predicción</strong><a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<section id="id5">
+<h3><strong>Modelos usando ventanas de predicción</strong><a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tabla</span><span class="p">,</span> <span class="n">mejores</span> <span class="o">=</span> <span class="n">evaluar_modelos</span><span class="p">(</span><span class="n">X4</span><span class="p">,</span> <span class="n">y4</span><span class="p">)</span>
@@ -1123,78 +1392,107 @@ document.write(`
   </thead>
   <tbody>
     <tr>
-      <th>24</th>
+      <th>61</th>
+      <td>Random Forest</td>
+      <td>15.810715</td>
+      <td>1.841094</td>
+      <td>0.688398</td>
+      <td>1.086024e-84</td>
+      <td>7.586783e-07</td>
+    </tr>
+    <tr>
+      <th>56</th>
       <td>Regresión K-NN</td>
-      <td>6.684306</td>
-      <td>1.351586</td>
-      <td>0.377391</td>
-      <td>8.968552e-32</td>
-      <td>0.000067</td>
+      <td>18.426858</td>
+      <td>2.188725</td>
+      <td>0.559617</td>
+      <td>8.866552e-94</td>
+      <td>2.568404e-10</td>
     </tr>
     <tr>
-      <th>27</th>
+      <th>45</th>
       <td>Regresión Lasso</td>
-      <td>4.206317</td>
-      <td>0.865937</td>
-      <td>0.744436</td>
-      <td>4.300009e-63</td>
-      <td>0.252943</td>
+      <td>4.206182</td>
+      <td>0.865905</td>
+      <td>0.744455</td>
+      <td>4.384785e-63</td>
+      <td>2.530800e-01</td>
     </tr>
     <tr>
-      <th>25</th>
+      <th>43</th>
       <td>Regresión Lineal</td>
       <td>4.203377</td>
       <td>0.857570</td>
       <td>0.749351</td>
       <td>7.246420e-60</td>
-      <td>0.344181</td>
+      <td>3.441812e-01</td>
     </tr>
     <tr>
-      <th>26</th>
+      <th>44</th>
       <td>Regresión Ridge</td>
       <td>4.196624</td>
       <td>0.859552</td>
       <td>0.748190</td>
       <td>6.662610e-61</td>
-      <td>0.314146</td>
+      <td>3.141458e-01</td>
+    </tr>
+    <tr>
+      <th>60</th>
+      <td>Tree Decision</td>
+      <td>19.019657</td>
+      <td>2.294240</td>
+      <td>0.516133</td>
+      <td>9.211714e-55</td>
+      <td>1.204766e-15</td>
+    </tr>
+    <tr>
+      <th>62</th>
+      <td>XGboost</td>
+      <td>15.513360</td>
+      <td>1.862407</td>
+      <td>0.681142</td>
+      <td>3.387343e-69</td>
+      <td>7.055606e-09</td>
     </tr>
   </tbody>
 </table>
 </div></div></div>
 </div>
 </section>
-<section id="id5">
-<h3><strong>Gráficas</strong><a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
+<section id="id6">
+<h3><strong>Gráficas de los modelos</strong><a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">7</span><span class="p">):</span>
     <span class="n">plt</span> <span class="o">=</span> <span class="n">grafica</span><span class="p">(</span><span class="n">mejores</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">mejores</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">mejores</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">2</span><span class="p">],</span> <span class="n">mejores</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">3</span><span class="p">],</span> <span class="n">mejores</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">4</span><span class="p">])</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/1a28a228336630856dd133e2a572cdb0d80c7c2a0b7a67438dbdb842fe97a707.png" src="_images/1a28a228336630856dd133e2a572cdb0d80c7c2a0b7a67438dbdb842fe97a707.png" />
+<img alt="_images/aef9d5a8df9c46463e8a5eafc07e7bf984fb807ca2b85fa710425d67234007e0.png" src="_images/aef9d5a8df9c46463e8a5eafc07e7bf984fb807ca2b85fa710425d67234007e0.png" />
 <img alt="_images/1295408cab96022f5706c7faf883a1eb53ad7a3787a4f3f8d92c499eaa9e5095.png" src="_images/1295408cab96022f5706c7faf883a1eb53ad7a3787a4f3f8d92c499eaa9e5095.png" />
 <img alt="_images/92e66af145f91518648e800865d8aca72e23721971561d887d42ef56770f0a31.png" src="_images/92e66af145f91518648e800865d8aca72e23721971561d887d42ef56770f0a31.png" />
-<img alt="_images/b11702dbeac06cbeba0483c136e18dd0a96ee448c16e2aee8bb3cec543066668.png" src="_images/b11702dbeac06cbeba0483c136e18dd0a96ee448c16e2aee8bb3cec543066668.png" />
+<img alt="_images/2ba9c0ad15d767320ef7fd458588e03667b8c08201e23bf19c510b0489624439.png" src="_images/2ba9c0ad15d767320ef7fd458588e03667b8c08201e23bf19c510b0489624439.png" />
+<img alt="_images/46dbf879f14e4d4bf8622758f80a6a5dff79a05bfafcc1af936ad14cea6aa6a1.png" src="_images/46dbf879f14e4d4bf8622758f80a6a5dff79a05bfafcc1af936ad14cea6aa6a1.png" />
+<img alt="_images/8cadc5fdf88286f7148f58b12b395d7546adf8eef835672ac4b504697482d31d.png" src="_images/8cadc5fdf88286f7148f58b12b395d7546adf8eef835672ac4b504697482d31d.png" />
+<img alt="_images/e54789ba86b6281b8f3f65ab683d391531f5f9d173e86e5c68ef72aaf1fc0c78.png" src="_images/e54789ba86b6281b8f3f65ab683d391531f5f9d173e86e5c68ef72aaf1fc0c78.png" />
 </div>
 </div>
-<p>En este análisis, se evaluaron los modelos para predecir la <strong>velocidad del viento a 80 metros</strong>. La <strong>Regresión K-NN</strong> mostró un buen desempeño en el conjunto de entrenamiento, con un <strong>R² de 0.86187</strong>, pero su rendimiento en el conjunto de prueba cayó considerablemente a un <strong>R² de 0.37739</strong>, lo que sugiere un <strong>sobreajuste</strong> y una mala generalización. En contraste, los <strong>modelos lineales</strong> (Lineal, Ridge y Lasso) presentaron un rendimiento más equilibrado; aunque su <strong>R² en el entrenamiento</strong> fue menor, alrededor de <strong>0.53</strong>, su desempeño en el conjunto de prueba mejoró significativamente, alcanzando un <strong>R² cercano a 0.74</strong>. Esto indica que, aunque los modelos lineales están menos ajustados en el entrenamiento, generalizan mucho mejor en los datos de prueba. En conclusión, los modelos lineales (Lineal, Ridge y Lasso) ofrecen un mejor equilibrio entre ajuste y generalización en comparación con K-NN, lo que los convierte en la mejor opción para la predicción de la velocidad del viento en este conjunto de datos.</p>
 </section>
 </section>
 <section id="modelo-5-wind-speed-60-metros">
 <h2><strong>Modelo 5: Wind speed 60 metros</strong><a class="headerlink" href="#modelo-5-wind-speed-60-metros" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X1</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Fecha&#39;</span><span class="p">,</span> <span class="s1">&#39;VelViento100m_1&#39;</span><span class="p">,</span> <span class="s1">&#39;VelViento100m_2&#39;</span><span class="p">,</span> <span class="s1">&#39;VelViento80m_1&#39;</span><span class="p">,</span> <span class="s1">&#39;VelViento80m_2&#39;</span><span class="p">,</span> <span class="s1">&#39;VelViento60m&#39;</span><span class="p">,</span> <span class="s1">&#39;DirViento80m&#39;</span><span class="p">,</span> <span class="s1">&#39;DirViento100m&#39;</span><span class="p">])</span>
-<span class="n">y1</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;VelViento60m&#39;</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X5</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Fecha&#39;</span><span class="p">,</span> <span class="s1">&#39;VelViento100m_1&#39;</span><span class="p">,</span> <span class="s1">&#39;VelViento100m_2&#39;</span><span class="p">,</span> <span class="s1">&#39;VelViento80m_1&#39;</span><span class="p">,</span> <span class="s1">&#39;VelViento80m_2&#39;</span><span class="p">,</span> <span class="s1">&#39;VelViento60m&#39;</span><span class="p">,</span> <span class="s1">&#39;DirViento80m&#39;</span><span class="p">,</span> <span class="s1">&#39;DirViento100m&#39;</span><span class="p">])</span>
+<span class="n">y5</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;VelViento60m&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
 </div>
-<section id="id6">
-<h3><strong>Modelos usando ventanas de predicción</strong><a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
+<section id="id7">
+<h3><strong>Modelos usando ventanas de predicción</strong><a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tabla</span><span class="p">,</span> <span class="n">mejores</span> <span class="o">=</span> <span class="n">evaluar_modelos</span><span class="p">(</span><span class="n">X5</span><span class="p">,</span> <span class="n">y5</span><span class="p">)</span>
@@ -1231,25 +1529,34 @@ document.write(`
   </thead>
   <tbody>
     <tr>
-      <th>24</th>
+      <th>61</th>
+      <td>Random Forest</td>
+      <td>16.545232</td>
+      <td>1.908646</td>
+      <td>0.633686</td>
+      <td>1.875899e-79</td>
+      <td>3.684872e-07</td>
+    </tr>
+    <tr>
+      <th>56</th>
       <td>Regresión K-NN</td>
-      <td>6.876112</td>
-      <td>1.332056</td>
-      <td>0.349680</td>
-      <td>8.837886e-33</td>
-      <td>1.308209e-08</td>
+      <td>19.725898</td>
+      <td>2.268929</td>
+      <td>0.482339</td>
+      <td>8.588551e-94</td>
+      <td>3.717309e-15</td>
     </tr>
     <tr>
-      <th>27</th>
+      <th>45</th>
       <td>Regresión Lasso</td>
-      <td>4.445645</td>
-      <td>0.890595</td>
-      <td>0.709302</td>
-      <td>8.780533e-59</td>
-      <td>3.338686e-01</td>
+      <td>4.445535</td>
+      <td>0.890562</td>
+      <td>0.709324</td>
+      <td>8.948713e-59</td>
+      <td>3.340703e-01</td>
     </tr>
     <tr>
-      <th>25</th>
+      <th>43</th>
       <td>Regresión Lineal</td>
       <td>4.439774</td>
       <td>0.880800</td>
@@ -1258,7 +1565,7 @@ document.write(`
       <td>4.692246e-01</td>
     </tr>
     <tr>
-      <th>26</th>
+      <th>44</th>
       <td>Regresión Ridge</td>
       <td>4.436869</td>
       <td>0.882914</td>
@@ -1266,27 +1573,50 @@ document.write(`
       <td>1.275099e-56</td>
       <td>4.269807e-01</td>
     </tr>
+    <tr>
+      <th>207</th>
+      <td>Tree Decision</td>
+      <td>18.350041</td>
+      <td>2.455425</td>
+      <td>0.393743</td>
+      <td>1.886983e-11</td>
+      <td>2.763144e-03</td>
+    </tr>
+    <tr>
+      <th>62</th>
+      <td>XGboost</td>
+      <td>14.825169</td>
+      <td>1.778782</td>
+      <td>0.681838</td>
+      <td>1.067667e-62</td>
+      <td>2.030054e-10</td>
+    </tr>
   </tbody>
 </table>
 </div></div></div>
 </div>
-<p>En este análisis, se evaluaron los modelos para predecir la <strong>velocidad del viento a 60 metros</strong>, y los resultados revelan conclusiones significativas. La <strong>Regresión K-NN</strong> obtuvo el peor desempeño, con un <strong>MAPE de 6.87%</strong>, un <strong>RMSE de 1.332056</strong> y un <strong>R² de 0.349680</strong>, lo que indica una alta tasa de error y una incapacidad para capturar los patrones de los datos. En contraste, la <strong>Regresión Lasso</strong> demostró un rendimiento notablemente mejor, con un <strong>MAPE de 4.44%</strong>, un <strong>RMSE de 0.890595</strong> y un <strong>R² de 0.709302</strong>, evidenciando una buena capacidad predictiva y una reducción significativa del error en comparación con K-NN. La <strong>Regresión Lineal</strong> se destacó como el modelo más preciso, logrando un <strong>R² de 0.715661</strong> y un <strong>RMSE de 0.880080</strong>. La <strong>Regresión Ridge</strong> también mostró un rendimiento competitivo, con un <strong>R² de 0.714294</strong> y un <strong>RMSE de 0.882914</strong>, muy cercano al de la Regresión Lineal. En conclusión, los modelos lineales, especialmente la <strong>Regresión Lineal</strong> y la <strong>Regresión Ridge</strong>, ofrecen el mejor rendimiento, logrando un buen equilibrio entre ajuste y generalización, mientras que <strong>K-NN</strong> sigue siendo el modelo menos adecuado para predecir la velocidad del viento a esta altura.</p>
 </section>
-<section id="id7">
-<h3><strong>Gráfica del mejor modelo</strong><a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
+<section id="grafica-de-los-modelos">
+<h3><strong>Gráfica de los modelos</strong><a class="headerlink" href="#grafica-de-los-modelos" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">7</span><span class="p">):</span>
     <span class="n">plt</span> <span class="o">=</span> <span class="n">grafica</span><span class="p">(</span><span class="n">mejores</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">mejores</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">mejores</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">2</span><span class="p">],</span> <span class="n">mejores</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">3</span><span class="p">],</span> <span class="n">mejores</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">4</span><span class="p">])</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/cc7d33feeed323e529b2b12ab147ef6128e36abe86482c4db9dac5ca928b1129.png" src="_images/cc7d33feeed323e529b2b12ab147ef6128e36abe86482c4db9dac5ca928b1129.png" />
-<img alt="_images/da118ee0a2816b6b4a125e9e9d8282c7878e496ac6cae4717e5aae907b7898ee.png" src="_images/da118ee0a2816b6b4a125e9e9d8282c7878e496ac6cae4717e5aae907b7898ee.png" />
-<img alt="_images/949489e611bd21f7878cfc1a5c23b4d36f3d32f0b0967db87a73651fcd383a1f.png" src="_images/949489e611bd21f7878cfc1a5c23b4d36f3d32f0b0967db87a73651fcd383a1f.png" />
-<img alt="_images/97aba8468d73307b41b7354671cdabecdc36cddb5edfb41123e604023155e690.png" src="_images/97aba8468d73307b41b7354671cdabecdc36cddb5edfb41123e604023155e690.png" />
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">IndexError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">67</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">7</span><span class="p">):</span>
+<span class="ne">----&gt; </span><span class="mi">2</span>     <span class="n">plt</span> <span class="o">=</span> <span class="n">grafica</span><span class="p">(</span><span class="n">mejores</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">mejores</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">mejores</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">2</span><span class="p">],</span> <span class="n">mejores</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">3</span><span class="p">],</span> <span class="n">mejores</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">4</span><span class="p">],</span> <span class="n">mejores</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">5</span><span class="p">])</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span>     <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="ne">IndexError</span>: list index out of range
+</pre></div>
+</div>
 </div>
 </div>
 <p>Las gráficas que acompañan el análisis de los modelos de predicción de la velocidad del viento a 60 metros revelan varias observaciones clave. En el caso de la <strong>Regresión K-NN</strong>, el modelo muestra un buen ajuste en el entrenamiento con un <strong>R² de 0.85224</strong>, pero cae significativamente en la prueba, con un <strong>R² de 0.34968</strong>, indicando <strong>sobreajuste</strong> y <strong>mala generalización</strong>. La <strong>Regresión Lineal</strong> presenta un <strong>R² de 0.52999</strong> en el entrenamiento y mejora en la prueba con un <strong>R² de 0.71566</strong>, capturando <strong>patrones más precisos</strong>. La <strong>Regresión Ridge</strong> muestra un comportamiento similar, con un <strong>R² de 0.52978</strong> en el entrenamiento y un <strong>R² de 0.71429</strong> en la prueba, confirmando su <strong>buen rendimiento</strong>. Por su parte, la <strong>Regresión Lasso</strong> tiene un <strong>R² de 0.52788</strong> en el entrenamiento y un <strong>R² de 0.70930</strong> en la prueba, siendo competitivo pero ligeramente inferior a los modelos Lineal y Ridge. En conclusión, los <strong>modelos lineales</strong>, especialmente la <strong>Regresión Lineal</strong>, <strong>Ridge</strong> y <strong>Lasso</strong>, ofrecen un <strong>mejor balance entre ajuste y generalización</strong>, con <strong>R² superiores a 0.70</strong> en los datos de prueba, mientras que <strong>K-NN muestra un claro sobreajuste</strong>, siendo el <strong>menos adecuado</strong> para este caso.</p>
@@ -1365,27 +1695,27 @@ document.write(`
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-1-wind-speed-100-metros-sensor-1"><strong>Modelo 1: Wind speed 100 metros (Sensor 1)</strong></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modelos-usando-ventanas-de-prediccion"><strong>Modelos usando ventanas de predicción</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#grafica-del-mejor-modelo"><strong>Gráfica del mejor modelo</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#graficas-de-los-modelos"><strong>Gráficas de los modelos</strong></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-2-wind-speed-100-metros-sensor-2"><strong>Modelo 2: Wind speed 100 metros (Sensor 2)</strong></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"><strong>Modelos usando ventanas de predicción</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#graficas"><strong>Gráficas</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2"><strong>Gráficas de los modelos</strong></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-3-wind-speed-80-metros-sensor-1"><strong>Modelo 3: Wind speed 80 metros (Sensor 1)</strong></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2"><strong>Modelos usando ventanas de predicción</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3"><strong>Gráficas</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3"><strong>Modelos usando ventanas de predicción</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4"><strong>Gráficas de los modelos</strong></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-4-wind-speed-80-metros-sensor-2"><strong>Modelo 4: Wind speed 80 metros (Sensor 2)</strong></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4"><strong>Modelos usando ventanas de predicción</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5"><strong>Gráficas</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5"><strong>Modelos usando ventanas de predicción</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6"><strong>Gráficas de los modelos</strong></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-5-wind-speed-60-metros"><strong>Modelo 5: Wind speed 60 metros</strong></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6"><strong>Modelos usando ventanas de predicción</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7"><strong>Gráfica del mejor modelo</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7"><strong>Modelos usando ventanas de predicción</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#grafica-de-los-modelos"><strong>Gráfica de los modelos</strong></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion"><strong>Conclusión</strong></a></li>

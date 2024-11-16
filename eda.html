@@ -443,20 +443,12 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">matplotlib.cm</span> <span class="k">as</span> <span class="nn">cm</span>
 <span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
 <span class="kn">from</span> <span class="nn">statsmodels.tsa.seasonal</span> <span class="kn">import</span> <span class="n">seasonal_decompose</span>
-<span class="kn">import</span> <span class="nn">missingno</span> <span class="k">as</span> <span class="nn">msno</span>
-<span class="kn">from</span> <span class="nn">windrose</span> <span class="kn">import</span> <span class="n">WindroseAxes</span>
 <span class="kn">from</span> <span class="nn">statsmodels.tsa.stattools</span> <span class="kn">import</span> <span class="n">adfuller</span>
 <span class="kn">from</span> <span class="nn">statsmodels.graphics.tsaplots</span> <span class="kn">import</span> <span class="n">plot_acf</span><span class="p">,</span> <span class="n">plot_pacf</span>
-<span class="kn">from</span> <span class="nn">statsmodels.tsa.arima.model</span> <span class="kn">import</span> <span class="n">ARIMA</span>
-<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span>
-<span class="kn">from</span> <span class="nn">sklearn.impute</span> <span class="kn">import</span> <span class="n">SimpleImputer</span>
-<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
-<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">product</span>
 <span class="kn">import</span> <span class="nn">warnings</span>
 <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
 </pre></div>
@@ -1270,10 +1262,10 @@ dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x23731132b50&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x10cedbdd970&gt;
 </pre></div>
 </div>
-<img alt="_images/c90dc9625d001cd8521e8b6e85849f19269aae09765980e2fc242fd3050d1371.png" src="_images/c90dc9625d001cd8521e8b6e85849f19269aae09765980e2fc242fd3050d1371.png" />
+<img alt="_images/4e325a7e385433f4d0253fda260f2ab425e97e298656f377bd5e48cab118dce9.png" src="_images/4e325a7e385433f4d0253fda260f2ab425e97e298656f377bd5e48cab118dce9.png" />
 </div>
 </div>
 </section>
@@ -2048,7 +2040,7 @@ dtype: float64
 </div>
 <p>Los diagramas de cajas y bigotes muestran la presencia de datos atípicos en varias de las variables analizadas. En las variables de <strong>dirección del viento</strong> (<code class="docutils literal notranslate"><span class="pre">DirViento60m</span></code>, <code class="docutils literal notranslate"><span class="pre">DirViento100m</span></code>, y <code class="docutils literal notranslate"><span class="pre">DirViento80m</span></code>), los atípicos son especialmente numerosos y están distribuidos en un amplio rango, lo cual es característico de este tipo de datos direccionales y su variabilidad. Las variables de <strong>velocidad del viento</strong> (<code class="docutils literal notranslate"><span class="pre">VelViento100m_1</span></code>, <code class="docutils literal notranslate"><span class="pre">VelViento100m_2</span></code>, <code class="docutils literal notranslate"><span class="pre">VelViento80m_1</span></code>, <code class="docutils literal notranslate"><span class="pre">VelViento80m_2</span></code>, <code class="docutils literal notranslate"><span class="pre">VelViento60m</span></code>) presentan pocos atípicos, la mayoría en valores bajos y altos, sugiriendo variaciones extremas en la intensidad del viento, aunque en un rango limitado.</p>
 <p>En la <strong>presión atmosférica</strong> (<code class="docutils literal notranslate"><span class="pre">Presion</span></code>), se observan algunos valores atípicos por encima de 1010 hPa, los cuales representan desviaciones de una distribución normal. En el caso de la <strong>humedad</strong> (<code class="docutils literal notranslate"><span class="pre">Humedad</span></code>), los valores atípicos son menos frecuentes y se concentran en los valores bajos, posiblemente reflejando eventos específicos de baja humedad. Por último, las variables de <strong>temperatura</strong> (<code class="docutils literal notranslate"><span class="pre">Temp100m</span></code> y <code class="docutils literal notranslate"><span class="pre">Temp21m</span></code>) muestran atípicos principalmente en los valores altos, sobre los 30 °C, lo que podría estar asociado a episodios de calentamiento extremo.</p>
-<p>Estos datos atípicos identificados en las diferentes variables son relevantes para el análisis, ya que pueden influir en la precisión de los modelos predictivos, especialmente si representan condiciones atmosféricas o ambientales inusuales.</p>
+<p>Aunque se ha identificado la presencia de valores atípicos en las variables no se procederá a su imputación, ya que estos valores se consideran normales en el contexto específico de este fenómeno meteorológico. La velocidad del viento es inherentemente variable y puede presentar fluctuaciones significativas debido a factores locales, estacionales y climáticos, los cuales son naturales y esperados en el ámbito de estudios meteorológicos. Imputar estos datos podría distorsionar el análisis al suavizar artificialmente variaciones propias del comportamiento del viento. Cabe mencionar que la base de datos ya ha sido sometida a un proceso de limpieza en el cual se eliminaron los valores considerados erróneos bajo criterios definidos previamente, asegurando que únicamente se mantengan los datos válidos. De este modo, el análisis conserva tanto la integridad de los datos como la representatividad de las condiciones reales del entorno estudiado.</p>
 </section>
 </section>
 <section id="base-de-datos-para-modelos">
