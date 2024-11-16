@@ -974,7 +974,7 @@ document.write(`
   </thead>
   <tbody>
     <tr>
-      <th>60</th>
+      <th>52</th>
       <td>Random Forest</td>
       <td>14.308942</td>
       <td>1.802617</td>
@@ -983,7 +983,7 @@ document.write(`
       <td>9.903668e-09</td>
     </tr>
     <tr>
-      <th>56</th>
+      <th>48</th>
       <td>Regresión K-NN</td>
       <td>17.234822</td>
       <td>2.153089</td>
@@ -992,7 +992,7 @@ document.write(`
       <td>8.177224e-21</td>
     </tr>
     <tr>
-      <th>45</th>
+      <th>39</th>
       <td>Regresión Lasso</td>
       <td>4.030323</td>
       <td>0.851835</td>
@@ -1001,7 +1001,7 @@ document.write(`
       <td>2.194810e-01</td>
     </tr>
     <tr>
-      <th>43</th>
+      <th>37</th>
       <td>Regresión Lineal</td>
       <td>4.013425</td>
       <td>0.845024</td>
@@ -1010,7 +1010,7 @@ document.write(`
       <td>2.488181e-01</td>
     </tr>
     <tr>
-      <th>44</th>
+      <th>38</th>
       <td>Regresión Ridge</td>
       <td>4.013893</td>
       <td>0.846827</td>
@@ -1019,16 +1019,7 @@ document.write(`
       <td>2.410755e-01</td>
     </tr>
     <tr>
-      <th>69</th>
-      <td>SVR</td>
-      <td>20.681334</td>
-      <td>2.744486</td>
-      <td>-0.001105</td>
-      <td>1.247995e-234</td>
-      <td>1.078668e-03</td>
-    </tr>
-    <tr>
-      <th>61</th>
+      <th>53</th>
       <td>XGboost</td>
       <td>14.851156</td>
       <td>1.838088</td>
@@ -1045,7 +1036,7 @@ document.write(`
 <h3><strong>Gráficas de los modelos</strong><a class="headerlink" href="#graficas-de-los-modelos" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">7</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">):</span>
     <span class="n">plt</span> <span class="o">=</span> <span class="n">grafica</span><span class="p">(</span><span class="n">mejores</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">mejores</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">mejores</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">2</span><span class="p">],</span> <span class="n">mejores</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">3</span><span class="p">],</span> <span class="n">mejores</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">4</span><span class="p">])</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
@@ -1058,16 +1049,6 @@ document.write(`
 <img alt="_images/bdb7f18cdd51ab97340b40f2ae9bcfb5019dc859f052ef9efa0315d7b3c60225.png" src="_images/bdb7f18cdd51ab97340b40f2ae9bcfb5019dc859f052ef9efa0315d7b3c60225.png" />
 <img alt="_images/865d99cb617b9044dcb539e45e8520a1bfd6bab7bceff8ab1f9cd2c9f03bc64d.png" src="_images/865d99cb617b9044dcb539e45e8520a1bfd6bab7bceff8ab1f9cd2c9f03bc64d.png" />
 <img alt="_images/2c799bb197b0065b717be89fbd50a929a02d0741dea36a7e92934dff9a4db09e.png" src="_images/2c799bb197b0065b717be89fbd50a929a02d0741dea36a7e92934dff9a4db09e.png" />
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">77</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">7</span><span class="p">):</span>
-<span class="ne">----&gt; </span><span class="mi">2</span>     <span class="n">plt</span> <span class="o">=</span> <span class="n">grafica</span><span class="p">(</span><span class="n">mejores</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">mejores</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">mejores</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">2</span><span class="p">],</span> <span class="n">mejores</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">3</span><span class="p">],</span> <span class="n">mejores</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">4</span><span class="p">])</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span>     <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-
-<span class="ne">TypeError</span>: &#39;NoneType&#39; object is not subscriptable
-</pre></div>
-</div>
 </div>
 </div>
 </section>
@@ -1120,7 +1101,7 @@ document.write(`
   </thead>
   <tbody>
     <tr>
-      <th>61</th>
+      <th>52</th>
       <td>Random Forest</td>
       <td>13.948897</td>
       <td>1.743095</td>
@@ -1129,7 +1110,7 @@ document.write(`
       <td>4.671781e-10</td>
     </tr>
     <tr>
-      <th>56</th>
+      <th>48</th>
       <td>Regresión K-NN</td>
       <td>17.236783</td>
       <td>2.132634</td>
@@ -1138,7 +1119,7 @@ document.write(`
       <td>2.569998e-21</td>
     </tr>
     <tr>
-      <th>45</th>
+      <th>39</th>
       <td>Regresión Lasso</td>
       <td>4.015628</td>
       <td>0.837644</td>
@@ -1147,7 +1128,7 @@ document.write(`
       <td>1.734285e-01</td>
     </tr>
     <tr>
-      <th>43</th>
+      <th>37</th>
       <td>Regresión Lineal</td>
       <td>3.996092</td>
       <td>0.830596</td>
@@ -1156,7 +1137,7 @@ document.write(`
       <td>1.987139e-01</td>
     </tr>
     <tr>
-      <th>44</th>
+      <th>38</th>
       <td>Regresión Ridge</td>
       <td>3.996013</td>
       <td>0.832460</td>
@@ -1165,16 +1146,7 @@ document.write(`
       <td>1.915789e-01</td>
     </tr>
     <tr>
-      <th>60</th>
-      <td>Tree Decision</td>
-      <td>16.090168</td>
-      <td>2.048057</td>
-      <td>0.644341</td>
-      <td>7.250496e-39</td>
-      <td>1.956860e-05</td>
-    </tr>
-    <tr>
-      <th>62</th>
+      <th>53</th>
       <td>XGboost</td>
       <td>14.675502</td>
       <td>1.750468</td>
@@ -1191,7 +1163,7 @@ document.write(`
 <h3><strong>Gráficas de los modelos</strong><a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">7</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">):</span>
     <span class="n">plt</span> <span class="o">=</span> <span class="n">grafica</span><span class="p">(</span><span class="n">mejores</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">mejores</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">mejores</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">2</span><span class="p">],</span> <span class="n">mejores</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">3</span><span class="p">],</span> <span class="n">mejores</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">4</span><span class="p">])</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
@@ -1202,12 +1174,10 @@ document.write(`
 <img alt="_images/dba8f1ab37d533a45f3a13f2236e55b98c070182b2f8510e27109845b4a1380b.png" src="_images/dba8f1ab37d533a45f3a13f2236e55b98c070182b2f8510e27109845b4a1380b.png" />
 <img alt="_images/8f91ad14469de54736d1e1e4e2ff822056d6179fad13b0b372f2b47c8587a309.png" src="_images/8f91ad14469de54736d1e1e4e2ff822056d6179fad13b0b372f2b47c8587a309.png" />
 <img alt="_images/d8b69ce399626dae4cf9e10390bb675dcd7b67ff2c347959ff43da893bdf94a0.png" src="_images/d8b69ce399626dae4cf9e10390bb675dcd7b67ff2c347959ff43da893bdf94a0.png" />
-<img alt="_images/172b16d994b1eae97e19439139817ba10c3268474e0505a23a10d2d7e5e32022.png" src="_images/172b16d994b1eae97e19439139817ba10c3268474e0505a23a10d2d7e5e32022.png" />
 <img alt="_images/db601e5fea55a8fba909bb2b3b6c14dd913a5c5877c79c214ff54bc4179993a5.png" src="_images/db601e5fea55a8fba909bb2b3b6c14dd913a5c5877c79c214ff54bc4179993a5.png" />
 <img alt="_images/6199e3bbaef5f07674f81ed5e3258406233d37e6bb8f741a3d0c7eb97a1380be.png" src="_images/6199e3bbaef5f07674f81ed5e3258406233d37e6bb8f741a3d0c7eb97a1380be.png" />
 </div>
 </div>
-<p>La gráfica muestra el desempeño del modelo de <strong>Regresión K-NN</strong> para la predicción de la velocidad del viento, comparando el conjunto de entrenamiento (izquierda) con el de prueba (derecha). En el conjunto de entrenamiento, el modelo presenta un <strong>R² de 0.87554</strong>, indicando un buen ajuste, ya que las predicciones (cruces) siguen de cerca los valores reales (puntos). Sin embargo, este alto rendimiento puede ser un signo de <strong>sobreajuste</strong>, dado que K-NN es muy sensible a los datos de entrenamiento. Por otro lado, en el conjunto de prueba, el rendimiento del modelo es significativamente menor, con un <strong>R² de 0.51771</strong>. Aunque las predicciones aún siguen las tendencias generales, hay mayor variabilidad y errores en comparación con los valores reales, lo que refuerza la posibilidad de sobreajuste. En resumen, aunque el modelo se ajusta bien a los datos de entrenamiento, su capacidad para generalizar a nuevos datos es limitada, lo que se refleja en su menor rendimiento en el conjunto de prueba.</p>
 </section>
 </section>
 <section id="modelo-3-wind-speed-80-metros-sensor-1">
@@ -1329,7 +1299,7 @@ document.write(`
 <h3><strong>Gráficas de los modelos</strong><a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">7</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">):</span>
     <span class="n">plt</span> <span class="o">=</span> <span class="n">grafica</span><span class="p">(</span><span class="n">mejores</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">mejores</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">mejores</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">2</span><span class="p">],</span> <span class="n">mejores</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">3</span><span class="p">],</span> <span class="n">mejores</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">4</span><span class="p">])</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
@@ -1392,7 +1362,7 @@ document.write(`
   </thead>
   <tbody>
     <tr>
-      <th>61</th>
+      <th>52</th>
       <td>Random Forest</td>
       <td>15.810715</td>
       <td>1.841094</td>
@@ -1401,7 +1371,7 @@ document.write(`
       <td>7.586783e-07</td>
     </tr>
     <tr>
-      <th>56</th>
+      <th>48</th>
       <td>Regresión K-NN</td>
       <td>18.426858</td>
       <td>2.188725</td>
@@ -1410,7 +1380,7 @@ document.write(`
       <td>2.568404e-10</td>
     </tr>
     <tr>
-      <th>45</th>
+      <th>39</th>
       <td>Regresión Lasso</td>
       <td>4.206182</td>
       <td>0.865905</td>
@@ -1419,7 +1389,7 @@ document.write(`
       <td>2.530800e-01</td>
     </tr>
     <tr>
-      <th>43</th>
+      <th>37</th>
       <td>Regresión Lineal</td>
       <td>4.203377</td>
       <td>0.857570</td>
@@ -1428,7 +1398,7 @@ document.write(`
       <td>3.441812e-01</td>
     </tr>
     <tr>
-      <th>44</th>
+      <th>38</th>
       <td>Regresión Ridge</td>
       <td>4.196624</td>
       <td>0.859552</td>
@@ -1437,16 +1407,7 @@ document.write(`
       <td>3.141458e-01</td>
     </tr>
     <tr>
-      <th>60</th>
-      <td>Tree Decision</td>
-      <td>19.019657</td>
-      <td>2.294240</td>
-      <td>0.516133</td>
-      <td>9.211714e-55</td>
-      <td>1.204766e-15</td>
-    </tr>
-    <tr>
-      <th>62</th>
+      <th>53</th>
       <td>XGboost</td>
       <td>15.513360</td>
       <td>1.862407</td>
@@ -1463,7 +1424,7 @@ document.write(`
 <h3><strong>Gráficas de los modelos</strong><a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">7</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">):</span>
     <span class="n">plt</span> <span class="o">=</span> <span class="n">grafica</span><span class="p">(</span><span class="n">mejores</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">mejores</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">mejores</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">2</span><span class="p">],</span> <span class="n">mejores</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">3</span><span class="p">],</span> <span class="n">mejores</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">4</span><span class="p">])</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
@@ -1474,7 +1435,6 @@ document.write(`
 <img alt="_images/1295408cab96022f5706c7faf883a1eb53ad7a3787a4f3f8d92c499eaa9e5095.png" src="_images/1295408cab96022f5706c7faf883a1eb53ad7a3787a4f3f8d92c499eaa9e5095.png" />
 <img alt="_images/92e66af145f91518648e800865d8aca72e23721971561d887d42ef56770f0a31.png" src="_images/92e66af145f91518648e800865d8aca72e23721971561d887d42ef56770f0a31.png" />
 <img alt="_images/2ba9c0ad15d767320ef7fd458588e03667b8c08201e23bf19c510b0489624439.png" src="_images/2ba9c0ad15d767320ef7fd458588e03667b8c08201e23bf19c510b0489624439.png" />
-<img alt="_images/46dbf879f14e4d4bf8622758f80a6a5dff79a05bfafcc1af936ad14cea6aa6a1.png" src="_images/46dbf879f14e4d4bf8622758f80a6a5dff79a05bfafcc1af936ad14cea6aa6a1.png" />
 <img alt="_images/8cadc5fdf88286f7148f58b12b395d7546adf8eef835672ac4b504697482d31d.png" src="_images/8cadc5fdf88286f7148f58b12b395d7546adf8eef835672ac4b504697482d31d.png" />
 <img alt="_images/e54789ba86b6281b8f3f65ab683d391531f5f9d173e86e5c68ef72aaf1fc0c78.png" src="_images/e54789ba86b6281b8f3f65ab683d391531f5f9d173e86e5c68ef72aaf1fc0c78.png" />
 </div>
@@ -1529,7 +1489,7 @@ document.write(`
   </thead>
   <tbody>
     <tr>
-      <th>61</th>
+      <th>52</th>
       <td>Random Forest</td>
       <td>16.545232</td>
       <td>1.908646</td>
@@ -1538,7 +1498,7 @@ document.write(`
       <td>3.684872e-07</td>
     </tr>
     <tr>
-      <th>56</th>
+      <th>48</th>
       <td>Regresión K-NN</td>
       <td>19.725898</td>
       <td>2.268929</td>
@@ -1547,7 +1507,7 @@ document.write(`
       <td>3.717309e-15</td>
     </tr>
     <tr>
-      <th>45</th>
+      <th>39</th>
       <td>Regresión Lasso</td>
       <td>4.445535</td>
       <td>0.890562</td>
@@ -1556,7 +1516,7 @@ document.write(`
       <td>3.340703e-01</td>
     </tr>
     <tr>
-      <th>43</th>
+      <th>37</th>
       <td>Regresión Lineal</td>
       <td>4.439774</td>
       <td>0.880800</td>
@@ -1565,7 +1525,7 @@ document.write(`
       <td>4.692246e-01</td>
     </tr>
     <tr>
-      <th>44</th>
+      <th>38</th>
       <td>Regresión Ridge</td>
       <td>4.436869</td>
       <td>0.882914</td>
@@ -1574,16 +1534,7 @@ document.write(`
       <td>4.269807e-01</td>
     </tr>
     <tr>
-      <th>207</th>
-      <td>Tree Decision</td>
-      <td>18.350041</td>
-      <td>2.455425</td>
-      <td>0.393743</td>
-      <td>1.886983e-11</td>
-      <td>2.763144e-03</td>
-    </tr>
-    <tr>
-      <th>62</th>
+      <th>53</th>
       <td>XGboost</td>
       <td>14.825169</td>
       <td>1.778782</td>
@@ -1600,26 +1551,21 @@ document.write(`
 <h3><strong>Gráfica de los modelos</strong><a class="headerlink" href="#grafica-de-los-modelos" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">7</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">):</span>
     <span class="n">plt</span> <span class="o">=</span> <span class="n">grafica</span><span class="p">(</span><span class="n">mejores</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">mejores</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">mejores</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">2</span><span class="p">],</span> <span class="n">mejores</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">3</span><span class="p">],</span> <span class="n">mejores</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">4</span><span class="p">])</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">IndexError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">67</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">7</span><span class="p">):</span>
-<span class="ne">----&gt; </span><span class="mi">2</span>     <span class="n">plt</span> <span class="o">=</span> <span class="n">grafica</span><span class="p">(</span><span class="n">mejores</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">mejores</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">mejores</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">2</span><span class="p">],</span> <span class="n">mejores</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">3</span><span class="p">],</span> <span class="n">mejores</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">4</span><span class="p">],</span> <span class="n">mejores</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">5</span><span class="p">])</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span>     <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-
-<span class="ne">IndexError</span>: list index out of range
-</pre></div>
+<img alt="_images/08a0d50c779ff386f58de4ee92d959a6ff13955c5a7c424d70628e6d109e90f6.png" src="_images/08a0d50c779ff386f58de4ee92d959a6ff13955c5a7c424d70628e6d109e90f6.png" />
+<img alt="_images/da118ee0a2816b6b4a125e9e9d8282c7878e496ac6cae4717e5aae907b7898ee.png" src="_images/da118ee0a2816b6b4a125e9e9d8282c7878e496ac6cae4717e5aae907b7898ee.png" />
+<img alt="_images/949489e611bd21f7878cfc1a5c23b4d36f3d32f0b0967db87a73651fcd383a1f.png" src="_images/949489e611bd21f7878cfc1a5c23b4d36f3d32f0b0967db87a73651fcd383a1f.png" />
+<img alt="_images/c3ede90c65b74a4d955279bd58879090fc4a501d2dffffc952343f87fdb97987.png" src="_images/c3ede90c65b74a4d955279bd58879090fc4a501d2dffffc952343f87fdb97987.png" />
+<img alt="_images/9d1849e2cc12d4fabeaba3ebbe8f10c994cc69d200f4821ece8909f6296f6f7e.png" src="_images/9d1849e2cc12d4fabeaba3ebbe8f10c994cc69d200f4821ece8909f6296f6f7e.png" />
+<img alt="_images/d87e9e75b777db8b7d1b6732f6ac03bd51b35ae54b16d3770e2f38aad45d66f8.png" src="_images/d87e9e75b777db8b7d1b6732f6ac03bd51b35ae54b16d3770e2f38aad45d66f8.png" />
 </div>
 </div>
-</div>
-<p>Las gráficas que acompañan el análisis de los modelos de predicción de la velocidad del viento a 60 metros revelan varias observaciones clave. En el caso de la <strong>Regresión K-NN</strong>, el modelo muestra un buen ajuste en el entrenamiento con un <strong>R² de 0.85224</strong>, pero cae significativamente en la prueba, con un <strong>R² de 0.34968</strong>, indicando <strong>sobreajuste</strong> y <strong>mala generalización</strong>. La <strong>Regresión Lineal</strong> presenta un <strong>R² de 0.52999</strong> en el entrenamiento y mejora en la prueba con un <strong>R² de 0.71566</strong>, capturando <strong>patrones más precisos</strong>. La <strong>Regresión Ridge</strong> muestra un comportamiento similar, con un <strong>R² de 0.52978</strong> en el entrenamiento y un <strong>R² de 0.71429</strong> en la prueba, confirmando su <strong>buen rendimiento</strong>. Por su parte, la <strong>Regresión Lasso</strong> tiene un <strong>R² de 0.52788</strong> en el entrenamiento y un <strong>R² de 0.70930</strong> en la prueba, siendo competitivo pero ligeramente inferior a los modelos Lineal y Ridge. En conclusión, los <strong>modelos lineales</strong>, especialmente la <strong>Regresión Lineal</strong>, <strong>Ridge</strong> y <strong>Lasso</strong>, ofrecen un <strong>mejor balance entre ajuste y generalización</strong>, con <strong>R² superiores a 0.70</strong> en los datos de prueba, mientras que <strong>K-NN muestra un claro sobreajuste</strong>, siendo el <strong>menos adecuado</strong> para este caso.</p>
 </section>
 </section>
 <section id="conclusion">
