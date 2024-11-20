@@ -354,7 +354,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -370,6 +372,15 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#puntos-clave-del-enfoque">Puntos clave del enfoque:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#propuesta-para-adaptar-el-modelo-a-la-velocidad-del-viento">Propuesta para adaptar el modelo a la velocidad del viento:</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -381,7 +392,30 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="propuesta-de-modelo-original">
 <h1><strong>Propuesta de modelo original</strong><a class="headerlink" href="#propuesta-de-modelo-original" title="Link to this heading">#</a></h1>
-<p>En esta parte, proponemos el siguiente modelo para aplicarlo al tema de la velocidad del viento:</p>
+<p>El artículo <strong>“Hybrid evolutionary algorithms in a SVR-based electric load forecasting model”</strong> de Wei-Chiang Hong presenta un enfoque innovador que combina <strong>algoritmos evolutivos híbridos</strong> y <strong>regresión de soporte vectorial (SVR)</strong> para abordar la predicción de cargas eléctricas en datos no lineales. Aunque originalmente se aplica en el campo de la predicción de carga eléctrica, este enfoque puede adaptarse a la predicción de velocidades del viento por sus características similares de no linealidad y dependencia de múltiples factores.</p>
+<section id="puntos-clave-del-enfoque">
+<h2>Puntos clave del enfoque:<a class="headerlink" href="#puntos-clave-del-enfoque" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p><strong>Uso de SVR</strong>: La SVR es conocida por su capacidad para modelar relaciones no lineales y minimizar errores de generalización, a diferencia de modelos como redes neuronales que minimizan errores de entrenamiento.</p></li>
+<li><p><strong>Algoritmo Genético Caótico (CGA)</strong>: Este algoritmo mejora la selección de parámetros en la SVR al evitar convergencias prematuras y optimizar el ajuste global. Esto es útil en problemas complejos como los sistemas dinámicos del viento.</p></li>
+<li><p><strong>Comparación y validación</strong>: El modelo propuesto supera a otros métodos como ANN, SVM con algoritmos genéticos convencionales, y modelos de regresión en términos de rendimiento predictivo.</p></li>
+</ol>
+</section>
+<section id="propuesta-para-adaptar-el-modelo-a-la-velocidad-del-viento">
+<h2>Propuesta para adaptar el modelo a la velocidad del viento:<a class="headerlink" href="#propuesta-para-adaptar-el-modelo-a-la-velocidad-del-viento" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Características del dataset</strong>: Utilizar datos históricos de velocidad del viento, incluyendo variables como temperatura, humedad, presión y estacionalidad.</p></li>
+<li><p><strong>Preprocesamiento</strong>: Aplicar técnicas como normalización y descomposición de series temporales para capturar patrones subyacentes.</p></li>
+<li><p><strong>Adaptación del CGA-SVR</strong>:</p>
+<ul>
+<li><p>Usar el algoritmo genético caótico para ajustar los hiperparámetros de la SVR (parámetro del kernel, margen de tolerancia, etc.).</p></li>
+<li><p>Entrenar y validar con particiones de datos (T=7, 14, 21, 28 días).</p></li>
+</ul>
+</li>
+<li><p><strong>Evaluación</strong>: Comparar el rendimiento utilizando métricas como RMSE, MAPE y R², asegurando la normalidad e independencia de los residuos.</p></li>
+</ul>
+<p><a class="reference external" href="https://www.sciencedirect.com/science/article/abs/pii/S1352231018308823?via%3Dihub">https://www.sciencedirect.com/science/article/abs/pii/S1352231018308823?via%3Dihub</a></p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -429,6 +463,22 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#puntos-clave-del-enfoque">Puntos clave del enfoque:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#propuesta-para-adaptar-el-modelo-a-la-velocidad-del-viento">Propuesta para adaptar el modelo a la velocidad del viento:</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
