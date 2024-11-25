@@ -184,7 +184,7 @@
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="eda.html"><strong>Análisis Exploratorio de Datos (EDA)</strong></a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>Modelos de regresión</strong></a></li>
-<li class="toctree-l1"><a class="reference internal" href="original.html"><strong>Propuesta de modelo original</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="original.html">Propuesta de modelo original</a></li>
 </ul>
 
     </div>
@@ -420,6 +420,8 @@ document.write(`
 <span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">Ridge</span><span class="p">,</span> <span class="n">Lasso</span>
 <span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestRegressor</span>
 <span class="kn">from</span> <span class="nn">sklearn.tree</span> <span class="kn">import</span> <span class="n">DecisionTreeRegressor</span>
+<span class="kn">from</span> <span class="nn">skopt</span> <span class="kn">import</span> <span class="n">BayesSearchCV</span>
+<span class="kn">from</span> <span class="nn">skopt.space</span> <span class="kn">import</span> <span class="n">Integer</span>
 <span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="kn">import</span> <span class="n">SVR</span>
 <span class="kn">from</span> <span class="nn">xgboost</span> <span class="kn">import</span> <span class="n">XGBRegressor</span>
 <span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">jarque_bera</span>
@@ -784,6 +786,11 @@ document.write(`
 </div>
 </div>
 </div>
+<p>Este método garantiza que los valores donde el valor verdadero es cero no se incluyan en el cálculo, evitando errores de división por cero y proporcionando una evaluación más precisa del desempeño de los modelos. A continuación, aplicaremos esta métrica, junto con otras como el <span class="math notranslate nohighlight">\(RMSE\)</span> y el <span class="math notranslate nohighlight">\(R^2\)</span>, para evaluar el desempeño de cada uno de los modelos en las distintas variables objetivo.</p>
+</section>
+<section id="metodos-para-realizar-las-graficas">
+<h2><strong>Métodos para realizar las gráficas</strong><a class="headerlink" href="#metodos-para-realizar-las-graficas" title="Link to this heading">#</a></h2>
+<p>En esta sección, se desarrollan métodos para generar gráficas de las predicciones y los residuos, con el propósito de optimizar el código para cada uno de los modelos a implementar.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">grafica</span><span class="p">(</span><span class="n">nombre_modelo</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_train_pred</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">y_test_pred</span><span class="p">,</span> <span class="n">xlim_train</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">xlim_test</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -791,11 +798,11 @@ document.write(`
     <span class="n">r2_test</span> <span class="o">=</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_test_pred</span><span class="p">)</span>
 
     <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
-
+    <span class="n">n_display</span> <span class="o">=</span> <span class="mi">100</span>
     <span class="c1"># Gráfico del conjunto de entrenamiento</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">y_train</span><span class="p">)),</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Velocidad original&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#00008B&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">y_train_pred</span><span class="p">)),</span> <span class="n">y_train_pred</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Velocidad predicha&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#00B2EE&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">n_display</span><span class="p">),</span> <span class="n">y_train</span><span class="p">[:</span><span class="n">n_display</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Velocidad original&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#00008B&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">n_display</span><span class="p">),</span> <span class="n">y_train_pred</span><span class="p">[:</span><span class="n">n_display</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Velocidad predicha&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#00B2EE&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Índice&#39;</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Velocidad del viento&#39;</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">nombre_modelo</span><span class="si">}</span><span class="s2"> (Entrenamiento)</span><span class="se">\n</span><span class="s2">R²: </span><span class="si">{</span><span class="n">r2_train</span><span class="si">:</span><span class="s2">.5f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -805,55 +812,14 @@ document.write(`
 
     <span class="c1"># Gráfico del conjunto de prueba</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">y_test</span><span class="p">)),</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Velocidad original&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#00008B&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">y_test_pred</span><span class="p">)),</span> <span class="n">y_test_pred</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Velocidad predicha&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#00B2EE&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">n_display</span><span class="p">),</span> <span class="n">y_test</span><span class="p">[:</span><span class="n">n_display</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Velocidad original&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#00008B&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">n_display</span><span class="p">),</span> <span class="n">y_test_pred</span><span class="p">[:</span><span class="n">n_display</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Velocidad predicha&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#00B2EE&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Índice&#39;</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Velocidad del viento&#39;</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">nombre_modelo</span><span class="si">}</span><span class="s2"> (Prueba)</span><span class="se">\n</span><span class="s2">R²: </span><span class="si">{</span><span class="n">r2_test</span><span class="si">:</span><span class="s2">.5f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
 
-
-    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Este método garantiza que los valores donde el valor verdadero es cero no se incluyan en el cálculo, evitando errores de división por cero y proporcionando una evaluación más precisa del desempeño de los modelos. A continuación, aplicaremos esta métrica, junto con otras como el <span class="math notranslate nohighlight">\(RMSE\)</span> y el <span class="math notranslate nohighlight">\(R^2\)</span>, para evaluar el desempeño de cada uno de los modelos en las distintas variables objetivo.</p>
-</section>
-<section id="metodos-para-realizar-las-graficas">
-<h2><strong>Métodos para realizar las gráficas</strong><a class="headerlink" href="#metodos-para-realizar-las-graficas" title="Link to this heading">#</a></h2>
-<p>En esta sección, se desarrollan métodos para generar gráficas de las predicciones y los residuos, con el propósito de optimizar el código para cada uno de los modelos a implementar.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">grafica</span><span class="p">(</span><span class="n">nombre_modelo</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_train_pred</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">y_test_pred</span><span class="p">):</span>
-    <span class="c1"># Calcular R² y RMSE</span>
-    <span class="n">r2_train</span> <span class="o">=</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">y_train</span><span class="p">,</span> <span class="n">y_train_pred</span><span class="p">)</span>
-    <span class="n">r2_test</span> <span class="o">=</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_test_pred</span><span class="p">)</span>
-
-
-    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
-
-    <span class="c1"># Gráfico del conjunto de entrenamiento</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">y_train</span><span class="p">,</span> <span class="n">y_train_pred</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Entrenamiento&quot;</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;#00008B&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>  <span class="c1"># Azul oscuro</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="nb">min</span><span class="p">(</span><span class="n">y_train</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">y_train</span><span class="p">)],</span> <span class="p">[</span><span class="nb">min</span><span class="p">(</span><span class="n">y_train</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">y_train</span><span class="p">)],</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Referencia&quot;</span><span class="p">)</span>  <span class="c1"># Línea de referencia</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Velocidad original&quot;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Velocidad predicha&quot;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">nombre_modelo</span><span class="si">}</span><span class="s2"> (Entrenamiento)</span><span class="se">\n</span><span class="s2">R²: </span><span class="si">{</span><span class="n">r2_train</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
-
-    <span class="c1"># Gráfico del conjunto de prueba</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_test_pred</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Prueba&quot;</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;#00B2EE&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>  <span class="c1"># Azul claro</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="nb">min</span><span class="p">(</span><span class="n">y_test</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">y_test</span><span class="p">)],</span> <span class="p">[</span><span class="nb">min</span><span class="p">(</span><span class="n">y_test</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">y_test</span><span class="p">)],</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Referencia&quot;</span><span class="p">)</span>  <span class="c1"># Línea de referencia</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Velocidad original&quot;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Velocidad predicha&quot;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">nombre_modelo</span><span class="si">}</span><span class="s2"> (Prueba)</span><span class="se">\n</span><span class="s2">R²: </span><span class="si">{</span><span class="n">r2_test</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
 
     <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
@@ -887,32 +853,32 @@ document.write(`
 <section id="metodos-para-los-modelos-de-regresion">
 <h2><strong>Métodos para los modelos de regresión</strong><a class="headerlink" href="#metodos-para-los-modelos-de-regresion" title="Link to this heading">#</a></h2>
 <p>A continuación se presenta un método para cada uno de los modelos de regresión, con el objetivo de reducir la cantidad de código repetido. Estos métodos se encargan de escalar los datos, encontrar los mejores hiperparámetros, evaluar los modelos, calcular las métricas y generar las predicciones, utilizando los conjuntos de datos <code class="docutils literal notranslate"><span class="pre">X_train</span></code>, <code class="docutils literal notranslate"><span class="pre">y_train</span></code>, <code class="docutils literal notranslate"><span class="pre">X_test</span></code> y <code class="docutils literal notranslate"><span class="pre">y_test</span></code>.</p>
-<p>Para escalar los datos, se emplea <code class="docutils literal notranslate"><span class="pre">StandardScaler</span></code>, debido a que asegura una distribución con media cero y desviación estándar unitaria, lo cual es crucial para modelos sensibles a las escalas de las variables. Como validación cruzada se utiliza <code class="docutils literal notranslate"><span class="pre">KFold</span></code> con <code class="docutils literal notranslate"><span class="pre">shuffle</span> <span class="pre">=</span> <span class="pre">False</span></code>, ya que los datos están ordenados cronológicamente y es necesario mantener ese orden para evitar fugas de información, lo cual es especialmente relevante en la predicción de la velocidad del viento, donde la secuencia temporal puede impactar significativamente en los resultados.</p>
 <p>Este proceso se aplica a cada uno de los modelos de regresión, incluyendo KNN, regresión lineal, Ridge, Lasso, Árbol de decisión regresor, Random Forest Regressor, XGBoost y SVR, garantizando así un flujo de trabajo consistente y eficiente para cada técnica.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">evaluate_knn</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">results</span><span class="p">,</span> <span class="n">resultados_graficos</span><span class="p">):</span>
-    <span class="n">pipeline_knn_reg</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([(</span><span class="s1">&#39;scaler&#39;</span><span class="p">,</span> <span class="n">StandardScaler</span><span class="p">()),</span> <span class="p">(</span><span class="s1">&#39;knn&#39;</span><span class="p">,</span> <span class="n">KNeighborsRegressor</span><span class="p">())])</span>
+    <span class="n">param_space_knn_reg</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;n_neighbors&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">50</span><span class="p">),</span><span class="s1">&#39;p&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)}</span>
+    
+    <span class="n">modelo</span> <span class="o">=</span> <span class="n">KNeighborsRegressor</span><span class="p">()</span>
+    
+    <span class="n">bayes_knn_reg</span> <span class="o">=</span> <span class="n">BayesSearchCV</span><span class="p">(</span><span class="n">estimator</span> <span class="o">=</span> <span class="n">modelo</span><span class="p">,</span> <span class="n">search_spaces</span> <span class="o">=</span> <span class="n">param_space_knn_reg</span><span class="p">,</span> <span class="n">n_iter</span> <span class="o">=</span> <span class="mi">30</span><span class="p">,</span> <span class="n">cv</span> <span class="o">=</span> <span class="mi">5</span><span class="p">)</span>
 
-    <span class="n">param_grid_knn_reg</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;knn__n_neighbors&#39;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">)),</span> <span class="s1">&#39;knn__weights&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;uniform&#39;</span><span class="p">,</span> <span class="s1">&#39;distance&#39;</span><span class="p">],</span> <span class="s1">&#39;knn__p&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]}</span>
-
-    <span class="n">kf</span> <span class="o">=</span> <span class="n">KFold</span><span class="p">(</span><span class="n">n_splits</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="n">shuffle</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
-
-    <span class="n">grid_knn_reg</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">pipeline_knn_reg</span><span class="p">,</span> <span class="n">param_grid_knn_reg</span><span class="p">,</span> <span class="n">cv</span> <span class="o">=</span> <span class="n">kf</span><span class="p">,</span> <span class="n">scoring</span> <span class="o">=</span> <span class="s1">&#39;r2&#39;</span><span class="p">)</span>
-
-    <span class="n">grid_knn_reg</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
-    <span class="n">y_train_pred</span> <span class="o">=</span> <span class="n">grid_knn_reg</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span> 
-    <span class="n">y_pred_knn_reg</span> <span class="o">=</span> <span class="n">grid_knn_reg</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
-
+    <span class="n">bayes_knn_reg</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+    
+    <span class="n">y_train_pred</span> <span class="o">=</span> <span class="n">bayes_knn_reg</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+    <span class="n">y_pred_knn_reg</span> <span class="o">=</span> <span class="n">bayes_knn_reg</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+    
     <span class="n">residuals</span> <span class="o">=</span> <span class="n">y_test</span> <span class="o">-</span> <span class="n">y_pred_knn_reg</span>
+
     <span class="n">r2</span> <span class="o">=</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_knn_reg</span><span class="p">)</span>
     <span class="n">mape</span> <span class="o">=</span> <span class="n">MAPE</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_knn_reg</span><span class="p">)</span>
     <span class="n">rmse</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_knn_reg</span><span class="p">))</span>
 
-    <span class="n">ljung_box_p_value</span> <span class="o">=</span> <span class="n">acorr_ljungbox</span><span class="p">(</span><span class="n">residuals</span><span class="p">,</span> <span class="n">lags</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">],</span> <span class="n">return_df</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="s1">&#39;lb_pvalue&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="n">jarque_bera_p_value</span> <span class="o">=</span> <span class="n">jarque_bera</span><span class="p">(</span><span class="n">residuals</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>  <span class="c1"># p-value</span>
+    <span class="n">ljung_box_p_value</span> <span class="o">=</span> <span class="n">acorr_ljungbox</span><span class="p">(</span><span class="n">residuals</span><span class="p">,</span> <span class="n">lags</span> <span class="o">=</span> <span class="p">[</span><span class="mi">30</span><span class="p">],</span> <span class="n">return_df</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)[</span><span class="s1">&#39;lb_pvalue&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">jarque_bera_p_value</span> <span class="o">=</span> <span class="n">jarque_bera</span><span class="p">(</span><span class="n">residuals</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>  
+
     <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
-        <span class="s1">&#39;Modelo&#39;</span><span class="p">:</span> <span class="s1">&#39;K-NN&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;Modelo&#39;</span><span class="p">:</span> <span class="s1">&#39;K-NN Regressor&#39;</span><span class="p">,</span>
         <span class="s1">&#39;MAPE&#39;</span><span class="p">:</span> <span class="n">mape</span><span class="p">,</span>
         <span class="s1">&#39;RMSE&#39;</span><span class="p">:</span> <span class="n">rmse</span><span class="p">,</span>
         <span class="s1">&#39;R^2&#39;</span><span class="p">:</span> <span class="n">r2</span><span class="p">,</span>
@@ -921,7 +887,7 @@ document.write(`
     <span class="p">})</span>
     
     <span class="n">resultados_graficos</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
-        <span class="s1">&#39;nombre_modelo&#39;</span><span class="p">:</span> <span class="s1">&#39;K-NN&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;nombre_modelo&#39;</span><span class="p">:</span> <span class="s1">&#39;K-NN Regressor&#39;</span><span class="p">,</span>
         <span class="s1">&#39;y_train&#39;</span><span class="p">:</span> <span class="n">y_train</span><span class="p">,</span>
         <span class="s1">&#39;y_train_pred&#39;</span><span class="p">:</span> <span class="n">y_train_pred</span><span class="p">,</span>
         <span class="s1">&#39;y_test&#39;</span><span class="p">:</span> <span class="n">y_test</span><span class="p">,</span>
@@ -935,34 +901,42 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">evaluate_ridge</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">results</span><span class="p">,</span> <span class="n">resultados_graficos</span><span class="p">):</span>
-    <span class="n">pipeline</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([(</span><span class="s1">&#39;scaler&#39;</span><span class="p">,</span> <span class="n">StandardScaler</span><span class="p">()),(</span><span class="s1">&#39;ridge&#39;</span><span class="p">,</span> <span class="n">Ridge</span><span class="p">())])</span>
-    <span class="n">param_grid</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;ridge__alpha&#39;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">1e-3</span><span class="p">,</span> <span class="mf">10.1</span><span class="p">,</span> <span class="mf">1e-1</span><span class="p">))}</span>
-    <span class="n">kf</span> <span class="o">=</span> <span class="n">KFold</span><span class="p">(</span><span class="n">n_splits</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="n">shuffle</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
-    <span class="n">grid</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">pipeline</span><span class="p">,</span> <span class="n">param_grid</span><span class="p">,</span> <span class="n">cv</span> <span class="o">=</span> <span class="n">kf</span><span class="p">,</span> <span class="n">scoring</span> <span class="o">=</span> <span class="s1">&#39;r2&#39;</span><span class="p">)</span>
-    <span class="n">grid</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
-    <span class="n">y_pred</span> <span class="o">=</span> <span class="n">grid</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
-    <span class="n">residuals</span> <span class="o">=</span> <span class="n">y_test</span> <span class="o">-</span> <span class="n">y_pred</span>
-    <span class="n">r2</span> <span class="o">=</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
-    <span class="n">mape</span> <span class="o">=</span> <span class="n">MAPE</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
-    <span class="n">rmse</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">squared</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
-    <span class="n">jb_test_stat</span><span class="p">,</span> <span class="n">jb_p_value</span> <span class="o">=</span> <span class="n">jarque_bera</span><span class="p">(</span><span class="n">residuals</span><span class="p">)</span>
-    <span class="n">lb_test</span> <span class="o">=</span> <span class="n">acorr_ljungbox</span><span class="p">(</span><span class="n">residuals</span><span class="p">,</span> <span class="n">lags</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">],</span> <span class="n">return_df</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">ljung_box_p_value</span> <span class="o">=</span> <span class="n">lb_test</span><span class="p">[</span><span class="s1">&#39;lb_pvalue&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">param_space_ridge</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;alpha&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mf">1e-3</span><span class="p">,</span> <span class="mf">1e3</span><span class="p">,</span> <span class="s1">&#39;log-uniform&#39;</span><span class="p">)}</span>  <span class="c1"># Rango para el hiperparámetro alpha</span>
+
+    <span class="n">modelo</span> <span class="o">=</span> <span class="n">Ridge</span><span class="p">()</span>
+
+    <span class="n">bayes_ridge</span> <span class="o">=</span> <span class="n">BayesSearchCV</span><span class="p">(</span><span class="n">estimator</span><span class="o">=</span><span class="n">modelo</span><span class="p">,</span> <span class="n">search_spaces</span><span class="o">=</span><span class="n">param_space_ridge</span><span class="p">,</span> <span class="n">n_iter</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+
+    <span class="n">bayes_ridge</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+    <span class="n">y_train_pred</span> <span class="o">=</span> <span class="n">bayes_ridge</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+    <span class="n">y_pred_ridge</span> <span class="o">=</span> <span class="n">bayes_ridge</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+    <span class="n">residuals</span> <span class="o">=</span> <span class="n">y_test</span> <span class="o">-</span> <span class="n">y_pred_ridge</span>
+
+    <span class="n">r2</span> <span class="o">=</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_ridge</span><span class="p">)</span>
+    <span class="n">mape</span> <span class="o">=</span> <span class="n">MAPE</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_ridge</span><span class="p">)</span>
+    <span class="n">rmse</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_ridge</span><span class="p">))</span>
+
+
+    <span class="n">ljung_box_p_value</span> <span class="o">=</span> <span class="n">acorr_ljungbox</span><span class="p">(</span><span class="n">residuals</span><span class="p">,</span> <span class="n">lags</span><span class="o">=</span><span class="p">[</span><span class="mi">30</span><span class="p">],</span> <span class="n">return_df</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="s1">&#39;lb_pvalue&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">jarque_bera_p_value</span> <span class="o">=</span> <span class="n">jarque_bera</span><span class="p">(</span><span class="n">residuals</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+
     <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
         <span class="s1">&#39;Modelo&#39;</span><span class="p">:</span> <span class="s1">&#39;Ridge Regression&#39;</span><span class="p">,</span>
         <span class="s1">&#39;MAPE&#39;</span><span class="p">:</span> <span class="n">mape</span><span class="p">,</span>
         <span class="s1">&#39;RMSE&#39;</span><span class="p">:</span> <span class="n">rmse</span><span class="p">,</span>
         <span class="s1">&#39;R^2&#39;</span><span class="p">:</span> <span class="n">r2</span><span class="p">,</span>
-        <span class="s2">&quot;Ljung-Box p-value&quot;</span><span class="p">:</span> <span class="n">ljung_box_p_value</span><span class="p">,</span>
-        <span class="s2">&quot;Jarque-Bera p-value&quot;</span><span class="p">:</span> <span class="n">jb_p_value</span>
+        <span class="s1">&#39;Ljung-Box p-value&#39;</span><span class="p">:</span> <span class="n">ljung_box_p_value</span><span class="p">,</span>
+        <span class="s1">&#39;Jarque-Bera p-value&#39;</span><span class="p">:</span> <span class="n">jarque_bera_p_value</span>
     <span class="p">})</span>
-    <span class="n">y_train_pred</span> <span class="o">=</span> <span class="n">grid</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+
     <span class="n">resultados_graficos</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
-        <span class="s1">&#39;nombre_modelo&#39;</span><span class="p">:</span> <span class="s1">&#39;Regresión Ridge&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;nombre_modelo&#39;</span><span class="p">:</span> <span class="s1">&#39;Ridge Regression&#39;</span><span class="p">,</span>
         <span class="s1">&#39;y_train&#39;</span><span class="p">:</span> <span class="n">y_train</span><span class="p">,</span>
         <span class="s1">&#39;y_train_pred&#39;</span><span class="p">:</span> <span class="n">y_train_pred</span><span class="p">,</span>
         <span class="s1">&#39;y_test&#39;</span><span class="p">:</span> <span class="n">y_test</span><span class="p">,</span>
-        <span class="s1">&#39;y_test_pred&#39;</span><span class="p">:</span> <span class="n">y_pred</span><span class="p">,</span>
+        <span class="s1">&#39;y_test_pred&#39;</span><span class="p">:</span> <span class="n">y_pred_ridge</span><span class="p">,</span>
         <span class="s1">&#39;residuos&#39;</span><span class="p">:</span> <span class="n">residuals</span>
     <span class="p">})</span>
 </pre></div>
@@ -972,24 +946,25 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">evaluate_lasso</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">results</span><span class="p">,</span> <span class="n">resultados_graficos</span><span class="p">):</span>
-    <span class="n">pipeline</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([(</span><span class="s1">&#39;scaler&#39;</span><span class="p">,</span> <span class="n">StandardScaler</span><span class="p">()),(</span><span class="s1">&#39;lasso&#39;</span><span class="p">,</span> <span class="n">Lasso</span><span class="p">())])</span>
+    <span class="n">param_space_lasso</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;alpha&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mf">1e-3</span><span class="p">,</span> <span class="mf">1e3</span><span class="p">,</span> <span class="s1">&#39;log-uniform&#39;</span><span class="p">)}</span>  <span class="c1"># Rango para el hiperparámetro alpha</span>
 
-    <span class="n">param_grid</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;lasso__alpha&#39;</span><span class="p">:</span><span class="nb">list</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">1e-3</span><span class="p">,</span> <span class="mf">10.1</span><span class="p">,</span> <span class="mf">1e-1</span><span class="p">))}</span>
+    <span class="n">modelo</span> <span class="o">=</span> <span class="n">Lasso</span><span class="p">(</span><span class="n">max_iter</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>  <span class="c1"># Asegurar convergencia en casos complejos</span>
 
-    <span class="n">kf</span> <span class="o">=</span> <span class="n">KFold</span><span class="p">(</span><span class="n">n_splits</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="n">shuffle</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+    <span class="n">bayes_lasso</span> <span class="o">=</span> <span class="n">BayesSearchCV</span><span class="p">(</span><span class="n">estimator</span><span class="o">=</span><span class="n">modelo</span><span class="p">,</span> <span class="n">search_spaces</span><span class="o">=</span><span class="n">param_space_lasso</span><span class="p">,</span> <span class="n">n_iter</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 
-    <span class="n">grid</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">pipeline</span><span class="p">,</span> <span class="n">param_grid</span><span class="p">,</span> <span class="n">cv</span> <span class="o">=</span> <span class="n">kf</span><span class="p">,</span> <span class="n">scoring</span> <span class="o">=</span> <span class="s1">&#39;r2&#39;</span><span class="p">)</span>
-    <span class="n">grid</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+    <span class="n">bayes_lasso</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 
-    <span class="n">y_pred</span> <span class="o">=</span> <span class="n">grid</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
-    <span class="n">residuals</span> <span class="o">=</span> <span class="n">y_test</span> <span class="o">-</span> <span class="n">y_pred</span>
+    <span class="n">y_train_pred</span> <span class="o">=</span> <span class="n">bayes_lasso</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+    <span class="n">y_pred_lasso</span> <span class="o">=</span> <span class="n">bayes_lasso</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
 
-    <span class="n">r2</span> <span class="o">=</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
-    <span class="n">mape</span> <span class="o">=</span> <span class="n">MAPE</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
-    <span class="n">rmse</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">squared</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
-    <span class="n">jb_test_stat</span><span class="p">,</span> <span class="n">jb_p_value</span> <span class="o">=</span> <span class="n">jarque_bera</span><span class="p">(</span><span class="n">residuals</span><span class="p">)</span>
-    <span class="n">lb_test</span> <span class="o">=</span> <span class="n">acorr_ljungbox</span><span class="p">(</span><span class="n">residuals</span><span class="p">,</span> <span class="n">lags</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">],</span> <span class="n">return_df</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">ljung_box_p_value</span> <span class="o">=</span> <span class="n">lb_test</span><span class="p">[</span><span class="s1">&#39;lb_pvalue&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">residuals</span> <span class="o">=</span> <span class="n">y_test</span> <span class="o">-</span> <span class="n">y_pred_lasso</span>
+
+    <span class="n">r2</span> <span class="o">=</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_lasso</span><span class="p">)</span>
+    <span class="n">mape</span> <span class="o">=</span> <span class="n">MAPE</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_lasso</span><span class="p">)</span>
+    <span class="n">rmse</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_lasso</span><span class="p">))</span>
+    
+    <span class="n">ljung_box_p_value</span> <span class="o">=</span> <span class="n">acorr_ljungbox</span><span class="p">(</span><span class="n">residuals</span><span class="p">,</span> <span class="n">lags</span><span class="o">=</span><span class="p">[</span><span class="mi">30</span><span class="p">],</span> <span class="n">return_df</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="s1">&#39;lb_pvalue&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">jarque_bera_p_value</span> <span class="o">=</span> <span class="n">jarque_bera</span><span class="p">(</span><span class="n">residuals</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
 
     <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
         <span class="s1">&#39;Modelo&#39;</span><span class="p">:</span> <span class="s1">&#39;Lasso Regression&#39;</span><span class="p">,</span>
@@ -997,17 +972,15 @@ document.write(`
         <span class="s1">&#39;RMSE&#39;</span><span class="p">:</span> <span class="n">rmse</span><span class="p">,</span>
         <span class="s1">&#39;R^2&#39;</span><span class="p">:</span> <span class="n">r2</span><span class="p">,</span>
         <span class="s1">&#39;Ljung-Box p-value&#39;</span><span class="p">:</span> <span class="n">ljung_box_p_value</span><span class="p">,</span>
-        <span class="s1">&#39;Jarque-Bera p-value&#39;</span><span class="p">:</span> <span class="n">jb_p_value</span>
+        <span class="s1">&#39;Jarque-Bera p-value&#39;</span><span class="p">:</span> <span class="n">jarque_bera_p_value</span>
     <span class="p">})</span>
-    
-    <span class="n">y_pred_train</span> <span class="o">=</span> <span class="n">grid</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
-    
+
     <span class="n">resultados_graficos</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
-        <span class="s1">&#39;nombre_modelo&#39;</span><span class="p">:</span> <span class="s1">&#39;Regresión Lasso&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;nombre_modelo&#39;</span><span class="p">:</span> <span class="s1">&#39;Lasso Regression&#39;</span><span class="p">,</span>
         <span class="s1">&#39;y_train&#39;</span><span class="p">:</span> <span class="n">y_train</span><span class="p">,</span>
-        <span class="s1">&#39;y_train_pred&#39;</span><span class="p">:</span> <span class="n">y_pred_train</span><span class="p">,</span>
+        <span class="s1">&#39;y_train_pred&#39;</span><span class="p">:</span> <span class="n">y_train_pred</span><span class="p">,</span>
         <span class="s1">&#39;y_test&#39;</span><span class="p">:</span> <span class="n">y_test</span><span class="p">,</span>
-        <span class="s1">&#39;y_test_pred&#39;</span><span class="p">:</span> <span class="n">y_pred</span><span class="p">,</span>
+        <span class="s1">&#39;y_test_pred&#39;</span><span class="p">:</span> <span class="n">y_pred_lasso</span><span class="p">,</span>
         <span class="s1">&#39;residuos&#39;</span><span class="p">:</span> <span class="n">residuals</span>
     <span class="p">})</span>
 </pre></div>
@@ -1017,20 +990,22 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">evaluate_linear</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">results</span><span class="p">,</span> <span class="n">resultados_graficos</span><span class="p">):</span>
-    <span class="n">pipeline</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([</span> <span class="p">(</span><span class="s1">&#39;scaler&#39;</span><span class="p">,</span> <span class="n">StandardScaler</span><span class="p">()),(</span><span class="s1">&#39;linear&#39;</span><span class="p">,</span> <span class="n">LinearRegression</span><span class="p">())])</span>
+    
+    <span class="n">modelo</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span>
+    
+    <span class="n">modelo</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 
-    <span class="n">pipeline</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
-
-    <span class="n">y_pred</span> <span class="o">=</span> <span class="n">pipeline</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+    <span class="n">y_pred</span> <span class="o">=</span> <span class="n">modelo</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+    <span class="n">y_pred_train</span> <span class="o">=</span> <span class="n">modelo</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
     <span class="n">residuals</span> <span class="o">=</span> <span class="n">y_test</span> <span class="o">-</span> <span class="n">y_pred</span>
 
 
     <span class="n">r2</span> <span class="o">=</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
     <span class="n">mape</span> <span class="o">=</span> <span class="n">MAPE</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
     <span class="n">rmse</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">squared</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
-    <span class="n">jb_test_stat</span><span class="p">,</span> <span class="n">jb_p_value</span> <span class="o">=</span> <span class="n">jarque_bera</span><span class="p">(</span><span class="n">residuals</span><span class="p">)</span>
-    <span class="n">lb_test</span> <span class="o">=</span> <span class="n">acorr_ljungbox</span><span class="p">(</span><span class="n">residuals</span><span class="p">,</span> <span class="n">lags</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">],</span> <span class="n">return_df</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">ljung_box_p_value</span> <span class="o">=</span> <span class="n">lb_test</span><span class="p">[</span><span class="s1">&#39;lb_pvalue&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="n">ljung_box_p_value</span> <span class="o">=</span> <span class="n">acorr_ljungbox</span><span class="p">(</span><span class="n">residuals</span><span class="p">,</span> <span class="n">lags</span> <span class="o">=</span> <span class="p">[</span><span class="mi">30</span><span class="p">],</span> <span class="n">return_df</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)[</span><span class="s1">&#39;lb_pvalue&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">jarque_bera_p_value</span> <span class="o">=</span> <span class="n">jarque_bera</span><span class="p">(</span><span class="n">residuals</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>  
 
     <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
         <span class="s1">&#39;Modelo&#39;</span><span class="p">:</span> <span class="s1">&#39;Linear Regression&#39;</span><span class="p">,</span>
@@ -1038,10 +1013,8 @@ document.write(`
         <span class="s1">&#39;RMSE&#39;</span><span class="p">:</span> <span class="n">rmse</span><span class="p">,</span>
         <span class="s1">&#39;R^2&#39;</span><span class="p">:</span> <span class="n">r2</span><span class="p">,</span>
         <span class="s1">&#39;Ljung-Box p-value&#39;</span><span class="p">:</span> <span class="n">ljung_box_p_value</span><span class="p">,</span>
-        <span class="s1">&#39;Jarque-Bera p-value&#39;</span><span class="p">:</span> <span class="n">jb_p_value</span>
+        <span class="s1">&#39;Jarque-Bera p-value&#39;</span><span class="p">:</span> <span class="n">jarque_bera_p_value</span>
     <span class="p">})</span>
-    
-    <span class="n">y_pred_train</span> <span class="o">=</span> <span class="n">pipeline</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
     
     <span class="n">resultados_graficos</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
         <span class="s1">&#39;nombre_modelo&#39;</span><span class="p">:</span> <span class="s1">&#39;Regresión Lineal&#39;</span><span class="p">,</span>
@@ -1058,42 +1031,41 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">evaluate_tree</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">results</span><span class="p">,</span> <span class="n">resultados_graficos</span><span class="p">):</span>
-    <span class="n">pipeline</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([(</span><span class="s1">&#39;scaler&#39;</span><span class="p">,</span> <span class="n">StandardScaler</span><span class="p">()),(</span><span class="s1">&#39;tree&#39;</span><span class="p">,</span> <span class="n">DecisionTreeRegressor</span><span class="p">())])</span>
+    <span class="n">param_space_tree</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;max_depth&#39;</span><span class="p">:</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">20</span><span class="p">),</span> <span class="s1">&#39;min_samples_split&#39;</span><span class="p">:</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">20</span><span class="p">),</span> <span class="s1">&#39;min_samples_leaf&#39;</span><span class="p">:</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">20</span><span class="p">)}</span>
 
-    <span class="n">param_grid</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;tree__max_depth&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">]}</span>
+    <span class="n">modelo</span> <span class="o">=</span> <span class="n">DecisionTreeRegressor</span><span class="p">()</span>
 
-    <span class="n">kf</span> <span class="o">=</span> <span class="n">KFold</span><span class="p">(</span><span class="n">n_splits</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="n">shuffle</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+    <span class="n">bayes_tree</span> <span class="o">=</span> <span class="n">BayesSearchCV</span><span class="p">(</span><span class="n">estimator</span><span class="o">=</span><span class="n">modelo</span><span class="p">,</span> <span class="n">search_spaces</span><span class="o">=</span><span class="n">param_space_tree</span><span class="p">,</span> <span class="n">n_iter</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 
-    <span class="n">grid</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">pipeline</span><span class="p">,</span> <span class="n">param_grid</span><span class="p">,</span> <span class="n">cv</span> <span class="o">=</span> <span class="n">kf</span><span class="p">,</span> <span class="n">scoring</span> <span class="o">=</span> <span class="s1">&#39;r2&#39;</span><span class="p">)</span>
-    <span class="n">grid</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+    <span class="n">bayes_tree</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 
-    <span class="n">y_pred</span> <span class="o">=</span> <span class="n">grid</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
-    <span class="n">residuals</span> <span class="o">=</span> <span class="n">y_test</span> <span class="o">-</span> <span class="n">y_pred</span>
+    <span class="n">y_train_pred</span> <span class="o">=</span> <span class="n">bayes_tree</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+    <span class="n">y_pred_tree</span> <span class="o">=</span> <span class="n">bayes_tree</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
 
-    <span class="n">r2</span> <span class="o">=</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
-    <span class="n">mape</span> <span class="o">=</span> <span class="n">MAPE</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
-    <span class="n">rmse</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">squared</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
-    <span class="n">jb_test_stat</span><span class="p">,</span> <span class="n">jb_p_value</span> <span class="o">=</span> <span class="n">jarque_bera</span><span class="p">(</span><span class="n">residuals</span><span class="p">)</span>
-    <span class="n">lb_test</span> <span class="o">=</span> <span class="n">acorr_ljungbox</span><span class="p">(</span><span class="n">residuals</span><span class="p">,</span> <span class="n">lags</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">],</span> <span class="n">return_df</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">ljung_box_p_value</span> <span class="o">=</span> <span class="n">lb_test</span><span class="p">[</span><span class="s1">&#39;lb_pvalue&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">residuals</span> <span class="o">=</span> <span class="n">y_test</span> <span class="o">-</span> <span class="n">y_pred_tree</span>
+
+    <span class="n">r2</span> <span class="o">=</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_tree</span><span class="p">)</span>
+    <span class="n">mape</span> <span class="o">=</span> <span class="n">MAPE</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_tree</span><span class="p">)</span>
+    <span class="n">rmse</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_tree</span><span class="p">))</span>
+
+    <span class="n">ljung_box_p_value</span> <span class="o">=</span> <span class="n">acorr_ljungbox</span><span class="p">(</span><span class="n">residuals</span><span class="p">,</span> <span class="n">lags</span><span class="o">=</span><span class="p">[</span><span class="mi">30</span><span class="p">],</span> <span class="n">return_df</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="s1">&#39;lb_pvalue&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">jarque_bera_p_value</span> <span class="o">=</span> <span class="n">jarque_bera</span><span class="p">(</span><span class="n">residuals</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
 
     <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
-        <span class="s1">&#39;Modelo&#39;</span><span class="p">:</span> <span class="s1">&#39;Decision Tree&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;Modelo&#39;</span><span class="p">:</span> <span class="s1">&#39;Decision Tree Regressor&#39;</span><span class="p">,</span>
         <span class="s1">&#39;MAPE&#39;</span><span class="p">:</span> <span class="n">mape</span><span class="p">,</span>
         <span class="s1">&#39;RMSE&#39;</span><span class="p">:</span> <span class="n">rmse</span><span class="p">,</span>
         <span class="s1">&#39;R^2&#39;</span><span class="p">:</span> <span class="n">r2</span><span class="p">,</span>
         <span class="s1">&#39;Ljung-Box p-value&#39;</span><span class="p">:</span> <span class="n">ljung_box_p_value</span><span class="p">,</span>
-        <span class="s1">&#39;Jarque-Bera p-value&#39;</span><span class="p">:</span> <span class="n">jb_p_value</span>
+        <span class="s1">&#39;Jarque-Bera p-value&#39;</span><span class="p">:</span> <span class="n">jarque_bera_p_value</span>
     <span class="p">})</span>
-    
-    <span class="n">y_pred_train</span> <span class="o">=</span> <span class="n">grid</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
-    
+
     <span class="n">resultados_graficos</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
-        <span class="s1">&#39;nombre_modelo&#39;</span><span class="p">:</span> <span class="s1">&#39;Tree decision Regressor&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;nombre_modelo&#39;</span><span class="p">:</span> <span class="s1">&#39;Decision Tree Regressor&#39;</span><span class="p">,</span>
         <span class="s1">&#39;y_train&#39;</span><span class="p">:</span> <span class="n">y_train</span><span class="p">,</span>
-        <span class="s1">&#39;y_train_pred&#39;</span><span class="p">:</span> <span class="n">y_pred_train</span><span class="p">,</span>
+        <span class="s1">&#39;y_train_pred&#39;</span><span class="p">:</span> <span class="n">y_train_pred</span><span class="p">,</span>
         <span class="s1">&#39;y_test&#39;</span><span class="p">:</span> <span class="n">y_test</span><span class="p">,</span>
-        <span class="s1">&#39;y_test_pred&#39;</span><span class="p">:</span> <span class="n">y_pred</span><span class="p">,</span>
+        <span class="s1">&#39;y_test_pred&#39;</span><span class="p">:</span> <span class="n">y_pred_tree</span><span class="p">,</span>
         <span class="s1">&#39;residuos&#39;</span><span class="p">:</span> <span class="n">residuals</span>
     <span class="p">})</span>
 </pre></div>
@@ -1103,44 +1075,41 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">evaluate_forest</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">results</span><span class="p">,</span> <span class="n">resultados_graficos</span><span class="p">):</span>
-    <span class="n">pipeline</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([(</span><span class="s1">&#39;scaler&#39;</span><span class="p">,</span> <span class="n">StandardScaler</span><span class="p">()),(</span><span class="s1">&#39;forest&#39;</span><span class="p">,</span> <span class="n">RandomForestRegressor</span><span class="p">())])</span>
+    <span class="n">param_space_rf</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;n_estimators&#39;</span><span class="p">:</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span> <span class="s1">&#39;max_depth&#39;</span><span class="p">:</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span> <span class="p">}</span>
 
-    <span class="n">param_grid</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s1">&#39;forest__n_estimators&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">150</span><span class="p">],</span>
-        <span class="s1">&#39;forest__max_depth&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">]</span>
-    <span class="p">}</span>
+    <span class="n">modelo</span> <span class="o">=</span> <span class="n">RandomForestRegressor</span><span class="p">()</span>
 
-    <span class="n">kf</span> <span class="o">=</span> <span class="n">KFold</span><span class="p">(</span><span class="n">n_splits</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="n">shuffle</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+    <span class="n">bayes_rf</span> <span class="o">=</span> <span class="n">BayesSearchCV</span><span class="p">(</span><span class="n">estimator</span><span class="o">=</span><span class="n">modelo</span><span class="p">,</span> <span class="n">search_spaces</span><span class="o">=</span><span class="n">param_space_rf</span><span class="p">,</span> <span class="n">n_iter</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 
-    <span class="n">grid</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">pipeline</span><span class="p">,</span> <span class="n">param_grid</span><span class="p">,</span> <span class="n">cv</span> <span class="o">=</span> <span class="n">kf</span><span class="p">,</span> <span class="n">scoring</span> <span class="o">=</span> <span class="s1">&#39;r2&#39;</span><span class="p">)</span>
-    <span class="n">grid</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+    <span class="n">bayes_rf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 
-    <span class="n">y_pred</span> <span class="o">=</span> <span class="n">grid</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
-    <span class="n">residuals</span> <span class="o">=</span> <span class="n">y_test</span> <span class="o">-</span> <span class="n">y_pred</span>
+    <span class="n">y_train_pred</span> <span class="o">=</span> <span class="n">bayes_rf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+    <span class="n">y_pred_rf</span> <span class="o">=</span> <span class="n">bayes_rf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
 
-    <span class="n">r2</span> <span class="o">=</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
-    <span class="n">mape</span> <span class="o">=</span> <span class="n">mean_absolute_percentage_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
-    <span class="n">rmse</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">squared</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
-    <span class="n">jb_test_stat</span><span class="p">,</span> <span class="n">jb_p_value</span> <span class="o">=</span> <span class="n">jarque_bera</span><span class="p">(</span><span class="n">residuals</span><span class="p">)</span>
-    <span class="n">lb_test</span> <span class="o">=</span> <span class="n">acorr_ljungbox</span><span class="p">(</span><span class="n">residuals</span><span class="p">,</span> <span class="n">lags</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">],</span> <span class="n">return_df</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">ljung_box_p_value</span> <span class="o">=</span> <span class="n">lb_test</span><span class="p">[</span><span class="s1">&#39;lb_pvalue&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">residuals</span> <span class="o">=</span> <span class="n">y_test</span> <span class="o">-</span> <span class="n">y_pred_rf</span>
+
+    <span class="n">r2</span> <span class="o">=</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_rf</span><span class="p">)</span>
+    <span class="n">mape</span> <span class="o">=</span> <span class="n">MAPE</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_rf</span><span class="p">)</span>
+    <span class="n">rmse</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_rf</span><span class="p">))</span>
+
+    <span class="n">ljung_box_p_value</span> <span class="o">=</span> <span class="n">acorr_ljungbox</span><span class="p">(</span><span class="n">residuals</span><span class="p">,</span> <span class="n">lags</span><span class="o">=</span><span class="p">[</span><span class="mi">30</span><span class="p">],</span> <span class="n">return_df</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="s1">&#39;lb_pvalue&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">jarque_bera_p_value</span> <span class="o">=</span> <span class="n">jarque_bera</span><span class="p">(</span><span class="n">residuals</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+
     <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
-        <span class="s1">&#39;Modelo&#39;</span><span class="p">:</span> <span class="s1">&#39;Random Forest&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;Modelo&#39;</span><span class="p">:</span> <span class="s1">&#39;Random Forest Regressor&#39;</span><span class="p">,</span>
         <span class="s1">&#39;MAPE&#39;</span><span class="p">:</span> <span class="n">mape</span><span class="p">,</span>
         <span class="s1">&#39;RMSE&#39;</span><span class="p">:</span> <span class="n">rmse</span><span class="p">,</span>
         <span class="s1">&#39;R^2&#39;</span><span class="p">:</span> <span class="n">r2</span><span class="p">,</span>
         <span class="s1">&#39;Ljung-Box p-value&#39;</span><span class="p">:</span> <span class="n">ljung_box_p_value</span><span class="p">,</span>
-        <span class="s1">&#39;Jarque-Bera p-value&#39;</span><span class="p">:</span> <span class="n">jb_p_value</span>
+        <span class="s1">&#39;Jarque-Bera p-value&#39;</span><span class="p">:</span> <span class="n">jarque_bera_p_value</span>
     <span class="p">})</span>
 
-    <span class="n">y_pred_train</span> <span class="o">=</span> <span class="n">grid</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
-    
     <span class="n">resultados_graficos</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
         <span class="s1">&#39;nombre_modelo&#39;</span><span class="p">:</span> <span class="s1">&#39;Random Forest Regressor&#39;</span><span class="p">,</span>
         <span class="s1">&#39;y_train&#39;</span><span class="p">:</span> <span class="n">y_train</span><span class="p">,</span>
-        <span class="s1">&#39;y_train_pred&#39;</span><span class="p">:</span> <span class="n">y_pred_train</span><span class="p">,</span>
+        <span class="s1">&#39;y_train_pred&#39;</span><span class="p">:</span> <span class="n">y_train_pred</span><span class="p">,</span>
         <span class="s1">&#39;y_test&#39;</span><span class="p">:</span> <span class="n">y_test</span><span class="p">,</span>
-        <span class="s1">&#39;y_test_pred&#39;</span><span class="p">:</span> <span class="n">y_pred</span><span class="p">,</span>
+        <span class="s1">&#39;y_test_pred&#39;</span><span class="p">:</span> <span class="n">y_pred_rf</span><span class="p">,</span>
         <span class="s1">&#39;residuos&#39;</span><span class="p">:</span> <span class="n">residuals</span>
     <span class="p">})</span>
 </pre></div>
@@ -1150,46 +1119,42 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">evaluate_xgboost</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">results</span><span class="p">,</span> <span class="n">resultados_graficos</span><span class="p">):</span>
-    <span class="n">pipeline</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([(</span><span class="s1">&#39;scaler&#39;</span><span class="p">,</span> <span class="n">StandardScaler</span><span class="p">()),(</span><span class="s1">&#39;xgb&#39;</span><span class="p">,</span> <span class="n">XGBRegressor</span><span class="p">())])</span>
+    <span class="n">param_space_xgb</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;n_estimators&#39;</span><span class="p">:</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span><span class="s1">&#39;max_depth&#39;</span><span class="p">:</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">20</span><span class="p">),</span><span class="s1">&#39;learning_rate&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="s1">&#39;uniform&#39;</span><span class="p">)}</span>
 
-    <span class="n">param_grid</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s1">&#39;xgb__n_estimators&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">50</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">],</span>
-        <span class="s1">&#39;xgb__max_depth&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">],</span>
-        <span class="s1">&#39;xgb__learning_rate&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">]</span>
-    <span class="p">}</span>
+    <span class="n">modelo</span> <span class="o">=</span> <span class="n">XGBRegressor</span><span class="p">()</span>
 
-    <span class="n">kf</span> <span class="o">=</span> <span class="n">KFold</span><span class="p">(</span><span class="n">n_splits</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="n">shuffle</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+    <span class="n">bayes_xgb</span> <span class="o">=</span> <span class="n">BayesSearchCV</span><span class="p">(</span><span class="n">estimator</span><span class="o">=</span><span class="n">modelo</span><span class="p">,</span> <span class="n">search_spaces</span><span class="o">=</span><span class="n">param_space_xgb</span><span class="p">,</span> <span class="n">n_iter</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 
-    <span class="n">grid</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">pipeline</span><span class="p">,</span> <span class="n">param_grid</span><span class="p">,</span> <span class="n">cv</span> <span class="o">=</span> <span class="n">kf</span><span class="p">,</span> <span class="n">scoring</span> <span class="o">=</span> <span class="s1">&#39;r2&#39;</span><span class="p">)</span>
-    <span class="n">grid</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+    <span class="n">bayes_xgb</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 
-    <span class="n">y_pred</span> <span class="o">=</span> <span class="n">grid</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
-    <span class="n">residuals</span> <span class="o">=</span> <span class="n">y_test</span> <span class="o">-</span> <span class="n">y_pred</span>
+    <span class="n">y_train_pred</span> <span class="o">=</span> <span class="n">bayes_xgb</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+    <span class="n">y_pred_xgb</span> <span class="o">=</span> <span class="n">bayes_xgb</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
 
-    <span class="n">r2</span> <span class="o">=</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
-    <span class="n">mape</span> <span class="o">=</span> <span class="n">mean_absolute_percentage_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
-    <span class="n">rmse</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">squared</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
-    <span class="n">jb_test_stat</span><span class="p">,</span> <span class="n">jb_p_value</span> <span class="o">=</span> <span class="n">jarque_bera</span><span class="p">(</span><span class="n">residuals</span><span class="p">)</span>
-    <span class="n">lb_test</span> <span class="o">=</span> <span class="n">acorr_ljungbox</span><span class="p">(</span><span class="n">residuals</span><span class="p">,</span> <span class="n">lags</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">],</span> <span class="n">return_df</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">ljung_box_p_value</span> <span class="o">=</span> <span class="n">lb_test</span><span class="p">[</span><span class="s1">&#39;lb_pvalue&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">residuals</span> <span class="o">=</span> <span class="n">y_test</span> <span class="o">-</span> <span class="n">y_pred_xgb</span>
+
+    <span class="n">r2</span> <span class="o">=</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_xgb</span><span class="p">)</span>
+    <span class="n">mape</span> <span class="o">=</span> <span class="n">MAPE</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_xgb</span><span class="p">)</span>
+    <span class="n">rmse</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_xgb</span><span class="p">))</span>
+    <span class="n">r2_train</span> <span class="o">=</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">y_train</span><span class="p">,</span> <span class="n">y_train_pred</span><span class="p">)</span>
+
+    <span class="n">ljung_box_p_value</span> <span class="o">=</span> <span class="n">acorr_ljungbox</span><span class="p">(</span><span class="n">residuals</span><span class="p">,</span> <span class="n">lags</span><span class="o">=</span><span class="p">[</span><span class="mi">30</span><span class="p">],</span> <span class="n">return_df</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="s1">&#39;lb_pvalue&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">jarque_bera_p_value</span> <span class="o">=</span> <span class="n">jarque_bera</span><span class="p">(</span><span class="n">residuals</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
 
     <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
-        <span class="s1">&#39;Modelo&#39;</span><span class="p">:</span> <span class="s1">&#39;XGBoost&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;Modelo&#39;</span><span class="p">:</span> <span class="s1">&#39;XGBoost Regressor&#39;</span><span class="p">,</span>
         <span class="s1">&#39;MAPE&#39;</span><span class="p">:</span> <span class="n">mape</span><span class="p">,</span>
         <span class="s1">&#39;RMSE&#39;</span><span class="p">:</span> <span class="n">rmse</span><span class="p">,</span>
         <span class="s1">&#39;R^2&#39;</span><span class="p">:</span> <span class="n">r2</span><span class="p">,</span>
         <span class="s1">&#39;Ljung-Box p-value&#39;</span><span class="p">:</span> <span class="n">ljung_box_p_value</span><span class="p">,</span>
-        <span class="s1">&#39;Jarque-Bera p-value&#39;</span><span class="p">:</span> <span class="n">jb_p_value</span>
+        <span class="s1">&#39;Jarque-Bera p-value&#39;</span><span class="p">:</span> <span class="n">jarque_bera_p_value</span>
     <span class="p">})</span>
-    
-    <span class="n">y_pred_train</span> <span class="o">=</span> <span class="n">grid</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
-    
+
     <span class="n">resultados_graficos</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
         <span class="s1">&#39;nombre_modelo&#39;</span><span class="p">:</span> <span class="s1">&#39;XGBoost Regressor&#39;</span><span class="p">,</span>
         <span class="s1">&#39;y_train&#39;</span><span class="p">:</span> <span class="n">y_train</span><span class="p">,</span>
-        <span class="s1">&#39;y_train_pred&#39;</span><span class="p">:</span> <span class="n">y_pred_train</span><span class="p">,</span>
+        <span class="s1">&#39;y_train_pred&#39;</span><span class="p">:</span> <span class="n">y_train_pred</span><span class="p">,</span>
         <span class="s1">&#39;y_test&#39;</span><span class="p">:</span> <span class="n">y_test</span><span class="p">,</span>
-        <span class="s1">&#39;y_test_pred&#39;</span><span class="p">:</span> <span class="n">y_pred</span><span class="p">,</span>
+        <span class="s1">&#39;y_test_pred&#39;</span><span class="p">:</span> <span class="n">y_pred_xgb</span><span class="p">,</span>
         <span class="s1">&#39;residuos&#39;</span><span class="p">:</span> <span class="n">residuals</span>
     <span class="p">})</span>
 </pre></div>
@@ -1199,8 +1164,7 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">evaluate_svr</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">results</span><span class="p">,</span> <span class="n">resultados_graficos</span><span class="p">):</span>
-    <span class="n">pipeline</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([(</span><span class="s1">&#39;scaler&#39;</span><span class="p">,</span> <span class="n">StandardScaler</span><span class="p">()),(</span><span class="s1">&#39;svr&#39;</span><span class="p">,</span> <span class="n">SVR</span><span class="p">())</span>
-    <span class="p">])</span>
+    <span class="n">pipeline</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([(</span><span class="s1">&#39;svr&#39;</span><span class="p">,</span> <span class="n">SVR</span><span class="p">())])</span>
 
     <span class="n">param_grid</span> <span class="o">=</span> <span class="p">{</span>
         <span class="s1">&#39;svr__kernel&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;rbf&#39;</span><span class="p">],</span>
@@ -1335,30 +1299,30 @@ document.write(`
   <tbody>
     <tr>
       <th>0</th>
-      <td>K-NN</td>
-      <td>8.170143</td>
-      <td>1.204795</td>
-      <td>0.927956</td>
-      <td>0.712118</td>
+      <td>K-NN Regressor</td>
+      <td>17.283141</td>
+      <td>1.832996</td>
+      <td>0.833239</td>
+      <td>0.228503</td>
       <td>0.000000e+00</td>
     </tr>
     <tr>
       <th>1</th>
       <td>Ridge Regression</td>
-      <td>32.218242</td>
-      <td>2.983672</td>
-      <td>0.558151</td>
-      <td>0.450426</td>
-      <td>1.730091e-69</td>
+      <td>32.216900</td>
+      <td>2.983645</td>
+      <td>0.558159</td>
+      <td>0.358563</td>
+      <td>1.857820e-69</td>
     </tr>
     <tr>
       <th>2</th>
       <td>Lasso Regression</td>
-      <td>32.214461</td>
-      <td>2.983710</td>
-      <td>0.558140</td>
-      <td>0.449601</td>
-      <td>4.903189e-69</td>
+      <td>32.214455</td>
+      <td>2.983673</td>
+      <td>0.558151</td>
+      <td>0.357589</td>
+      <td>4.102541e-69</td>
     </tr>
     <tr>
       <th>3</th>
@@ -1366,44 +1330,44 @@ document.write(`
       <td>32.212888</td>
       <td>2.983655</td>
       <td>0.558156</td>
-      <td>0.449567</td>
+      <td>0.357182</td>
       <td>4.019790e-69</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>Decision Tree</td>
-      <td>14.608610</td>
-      <td>1.915615</td>
-      <td>0.817867</td>
-      <td>0.655369</td>
+      <td>Decision Tree Regressor</td>
+      <td>15.394982</td>
+      <td>1.896897</td>
+      <td>0.821409</td>
+      <td>0.538631</td>
       <td>0.000000e+00</td>
     </tr>
     <tr>
       <th>5</th>
-      <td>Random Forest</td>
-      <td>0.127716</td>
-      <td>1.505340</td>
-      <td>0.887529</td>
-      <td>0.284184</td>
+      <td>Random Forest Regressor</td>
+      <td>11.892583</td>
+      <td>1.398689</td>
+      <td>0.902901</td>
+      <td>0.132393</td>
       <td>0.000000e+00</td>
     </tr>
     <tr>
       <th>6</th>
-      <td>XGBoost</td>
-      <td>0.111021</td>
-      <td>1.345177</td>
-      <td>0.910189</td>
-      <td>0.420752</td>
+      <td>XGBoost Regressor</td>
+      <td>10.994054</td>
+      <td>1.344034</td>
+      <td>0.910341</td>
+      <td>0.186563</td>
       <td>0.000000e+00</td>
     </tr>
     <tr>
       <th>7</th>
       <td>SVR</td>
-      <td>0.210388</td>
-      <td>2.224428</td>
-      <td>0.754411</td>
-      <td>0.503094</td>
-      <td>3.556490e-158</td>
+      <td>0.234688</td>
+      <td>2.104995</td>
+      <td>0.780075</td>
+      <td>0.600444</td>
+      <td>8.729734e-187</td>
     </tr>
   </tbody>
 </table>
@@ -1422,14 +1386,14 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/bdfc82d5301bc1ccd4d45ff663d420408cff33fcdcf6157cc8a3b14d25ceb171.png" src="_images/bdfc82d5301bc1ccd4d45ff663d420408cff33fcdcf6157cc8a3b14d25ceb171.png" />
-<img alt="_images/fa96ecf773c0a8041b53a505d7f58d99ed7773beda348db73ba8f8c2a7962477.png" src="_images/fa96ecf773c0a8041b53a505d7f58d99ed7773beda348db73ba8f8c2a7962477.png" />
-<img alt="_images/cd29549491a02013ed3010ee935926ba7d52b2144e3f15ca24ca65f15eca6b9f.png" src="_images/cd29549491a02013ed3010ee935926ba7d52b2144e3f15ca24ca65f15eca6b9f.png" />
-<img alt="_images/90ccf3aaa0b260d44c80bd56cbae09565151bcd11fc9192e0ba741c95c55caa7.png" src="_images/90ccf3aaa0b260d44c80bd56cbae09565151bcd11fc9192e0ba741c95c55caa7.png" />
-<img alt="_images/18ac3b478a07fcfed8430b8781180ed5b19a0f4e7744534120dca1bd9b9156b6.png" src="_images/18ac3b478a07fcfed8430b8781180ed5b19a0f4e7744534120dca1bd9b9156b6.png" />
-<img alt="_images/be5fadecac879c50e77fc368eb74ee7da464b5bfc60242250a0b86b6bc88d249.png" src="_images/be5fadecac879c50e77fc368eb74ee7da464b5bfc60242250a0b86b6bc88d249.png" />
-<img alt="_images/b23ac11eedb7c99ba8b17dd994cc4c5fda5b7fa9d55b2ea190a8a07f69fb811e.png" src="_images/b23ac11eedb7c99ba8b17dd994cc4c5fda5b7fa9d55b2ea190a8a07f69fb811e.png" />
-<img alt="_images/bf80e33ed87eb6612cb06a558b826610a80e93a29a3eaf9a7d3c7afcbe3b4dec.png" src="_images/bf80e33ed87eb6612cb06a558b826610a80e93a29a3eaf9a7d3c7afcbe3b4dec.png" />
+<img alt="_images/4f6d6c4627f639f9ecb29acb6aa9087950b844ae9a4549801e161f4b5b477388.png" src="_images/4f6d6c4627f639f9ecb29acb6aa9087950b844ae9a4549801e161f4b5b477388.png" />
+<img alt="_images/3e2af3e07d9c5375d3a7fe7d9e509fccef5756fa52b590e9e545cfaf2453c8ec.png" src="_images/3e2af3e07d9c5375d3a7fe7d9e509fccef5756fa52b590e9e545cfaf2453c8ec.png" />
+<img alt="_images/df28b832696855fb36c4ee5535aff38cdf81ede1b2fdb69221f3ab999b30a297.png" src="_images/df28b832696855fb36c4ee5535aff38cdf81ede1b2fdb69221f3ab999b30a297.png" />
+<img alt="_images/c765b71d5f4fe08fa49bfdb159b0a893092364a41e89b24baef8d3de29a9d77d.png" src="_images/c765b71d5f4fe08fa49bfdb159b0a893092364a41e89b24baef8d3de29a9d77d.png" />
+<img alt="_images/67baf46115492ff2ee81b24ab6173a50e7240a5f348258abf9d8a0718fc086bf.png" src="_images/67baf46115492ff2ee81b24ab6173a50e7240a5f348258abf9d8a0718fc086bf.png" />
+<img alt="_images/da0eef3dfbad2f05eb2f03fb14c0321f1d072c04adbdce7151b0af50b5e5885a.png" src="_images/da0eef3dfbad2f05eb2f03fb14c0321f1d072c04adbdce7151b0af50b5e5885a.png" />
+<img alt="_images/0c5fc2e2f346ed44b6a5fd86692a0636c9c96e8a9ad32cd5a0bd6c94c0dc324c.png" src="_images/0c5fc2e2f346ed44b6a5fd86692a0636c9c96e8a9ad32cd5a0bd6c94c0dc324c.png" />
+<img alt="_images/dcfa3fc5097af23f1ee610d57545d32e0c10d81567fd72129d3128e56c4e4553.png" src="_images/dcfa3fc5097af23f1ee610d57545d32e0c10d81567fd72129d3128e56c4e4553.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1443,14 +1407,14 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/50b2c910aabf0a83c0f0f3d53a8fc4517900cb86702dfb5c513c7c2c163e5baa.png" src="_images/50b2c910aabf0a83c0f0f3d53a8fc4517900cb86702dfb5c513c7c2c163e5baa.png" />
-<img alt="_images/5adc8de36deadd29076ac6529a38451c0fe1cea8d29035b8e0a84c7adc197626.png" src="_images/5adc8de36deadd29076ac6529a38451c0fe1cea8d29035b8e0a84c7adc197626.png" />
-<img alt="_images/40f4c06354fd18c02c969ce10c9f23d69b1da8f89e54769e0cce07f393f75947.png" src="_images/40f4c06354fd18c02c969ce10c9f23d69b1da8f89e54769e0cce07f393f75947.png" />
+<img alt="_images/0d80fdfbd8256db316158f866eefabebbd354ee30c2fdbf32b04e632d45d2ba7.png" src="_images/0d80fdfbd8256db316158f866eefabebbd354ee30c2fdbf32b04e632d45d2ba7.png" />
+<img alt="_images/cebb67b43a991b2f00728b7b9c5ff09022e695d67ff1838abfcf21027128f120.png" src="_images/cebb67b43a991b2f00728b7b9c5ff09022e695d67ff1838abfcf21027128f120.png" />
+<img alt="_images/cfc3a267e9822ad1b57b0cbeaf09994fe3d5882a7218fefe5f25a502e080a7eb.png" src="_images/cfc3a267e9822ad1b57b0cbeaf09994fe3d5882a7218fefe5f25a502e080a7eb.png" />
 <img alt="_images/bdb350e4b0f0f52aeeb38b75c87118765cad8c58e8c11e4a8717c6e0a642fa44.png" src="_images/bdb350e4b0f0f52aeeb38b75c87118765cad8c58e8c11e4a8717c6e0a642fa44.png" />
-<img alt="_images/aeea360c96fdfa843c0a3da0b12a86a802861b695baea87ca71b4a9a1a580d46.png" src="_images/aeea360c96fdfa843c0a3da0b12a86a802861b695baea87ca71b4a9a1a580d46.png" />
-<img alt="_images/892e66dad246d07dc36dd1913179519ba0eeff7e4de3b0f47c7f594efe49aad8.png" src="_images/892e66dad246d07dc36dd1913179519ba0eeff7e4de3b0f47c7f594efe49aad8.png" />
-<img alt="_images/779b527628e5285bad5b60126e207d36283fc98f239b0dc688e4a9a12820c426.png" src="_images/779b527628e5285bad5b60126e207d36283fc98f239b0dc688e4a9a12820c426.png" />
-<img alt="_images/4d8c9d61d25eda767f7a1e7a747f6d3cbe51207585980b9cf241f3be23d6c54d.png" src="_images/4d8c9d61d25eda767f7a1e7a747f6d3cbe51207585980b9cf241f3be23d6c54d.png" />
+<img alt="_images/921a863add7cc81a62ae36c0f6665a88453219870358f68492b3702a6dd75c29.png" src="_images/921a863add7cc81a62ae36c0f6665a88453219870358f68492b3702a6dd75c29.png" />
+<img alt="_images/84c558ed29634300557140b9c02318958564f813b2a29fe47bbecee81c177336.png" src="_images/84c558ed29634300557140b9c02318958564f813b2a29fe47bbecee81c177336.png" />
+<img alt="_images/898b70b5ed30d4479aff074df1424d8257ab72765ce6e16f90cff6c369d54d05.png" src="_images/898b70b5ed30d4479aff074df1424d8257ab72765ce6e16f90cff6c369d54d05.png" />
+<img alt="_images/72fd9750bf2b614c6f3e7499c1846b359b7cc1a092481cdcc06c8b6d694155a5.png" src="_images/72fd9750bf2b614c6f3e7499c1846b359b7cc1a092481cdcc06c8b6d694155a5.png" />
 </div>
 </div>
 </section>
@@ -1519,30 +1483,30 @@ document.write(`
   <tbody>
     <tr>
       <th>0</th>
-      <td>K-NN</td>
-      <td>8.239754</td>
-      <td>1.193317</td>
-      <td>0.927750</td>
-      <td>0.699033</td>
+      <td>K-NN Regressor</td>
+      <td>17.425535</td>
+      <td>1.815518</td>
+      <td>0.832765</td>
+      <td>0.228043</td>
       <td>0.000000e+00</td>
     </tr>
     <tr>
       <th>1</th>
       <td>Ridge Regression</td>
-      <td>32.354650</td>
-      <td>2.949732</td>
-      <td>0.558541</td>
-      <td>0.451696</td>
-      <td>5.893567e-70</td>
+      <td>32.352281</td>
+      <td>2.949706</td>
+      <td>0.558548</td>
+      <td>0.344230</td>
+      <td>7.571024e-70</td>
     </tr>
     <tr>
       <th>2</th>
       <td>Lasso Regression</td>
-      <td>32.350837</td>
-      <td>2.949770</td>
-      <td>0.558529</td>
-      <td>0.450837</td>
-      <td>1.703740e-69</td>
+      <td>32.350785</td>
+      <td>2.949733</td>
+      <td>0.558540</td>
+      <td>0.343562</td>
+      <td>1.417559e-69</td>
     </tr>
     <tr>
       <th>3</th>
@@ -1550,44 +1514,44 @@ document.write(`
       <td>32.349087</td>
       <td>2.949714</td>
       <td>0.558546</td>
-      <td>0.450804</td>
+      <td>0.343160</td>
       <td>1.392381e-69</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>Decision Tree</td>
-      <td>14.628296</td>
-      <td>1.887265</td>
-      <td>0.819286</td>
-      <td>0.262838</td>
+      <td>Decision Tree Regressor</td>
+      <td>16.866256</td>
+      <td>1.922205</td>
+      <td>0.812533</td>
+      <td>0.584720</td>
       <td>0.000000e+00</td>
     </tr>
     <tr>
       <th>5</th>
-      <td>Random Forest</td>
-      <td>0.130011</td>
-      <td>1.491880</td>
-      <td>0.887074</td>
-      <td>0.317484</td>
+      <td>Random Forest Regressor</td>
+      <td>12.199308</td>
+      <td>1.389319</td>
+      <td>0.902067</td>
+      <td>0.260927</td>
       <td>0.000000e+00</td>
     </tr>
     <tr>
       <th>6</th>
-      <td>XGBoost</td>
-      <td>0.112810</td>
-      <td>1.342296</td>
-      <td>0.908584</td>
-      <td>0.340044</td>
+      <td>XGBoost Regressor</td>
+      <td>11.555407</td>
+      <td>1.360267</td>
+      <td>0.906120</td>
+      <td>0.204078</td>
       <td>0.000000e+00</td>
     </tr>
     <tr>
       <th>7</th>
       <td>SVR</td>
-      <td>0.211875</td>
-      <td>2.203696</td>
-      <td>0.753607</td>
-      <td>0.501667</td>
-      <td>9.112736e-159</td>
+      <td>0.236795</td>
+      <td>2.083249</td>
+      <td>0.779805</td>
+      <td>0.602634</td>
+      <td>3.242233e-186</td>
     </tr>
   </tbody>
 </table>
@@ -1606,14 +1570,14 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/e17fc3f2088162d27a6889598f0862d0b685d6f59e0d75e1e78cafce18f989a7.png" src="_images/e17fc3f2088162d27a6889598f0862d0b685d6f59e0d75e1e78cafce18f989a7.png" />
-<img alt="_images/ef322dbc0da53ea5d8cae6bd35062a46052b72265b4d53157ce98de6c1921dd2.png" src="_images/ef322dbc0da53ea5d8cae6bd35062a46052b72265b4d53157ce98de6c1921dd2.png" />
-<img alt="_images/793e7c5e901011abb757f6a5c769b0563eeea3b88ab609363888fe9e46bbda04.png" src="_images/793e7c5e901011abb757f6a5c769b0563eeea3b88ab609363888fe9e46bbda04.png" />
-<img alt="_images/dc2fd23ca7295bbf232972e9a4e1e2fdc506b46100d76493c1a195c214ce1082.png" src="_images/dc2fd23ca7295bbf232972e9a4e1e2fdc506b46100d76493c1a195c214ce1082.png" />
-<img alt="_images/fa13b182e3ecea4f0b4d6dc089d570fc5007cc464c987db5a2ef137009102b7a.png" src="_images/fa13b182e3ecea4f0b4d6dc089d570fc5007cc464c987db5a2ef137009102b7a.png" />
-<img alt="_images/2510867aabbd14d87626446beedd4c2693b3915785cf52e78778f6a1375e1890.png" src="_images/2510867aabbd14d87626446beedd4c2693b3915785cf52e78778f6a1375e1890.png" />
-<img alt="_images/86fac5dca22235b1e45d0e0575d726cd770c94d0888f249eb10f658b3b6262cf.png" src="_images/86fac5dca22235b1e45d0e0575d726cd770c94d0888f249eb10f658b3b6262cf.png" />
-<img alt="_images/66a7042909f52a11515c49da5728e700827bf37c5732eea85903fd1c9a75c080.png" src="_images/66a7042909f52a11515c49da5728e700827bf37c5732eea85903fd1c9a75c080.png" />
+<img alt="_images/ce3b6ef4caf736854bc14ba4a0cd60d8449f246458934270b32c94bea26d094a.png" src="_images/ce3b6ef4caf736854bc14ba4a0cd60d8449f246458934270b32c94bea26d094a.png" />
+<img alt="_images/effaf090fef34f2a23a2bc81135cd6033fbf04e357aac0ae5510bdac501c65b9.png" src="_images/effaf090fef34f2a23a2bc81135cd6033fbf04e357aac0ae5510bdac501c65b9.png" />
+<img alt="_images/e0c7d02077c6297adf540f48857f84acd373542ad93b86eb356c2d0d36e24747.png" src="_images/e0c7d02077c6297adf540f48857f84acd373542ad93b86eb356c2d0d36e24747.png" />
+<img alt="_images/c2dad46d392352f530159b7bacdf80176e2cf6b57e0d3c09550144bc9fe21809.png" src="_images/c2dad46d392352f530159b7bacdf80176e2cf6b57e0d3c09550144bc9fe21809.png" />
+<img alt="_images/49c39bbb1c012d03f0931d1bb6ec5ec104f225693e0ef3be5c0899ea359344a1.png" src="_images/49c39bbb1c012d03f0931d1bb6ec5ec104f225693e0ef3be5c0899ea359344a1.png" />
+<img alt="_images/7aeee59b7d18223d05ef54623d72525b0455b61aefdf2fdc80137f45f27d5d3f.png" src="_images/7aeee59b7d18223d05ef54623d72525b0455b61aefdf2fdc80137f45f27d5d3f.png" />
+<img alt="_images/1193aff7aeef71e405e0be1ac06697e442b8498af8f20e9d7fe551c16a89aac8.png" src="_images/1193aff7aeef71e405e0be1ac06697e442b8498af8f20e9d7fe551c16a89aac8.png" />
+<img alt="_images/e6ccdd42e8f03d04df4dfddb805d5df83142fe9526c55cc1d5b8157ac288548d.png" src="_images/e6ccdd42e8f03d04df4dfddb805d5df83142fe9526c55cc1d5b8157ac288548d.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1627,14 +1591,14 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/7cd3b5a3a05950f98b68c89f6aa2f88ee7adc83b582a18c26559709d12780286.png" src="_images/7cd3b5a3a05950f98b68c89f6aa2f88ee7adc83b582a18c26559709d12780286.png" />
-<img alt="_images/8607e7d02d2be8d607f631d984c0e27557b716a2a540078af5354b8a120d0bdc.png" src="_images/8607e7d02d2be8d607f631d984c0e27557b716a2a540078af5354b8a120d0bdc.png" />
-<img alt="_images/571f981e0e6be758b7f79048cefa3aabc73d6771b0d01c794893dc7865922a0a.png" src="_images/571f981e0e6be758b7f79048cefa3aabc73d6771b0d01c794893dc7865922a0a.png" />
+<img alt="_images/a6d6d274befc087d5cd56344ac38e1aee8f882cb20ce414f1c939a4ab560069e.png" src="_images/a6d6d274befc087d5cd56344ac38e1aee8f882cb20ce414f1c939a4ab560069e.png" />
+<img alt="_images/8665e13cd3e33430c49606f2d96745360351908c40a61361d7bfa799ed8d1bcd.png" src="_images/8665e13cd3e33430c49606f2d96745360351908c40a61361d7bfa799ed8d1bcd.png" />
+<img alt="_images/25fb5940a4d1a6c1ef6766862186ed9bcba60990918712bd64a4e49a93ab69cd.png" src="_images/25fb5940a4d1a6c1ef6766862186ed9bcba60990918712bd64a4e49a93ab69cd.png" />
 <img alt="_images/b0ea9a94079c8edddbbda1979feb4a7fcfe9cf15214d5339df59c89e3e34a4c4.png" src="_images/b0ea9a94079c8edddbbda1979feb4a7fcfe9cf15214d5339df59c89e3e34a4c4.png" />
-<img alt="_images/91bc57a36a2721aba1dc95d39d9449b37ad5ba825ffbe8b7cf96b6e2c0e79630.png" src="_images/91bc57a36a2721aba1dc95d39d9449b37ad5ba825ffbe8b7cf96b6e2c0e79630.png" />
-<img alt="_images/342d23511d52b88b0c91c4f424e99a503002773931707d23e6ccb3ecee02661f.png" src="_images/342d23511d52b88b0c91c4f424e99a503002773931707d23e6ccb3ecee02661f.png" />
-<img alt="_images/181c4590ea794520eb9f9eca8f9d75bfe6d33e861e6a8b2ec571f340ce08b07a.png" src="_images/181c4590ea794520eb9f9eca8f9d75bfe6d33e861e6a8b2ec571f340ce08b07a.png" />
-<img alt="_images/6ccf8e90eb080099ede140291aac47116a2a7a37b9ad9997f0bad068b7432f8b.png" src="_images/6ccf8e90eb080099ede140291aac47116a2a7a37b9ad9997f0bad068b7432f8b.png" />
+<img alt="_images/ddce342ed278628f0a8e7643cf1b6259d7415b4ffb4ec5dec3ba6f920e823c0a.png" src="_images/ddce342ed278628f0a8e7643cf1b6259d7415b4ffb4ec5dec3ba6f920e823c0a.png" />
+<img alt="_images/79fd47d9497a14116da13a0e995f5339b8b45216c5b13fe45fe21dce4f24a017.png" src="_images/79fd47d9497a14116da13a0e995f5339b8b45216c5b13fe45fe21dce4f24a017.png" />
+<img alt="_images/346353a418f610684bebc8abfdceafb6ac1b659727bca6e8506b69f3335acb1d.png" src="_images/346353a418f610684bebc8abfdceafb6ac1b659727bca6e8506b69f3335acb1d.png" />
+<img alt="_images/a318c6b29653ba4b1c16fd2338f5c6b940724d4033139deecd1431e69bb4887e.png" src="_images/a318c6b29653ba4b1c16fd2338f5c6b940724d4033139deecd1431e69bb4887e.png" />
 </div>
 </div>
 </section>
@@ -1703,30 +1667,30 @@ document.write(`
   <tbody>
     <tr>
       <th>0</th>
-      <td>K-NN</td>
-      <td>8.358144</td>
-      <td>1.158691</td>
-      <td>0.928144</td>
-      <td>0.865322</td>
+      <td>K-NN Regressor</td>
+      <td>18.056679</td>
+      <td>1.799872</td>
+      <td>0.826614</td>
+      <td>0.009001</td>
       <td>0.000000e+00</td>
     </tr>
     <tr>
       <th>1</th>
       <td>Ridge Regression</td>
-      <td>32.314343</td>
-      <td>2.872271</td>
-      <td>0.558449</td>
-      <td>0.433729</td>
-      <td>3.236977e-68</td>
+      <td>32.311663</td>
+      <td>2.872244</td>
+      <td>0.558457</td>
+      <td>0.458802</td>
+      <td>4.262188e-68</td>
     </tr>
     <tr>
       <th>2</th>
       <td>Lasso Regression</td>
-      <td>32.310101</td>
-      <td>2.872316</td>
-      <td>0.558435</td>
-      <td>0.432956</td>
-      <td>1.037228e-67</td>
+      <td>32.309821</td>
+      <td>2.872276</td>
+      <td>0.558448</td>
+      <td>0.457919</td>
+      <td>8.775526e-68</td>
     </tr>
     <tr>
       <th>3</th>
@@ -1734,44 +1698,44 @@ document.write(`
       <td>32.307985</td>
       <td>2.872257</td>
       <td>0.558453</td>
-      <td>0.432788</td>
+      <td>0.457430</td>
       <td>8.671614e-68</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>Decision Tree</td>
-      <td>14.714522</td>
-      <td>1.854332</td>
-      <td>0.815963</td>
-      <td>0.425502</td>
+      <td>Decision Tree Regressor</td>
+      <td>15.499414</td>
+      <td>1.826902</td>
+      <td>0.821368</td>
+      <td>0.577910</td>
       <td>0.000000e+00</td>
     </tr>
     <tr>
       <th>5</th>
-      <td>Random Forest</td>
-      <td>0.127730</td>
-      <td>1.451526</td>
-      <td>0.887234</td>
-      <td>0.155106</td>
+      <td>Random Forest Regressor</td>
+      <td>12.049813</td>
+      <td>1.355316</td>
+      <td>0.901687</td>
+      <td>0.339361</td>
       <td>0.000000e+00</td>
     </tr>
     <tr>
       <th>6</th>
-      <td>XGBoost</td>
-      <td>0.117078</td>
-      <td>1.360584</td>
-      <td>0.900921</td>
-      <td>0.323485</td>
+      <td>XGBoost Regressor</td>
+      <td>11.355959</td>
+      <td>1.332096</td>
+      <td>0.905027</td>
+      <td>0.562679</td>
       <td>0.000000e+00</td>
     </tr>
     <tr>
       <th>7</th>
       <td>SVR</td>
-      <td>0.207560</td>
-      <td>2.128939</td>
-      <td>0.757419</td>
-      <td>0.388942</td>
-      <td>8.076865e-167</td>
+      <td>0.237329</td>
+      <td>2.038345</td>
+      <td>0.777625</td>
+      <td>0.531900</td>
+      <td>3.018409e-193</td>
     </tr>
   </tbody>
 </table>
@@ -1790,14 +1754,14 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/995beca4312aa4045c62367cb8732a4fd61db76502224c7fd0e334dd54a7c16b.png" src="_images/995beca4312aa4045c62367cb8732a4fd61db76502224c7fd0e334dd54a7c16b.png" />
-<img alt="_images/313e6ccfd5fe8c7b0a9861af6bbdc5d60e573e47aee0a0634fa9c1277f5c305f.png" src="_images/313e6ccfd5fe8c7b0a9861af6bbdc5d60e573e47aee0a0634fa9c1277f5c305f.png" />
-<img alt="_images/baddb37e46513181d4145b5e71e9036c6e0ef3f5ce7a12cd313dc3a049d32693.png" src="_images/baddb37e46513181d4145b5e71e9036c6e0ef3f5ce7a12cd313dc3a049d32693.png" />
-<img alt="_images/58317ce77a3b44149818cc8f1f8ec6ebfc451c9c2ba68e5de8f6c6326e4affe5.png" src="_images/58317ce77a3b44149818cc8f1f8ec6ebfc451c9c2ba68e5de8f6c6326e4affe5.png" />
-<img alt="_images/6fdf6fe0445926b239a4adf04b7aa4c891e97d6c036cf0d71871cb9011b9cf35.png" src="_images/6fdf6fe0445926b239a4adf04b7aa4c891e97d6c036cf0d71871cb9011b9cf35.png" />
-<img alt="_images/f3bc017dd0f0551db209e88e0c7b6cfd3e47d6e813480b8996971b8b7c0ba49d.png" src="_images/f3bc017dd0f0551db209e88e0c7b6cfd3e47d6e813480b8996971b8b7c0ba49d.png" />
-<img alt="_images/41e5ad07fe1a55930dc295b548068c1c99d9950e8c39f174768ed9b09f80bc08.png" src="_images/41e5ad07fe1a55930dc295b548068c1c99d9950e8c39f174768ed9b09f80bc08.png" />
-<img alt="_images/b0c13fd9b387a41adffcbf6dbdc718260eeceb014e32a5441961f1b4865a863c.png" src="_images/b0c13fd9b387a41adffcbf6dbdc718260eeceb014e32a5441961f1b4865a863c.png" />
+<img alt="_images/6b582ea334a22ba04233ade2f97578f879576b4efc385ef7033604e86510ba38.png" src="_images/6b582ea334a22ba04233ade2f97578f879576b4efc385ef7033604e86510ba38.png" />
+<img alt="_images/6560283c85e715ad118bc9370dc3d7d6ead32e82ccf1eb1b85e4bdc09c6f284a.png" src="_images/6560283c85e715ad118bc9370dc3d7d6ead32e82ccf1eb1b85e4bdc09c6f284a.png" />
+<img alt="_images/bece8e852c4387b6dbc435d2ad42abbcaeb9e5c40b925f72e28dcdfb6f5b2d3e.png" src="_images/bece8e852c4387b6dbc435d2ad42abbcaeb9e5c40b925f72e28dcdfb6f5b2d3e.png" />
+<img alt="_images/9f4377e3ca4ac3d2f85ad5f40f06f3d3cc34da017af38b5cb957010022dbf4fc.png" src="_images/9f4377e3ca4ac3d2f85ad5f40f06f3d3cc34da017af38b5cb957010022dbf4fc.png" />
+<img alt="_images/5c81062eaf5ca351c304223fc8603eff0658d81970c4acb6c3dd76cedf34c4a2.png" src="_images/5c81062eaf5ca351c304223fc8603eff0658d81970c4acb6c3dd76cedf34c4a2.png" />
+<img alt="_images/2544a8eae57e425e88fd7d3142eed69920ecd987c85ccdbd7e2943c67084a468.png" src="_images/2544a8eae57e425e88fd7d3142eed69920ecd987c85ccdbd7e2943c67084a468.png" />
+<img alt="_images/c5f15817dd46bbdd259bbecae5e4cc3e4f95b4a8b30f0e935e917b78e19f7689.png" src="_images/c5f15817dd46bbdd259bbecae5e4cc3e4f95b4a8b30f0e935e917b78e19f7689.png" />
+<img alt="_images/b6616421ece6e923fce72f75a4512c794fa809af042f33e5b677b956c0ffa662.png" src="_images/b6616421ece6e923fce72f75a4512c794fa809af042f33e5b677b956c0ffa662.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1811,14 +1775,14 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/c87c5ee14b6dd622dabeb6268a41e976825a11724048beb761549c6f76e9c295.png" src="_images/c87c5ee14b6dd622dabeb6268a41e976825a11724048beb761549c6f76e9c295.png" />
-<img alt="_images/eb14ebd299fa68369ed850f79fd1e32a52285afd3573632f9991b9763c1efe52.png" src="_images/eb14ebd299fa68369ed850f79fd1e32a52285afd3573632f9991b9763c1efe52.png" />
-<img alt="_images/715f27489709091cb59748666d14c8a8db535a7feb14ca83438bd47a004496d7.png" src="_images/715f27489709091cb59748666d14c8a8db535a7feb14ca83438bd47a004496d7.png" />
+<img alt="_images/6b2004b5d41f69880ee82d8fb8fc711482b1758a2cab5fad196cb647c6e62971.png" src="_images/6b2004b5d41f69880ee82d8fb8fc711482b1758a2cab5fad196cb647c6e62971.png" />
+<img alt="_images/94ced3cfaf21a4ccf2bab1b8d81722030792a21a05bc67ed2e9978660d413c0c.png" src="_images/94ced3cfaf21a4ccf2bab1b8d81722030792a21a05bc67ed2e9978660d413c0c.png" />
+<img alt="_images/b7244dcf27524d4d87473f41705574fd7734abad1ae4d5cb9e9a3e8cf42d14e8.png" src="_images/b7244dcf27524d4d87473f41705574fd7734abad1ae4d5cb9e9a3e8cf42d14e8.png" />
 <img alt="_images/b60cbcd762661976a8850c40fcbcb58ccafc8f21fd8bc23c58aede600bc5663f.png" src="_images/b60cbcd762661976a8850c40fcbcb58ccafc8f21fd8bc23c58aede600bc5663f.png" />
-<img alt="_images/ba7bceb87c2f56e729bcfed36e4adb08347bace00e4506b884ce2d4af5a657ef.png" src="_images/ba7bceb87c2f56e729bcfed36e4adb08347bace00e4506b884ce2d4af5a657ef.png" />
-<img alt="_images/de83620762638fc749ee69824f69e0ae85165fa965b6cd813072ee3d14bf5936.png" src="_images/de83620762638fc749ee69824f69e0ae85165fa965b6cd813072ee3d14bf5936.png" />
-<img alt="_images/7422e3424f0b98823a9a9c12d2f04c62434069d7854f58d3c696830764e378ff.png" src="_images/7422e3424f0b98823a9a9c12d2f04c62434069d7854f58d3c696830764e378ff.png" />
-<img alt="_images/e68e51e9b5c873a920f31b4f357e8ff5a17de31b088e3b4d2dbcba76f62da397.png" src="_images/e68e51e9b5c873a920f31b4f357e8ff5a17de31b088e3b4d2dbcba76f62da397.png" />
+<img alt="_images/d1aba38293cd7209627066b7bbea1cbf4f8eab95dd0fb0f262bf1c0614d364fc.png" src="_images/d1aba38293cd7209627066b7bbea1cbf4f8eab95dd0fb0f262bf1c0614d364fc.png" />
+<img alt="_images/1512f5fba6dca7d1afa24e9de689af10b5e4e687e837b0a24b8d6ba8243708f3.png" src="_images/1512f5fba6dca7d1afa24e9de689af10b5e4e687e837b0a24b8d6ba8243708f3.png" />
+<img alt="_images/36af33c30a6970de969dc892e5a336306be88ec446f3ae7f0f651538f2cb7df5.png" src="_images/36af33c30a6970de969dc892e5a336306be88ec446f3ae7f0f651538f2cb7df5.png" />
+<img alt="_images/68ce601d3eca7a67a570239800c8d1f78d2869da706106fc1eb32969d6f808ed.png" src="_images/68ce601d3eca7a67a570239800c8d1f78d2869da706106fc1eb32969d6f808ed.png" />
 </div>
 </div>
 </section>
@@ -1887,30 +1851,30 @@ document.write(`
   <tbody>
     <tr>
       <th>0</th>
-      <td>K-NN</td>
-      <td>8.324089</td>
-      <td>1.156131</td>
-      <td>0.928070</td>
-      <td>0.856604</td>
+      <td>K-NN Regressor</td>
+      <td>17.955293</td>
+      <td>1.796312</td>
+      <td>0.826355</td>
+      <td>0.010794</td>
       <td>0.000000e+00</td>
     </tr>
     <tr>
       <th>1</th>
       <td>Ridge Regression</td>
-      <td>32.001932</td>
-      <td>2.859538</td>
-      <td>0.559962</td>
-      <td>0.436231</td>
-      <td>1.303787e-68</td>
+      <td>31.999951</td>
+      <td>2.859510</td>
+      <td>0.559971</td>
+      <td>0.433718</td>
+      <td>1.524338e-68</td>
     </tr>
     <tr>
       <th>2</th>
       <td>Lasso Regression</td>
-      <td>31.997784</td>
-      <td>2.859583</td>
-      <td>0.559948</td>
-      <td>0.435434</td>
-      <td>4.170503e-68</td>
+      <td>31.997537</td>
+      <td>2.859544</td>
+      <td>0.559961</td>
+      <td>0.432626</td>
+      <td>3.533504e-68</td>
     </tr>
     <tr>
       <th>3</th>
@@ -1918,44 +1882,44 @@ document.write(`
       <td>31.995739</td>
       <td>2.859525</td>
       <td>0.559966</td>
-      <td>0.435269</td>
+      <td>0.432138</td>
       <td>3.492348e-68</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>Decision Tree</td>
-      <td>14.731821</td>
-      <td>1.879576</td>
-      <td>0.809884</td>
-      <td>0.710458</td>
+      <td>Decision Tree Regressor</td>
+      <td>15.732693</td>
+      <td>1.869437</td>
+      <td>0.811930</td>
+      <td>0.129926</td>
       <td>0.000000e+00</td>
     </tr>
     <tr>
       <th>5</th>
-      <td>Random Forest</td>
-      <td>0.127688</td>
-      <td>1.445338</td>
-      <td>0.887582</td>
-      <td>0.136359</td>
+      <td>Random Forest Regressor</td>
+      <td>12.044173</td>
+      <td>1.357483</td>
+      <td>0.900833</td>
+      <td>0.325376</td>
       <td>0.000000e+00</td>
     </tr>
     <tr>
       <th>6</th>
-      <td>XGBoost</td>
-      <td>0.111950</td>
-      <td>1.302750</td>
-      <td>0.908669</td>
-      <td>0.276298</td>
+      <td>XGBoost Regressor</td>
+      <td>11.040679</td>
+      <td>1.296130</td>
+      <td>0.909594</td>
+      <td>0.269406</td>
       <td>0.000000e+00</td>
     </tr>
     <tr>
       <th>7</th>
       <td>SVR</td>
-      <td>0.206998</td>
-      <td>2.125639</td>
-      <td>0.756848</td>
-      <td>0.383440</td>
-      <td>2.054165e-164</td>
+      <td>0.236028</td>
+      <td>2.034317</td>
+      <td>0.777292</td>
+      <td>0.574872</td>
+      <td>1.125601e-193</td>
     </tr>
   </tbody>
 </table>
@@ -1974,14 +1938,14 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/ee916afbc097dcaf59d5571bca5ed2dfb15bb959479fc795e2f76628a5ca7b23.png" src="_images/ee916afbc097dcaf59d5571bca5ed2dfb15bb959479fc795e2f76628a5ca7b23.png" />
-<img alt="_images/d7b680549c8e4858960bec174f1d611d10a7ad5088f755b5efa2efe804069590.png" src="_images/d7b680549c8e4858960bec174f1d611d10a7ad5088f755b5efa2efe804069590.png" />
-<img alt="_images/e3ee4f4096a240602c548ed1b3939afad9dcede8f994de3e30f63ab871d23ebc.png" src="_images/e3ee4f4096a240602c548ed1b3939afad9dcede8f994de3e30f63ab871d23ebc.png" />
-<img alt="_images/67ccdd2edef86931594cb9227fffd905f7b188d0a8ca3f3875fda2418f9a1c7b.png" src="_images/67ccdd2edef86931594cb9227fffd905f7b188d0a8ca3f3875fda2418f9a1c7b.png" />
-<img alt="_images/d8578e18e6058357b109885563231d9a46baf253cbf70e7db1bae40e143a4fde.png" src="_images/d8578e18e6058357b109885563231d9a46baf253cbf70e7db1bae40e143a4fde.png" />
-<img alt="_images/e20bf9fef53285d2087a2d257adf9ac03eb9f7458288b1452fee1c618eea61aa.png" src="_images/e20bf9fef53285d2087a2d257adf9ac03eb9f7458288b1452fee1c618eea61aa.png" />
-<img alt="_images/539e6049f310fbff7fdaee6ae082029d9abcff9f66116baf6da83611a7331400.png" src="_images/539e6049f310fbff7fdaee6ae082029d9abcff9f66116baf6da83611a7331400.png" />
-<img alt="_images/2a0a5de73aa15dc876fcd059133e2cd871fe791c21c6c55639ddcd966807cf31.png" src="_images/2a0a5de73aa15dc876fcd059133e2cd871fe791c21c6c55639ddcd966807cf31.png" />
+<img alt="_images/b1afca4497f42ed98232d5d58295bed61d9defb7ed214b8b7261ff7919dcebf4.png" src="_images/b1afca4497f42ed98232d5d58295bed61d9defb7ed214b8b7261ff7919dcebf4.png" />
+<img alt="_images/66c230b23b37949cf36a7eed0452d269d41a6937dcf8a4e4439a11643df9201d.png" src="_images/66c230b23b37949cf36a7eed0452d269d41a6937dcf8a4e4439a11643df9201d.png" />
+<img alt="_images/ffef47f1bc4c5ea987b94507395130a70859df8e826726c1a61012e337451ccf.png" src="_images/ffef47f1bc4c5ea987b94507395130a70859df8e826726c1a61012e337451ccf.png" />
+<img alt="_images/6c5d9ce222f674fedc967a1b25d6d2797c9f84c1e460c78a2e3c1dbeca44e7e5.png" src="_images/6c5d9ce222f674fedc967a1b25d6d2797c9f84c1e460c78a2e3c1dbeca44e7e5.png" />
+<img alt="_images/ecf77d59a7114381dbb80fd11c788724756480ff7c53be8c9278a36de8cbdf20.png" src="_images/ecf77d59a7114381dbb80fd11c788724756480ff7c53be8c9278a36de8cbdf20.png" />
+<img alt="_images/c10605585f52ecc526389042e869b110da4d0d000ba0e08271b673283838baa2.png" src="_images/c10605585f52ecc526389042e869b110da4d0d000ba0e08271b673283838baa2.png" />
+<img alt="_images/9e90f526f602b3d754f27c6c21e667068dadceadb178778ec1f85c58f702e0e7.png" src="_images/9e90f526f602b3d754f27c6c21e667068dadceadb178778ec1f85c58f702e0e7.png" />
+<img alt="_images/898c7ef501d31e3de751d602277b1f0ca7cf1c7dfb1c1fc9f0ce2c52e59ea206.png" src="_images/898c7ef501d31e3de751d602277b1f0ca7cf1c7dfb1c1fc9f0ce2c52e59ea206.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1995,14 +1959,14 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/7bb7a71d2eff3df4822a1b9f6887a557745a12052a42fca5030683c9de108ba7.png" src="_images/7bb7a71d2eff3df4822a1b9f6887a557745a12052a42fca5030683c9de108ba7.png" />
-<img alt="_images/684a742bf00475715d4991b4c3210a95e62de1db4d12c0df4b265ce21443170f.png" src="_images/684a742bf00475715d4991b4c3210a95e62de1db4d12c0df4b265ce21443170f.png" />
-<img alt="_images/c29b91344023cc24854d763c01a37e283aa8905288cc1f640d452185328b0cb2.png" src="_images/c29b91344023cc24854d763c01a37e283aa8905288cc1f640d452185328b0cb2.png" />
+<img alt="_images/c8a10459d6ee676037340f27bd28ec0861a1ecb80ec2ea14113987ddfef58a9d.png" src="_images/c8a10459d6ee676037340f27bd28ec0861a1ecb80ec2ea14113987ddfef58a9d.png" />
+<img alt="_images/182880cde6faed49e5a0fe87ca6442751bcfac1d02c40da97e0cff657878c613.png" src="_images/182880cde6faed49e5a0fe87ca6442751bcfac1d02c40da97e0cff657878c613.png" />
+<img alt="_images/03def89c662aa822bda073daad20717d11c296274d78b0c3ea7f394bbbf7ae9d.png" src="_images/03def89c662aa822bda073daad20717d11c296274d78b0c3ea7f394bbbf7ae9d.png" />
 <img alt="_images/37e8a9a93911d91fd45a0c3fb51bc0de47615101a38e37e64f385dd4d74aaff6.png" src="_images/37e8a9a93911d91fd45a0c3fb51bc0de47615101a38e37e64f385dd4d74aaff6.png" />
-<img alt="_images/bee5255a859b0c3c4d973788d045ed8b1abf76e8d8169fa2d6037ef04145ac8d.png" src="_images/bee5255a859b0c3c4d973788d045ed8b1abf76e8d8169fa2d6037ef04145ac8d.png" />
-<img alt="_images/57de5d09401d0461be5b5f1b444f34998dce291d0369a1f4b536abe17e6689cb.png" src="_images/57de5d09401d0461be5b5f1b444f34998dce291d0369a1f4b536abe17e6689cb.png" />
-<img alt="_images/0ffe4874c577d09357432967a213f6a1a32e5cd1b47dcc4efbd5d43940d31b11.png" src="_images/0ffe4874c577d09357432967a213f6a1a32e5cd1b47dcc4efbd5d43940d31b11.png" />
-<img alt="_images/23945fbbd85d9cb9e401fd1617375640e30d524724b5def065d6032d7b3062a3.png" src="_images/23945fbbd85d9cb9e401fd1617375640e30d524724b5def065d6032d7b3062a3.png" />
+<img alt="_images/668cfb7476485249534958e6bb09bf2fcb7c8f11cc71deb71f8fd29b0527f065.png" src="_images/668cfb7476485249534958e6bb09bf2fcb7c8f11cc71deb71f8fd29b0527f065.png" />
+<img alt="_images/64757d7ae2aeab298bfb412413a094bbe746b381dd15ac4c422b73c90866cb66.png" src="_images/64757d7ae2aeab298bfb412413a094bbe746b381dd15ac4c422b73c90866cb66.png" />
+<img alt="_images/bf3626e5ba197ca932ac4b20df952ddf60b55776c574daba1f9649f8d11772aa.png" src="_images/bf3626e5ba197ca932ac4b20df952ddf60b55776c574daba1f9649f8d11772aa.png" />
+<img alt="_images/67d41bb77500dbb1174b6ebb4348beacef3d7efdb5d7544e62895b029f817b41.png" src="_images/67d41bb77500dbb1174b6ebb4348beacef3d7efdb5d7544e62895b029f817b41.png" />
 </div>
 </div>
 </section>
@@ -2072,30 +2036,30 @@ document.write(`
   <tbody>
     <tr>
       <th>0</th>
-      <td>K-NN</td>
-      <td>8.890400</td>
-      <td>1.133081</td>
-      <td>0.925664</td>
-      <td>0.795328</td>
+      <td>K-NN Regressor</td>
+      <td>18.071042</td>
+      <td>1.757999</td>
+      <td>0.821058</td>
+      <td>0.382512</td>
       <td>0.000000e+00</td>
     </tr>
     <tr>
       <th>1</th>
       <td>Ridge Regression</td>
-      <td>32.393069</td>
-      <td>2.776450</td>
-      <td>0.553671</td>
-      <td>0.363604</td>
-      <td>3.932731e-67</td>
+      <td>32.392141</td>
+      <td>2.776435</td>
+      <td>0.553675</td>
+      <td>0.543730</td>
+      <td>4.158995e-67</td>
     </tr>
     <tr>
       <th>2</th>
       <td>Lasso Regression</td>
-      <td>32.391389</td>
-      <td>2.776492</td>
-      <td>0.553657</td>
-      <td>0.363496</td>
-      <td>7.919629e-67</td>
+      <td>32.391206</td>
+      <td>2.776469</td>
+      <td>0.553664</td>
+      <td>0.543174</td>
+      <td>7.603221e-67</td>
     </tr>
     <tr>
       <th>3</th>
@@ -2103,44 +2067,44 @@ document.write(`
       <td>32.388608</td>
       <td>2.776441</td>
       <td>0.553673</td>
-      <td>0.363178</td>
+      <td>0.542471</td>
       <td>7.883555e-67</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>Decision Tree</td>
-      <td>15.181163</td>
-      <td>1.840293</td>
-      <td>0.803912</td>
-      <td>0.618823</td>
+      <td>Decision Tree Regressor</td>
+      <td>15.573285</td>
+      <td>1.806128</td>
+      <td>0.811126</td>
+      <td>0.339878</td>
       <td>0.000000e+00</td>
     </tr>
     <tr>
       <th>5</th>
-      <td>Random Forest</td>
-      <td>0.130781</td>
-      <td>1.421475</td>
-      <td>0.883008</td>
-      <td>0.114057</td>
+      <td>Random Forest Regressor</td>
+      <td>12.282860</td>
+      <td>1.330840</td>
+      <td>0.897452</td>
+      <td>0.126853</td>
       <td>0.000000e+00</td>
     </tr>
     <tr>
       <th>6</th>
-      <td>XGBoost</td>
-      <td>0.115935</td>
-      <td>1.279917</td>
-      <td>0.905149</td>
-      <td>0.409827</td>
+      <td>XGBoost Regressor</td>
+      <td>11.698853</td>
+      <td>1.307149</td>
+      <td>0.901070</td>
+      <td>0.487035</td>
       <td>0.000000e+00</td>
     </tr>
     <tr>
       <th>7</th>
       <td>SVR</td>
-      <td>0.209240</td>
-      <td>2.059412</td>
-      <td>0.754437</td>
-      <td>0.406323</td>
-      <td>1.331446e-223</td>
+      <td>0.234403</td>
+      <td>1.973021</td>
+      <td>0.774607</td>
+      <td>0.403373</td>
+      <td>1.385592e-209</td>
     </tr>
   </tbody>
 </table>
@@ -2159,14 +2123,14 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/df35e65982257820e8c34701e47fde3c478c3985963b8474e5a810fc54c8db30.png" src="_images/df35e65982257820e8c34701e47fde3c478c3985963b8474e5a810fc54c8db30.png" />
-<img alt="_images/f991a598e4ef044f54f7e76d074d33d606c8f312053067532cbbd51afc860ae6.png" src="_images/f991a598e4ef044f54f7e76d074d33d606c8f312053067532cbbd51afc860ae6.png" />
-<img alt="_images/087575f8fc44b53a7a1a4bbeabfc4a26eb6366eb17b7f7d6725ae6bca201e013.png" src="_images/087575f8fc44b53a7a1a4bbeabfc4a26eb6366eb17b7f7d6725ae6bca201e013.png" />
-<img alt="_images/67287d1c64364b613b4e0e83765702bdd4b7a4dfe99e806ba23bd699790740c1.png" src="_images/67287d1c64364b613b4e0e83765702bdd4b7a4dfe99e806ba23bd699790740c1.png" />
-<img alt="_images/73bc9288b076096ee16036b037ef4b5888db9419b1d7e8e7ca50d6adbe77a5ab.png" src="_images/73bc9288b076096ee16036b037ef4b5888db9419b1d7e8e7ca50d6adbe77a5ab.png" />
-<img alt="_images/50f99f31b70d456f9721979809dac7ca8b079b8ab36a4bb41a1a3512d0b2d22a.png" src="_images/50f99f31b70d456f9721979809dac7ca8b079b8ab36a4bb41a1a3512d0b2d22a.png" />
-<img alt="_images/f6ead5b01349c67396b9b80080cb341605ec072745f57b6193eaf48895b050fa.png" src="_images/f6ead5b01349c67396b9b80080cb341605ec072745f57b6193eaf48895b050fa.png" />
-<img alt="_images/23bdfe015f47c3ee2c7aff7f584d9239ae1664f11b6617127659c3ae79d7784b.png" src="_images/23bdfe015f47c3ee2c7aff7f584d9239ae1664f11b6617127659c3ae79d7784b.png" />
+<img alt="_images/d84d2163009b6a6c3c77f156664e58fa935e0ae737f6924af782a3a710fb3991.png" src="_images/d84d2163009b6a6c3c77f156664e58fa935e0ae737f6924af782a3a710fb3991.png" />
+<img alt="_images/c26096a5235a51c52b8af9fbe6715ebafafe4e7c117848ed34ba8833146a05cf.png" src="_images/c26096a5235a51c52b8af9fbe6715ebafafe4e7c117848ed34ba8833146a05cf.png" />
+<img alt="_images/d384857dc16bf6a56db96a14e50bf79ebfe752f64503167ba468ef8a60c13882.png" src="_images/d384857dc16bf6a56db96a14e50bf79ebfe752f64503167ba468ef8a60c13882.png" />
+<img alt="_images/6826cb7c8aa30e1225bc786d2bd4042af96e544c63837fb9a7cde981e1c3c312.png" src="_images/6826cb7c8aa30e1225bc786d2bd4042af96e544c63837fb9a7cde981e1c3c312.png" />
+<img alt="_images/24b51bc3db3f3565ad75f56dacae681078a7eb98602b5d85b59ea9d1dbad994b.png" src="_images/24b51bc3db3f3565ad75f56dacae681078a7eb98602b5d85b59ea9d1dbad994b.png" />
+<img alt="_images/07f3c34d3814783beec58716f10515939278ffe46f94c8b6e467d63305bb2040.png" src="_images/07f3c34d3814783beec58716f10515939278ffe46f94c8b6e467d63305bb2040.png" />
+<img alt="_images/a5fc2ded9249dfc0588453d42f455a4ddc244037774769e9aacee197c890806b.png" src="_images/a5fc2ded9249dfc0588453d42f455a4ddc244037774769e9aacee197c890806b.png" />
+<img alt="_images/19913595dfdbaabc3719242c29f95dea3aa1155385739eead2ea3b11627cdbc2.png" src="_images/19913595dfdbaabc3719242c29f95dea3aa1155385739eead2ea3b11627cdbc2.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2180,14 +2144,14 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/43b341ee2690b5e8aa5a555a06e96f9e9a3e54ba28874b23e2040d587d19f5d6.png" src="_images/43b341ee2690b5e8aa5a555a06e96f9e9a3e54ba28874b23e2040d587d19f5d6.png" />
-<img alt="_images/e300b4e4459823ec5186d57a28e7b833c03ebc4cf5280ebbeeb159f4f232aada.png" src="_images/e300b4e4459823ec5186d57a28e7b833c03ebc4cf5280ebbeeb159f4f232aada.png" />
-<img alt="_images/53f59482249500f74c48f80eef8719887a913a183bf1780716c1f64ac2b1b979.png" src="_images/53f59482249500f74c48f80eef8719887a913a183bf1780716c1f64ac2b1b979.png" />
+<img alt="_images/dd476356c8b9ae31515767c3e0d3589f4e11b098cea485b55726c9515710d161.png" src="_images/dd476356c8b9ae31515767c3e0d3589f4e11b098cea485b55726c9515710d161.png" />
+<img alt="_images/ad399627a5d80be6f31742882646617c918dc527cb32b36031d03818a90d9e17.png" src="_images/ad399627a5d80be6f31742882646617c918dc527cb32b36031d03818a90d9e17.png" />
+<img alt="_images/f281bf2ebbd23c80de1cb7e0e975bede602fcbe99efd092c69b6497a74e9e0e3.png" src="_images/f281bf2ebbd23c80de1cb7e0e975bede602fcbe99efd092c69b6497a74e9e0e3.png" />
 <img alt="_images/a8ad28247273857df54d05d5bbeeae00d89ac369ca322cbb2ef0fc74e4cedf78.png" src="_images/a8ad28247273857df54d05d5bbeeae00d89ac369ca322cbb2ef0fc74e4cedf78.png" />
-<img alt="_images/7a992d3b76d0017c3423175cb0296564edb8db2333715b20e7e471d9e4cf9e24.png" src="_images/7a992d3b76d0017c3423175cb0296564edb8db2333715b20e7e471d9e4cf9e24.png" />
-<img alt="_images/3ab474c2e5f219a809e816ef039ce591fab4fa548d456d2266489af223473775.png" src="_images/3ab474c2e5f219a809e816ef039ce591fab4fa548d456d2266489af223473775.png" />
-<img alt="_images/8ccd0b9e0bcbc2e161f4a1d0f33b63e517fd7f31bdd66b36b3f0b2c8a1a51bcf.png" src="_images/8ccd0b9e0bcbc2e161f4a1d0f33b63e517fd7f31bdd66b36b3f0b2c8a1a51bcf.png" />
-<img alt="_images/bdf2cd828d1af6f4d67ed0279da25873b352e5478b6788d801a0e58aa4f73384.png" src="_images/bdf2cd828d1af6f4d67ed0279da25873b352e5478b6788d801a0e58aa4f73384.png" />
+<img alt="_images/4270561c0b350e881784fd2084dee31755bd98b47ad7c6b55c470ef4f9d4e689.png" src="_images/4270561c0b350e881784fd2084dee31755bd98b47ad7c6b55c470ef4f9d4e689.png" />
+<img alt="_images/b88ea8432199127581433dcb5aa7dc29c2a87042ad71b86199039a7d7c1b9ca0.png" src="_images/b88ea8432199127581433dcb5aa7dc29c2a87042ad71b86199039a7d7c1b9ca0.png" />
+<img alt="_images/48decba97be5852ab40654aaa158942a8343cd54a79398510e8afae9cb56a894.png" src="_images/48decba97be5852ab40654aaa158942a8343cd54a79398510e8afae9cb56a894.png" />
+<img alt="_images/bf972787601c243892c57cdff7cb4a3fc46b84ea8140fe6f8fc20203a5868c89.png" src="_images/bf972787601c243892c57cdff7cb4a3fc46b84ea8140fe6f8fc20203a5868c89.png" />
 </div>
 </div>
 </section>
@@ -2250,7 +2214,7 @@ document.write(`
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><strong>Propuesta de modelo original</strong></p>
+        <p class="prev-next-title">Propuesta de modelo original</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
