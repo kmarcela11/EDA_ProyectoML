@@ -1,0 +1,1158 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Implementación del modelo original &#8212; EDA PROYECTO FINAL</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'implementacion';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Propuesta de modelo original" href="original.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="Intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.jpeg" class="logo__image only-light" alt="EDA PROYECTO FINAL - Home"/>
+    <script>document.write(`<img src="_static/logo.jpeg" class="logo__image only-dark" alt="EDA PROYECTO FINAL - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="Intro.html">
+                    Proyecto Final - Energía Eólica.
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="inicio.html"><strong>Contextualización del Proyecto</strong></a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="eda.html"><strong>Análisis Exploratorio de Datos (EDA)</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="modelos.html"><strong>Modelos de regresión</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="original.html">Propuesta de modelo original</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>Implementación del modelo original</strong></a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/kmarcela11/ProyectoFinal_EnergiaEolica" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/kmarcela11/ProyectoFinal_EnergiaEolica/issues/new?title=Issue%20on%20page%20%2Fimplementacion.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/implementacion.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Implementación del modelo original</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bayesian-optimization"><strong>Bayesian Optimization</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gwo"><strong>GWO</strong></a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="implementacion-del-modelo-original">
+<h1><strong>Implementación del modelo original</strong><a class="headerlink" href="#implementacion-del-modelo-original" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">Pipeline</span>
+<span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="kn">import</span> <span class="n">SVR</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">jarque_bera</span>
+<span class="kn">from</span> <span class="nn">statsmodels.stats.diagnostic</span> <span class="kn">import</span> <span class="n">acorr_ljungbox</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span><span class="p">,</span> <span class="n">GridSearchCV</span><span class="p">,</span> <span class="n">KFold</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">r2_score</span><span class="p">,</span> <span class="n">mean_absolute_percentage_error</span><span class="p">,</span> <span class="n">mean_squared_error</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">file_path</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;C:\Users\kamac\OneDrive\Desktop\MachineLearningUN\EDA\ws_modelos.xlsx&quot;</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X1</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Fecha&#39;</span><span class="p">,</span> <span class="s1">&#39;VelViento100m_1&#39;</span><span class="p">,</span> <span class="s1">&#39;VelViento100m_2&#39;</span><span class="p">,</span> <span class="s1">&#39;VelViento80m_1&#39;</span><span class="p">,</span> <span class="s1">&#39;VelViento80m_2&#39;</span><span class="p">,</span> <span class="s1">&#39;VelViento60m&#39;</span><span class="p">,</span> <span class="s1">&#39;DirViento80m&#39;</span><span class="p">,</span> <span class="s1">&#39;DirViento60m&#39;</span><span class="p">])</span>
+<span class="n">y1</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;VelViento100m_1&#39;</span><span class="p">]</span>
+
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">test_size</span> <span class="o">=</span> <span class="mf">0.3</span><span class="p">,</span> <span class="n">random_state</span> <span class="o">=</span> <span class="mi">11</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="bayesian-optimization">
+<h2><strong>Bayesian Optimization</strong><a class="headerlink" href="#bayesian-optimization" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">xgboost</span> <span class="k">as</span> <span class="nn">xgb</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">mean_squared_error</span><span class="p">,</span> <span class="n">r2_score</span>
+<span class="kn">from</span> <span class="nn">bayes_opt</span> <span class="kn">import</span> <span class="n">BayesianOptimization</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">optimize_xgboost</span><span class="p">(</span><span class="n">max_depth</span><span class="p">,</span> <span class="n">learning_rate</span><span class="p">,</span> <span class="n">n_estimators</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">min_child_weight</span><span class="p">):</span>
+    <span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;max_depth&quot;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">max_depth</span><span class="p">),</span>
+        <span class="s2">&quot;learning_rate&quot;</span><span class="p">:</span> <span class="n">learning_rate</span><span class="p">,</span>
+        <span class="s2">&quot;n_estimators&quot;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">n_estimators</span><span class="p">),</span>
+        <span class="s2">&quot;gamma&quot;</span><span class="p">:</span> <span class="n">gamma</span><span class="p">,</span>
+        <span class="s2">&quot;min_child_weight&quot;</span><span class="p">:</span> <span class="n">min_child_weight</span><span class="p">,</span>
+        <span class="s2">&quot;objective&quot;</span><span class="p">:</span> <span class="s2">&quot;reg:squarederror&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;eval_metric&quot;</span><span class="p">:</span> <span class="s2">&quot;rmse&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;random_state&quot;</span><span class="p">:</span> <span class="mi">42</span><span class="p">,</span>
+    <span class="p">}</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">XGBRegressor</span><span class="p">(</span><span class="o">**</span><span class="n">params</span><span class="p">)</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+    <span class="n">predictions</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+    <span class="n">rmse</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">predictions</span><span class="p">))</span>
+    <span class="k">return</span> <span class="o">-</span><span class="n">rmse</span>  <span class="c1"># Maximizar el inverso de RMSE</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">param_bounds</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;max_depth&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">20</span><span class="p">),</span>
+    <span class="s2">&quot;learning_rate&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">),</span>
+    <span class="s2">&quot;n_estimators&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">300</span><span class="p">),</span>
+    <span class="s2">&quot;gamma&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+    <span class="s2">&quot;min_child_weight&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">optimizer</span> <span class="o">=</span> <span class="n">BayesianOptimization</span><span class="p">(</span>
+    <span class="n">f</span><span class="o">=</span><span class="n">optimize_xgboost</span><span class="p">,</span>
+    <span class="n">pbounds</span><span class="o">=</span><span class="n">param_bounds</span><span class="p">,</span>
+    <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span>
+    <span class="n">verbose</span><span class="o">=</span><span class="mi">2</span>
+<span class="p">)</span>
+
+<span class="n">optimizer</span><span class="o">.</span><span class="n">maximize</span><span class="p">(</span><span class="n">init_points</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">n_iter</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>|   iter    |  target   |   gamma   | learni... | max_depth | min_ch... | n_esti... |
+-------------------------------------------------------------------------------------
+| 1         | -1.461    | 1.873     | 0.2857    | 15.44     | 6.388     | 89.0      |
+| <span class=" -Color -Color-Magenta">2        </span> | <span class=" -Color -Color-Magenta">-1.408   </span> | <span class=" -Color -Color-Magenta">0.78     </span> | <span class=" -Color -Color-Magenta">0.02684  </span> | <span class=" -Color -Color-Magenta">17.72    </span> | <span class=" -Color -Color-Magenta">6.41     </span> | <span class=" -Color -Color-Magenta">227.0    </span> |
+| 3         | -1.448    | 0.1029    | 0.2913    | 17.15     | 2.911     | 95.46     |
+| 4         | -1.48     | 0.917     | 0.09823   | 11.92     | 4.888     | 122.8     |
+| 5         | -1.722    | 3.059     | 0.05045   | 7.966     | 4.297     | 164.0     |
+| 6         | -1.564    | 3.926     | 0.06791   | 11.74     | 6.332     | 61.61     |
+| 7         | -1.931    | 3.038     | 0.05945   | 4.106     | 9.54      | 291.4     |
+| 8         | -1.938    | 4.042     | 0.09834   | 4.66      | 7.158     | 160.0     |
+| 9         | -2.033    | 0.6102    | 0.1536    | 3.585     | 9.184     | 114.7     |
+| 10        | -1.528    | 3.313     | 0.1004    | 11.84     | 5.92      | 96.21     |
+| 11        | -1.464    | 2.919     | 0.1067    | 18.47     | 6.505     | 219.1     |
+| 12        | -1.669    | 2.547     | 0.1765    | 8.887     | 9.097     | 224.3     |
+| 13        | -1.514    | 2.655     | 0.2449    | 19.82     | 1.558     | 232.6     |
+| 14        | -1.477    | 0.9155    | 0.1944    | 17.78     | 1.113     | 129.4     |
+| 15        | -1.491    | 3.629     | 0.1575    | 19.35     | 9.932     | 127.2     |
+| 16        | -1.411    | 0.1485    | 0.09136   | 19.85     | 2.087     | 79.02     |
+| 17        | -1.637    | 2.012     | 0.1838    | 8.203     | 1.38      | 78.52     |
+| 18        | -1.541    | 4.67      | 0.2437    | 20.0      | 9.351     | 74.47     |
+| 19        | -1.519    | 3.663     | 0.2126    | 18.78     | 1.179     | 117.4     |
+| 20        | -1.494    | 2.466     | 0.1867    | 19.76     | 2.292     | 203.8     |
+| 21        | -1.445    | 0.04893   | 0.2852    | 15.84     | 1.653     | 189.2     |
+| 22        | -1.601    | 2.798     | 0.0834    | 9.775     | 9.839     | 195.2     |
+| 23        | -1.476    | 1.824     | 0.1616    | 19.62     | 3.616     | 180.0     |
+| 24        | -1.985    | 1.032     | 0.0275    | 5.541     | 1.196     | 181.6     |
+| 25        | -1.521    | 4.957     | 0.1575    | 19.32     | 9.73      | 187.4     |
+| 26        | -1.512    | 0.08554   | 0.07888   | 9.748     | 8.07      | 134.6     |
+| 27        | -1.53     | 3.06      | 0.1984    | 19.82     | 1.056     | 194.2     |
+| 28        | -1.519    | 4.31      | 0.1058    | 19.19     | 1.283     | 86.77     |
+| 29        | -1.442    | 1.748     | 0.06296   | 17.99     | 9.82      | 243.1     |
+| 30        | -1.412    | 0.07399   | 0.2608    | 19.18     | 8.787     | 254.7     |
+| 31        | -1.481    | 0.2238    | 0.2302    | 10.66     | 3.76      | 250.3     |
+| 32        | -1.525    | 4.376     | 0.1831    | 19.88     | 2.627     | 262.1     |
+| 33        | -1.59     | 1.927     | 0.1024    | 9.118     | 9.966     | 260.4     |
+| 34        | -1.461    | 1.138     | 0.02426   | 19.72     | 1.49      | 247.7     |
+| 35        | -1.96     | 0.2153    | 0.1177    | 3.417     | 9.256     | 241.4     |
+| 36        | -1.45     | 0.9581    | 0.09513   | 19.35     | 2.524     | 50.0      |
+| 37        | -2.045    | 1.244     | 0.05462   | 6.504     | 1.706     | 50.59     |
+| 38        | -1.493    | 1.768     | 0.1658    | 19.94     | 1.562     | 66.24     |
+| 39        | -1.527    | 3.107     | 0.2732    | 19.56     | 9.996     | 56.2      |
+| 40        | -1.586    | 0.1743    | 0.08653   | 7.682     | 1.155     | 209.7     |
+=====================================================================================
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">best_params</span> <span class="o">=</span> <span class="n">optimizer</span><span class="o">.</span><span class="n">max</span><span class="p">[</span><span class="s1">&#39;params&#39;</span><span class="p">]</span>
+<span class="n">best_model</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">XGBRegressor</span><span class="p">(</span>
+    <span class="n">max_depth</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">best_params</span><span class="p">[</span><span class="s1">&#39;max_depth&#39;</span><span class="p">]),</span>
+    <span class="n">learning_rate</span><span class="o">=</span><span class="n">best_params</span><span class="p">[</span><span class="s1">&#39;learning_rate&#39;</span><span class="p">],</span>
+    <span class="n">n_estimators</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">best_params</span><span class="p">[</span><span class="s1">&#39;n_estimators&#39;</span><span class="p">]),</span>
+    <span class="n">gamma</span><span class="o">=</span><span class="n">best_params</span><span class="p">[</span><span class="s1">&#39;gamma&#39;</span><span class="p">],</span>
+    <span class="n">min_child_weight</span><span class="o">=</span><span class="n">best_params</span><span class="p">[</span><span class="s1">&#39;min_child_weight&#39;</span><span class="p">],</span>
+    <span class="n">objective</span><span class="o">=</span><span class="s2">&quot;reg:squarederror&quot;</span><span class="p">,</span>
+    <span class="n">eval_metric</span><span class="o">=</span><span class="s2">&quot;rmse&quot;</span><span class="p">,</span>
+    <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">best_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">predictions</span> <span class="o">=</span> <span class="n">best_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rmse</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">predictions</span><span class="p">))</span>
+<span class="n">r2</span> <span class="o">=</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">predictions</span><span class="p">)</span>
+<span class="n">residuals</span> <span class="o">=</span> <span class="n">y_test</span> <span class="o">-</span> <span class="n">predictions</span>
+<span class="n">ljung_box_p_value</span> <span class="o">=</span> <span class="n">acorr_ljungbox</span><span class="p">(</span><span class="n">residuals</span><span class="p">,</span> <span class="n">lags</span><span class="o">=</span><span class="p">[</span><span class="mi">30</span><span class="p">],</span> <span class="n">return_df</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="s1">&#39;lb_pvalue&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">jarque_bera_p_value</span> <span class="o">=</span> <span class="n">jarque_bera</span><span class="p">(</span><span class="n">residuals</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;RMSE: </span><span class="si">{</span><span class="n">rmse</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;R2 Score: </span><span class="si">{</span><span class="n">r2</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Ljung-Box p-value: </span><span class="si">{</span><span class="n">ljung_box_p_value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Jarque-Bera p-value: </span><span class="si">{</span><span class="n">jarque_bera_p_value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>RMSE: 1.4076855242944042
+R2 Score: 0.8960165627720081
+Ljung-Box p-value: 0.45843638807833753
+Jarque-Bera p-value: 0.0
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">GridSearchCV</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">mean_squared_error</span><span class="p">,</span> <span class="n">mean_absolute_error</span><span class="p">,</span> <span class="n">r2_score</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">jarque_bera</span>
+<span class="kn">from</span> <span class="nn">statsmodels.stats.diagnostic</span> <span class="kn">import</span> <span class="n">acorr_ljungbox</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">xgboost</span> <span class="kn">import</span> <span class="n">XGBRegressor</span>
+
+<span class="k">def</span> <span class="nf">evaluate_xgboost_with_gridsearch_r2</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">results</span><span class="p">,</span> <span class="n">resultados_graficos</span><span class="p">):</span>
+    <span class="c1"># Definimos el espacio de búsqueda para GridSearchCV</span>
+    <span class="n">param_grid_xgb</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;n_estimators&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">100</span><span class="p">],</span>
+        <span class="s1">&#39;max_depth&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">20</span><span class="p">],</span>
+        <span class="s1">&#39;learning_rate&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">]</span>
+    <span class="p">}</span>
+
+    <span class="c1"># Inicializamos el modelo XGBoost</span>
+    <span class="n">modelo</span> <span class="o">=</span> <span class="n">XGBRegressor</span><span class="p">(</span><span class="n">objective</span><span class="o">=</span><span class="s1">&#39;reg:squarederror&#39;</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+
+    <span class="c1"># Implementamos GridSearchCV con 10 pliegues</span>
+    <span class="n">grid_xgb</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span>
+        <span class="n">estimator</span><span class="o">=</span><span class="n">modelo</span><span class="p">,</span>
+        <span class="n">param_grid</span><span class="o">=</span><span class="n">param_grid_xgb</span><span class="p">,</span>
+        <span class="n">scoring</span><span class="o">=</span><span class="s1">&#39;r2&#39;</span><span class="p">,</span>  <span class="c1"># Usamos R² como métrica de evaluación</span>
+        <span class="n">cv</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>         <span class="c1"># Validación cruzada con 10 pliegues</span>
+        <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Ajustamos el modelo a los datos de entrenamiento</span>
+    <span class="n">grid_xgb</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+    <span class="c1"># Predicciones para entrenamiento y prueba</span>
+    <span class="n">y_train_pred</span> <span class="o">=</span> <span class="n">grid_xgb</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+    <span class="n">y_pred_xgb</span> <span class="o">=</span> <span class="n">grid_xgb</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+    <span class="c1"># Residuos</span>
+    <span class="n">residuals</span> <span class="o">=</span> <span class="n">y_test</span> <span class="o">-</span> <span class="n">y_pred_xgb</span>
+
+    <span class="c1"># Métricas de evaluación</span>
+    <span class="n">r2</span> <span class="o">=</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_xgb</span><span class="p">)</span>
+    <span class="n">mape</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">((</span><span class="n">y_test</span> <span class="o">-</span> <span class="n">y_pred_xgb</span><span class="p">)</span> <span class="o">/</span> <span class="n">y_test</span><span class="p">))</span> <span class="o">*</span> <span class="mi">100</span>  <span class="c1"># Mean Absolute Percentage Error</span>
+    <span class="n">rmse</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_xgb</span><span class="p">))</span>
+    <span class="n">mae</span> <span class="o">=</span> <span class="n">mean_absolute_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_xgb</span><span class="p">)</span>
+    <span class="n">mse</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_xgb</span><span class="p">)</span>
+
+    <span class="c1"># Pruebas estadísticas para residuos</span>
+    <span class="n">ljung_box_p_value</span> <span class="o">=</span> <span class="n">acorr_ljungbox</span><span class="p">(</span><span class="n">residuals</span><span class="p">,</span> <span class="n">lags</span><span class="o">=</span><span class="p">[</span><span class="mi">30</span><span class="p">],</span> <span class="n">return_df</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="s1">&#39;lb_pvalue&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">jarque_bera_p_value</span> <span class="o">=</span> <span class="n">jarque_bera</span><span class="p">(</span><span class="n">residuals</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="c1"># Guardamos los resultados en las listas proporcionadas</span>
+    <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+        <span class="s1">&#39;Modelo&#39;</span><span class="p">:</span> <span class="s1">&#39;XGBoost Regressor (GridSearch)&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;MAPE&#39;</span><span class="p">:</span> <span class="n">mape</span><span class="p">,</span>
+        <span class="s1">&#39;MAE&#39;</span><span class="p">:</span> <span class="n">mae</span><span class="p">,</span>
+        <span class="s1">&#39;MSE&#39;</span><span class="p">:</span> <span class="n">mse</span><span class="p">,</span>
+        <span class="s1">&#39;RMSE&#39;</span><span class="p">:</span> <span class="n">rmse</span><span class="p">,</span>
+        <span class="s1">&#39;R²&#39;</span><span class="p">:</span> <span class="n">r2</span><span class="p">,</span>
+        <span class="s1">&#39;Ljung-Box p-value&#39;</span><span class="p">:</span> <span class="n">ljung_box_p_value</span><span class="p">,</span>
+        <span class="s1">&#39;Jarque-Bera p-value&#39;</span><span class="p">:</span> <span class="n">jarque_bera_p_value</span>
+    <span class="p">})</span>
+
+    <span class="n">resultados_graficos</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+        <span class="s1">&#39;nombre_modelo&#39;</span><span class="p">:</span> <span class="s1">&#39;XGBoost Regressor (GridSearch)&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;y_train&#39;</span><span class="p">:</span> <span class="n">y_train</span><span class="p">,</span>
+        <span class="s1">&#39;y_train_pred&#39;</span><span class="p">:</span> <span class="n">y_train_pred</span><span class="p">,</span>
+        <span class="s1">&#39;y_test&#39;</span><span class="p">:</span> <span class="n">y_test</span><span class="p">,</span>
+        <span class="s1">&#39;y_test_pred&#39;</span><span class="p">:</span> <span class="n">y_pred_xgb</span><span class="p">,</span>
+        <span class="s1">&#39;residuos&#39;</span><span class="p">:</span> <span class="n">residuals</span>
+    <span class="p">})</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Mejores hiperparámetros encontrados:&quot;</span><span class="p">,</span> <span class="n">grid_xgb</span><span class="o">.</span><span class="n">best_params_</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Mejor puntuación R² en validación cruzada:&quot;</span><span class="p">,</span> <span class="n">grid_xgb</span><span class="o">.</span><span class="n">best_score_</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">resultados_graficos</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="n">evaluate_xgboost_with_gridsearch_r2</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">results</span><span class="p">,</span> <span class="n">resultados_graficos</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fitting 10 folds for each of 48 candidates, totalling 480 fits
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\Users\kamac\miniconda3\envs\data_viz\lib\site-packages\sklearn\model_selection\_validation.py:540: FitFailedWarning: 
+1 fits failed out of a total of 480.
+The score on these train-test partitions for these parameters will be set to nan.
+If these failures are not expected, you can try to debug them by setting error_score=&#39;raise&#39;.
+
+Below are more details about the failures:
+--------------------------------------------------------------------------------
+1 fits failed with the following error:
+Traceback (most recent call last):
+  File &quot;c:\Users\kamac\miniconda3\envs\data_viz\lib\site-packages\sklearn\model_selection\_validation.py&quot;, line 888, in _fit_and_score
+    estimator.fit(X_train, y_train, **fit_params)
+  File &quot;c:\Users\kamac\miniconda3\envs\data_viz\lib\site-packages\xgboost\core.py&quot;, line 726, in inner_f
+    return func(**kwargs)
+  File &quot;c:\Users\kamac\miniconda3\envs\data_viz\lib\site-packages\xgboost\sklearn.py&quot;, line 1081, in fit
+    train_dmatrix, evals = _wrap_evaluation_matrices(
+  File &quot;c:\Users\kamac\miniconda3\envs\data_viz\lib\site-packages\xgboost\sklearn.py&quot;, line 596, in _wrap_evaluation_matrices
+    train_dmatrix = create_dmatrix(
+  File &quot;c:\Users\kamac\miniconda3\envs\data_viz\lib\site-packages\xgboost\sklearn.py&quot;, line 1003, in _create_dmatrix
+    return QuantileDMatrix(
+  File &quot;c:\Users\kamac\miniconda3\envs\data_viz\lib\site-packages\xgboost\core.py&quot;, line 726, in inner_f
+    return func(**kwargs)
+  File &quot;c:\Users\kamac\miniconda3\envs\data_viz\lib\site-packages\xgboost\core.py&quot;, line 1573, in __init__
+    self._init(
+  File &quot;c:\Users\kamac\miniconda3\envs\data_viz\lib\site-packages\xgboost\core.py&quot;, line 1632, in _init
+    it.reraise()
+  File &quot;c:\Users\kamac\miniconda3\envs\data_viz\lib\site-packages\xgboost\core.py&quot;, line 569, in reraise
+    raise exc  # pylint: disable=raising-bad-type
+  File &quot;c:\Users\kamac\miniconda3\envs\data_viz\lib\site-packages\xgboost\core.py&quot;, line 550, in _handle_exception
+    return fn()
+  File &quot;c:\Users\kamac\miniconda3\envs\data_viz\lib\site-packages\xgboost\core.py&quot;, line 637, in &lt;lambda&gt;
+    return self._handle_exception(lambda: self.next(input_data), 0)
+  File &quot;c:\Users\kamac\miniconda3\envs\data_viz\lib\site-packages\xgboost\data.py&quot;, line 1388, in next
+    input_data(**self.kwargs)
+  File &quot;c:\Users\kamac\miniconda3\envs\data_viz\lib\site-packages\xgboost\core.py&quot;, line 726, in inner_f
+    return func(**kwargs)
+  File &quot;c:\Users\kamac\miniconda3\envs\data_viz\lib\site-packages\xgboost\core.py&quot;, line 626, in input_data
+    self.proxy.set_info(
+  File &quot;c:\Users\kamac\miniconda3\envs\data_viz\lib\site-packages\xgboost\core.py&quot;, line 726, in inner_f
+    return func(**kwargs)
+  File &quot;c:\Users\kamac\miniconda3\envs\data_viz\lib\site-packages\xgboost\core.py&quot;, line 954, in set_info
+    self.set_label(label)
+  File &quot;c:\Users\kamac\miniconda3\envs\data_viz\lib\site-packages\xgboost\core.py&quot;, line 1092, in set_label
+    dispatch_meta_backend(self, label, &quot;label&quot;, &quot;float&quot;)
+  File &quot;c:\Users\kamac\miniconda3\envs\data_viz\lib\site-packages\xgboost\data.py&quot;, line 1334, in dispatch_meta_backend
+    _meta_from_pandas_series(data, name, dtype, handle)
+  File &quot;c:\Users\kamac\miniconda3\envs\data_viz\lib\site-packages\xgboost\data.py&quot;, line 679, in _meta_from_pandas_series
+    _meta_from_numpy(data, name, dtype, handle)
+  File &quot;c:\Users\kamac\miniconda3\envs\data_viz\lib\site-packages\xgboost\data.py&quot;, line 1267, in _meta_from_numpy
+    _check_call(_LIB.XGDMatrixSetInfoFromInterface(handle, c_str(field), interface_str))
+  File &quot;c:\Users\kamac\miniconda3\envs\data_viz\lib\site-packages\xgboost\core.py&quot;, line 284, in _check_call
+    raise XGBoostError(py_str(_LIB.XGBGetLastError()))
+xgboost.core.XGBoostError: [10:26:51] C:\buildkite-agent\builds\buildkite-windows-cpu-autoscaling-group-i-0ed59c031377d09b8-1\xgboost\xgboost-ci-windows\src\data\array_interface.cu:44: Check failed: err == cudaGetLastError() (0 vs. 46) : 
+
+  warnings.warn(some_fits_failed_message, FitFailedWarning)
+c:\Users\kamac\miniconda3\envs\data_viz\lib\site-packages\sklearn\model_selection\_search.py:1102: UserWarning: One or more of the test scores are non-finite: [       nan 0.42882467 0.61256275 0.14176893 0.50474728 0.70475496
+ 0.14864936 0.5261543  0.73185515 0.14954292 0.52843659 0.73432452
+ 0.43407118 0.76264409 0.80218108 0.51074454 0.84616968 0.87404741
+ 0.532387   0.87038657 0.88992872 0.53492749 0.87146163 0.88829819
+ 0.62178639 0.80242917 0.82421961 0.71490044 0.8741934  0.88409942
+ 0.74267598 0.89079509 0.89416667 0.74548318 0.88708294 0.88912589
+ 0.77507809 0.83388272 0.84966055 0.85544672 0.88116398 0.88399216
+ 0.87528853 0.88670103 0.88697869 0.87686176 0.88487487 0.88489215]
+  warnings.warn(
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mejores hiperparámetros encontrados: {&#39;learning_rate&#39;: 0.1, &#39;max_depth&#39;: 15, &#39;n_estimators&#39;: 100}
+Mejor puntuación R² en validación cruzada: 0.8941666710088407
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">resultados</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+<span class="n">resultados</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Modelo</th>
+      <th>MAPE</th>
+      <th>MAE</th>
+      <th>MSE</th>
+      <th>RMSE</th>
+      <th>R²</th>
+      <th>Ljung-Box p-value</th>
+      <th>Jarque-Bera p-value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>XGBoost Regressor (GridSearch)</td>
+      <td>11.475852</td>
+      <td>0.972034</td>
+      <td>2.008381</td>
+      <td>1.417173</td>
+      <td>0.89461</td>
+      <td>0.402368</td>
+      <td>0.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="gwo">
+<h2><strong>GWO</strong><a class="headerlink" href="#gwo" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">xgboost</span> <span class="kn">import</span> <span class="n">XGBRegressor</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">mean_squared_error</span><span class="p">,</span> <span class="n">r2_score</span>
+<span class="kn">import</span> <span class="nn">random</span>
+
+<span class="c1"># Función objetivo para optimización</span>
+<span class="k">def</span> <span class="nf">objective_function</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">):</span>
+    <span class="n">max_depth</span><span class="p">,</span> <span class="n">learning_rate</span><span class="p">,</span> <span class="n">n_estimators</span> <span class="o">=</span> <span class="n">params</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">XGBRegressor</span><span class="p">(</span>
+        <span class="n">max_depth</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">max_depth</span><span class="p">),</span>
+        <span class="n">learning_rate</span><span class="o">=</span><span class="n">learning_rate</span><span class="p">,</span>
+        <span class="n">n_estimators</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">n_estimators</span><span class="p">),</span>
+        <span class="n">objective</span><span class="o">=</span><span class="s2">&quot;reg:squarederror&quot;</span><span class="p">,</span>
+        <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span>
+    <span class="p">)</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+    <span class="n">predictions</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+    <span class="n">rmse</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">predictions</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">rmse</span>
+
+<span class="c1"># Implementación de GWO</span>
+<span class="k">def</span> <span class="nf">gwo_xgboost</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">n_wolves</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">n_iterations</span><span class="o">=</span><span class="mi">20</span><span class="p">):</span>
+    <span class="c1"># Definir espacio de búsqueda</span>
+    <span class="n">bounds</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;max_depth&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">30</span><span class="p">),</span>        <span class="c1"># Profundidad del árbol</span>
+        <span class="s1">&#39;learning_rate&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">),</span> <span class="c1"># Tasa de aprendizaje</span>
+        <span class="s1">&#39;n_estimators&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">300</span><span class="p">)</span>    <span class="c1"># Número de árboles</span>
+    <span class="p">}</span>
+
+    <span class="c1"># Inicialización de lobos</span>
+    <span class="n">wolves</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">bounds</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">bounds</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">bounds</span><span class="o">.</span><span class="n">keys</span><span class="p">()])</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_wolves</span><span class="p">)]</span>
+    <span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">delta</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>  <span class="c1"># Tres mejores lobos</span>
+    <span class="n">alpha_score</span><span class="p">,</span> <span class="n">beta_score</span><span class="p">,</span> <span class="n">delta_score</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s2">&quot;inf&quot;</span><span class="p">),</span> <span class="nb">float</span><span class="p">(</span><span class="s2">&quot;inf&quot;</span><span class="p">),</span> <span class="nb">float</span><span class="p">(</span><span class="s2">&quot;inf&quot;</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">iteration</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_iterations</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">wolf</span> <span class="ow">in</span> <span class="n">wolves</span><span class="p">:</span>
+            <span class="n">score</span> <span class="o">=</span> <span class="n">objective_function</span><span class="p">(</span><span class="n">wolf</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+
+            <span class="c1"># Actualizar lobos alfa, beta y delta</span>
+            <span class="k">if</span> <span class="n">score</span> <span class="o">&lt;</span> <span class="n">alpha_score</span><span class="p">:</span>
+                <span class="n">delta</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="n">beta</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">wolf</span>
+                <span class="n">delta_score</span><span class="p">,</span> <span class="n">beta_score</span><span class="p">,</span> <span class="n">alpha_score</span> <span class="o">=</span> <span class="n">beta_score</span><span class="p">,</span> <span class="n">alpha_score</span><span class="p">,</span> <span class="n">score</span>
+            <span class="k">elif</span> <span class="n">score</span> <span class="o">&lt;</span> <span class="n">beta_score</span><span class="p">:</span>
+                <span class="n">delta</span><span class="p">,</span> <span class="n">beta</span> <span class="o">=</span> <span class="n">beta</span><span class="p">,</span> <span class="n">wolf</span>
+                <span class="n">delta_score</span><span class="p">,</span> <span class="n">beta_score</span> <span class="o">=</span> <span class="n">beta_score</span><span class="p">,</span> <span class="n">score</span>
+            <span class="k">elif</span> <span class="n">score</span> <span class="o">&lt;</span> <span class="n">delta_score</span><span class="p">:</span>
+                <span class="n">delta</span> <span class="o">=</span> <span class="n">wolf</span>
+                <span class="n">delta_score</span> <span class="o">=</span> <span class="n">score</span>
+
+        <span class="c1"># Actualizar posiciones de los lobos</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">wolf</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">wolves</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">wolf</span><span class="p">)):</span>
+                <span class="n">A1</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span>
+                <span class="n">C1</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span>
+                <span class="n">X1</span> <span class="o">=</span> <span class="n">alpha</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="n">A1</span> <span class="o">*</span> <span class="nb">abs</span><span class="p">(</span><span class="n">C1</span> <span class="o">*</span> <span class="n">alpha</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="n">wolf</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+
+                <span class="n">A2</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span>
+                <span class="n">C2</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span>
+                <span class="n">X2</span> <span class="o">=</span> <span class="n">beta</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="n">A2</span> <span class="o">*</span> <span class="nb">abs</span><span class="p">(</span><span class="n">C2</span> <span class="o">*</span> <span class="n">beta</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="n">wolf</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+
+                <span class="n">A3</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span>
+                <span class="n">C3</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span>
+                <span class="n">X3</span> <span class="o">=</span> <span class="n">delta</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="n">A3</span> <span class="o">*</span> <span class="nb">abs</span><span class="p">(</span><span class="n">C3</span> <span class="o">*</span> <span class="n">delta</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="n">wolf</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+
+                <span class="n">wolf</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">X1</span> <span class="o">+</span> <span class="n">X2</span> <span class="o">+</span> <span class="n">X3</span><span class="p">)</span> <span class="o">/</span> <span class="mi">3</span>  <span class="c1"># Actualización promedio</span>
+
+                <span class="c1"># Restringir al espacio de búsqueda</span>
+                <span class="n">wolf</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">wolf</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">bounds</span><span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">bounds</span><span class="o">.</span><span class="n">keys</span><span class="p">())[</span><span class="n">j</span><span class="p">]][</span><span class="mi">0</span><span class="p">],</span> <span class="n">bounds</span><span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">bounds</span><span class="o">.</span><span class="n">keys</span><span class="p">())[</span><span class="n">j</span><span class="p">]][</span><span class="mi">1</span><span class="p">])</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Iteración </span><span class="si">{</span><span class="n">iteration</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">n_iterations</span><span class="si">}</span><span class="s2">: Mejor RMSE = </span><span class="si">{</span><span class="n">alpha_score</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Devuelve los mejores parámetros</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s1">&#39;max_depth&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">alpha</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
+        <span class="s1">&#39;learning_rate&#39;</span><span class="p">:</span> <span class="n">alpha</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+        <span class="s1">&#39;n_estimators&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">alpha</span><span class="p">[</span><span class="mi">2</span><span class="p">]),</span>
+        <span class="s1">&#39;best_rmse&#39;</span><span class="p">:</span> <span class="n">alpha_score</span>
+<span class="p">}</span>
+
+<span class="c1"># Llamar a la optimización GWO</span>
+<span class="n">best_params_gwo</span> <span class="o">=</span> <span class="n">gwo_xgboost</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Mejores hiperparámetros encontrados con GWO:&quot;</span><span class="p">,</span> <span class="n">best_params_gwo</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteración 1/20: Mejor RMSE = 1.4266196351997413
+Iteración 2/20: Mejor RMSE = 1.403670040199491
+Iteración 3/20: Mejor RMSE = 1.402758042439684
+Iteración 4/20: Mejor RMSE = 1.4000905332402367
+Iteración 5/20: Mejor RMSE = 1.4000905332402367
+Iteración 6/20: Mejor RMSE = 1.4000905332402367
+Iteración 7/20: Mejor RMSE = 1.4000905332402367
+Iteración 8/20: Mejor RMSE = 1.4000905332402367
+Iteración 9/20: Mejor RMSE = 1.4000905332402367
+Iteración 10/20: Mejor RMSE = 1.4000905332402367
+Iteración 11/20: Mejor RMSE = 1.4000905332402367
+Iteración 12/20: Mejor RMSE = 1.4000905332402367
+Iteración 13/20: Mejor RMSE = 1.3947734584687395
+Iteración 14/20: Mejor RMSE = 1.3947734584687395
+Iteración 15/20: Mejor RMSE = 1.3947734584687395
+Iteración 16/20: Mejor RMSE = 1.3947734584687395
+Iteración 17/20: Mejor RMSE = 1.3947734584687395
+Iteración 18/20: Mejor RMSE = 1.3947734584687395
+Iteración 19/20: Mejor RMSE = 1.3947734584687395
+Iteración 20/20: Mejor RMSE = 1.3947734584687395
+Mejores hiperparámetros encontrados con GWO: {&#39;max_depth&#39;: 5, &#39;learning_rate&#39;: 0.08080947168577321, &#39;n_estimators&#39;: 133, &#39;best_rmse&#39;: 1.3947734584687395}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">xgboost</span> <span class="kn">import</span> <span class="n">XGBRegressor</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">mean_squared_error</span><span class="p">,</span> <span class="n">r2_score</span>
+<span class="kn">import</span> <span class="nn">random</span>
+
+<span class="c1"># Función para evaluar las métricas</span>
+<span class="k">def</span> <span class="nf">evaluate_woa_metrics</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">):</span>
+    <span class="n">max_depth</span><span class="p">,</span> <span class="n">learning_rate</span><span class="p">,</span> <span class="n">n_estimators</span> <span class="o">=</span> <span class="n">params</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">XGBRegressor</span><span class="p">(</span>
+        <span class="n">max_depth</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">max_depth</span><span class="p">),</span>
+        <span class="n">learning_rate</span><span class="o">=</span><span class="n">learning_rate</span><span class="p">,</span>
+        <span class="n">n_estimators</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">n_estimators</span><span class="p">),</span>
+        <span class="n">objective</span><span class="o">=</span><span class="s2">&quot;reg:squarederror&quot;</span><span class="p">,</span>
+        <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span>
+    <span class="p">)</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+    <span class="n">y_train_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+    <span class="n">y_test_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+    <span class="c1"># Métricas</span>
+    <span class="n">r2_train</span> <span class="o">=</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">y_train</span><span class="p">,</span> <span class="n">y_train_pred</span><span class="p">)</span>
+    <span class="n">r2_test</span> <span class="o">=</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_test_pred</span><span class="p">)</span>
+    <span class="n">rmse_train</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_train</span><span class="p">,</span> <span class="n">y_train_pred</span><span class="p">))</span>
+    <span class="n">rmse_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_test_pred</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">rmse_test</span><span class="p">,</span> <span class="n">r2_train</span><span class="p">,</span> <span class="n">r2_test</span><span class="p">,</span> <span class="n">rmse_train</span><span class="p">,</span> <span class="n">rmse_test</span><span class="p">,</span> <span class="n">model</span>
+
+<span class="c1"># Implementación del Whale Optimization Algorithm (WOA)</span>
+<span class="k">def</span> <span class="nf">woa_xgboost</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">n_whales</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">n_iterations</span><span class="o">=</span><span class="mi">20</span><span class="p">):</span>
+    <span class="c1"># Definir espacio de búsqueda</span>
+    <span class="n">bounds</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;max_depth&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">20</span><span class="p">),</span>         <span class="c1"># Profundidad del árbol</span>
+        <span class="s1">&#39;learning_rate&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">),</span> <span class="c1"># Tasa de aprendizaje</span>
+        <span class="s1">&#39;n_estimators&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">300</span><span class="p">)</span>     <span class="c1"># Número de árboles</span>
+    <span class="p">}</span>
+
+    <span class="c1"># Inicialización de ballenas (aleatorio dentro del espacio de búsqueda)</span>
+    <span class="n">whales</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">bounds</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">bounds</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">bounds</span><span class="o">.</span><span class="n">keys</span><span class="p">()])</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_whales</span><span class="p">)]</span>
+    <span class="n">best_whale</span><span class="p">,</span> <span class="n">best_score</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="s2">&quot;inf&quot;</span><span class="p">)</span>
+    <span class="n">best_r2_train</span><span class="p">,</span> <span class="n">best_r2_test</span><span class="p">,</span> <span class="n">best_rmse_train</span><span class="p">,</span> <span class="n">best_rmse_test</span><span class="p">,</span> <span class="n">best_model</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
+
+    <span class="k">for</span> <span class="n">iteration</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_iterations</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">whale</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">whales</span><span class="p">):</span>
+            <span class="c1"># Evaluar métricas</span>
+            <span class="n">rmse_test</span><span class="p">,</span> <span class="n">r2_train</span><span class="p">,</span> <span class="n">r2_test</span><span class="p">,</span> <span class="n">rmse_train</span><span class="p">,</span> <span class="n">rmse_test_value</span><span class="p">,</span> <span class="n">model</span> <span class="o">=</span> <span class="n">evaluate_woa_metrics</span><span class="p">(</span><span class="n">whale</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+
+            <span class="c1"># Actualizar la mejor ballena</span>
+            <span class="k">if</span> <span class="n">rmse_test_value</span> <span class="o">&lt;</span> <span class="n">best_score</span><span class="p">:</span>
+                <span class="n">best_whale</span> <span class="o">=</span> <span class="n">whale</span>
+                <span class="n">best_score</span> <span class="o">=</span> <span class="n">rmse_test_value</span>
+                <span class="n">best_r2_train</span><span class="p">,</span> <span class="n">best_r2_test</span><span class="p">,</span> <span class="n">best_rmse_train</span><span class="p">,</span> <span class="n">best_rmse_test</span><span class="p">,</span> <span class="n">best_model</span> <span class="o">=</span> <span class="n">r2_train</span><span class="p">,</span> <span class="n">r2_test</span><span class="p">,</span> <span class="n">rmse_train</span><span class="p">,</span> <span class="n">rmse_test_value</span><span class="p">,</span> <span class="n">model</span>
+
+        <span class="c1"># Actualizar posiciones de las ballenas (comportamiento de caza)</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">whale</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">whales</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">whale</span><span class="p">)):</span>
+                <span class="n">r</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span>
+                <span class="k">if</span> <span class="n">r</span> <span class="o">&lt;</span> <span class="mf">0.5</span><span class="p">:</span>
+                    <span class="c1"># Movimiento en espiral</span>
+                    <span class="n">D</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">best_whale</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="n">whale</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+                    <span class="n">b</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># Constante de forma para el espiral</span>
+                    <span class="n">l</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># Factor aleatorio</span>
+                    <span class="n">whale</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">D</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">b</span> <span class="o">*</span> <span class="n">l</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">l</span><span class="p">)</span> <span class="o">+</span> <span class="n">best_whale</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="c1"># Movimiento lineal hacia la mejor ballena</span>
+                    <span class="n">A</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span>
+                    <span class="n">C</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span>
+                    <span class="n">D</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">C</span> <span class="o">*</span> <span class="n">best_whale</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="n">whale</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+                    <span class="n">whale</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">best_whale</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="n">A</span> <span class="o">*</span> <span class="n">D</span>
+
+                <span class="c1"># Restringir al espacio de búsqueda</span>
+                <span class="n">whale</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">whale</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">bounds</span><span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">bounds</span><span class="o">.</span><span class="n">keys</span><span class="p">())[</span><span class="n">j</span><span class="p">]][</span><span class="mi">0</span><span class="p">],</span> <span class="n">bounds</span><span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">bounds</span><span class="o">.</span><span class="n">keys</span><span class="p">())[</span><span class="n">j</span><span class="p">]][</span><span class="mi">1</span><span class="p">])</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Iteración </span><span class="si">{</span><span class="n">iteration</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">n_iterations</span><span class="si">}</span><span class="s2">: Mejor RMSE Test = </span><span class="si">{</span><span class="n">best_score</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Devuelve los mejores parámetros y métricas</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s1">&#39;best_params&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;max_depth&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">best_whale</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
+            <span class="s1">&#39;learning_rate&#39;</span><span class="p">:</span> <span class="n">best_whale</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+            <span class="s1">&#39;n_estimators&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">best_whale</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+        <span class="p">},</span>
+        <span class="s1">&#39;best_r2_train&#39;</span><span class="p">:</span> <span class="n">best_r2_train</span><span class="p">,</span>
+        <span class="s1">&#39;best_r2_test&#39;</span><span class="p">:</span> <span class="n">best_r2_test</span><span class="p">,</span>
+        <span class="s1">&#39;best_rmse_train&#39;</span><span class="p">:</span> <span class="n">best_rmse_train</span><span class="p">,</span>
+        <span class="s1">&#39;best_rmse_test&#39;</span><span class="p">:</span> <span class="n">best_rmse_test</span><span class="p">,</span>
+        <span class="s1">&#39;best_model&#39;</span><span class="p">:</span> <span class="n">best_model</span>
+    <span class="p">}</span>
+
+<span class="c1"># Llamar a la optimización WOA</span>
+<span class="n">results_woa</span> <span class="o">=</span> <span class="n">woa_xgboost</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Resultados finales de WOA-XGBoost:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;R² Train: </span><span class="si">{</span><span class="n">results_woa</span><span class="p">[</span><span class="s1">&#39;best_r2_train&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;R² Test: </span><span class="si">{</span><span class="n">results_woa</span><span class="p">[</span><span class="s1">&#39;best_r2_test&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;RMSE Train: </span><span class="si">{</span><span class="n">results_woa</span><span class="p">[</span><span class="s1">&#39;best_rmse_train&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;RMSE Test: </span><span class="si">{</span><span class="n">results_woa</span><span class="p">[</span><span class="s1">&#39;best_rmse_test&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Hiperparámetros óptimos: </span><span class="si">{</span><span class="n">results_woa</span><span class="p">[</span><span class="s1">&#39;best_params&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteración 1/20: Mejor RMSE Test = 1.4072
+Iteración 2/20: Mejor RMSE Test = 1.4041
+Iteración 3/20: Mejor RMSE Test = 1.4041
+Iteración 4/20: Mejor RMSE Test = 1.4041
+Iteración 5/20: Mejor RMSE Test = 1.4041
+Iteración 6/20: Mejor RMSE Test = 1.4041
+Iteración 7/20: Mejor RMSE Test = 1.4041
+Iteración 8/20: Mejor RMSE Test = 1.4041
+Iteración 9/20: Mejor RMSE Test = 1.4041
+Iteración 10/20: Mejor RMSE Test = 1.4041
+Iteración 11/20: Mejor RMSE Test = 1.4041
+Iteración 12/20: Mejor RMSE Test = 1.4041
+Iteración 13/20: Mejor RMSE Test = 1.4041
+Iteración 14/20: Mejor RMSE Test = 1.4041
+Iteración 15/20: Mejor RMSE Test = 1.4041
+Iteración 16/20: Mejor RMSE Test = 1.4041
+Iteración 17/20: Mejor RMSE Test = 1.4041
+Iteración 18/20: Mejor RMSE Test = 1.4041
+Iteración 19/20: Mejor RMSE Test = 1.4041
+Iteración 20/20: Mejor RMSE Test = 1.4041
+
+Resultados finales de WOA-XGBoost:
+R² Train: 0.9999
+R² Test: 0.8965
+RMSE Train: 0.0407
+RMSE Test: 1.4041
+Hiperparámetros óptimos: {&#39;max_depth&#39;: 3, &#39;learning_rate&#39;: 0.016485796467220086, &#39;n_estimators&#39;: 50}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="original.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Propuesta de modelo original</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bayesian-optimization"><strong>Bayesian Optimization</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gwo"><strong>GWO</strong></a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Kanery Camargo y Emanuel Carbonell
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

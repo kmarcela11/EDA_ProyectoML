@@ -61,7 +61,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Modelos de regresión" href="modelos.html" />
-    <link rel="prev" title="Contextualización del Proyecto" href="Intro.html" />
+    <link rel="prev" title="Contextualización del Proyecto" href="inicio.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -175,14 +175,17 @@
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="Intro.html">
-                    Contextualización del Proyecto
+                    Proyecto Final - Energía Eólica.
                 </a>
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="inicio.html"><strong>Contextualización del Proyecto</strong></a></li>
+
 <li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>Análisis Exploratorio de Datos (EDA)</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="modelos.html"><strong>Modelos de regresión</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="original.html">Propuesta de modelo original</a></li>
+<li class="toctree-l1"><a class="reference internal" href="implementacion.html"><strong>Implementación del modelo original</strong></a></li>
 </ul>
 
     </div>
@@ -423,6 +426,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variables-temperatura-a-100m-y-20m"><strong>Variables: Temperatura a 100m y 20m</strong></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prueba-de-estacionariedad-dickey-fuller"><strong>Prueba de estacionariedad: Dickey-Fuller</strong></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#valores-atipicos"><strong>Valores atípicos</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-bivariado"><strong>Análisis Bivariado</strong></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#base-de-datos-para-modelos"><strong>Base de datos para modelos</strong></a></li>
@@ -446,6 +450,8 @@ document.write(`
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">matplotlib.cm</span> <span class="k">as</span> <span class="nn">cm</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">windrose</span> <span class="kn">import</span> <span class="n">WindroseAxes</span>
 <span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
 <span class="kn">from</span> <span class="nn">statsmodels.tsa.seasonal</span> <span class="kn">import</span> <span class="n">seasonal_decompose</span>
 <span class="kn">from</span> <span class="nn">statsmodels.tsa.stattools</span> <span class="kn">import</span> <span class="n">adfuller</span>
@@ -459,10 +465,16 @@ document.write(`
 </section>
 <section id="contextualizacion-de-los-datos">
 <h2><strong>Contextualización de los datos</strong><a class="headerlink" href="#contextualizacion-de-los-datos" title="Link to this heading">#</a></h2>
-<p>El conjunto de datos a tratar cuenta con información sobre variables climáticas esenciales capturadas en una región costera mediante un sistema de monitoreo atmosférico que comenzó a operar el <strong>1 de enero de 2022</strong>. Este sistema incluye anemómetros acústicos ubicados a 100 m, 80 m, 60 m y 40 m de altura para registrar la velocidad del viento, así como veletas que miden su dirección a esas mismas alturas. También dispone de sensores de temperatura a 100 m y 20 m, y sensores de presión atmosférica y humedad relativa. Las mediciones se toman a intervalos de <strong>10 minutos</strong>, permitiendo la captura de datos en alta frecuencia y con un alto grado de detalle. Gracias a esta estructura de monitoreo, el conjunto de datos proporciona una base sólida para desarrollar modelos predictivos y analizar el comportamiento del viento y sus variaciones en tiempo real, fundamentales para la gestión y optimización de recursos energéticos eólicos en la región de estudio.</p>
+<div style="text-align: justify; margin-bottom: 20px;">
+    El conjunto de datos comprende información detallada sobre variables climáticas fundamentales, recopiladas en una región costera mediante un avanzado sistema de monitoreo atmosférico en funcionamiento desde el <strong>1 de enero de 2022</strong>. Este sistema cuenta con anemómetros acústicos instalados a alturas de 100 m, 80 m, 60 m y 40 m, que registran la velocidad del viento, complementados con veletas para medir su dirección en los mismos niveles. Además, incluye sensores de temperatura ubicados a 100 m y 20 m, así como dispositivos para medir presión atmosférica y humedad relativa.
+</div>
+<div style="text-align: justify;">
+    Las mediciones se realizan a intervalos de </b>10 minutos</b>, ofreciendo una resolución temporal elevada y un nivel de detalle que facilita un análisis minucioso de las condiciones atmosféricas. Este diseño de monitoreo proporciona una base robusta para desarrollar modelos predictivos y estudiar las dinámicas del viento en tiempo real, contribuyendo significativamente a la gestión y optimización de recursos energéticos eólicos en la región. El conjunto de datos abarca registros hasta el <strong>16 de mayo de 2022</strong>, fecha en que el sistema dejó de operar correctamente.
+</div>
 </section>
 <section id="conjunto-de-datos">
 <h2><strong>Conjunto de datos</strong><a class="headerlink" href="#conjunto-de-datos" title="Link to this heading">#</a></h2>
+<p>Inicialmente se realice el cargue del conjunto de datos.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">file_path</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;C:\Users\kamac\OneDrive\Desktop\MachineLearningUN\EDA\data_ws.xlsx&quot;</span>
@@ -473,7 +485,7 @@ document.write(`
 </div>
 <section id="caracteristicas-del-conjunto-de-datos">
 <h3><strong>Características del conjunto de datos</strong><a class="headerlink" href="#caracteristicas-del-conjunto-de-datos" title="Link to this heading">#</a></h3>
-<p>Inicialmente, se observan las primeras <strong>5 observaciones</strong> del conjunto de datos con el uso del método <code class="docutils literal notranslate"><span class="pre">.head()</span></code></p>
+<p>Se observan las primeras <strong>5 observaciones</strong> del conjunto de datos con el uso del método <code class="docutils literal notranslate"><span class="pre">.head()</span></code></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
@@ -656,12 +668,12 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(19105, 60)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(19008, 60)
 </pre></div>
 </div>
 </div>
 </div>
-<p>Al usar el método <code class="docutils literal notranslate"><span class="pre">.shape</span></code> observamos que el conjunto de datos contiene <strong>60</strong> variables y <strong>19105</strong> observaciones.</p>
+<p>Al usar el método <code class="docutils literal notranslate"><span class="pre">.shape</span></code> observamos que el conjunto de datos contiene <strong>60</strong> variables y <strong>19008</strong> observaciones.</p>
 </section>
 </section>
 <section id="reorganizacion-del-conjunto-de-datos">
@@ -1136,12 +1148,12 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(19105, 13)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(19008, 13)
 </pre></div>
 </div>
 </div>
 </div>
-<p>Luego de la reorganización de variables, nos quedamos con un conjunto de datos de <strong>19105 observaciones y 13 variables</strong>. Este conjunto de datos incluye las mediciones promedio tomadas cada 10 minutos para las variables seleccionadas, permitiendo un análisis más enfocado y manejable de las condiciones atmosféricas en la región de estudio.</p>
+<p>Luego de la reorganización de variables, nos quedamos con un conjunto de datos de <strong>19008 observaciones y 13 variables</strong>. Este conjunto de datos incluye las mediciones promedio tomadas cada 10 minutos para las variables seleccionadas, permitiendo un análisis más enfocado y manejable de las condiciones atmosféricas en la región de estudio.</p>
 </section>
 <section id="diccionario-de-variables">
 <h3><strong>Diccionario de variables</strong><a class="headerlink" href="#diccionario-de-variables" title="Link to this heading">#</a></h3>
@@ -1263,7 +1275,7 @@ dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x197152feeb0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x1b48bcd2bb0&gt;
 </pre></div>
 </div>
 <img alt="_images/c90dc9625d001cd8521e8b6e85849f19269aae09765980e2fc242fd3050d1371.png" src="_images/c90dc9625d001cd8521e8b6e85849f19269aae09765980e2fc242fd3050d1371.png" />
@@ -1398,48 +1410,48 @@ dtype: float64
   <tbody>
     <tr>
       <th>count</th>
-      <td>19105.000000</td>
-      <td>19105.000000</td>
-      <td>19105.000000</td>
-      <td>19105.000000</td>
-      <td>19105.000000</td>
-      <td>19105.000000</td>
-      <td>19105.000000</td>
-      <td>19105.000000</td>
-      <td>19105.000000</td>
-      <td>19105.000000</td>
-      <td>19105.000000</td>
-      <td>19105.000000</td>
+      <td>19008.000000</td>
+      <td>19008.000000</td>
+      <td>19008.000000</td>
+      <td>19008.000000</td>
+      <td>19008.000000</td>
+      <td>19008.000000</td>
+      <td>19008.000000</td>
+      <td>19008.000000</td>
+      <td>19008.000000</td>
+      <td>19008.000000</td>
+      <td>19008.000000</td>
+      <td>19008.000000</td>
     </tr>
     <tr>
       <th>mean</th>
-      <td>12.299370</td>
-      <td>12.165388</td>
-      <td>11.922609</td>
-      <td>11.919300</td>
-      <td>11.595240</td>
-      <td>67.366088</td>
-      <td>66.078548</td>
-      <td>66.379795</td>
-      <td>1006.204423</td>
-      <td>84.496944</td>
-      <td>26.273799</td>
-      <td>26.493253</td>
+      <td>12.342915</td>
+      <td>12.208528</td>
+      <td>11.964910</td>
+      <td>11.961529</td>
+      <td>11.636214</td>
+      <td>66.866064</td>
+      <td>65.645194</td>
+      <td>65.904410</td>
+      <td>1006.196902</td>
+      <td>84.469273</td>
+      <td>26.265028</td>
+      <td>26.486346</td>
     </tr>
     <tr>
       <th>std</th>
-      <td>4.466870</td>
-      <td>4.418245</td>
-      <td>4.301851</td>
-      <td>4.291515</td>
-      <td>4.136056</td>
-      <td>48.626800</td>
-      <td>48.900081</td>
-      <td>48.760917</td>
-      <td>1.824096</td>
-      <td>4.305227</td>
-      <td>0.846237</td>
-      <td>0.951251</td>
+      <td>4.433466</td>
+      <td>4.385033</td>
+      <td>4.268770</td>
+      <td>4.258439</td>
+      <td>4.103487</td>
+      <td>47.736005</td>
+      <td>48.149888</td>
+      <td>47.909614</td>
+      <td>1.823613</td>
+      <td>4.292172</td>
+      <td>0.837681</td>
+      <td>0.946633</td>
     </tr>
     <tr>
       <th>min</th>
@@ -1458,48 +1470,48 @@ dtype: float64
     </tr>
     <tr>
       <th>25%</th>
-      <td>9.779127</td>
-      <td>9.685888</td>
-      <td>9.565355</td>
-      <td>9.577816</td>
-      <td>9.400946</td>
-      <td>48.860000</td>
-      <td>47.860000</td>
-      <td>47.910000</td>
+      <td>9.837316</td>
+      <td>9.736328</td>
+      <td>9.612626</td>
+      <td>9.624122</td>
+      <td>9.451099</td>
+      <td>48.840000</td>
+      <td>47.840000</td>
+      <td>47.890000</td>
       <td>1004.901606</td>
-      <td>81.642151</td>
+      <td>81.634521</td>
       <td>25.709839</td>
-      <td>25.823634</td>
+      <td>25.820220</td>
     </tr>
     <tr>
       <th>50%</th>
-      <td>12.935835</td>
-      <td>12.804114</td>
-      <td>12.548935</td>
-      <td>12.553308</td>
-      <td>12.219060</td>
-      <td>56.490000</td>
-      <td>55.300000</td>
-      <td>55.580000</td>
+      <td>12.963534</td>
+      <td>12.826116</td>
+      <td>12.574976</td>
+      <td>12.572975</td>
+      <td>12.247453</td>
+      <td>56.420000</td>
+      <td>55.230000</td>
+      <td>55.525000</td>
       <td>1006.112585</td>
-      <td>84.640503</td>
-      <td>26.068420</td>
-      <td>26.328856</td>
+      <td>84.625244</td>
+      <td>26.060791</td>
+      <td>26.323735</td>
     </tr>
     <tr>
       <th>75%</th>
-      <td>15.555045</td>
-      <td>15.377155</td>
-      <td>15.028957</td>
-      <td>15.014298</td>
-      <td>14.557787</td>
-      <td>64.460000</td>
-      <td>63.030000</td>
-      <td>63.430000</td>
-      <td>1007.435347</td>
-      <td>87.669373</td>
-      <td>26.587219</td>
-      <td>26.997935</td>
+      <td>15.570065</td>
+      <td>15.395811</td>
+      <td>15.044143</td>
+      <td>15.026889</td>
+      <td>14.568282</td>
+      <td>64.360000</td>
+      <td>62.900000</td>
+      <td>63.312500</td>
+      <td>1007.421374</td>
+      <td>87.646484</td>
+      <td>26.571960</td>
+      <td>26.984280</td>
     </tr>
     <tr>
       <th>max</th>
@@ -1520,15 +1532,42 @@ dtype: float64
 </table>
 </div></div></div>
 </div>
-<p>El análisis estadístico descriptivo muestra un resumen de las variables de velocidad y dirección del viento, presión, humedad y temperatura, obtenidas a partir de datos promediados cada 10 minutos. A continuación, se destacan algunos puntos clave:</p>
+<p>El análisis estadístico descriptivo de las variables climáticas, basado en los datos promediados cada 10 minutos, revela los siguientes puntos clave:</p>
 <ul class="simple">
-<li><p><strong>Velocidad del Viento</strong>: Las velocidades promedio en los diferentes sensores y alturas (100 m, 80 m, y 60 m) varían entre 11.59 m/s y 12.30 m/s, con desviaciones estándar en el rango de 4.13 a 4.67 m/s. Los valores máximos alcanzan hasta 22.30 m/s a 100 m de altura.</p></li>
-<li><p><strong>Dirección del Viento</strong>: Las direcciones promediadas muestran una media cercana a 67°, indicando una predominancia en dirección noreste. La alta desviación estándar (aproximadamente 48°) sugiere variabilidad significativa en las direcciones del viento, con un rango completo de 0° a 359°.</p></li>
-<li><p><strong>Presión Atmosférica</strong>: La presión promedio es de 1006.2 hPa, con una desviación estándar relativamente baja (1.82 hPa), lo que indica estabilidad en esta variable, oscilando entre 1001 y 1012 hPa.</p></li>
-<li><p><strong>Humedad Relativa</strong>: La humedad tiene un promedio de 84.5%, con una variabilidad de 4.3%, fluctuando entre 63% y 94%, lo cual refleja condiciones de humedad alta y relativamente estables.</p></li>
-<li><p><strong>Temperatura</strong>: Las temperaturas a 100 m y 21 m promedian 26.2 °C y 26.5 °C, respectivamente, con ligeras variaciones. Los máximos registrados son de 33.9 °C y 34.5 °C, y la temperatura mínima registrada es de aproximadamente 23 °C.</p></li>
+<li><p><strong>Velocidad del Viento</strong>:</p>
+<ul>
+<li><p>Las velocidades promedio en los diferentes sensores y alturas (100 m, 80 m y 60 m m) oscilan entre <strong>11.63 m/s y 12.34 m/s</strong>.</p></li>
+<li><p>Las desviaciones estándar varían entre <strong>4.10 y 4.43 m/s</strong>, indicando fluctuaciones moderadas.</p></li>
+<li><p>El valor máximo registrado alcanza <strong>22.30 m/s</strong> a 100 m de altura, mientras que el valor mínimo es cercano a <strong>0.23 m/s</strong>.</p></li>
 </ul>
-<p>Este resumen estadístico indica que las variables presentan características estables, aunque la dirección del viento muestra una mayor dispersión, posiblemente debido a cambios en patrones atmosféricos o eventos específicos en el área de estudio.</p>
+</li>
+<li><p><strong>Dirección del Viento</strong>:</p>
+<ul>
+<li><p>Las direcciones promedio en los diferentes niveles muestran valores entre <strong>65.64° y 66.87°</strong>, reflejando predominancia en dirección noreste.</p></li>
+<li><p>La desviación estándar está en el rango de <strong>47.73° a 48.15°</strong>, lo que sugiere una significativa variabilidad direccional.</p></li>
+<li><p>Las mediciones abarcan un rango completo de <strong>0° a 359°</strong>, confirmando la dispersión en la orientación del viento.</p></li>
+</ul>
+</li>
+<li><p><strong>Presión Atmosférica</strong>:</p>
+<ul>
+<li><p>La presión promedio es de <strong>1006.20 hPa</strong>, con una desviación estándar baja de <strong>1.82 hPa</strong>, lo que indica estabilidad en esta variable.</p></li>
+<li><p>Los valores fluctúan entre <strong>1001.41 hPa y 1012.42 hPa</strong>, dentro de un rango esperado para condiciones atmosféricas normales.</p></li>
+</ul>
+</li>
+<li><p><strong>Humedad Relativa</strong>:</p>
+<ul>
+<li><p>La humedad relativa promedio es de <strong>84.47%</strong>, con una desviación estándar de <strong>4.29%</strong>, lo que refleja condiciones consistentemente húmedas.</p></li>
+<li><p>Los valores varían desde <strong>63.07% hasta 94.09%</strong>, dentro del rango típico de una región costera.</p></li>
+</ul>
+</li>
+<li><p><strong>Temperatura</strong>:</p>
+<ul>
+<li><p>A 100 m de altura, la temperatura promedio es de <strong>26.27 °C</strong>, mientras que a 21 m es de <strong>26.49 °C</strong>, con desviaciones estándar de <strong>0.83 °C y 0.95 °C</strong>, respectivamente.</p></li>
+<li><p>Las temperaturas máximas registradas son de <strong>33.90 °C y 34.59 °C</strong>, mientras que las mínimas son cercanas a <strong>22.70 °C y 23.71 °C</strong>.</p></li>
+</ul>
+</li>
+</ul>
+<p>Este análisis muestra que, si bien las variables de temperatura, humedad y presión son relativamente estables, la dirección del viento presenta una notable dispersión, probablemente debido a dinámicas atmosféricas complejas en la región de estudio.</p>
 </section>
 <section id="analisis-individual-de-las-variables">
 <h3><strong>Análisis individual de las variables</strong><a class="headerlink" href="#analisis-individual-de-las-variables" title="Link to this heading">#</a></h3>
@@ -1563,7 +1602,7 @@ dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/8b24e3c549e3ab482684b622d31bb54b9ab1896275ba54a8518a79facfe07a71.png" src="_images/8b24e3c549e3ab482684b622d31bb54b9ab1896275ba54a8518a79facfe07a71.png" />
+<img alt="_images/b6d7b6fe44a2372bb092fb69b770b631d50ed23a47e168db887f172a4d840a09.png" src="_images/b6d7b6fe44a2372bb092fb69b770b631d50ed23a47e168db887f172a4d840a09.png" />
 </div>
 </div>
 </section>
@@ -1576,7 +1615,7 @@ dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/72d8c5140bfc6c9b37b86f84674cf0e92efb4990f4bda372d272803747c62ba1.png" src="_images/72d8c5140bfc6c9b37b86f84674cf0e92efb4990f4bda372d272803747c62ba1.png" />
+<img alt="_images/5859e7bc4657463fa2d030ad4a18a781b6c1d54eec65cabb52a92d0fa1880a5a.png" src="_images/5859e7bc4657463fa2d030ad4a18a781b6c1d54eec65cabb52a92d0fa1880a5a.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1586,7 +1625,7 @@ dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/52b2de38a72dccca8be3f4dc2334bde8258b95f786aa49c70d1cc809066db5e6.png" src="_images/52b2de38a72dccca8be3f4dc2334bde8258b95f786aa49c70d1cc809066db5e6.png" />
+<img alt="_images/87fb23b0985ceb206529398ac07a55d95103c14e2f34c650dcb0f390b40948e2.png" src="_images/87fb23b0985ceb206529398ac07a55d95103c14e2f34c650dcb0f390b40948e2.png" />
 </div>
 </div>
 </section>
@@ -1611,7 +1650,7 @@ dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/9faa4436f1178e7e730d8f0e0dc4079cea4777b0dc0354ed27a40fb90399a7a7.png" src="_images/9faa4436f1178e7e730d8f0e0dc4079cea4777b0dc0354ed27a40fb90399a7a7.png" />
+<img alt="_images/7a9470fe6a265190f6b434e7e15f8996d1f74dea2183763a590f57e9eb021591.png" src="_images/7a9470fe6a265190f6b434e7e15f8996d1f74dea2183763a590f57e9eb021591.png" />
 </div>
 </div>
 </section>
@@ -1649,7 +1688,7 @@ dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/090e03a1eaddff7dc97dba6d4a5854e9ad48447d762b87205357fb15d44cf5ef.png" src="_images/090e03a1eaddff7dc97dba6d4a5854e9ad48447d762b87205357fb15d44cf5ef.png" />
+<img alt="_images/655925f1b32e6b8869eb3a618dbd9158f756ab898c3af85b465ea9ba7f01c60c.png" src="_images/655925f1b32e6b8869eb3a618dbd9158f756ab898c3af85b465ea9ba7f01c60c.png" />
 </div>
 </div>
 </section>
@@ -1662,7 +1701,7 @@ dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/66b3a35c7e5a16be2cfd0cf6a27d10cd2991e51158ecc80005e7604d364ae944.png" src="_images/66b3a35c7e5a16be2cfd0cf6a27d10cd2991e51158ecc80005e7604d364ae944.png" />
+<img alt="_images/c6b4f7cd9423e217f2f2b1ce9a59817da5e4007afa1b1206d558361f2f559484.png" src="_images/c6b4f7cd9423e217f2f2b1ce9a59817da5e4007afa1b1206d558361f2f559484.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1672,7 +1711,7 @@ dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/90337b58deaeda7c59e97f36bffb8648e848a7434fadc5dd88f2b102d5ec266e.png" src="_images/90337b58deaeda7c59e97f36bffb8648e848a7434fadc5dd88f2b102d5ec266e.png" />
+<img alt="_images/0fbe13d4493146f4f9a3415b967241ae7490065e84316a4b29129f9441a1f70a.png" src="_images/0fbe13d4493146f4f9a3415b967241ae7490065e84316a4b29129f9441a1f70a.png" />
 </div>
 </div>
 </section>
@@ -1697,7 +1736,7 @@ dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/85926adcef1e3f33d9ee014780ba090063e6bafb7b3c1fdb0d5ead8d1c57498a.png" src="_images/85926adcef1e3f33d9ee014780ba090063e6bafb7b3c1fdb0d5ead8d1c57498a.png" />
+<img alt="_images/f0fb1770853e90621ffa7ae79fa65d325d84cd5486c92e9c46a3781c5a565316.png" src="_images/f0fb1770853e90621ffa7ae79fa65d325d84cd5486c92e9c46a3781c5a565316.png" />
 </div>
 </div>
 </section>
@@ -1730,7 +1769,7 @@ dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/c5ac891e7265d1f37ed22da37d8aaadd5d30d3b0fb26bd57f8bbde0179798bfd.png" src="_images/c5ac891e7265d1f37ed22da37d8aaadd5d30d3b0fb26bd57f8bbde0179798bfd.png" />
+<img alt="_images/79437fc1e270ddab2e55f26d290abc1ce5089ac747f1b259e53c1c1e8e069902.png" src="_images/79437fc1e270ddab2e55f26d290abc1ce5089ac747f1b259e53c1c1e8e069902.png" />
 </div>
 </div>
 </section>
@@ -1743,7 +1782,7 @@ dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/bad71d5e9410640c02c81c8643c9f87eb4894b53d9650ec5bf75f6d806155530.png" src="_images/bad71d5e9410640c02c81c8643c9f87eb4894b53d9650ec5bf75f6d806155530.png" />
+<img alt="_images/f06da808e04a29a777ccfa886e495a331bc6cce437c383e21a06e331bcba04f4.png" src="_images/f06da808e04a29a777ccfa886e495a331bc6cce437c383e21a06e331bcba04f4.png" />
 </div>
 </div>
 </section>
@@ -1756,7 +1795,7 @@ dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/e031679316bde9e5ce51dda0735d66d831c45afb9be42147e051aff6717fefd7.png" src="_images/e031679316bde9e5ce51dda0735d66d831c45afb9be42147e051aff6717fefd7.png" />
+<img alt="_images/1385fe63e9d683aa69845a582bce790d7d3ad0ea30e11fe08ce60441ab4616a2.png" src="_images/1385fe63e9d683aa69845a582bce790d7d3ad0ea30e11fe08ce60441ab4616a2.png" />
 </div>
 </div>
 </section>
@@ -1798,7 +1837,7 @@ dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/6b64a747bbb0945b17425ca3422008e452930170b7446dbc245c69c813cf3a02.png" src="_images/6b64a747bbb0945b17425ca3422008e452930170b7446dbc245c69c813cf3a02.png" />
+<img alt="_images/e3e9e1452ff94cd2646ce06dec0e3d1b7c65310d3c4a9a214b3eead9456b0f0f.png" src="_images/e3e9e1452ff94cd2646ce06dec0e3d1b7c65310d3c4a9a214b3eead9456b0f0f.png" />
 </div>
 </div>
 <p>Los gráficos de la rosa de los vientos muestran una predominancia clara de vientos en dirección noreste (N-NE) en todas las alturas analizadas, específicamente para las velocidades del viento medidas a 100 m y 80 m con el sensor 1, y a 60 m. Las velocidades más altas, que superan los 17 m/s, también se orientan mayormente hacia el N-NE, mientras que las velocidades más bajas (en el rango de 0.3 a 4.5 m/s) se distribuyen entre el noreste y el sureste (SE). Esta tendencia es coherente con la ubicación del sensor, estratégicamente orientado hacia el noreste, lo cual favorece la captura de vientos predominantes de esa dirección. La estabilidad direccional observada en cada altura es un comportamiento esperado dada esta localización.</p>
@@ -1820,7 +1859,7 @@ dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/1eb31d11caf2582d62fae69101ddfc0d7fc82bea4f03df4e5b1cca51b3b3e20f.png" src="_images/1eb31d11caf2582d62fae69101ddfc0d7fc82bea4f03df4e5b1cca51b3b3e20f.png" />
+<img alt="_images/2d5a40c1e7b9eec109ec8487c5eccf7c624e8fa3b58f14a9251af9ec89a78ca4.png" src="_images/2d5a40c1e7b9eec109ec8487c5eccf7c624e8fa3b58f14a9251af9ec89a78ca4.png" />
 </div>
 </div>
 <p>La gráfica muestra la evolución temporal de la presión atmosférica en hectopascales (hPa). A lo largo del periodo observado, la presión presenta una variabilidad significativa, con oscilaciones que indican cambios frecuentes en las condiciones atmosféricas. Se observa una tendencia general a la baja en los primeros meses, alcanzando valores mínimos cercanos a 1004 hPa a mediados de enero. Posteriormente, hay una recuperación gradual hacia valores más altos en los meses siguientes, con picos ocasionales que alcanzan cerca de 1012 hPa. Estas fluctuaciones pueden estar asociadas a sistemas de alta y baja presión que afectan las condiciones climáticas de la región, lo cual es característico en climas con variabilidad estacional.</p>
@@ -1842,7 +1881,7 @@ dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/7e50b427b39a73a60bc11d50d3f15ab2c20c194b17aae709790e63d929227d26.png" src="_images/7e50b427b39a73a60bc11d50d3f15ab2c20c194b17aae709790e63d929227d26.png" />
+<img alt="_images/fb69fc114e88502e640395d47f24411fd747b1853233c1d1babd67c3e1456280.png" src="_images/fb69fc114e88502e640395d47f24411fd747b1853233c1d1babd67c3e1456280.png" />
 </div>
 </div>
 <p>La gráfica muestra la variación de la humedad relativa a lo largo del tiempo. Se observa que los valores de humedad fluctúan entre el 70% y el 90%, con picos ocasionales que superan el 90%, y caídas hasta cerca del 65%. La serie evidencia cambios frecuentes, posiblemente relacionados con condiciones climáticas variables como lluvias o periodos secos. Además, a partir de febrero se aprecia un ligero aumento en la frecuencia de valores altos de humedad, lo que podría estar vinculado a cambios estacionales o eventos específicos en el clima de la región.</p>
@@ -1875,7 +1914,7 @@ dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/7b3e78433b24172fe43ecfbeea6394b080ce8822935631a5de9d7aa8eeaa5971.png" src="_images/7b3e78433b24172fe43ecfbeea6394b080ce8822935631a5de9d7aa8eeaa5971.png" />
+<img alt="_images/10902cba94eed7373482afd5cc63d6ae38272f87a0676af8ddb53d6293f6dc22.png" src="_images/10902cba94eed7373482afd5cc63d6ae38272f87a0676af8ddb53d6293f6dc22.png" />
 </div>
 </div>
 <p>La serie temporal de temperaturas promedio a 100 m y 20 m de altura revela una estabilidad relativa, con valores que oscilan entre 24 °C y 28 °C en la mayor parte del periodo observado. Sin embargo, hacia finales de marzo y principios de abril, se registran aumentos bruscos que superan los 32 °C, especialmente a la altura de 100 m, lo cual podría reflejar eventos atmosféricos específicos o cambios estacionales. A 100 m, se observan variaciones ligeramente más amplias en comparación con 20 m, posiblemente debido a una menor influencia de la superficie terrestre, lo que permite una mayor oscilación en los registros de temperatura.</p>
@@ -1932,63 +1971,63 @@ dtype: float64
   <tbody>
     <tr>
       <th>VelViento100m_1</th>
-      <td>-8.661787</td>
-      <td>4.800586e-14</td>
+      <td>-8.621280</td>
+      <td>6.095513e-14</td>
     </tr>
     <tr>
       <th>VelViento100m_2</th>
-      <td>-8.689101</td>
-      <td>4.086498e-14</td>
+      <td>-8.645355</td>
+      <td>5.288958e-14</td>
     </tr>
     <tr>
       <th>VelViento80m_1</th>
-      <td>-8.793131</td>
-      <td>2.212792e-14</td>
+      <td>-8.752443</td>
+      <td>2.812799e-14</td>
     </tr>
     <tr>
       <th>VelViento80m_2</th>
-      <td>-8.797830</td>
-      <td>2.152317e-14</td>
+      <td>-8.749342</td>
+      <td>2.864705e-14</td>
     </tr>
     <tr>
       <th>VelViento60m</th>
-      <td>-8.929436</td>
-      <td>9.906884e-15</td>
+      <td>-8.883219</td>
+      <td>1.300938e-14</td>
     </tr>
     <tr>
       <th>DirViento60m</th>
-      <td>-10.192249</td>
-      <td>6.277660e-18</td>
+      <td>-10.370778</td>
+      <td>2.267128e-18</td>
     </tr>
     <tr>
       <th>DirViento100m</th>
-      <td>-10.461388</td>
-      <td>1.356205e-18</td>
+      <td>-10.642806</td>
+      <td>4.880716e-19</td>
     </tr>
     <tr>
       <th>DirViento80m</th>
-      <td>-10.250230</td>
-      <td>4.505855e-18</td>
+      <td>-10.451410</td>
+      <td>1.435001e-18</td>
     </tr>
     <tr>
       <th>Presion</th>
-      <td>-5.448123</td>
-      <td>2.681878e-06</td>
+      <td>-5.616470</td>
+      <td>1.171300e-06</td>
     </tr>
     <tr>
       <th>Humedad</th>
-      <td>-12.551317</td>
-      <td>2.202757e-23</td>
+      <td>-12.486424</td>
+      <td>3.011593e-23</td>
     </tr>
     <tr>
       <th>Temp100m</th>
-      <td>-8.667561</td>
-      <td>4.639905e-14</td>
+      <td>-8.464022</td>
+      <td>1.539798e-13</td>
     </tr>
     <tr>
       <th>Temp21m</th>
-      <td>-14.252399</td>
-      <td>1.473391e-26</td>
+      <td>-14.271832</td>
+      <td>1.370115e-26</td>
     </tr>
   </tbody>
 </table>
@@ -2017,7 +2056,7 @@ dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/6354a576531e1553763daef8dcb6370c37a90aa94c04c21f2bfe4de7da4943f1.png" src="_images/6354a576531e1553763daef8dcb6370c37a90aa94c04c21f2bfe4de7da4943f1.png" />
+<img alt="_images/dbda2a88038c74dfc2773872500e43a3f307b05b7be6031bf266e81fe566d466.png" src="_images/dbda2a88038c74dfc2773872500e43a3f307b05b7be6031bf266e81fe566d466.png" />
 </div>
 </div>
 <p>Los histogramas muestran la distribución de cada variable en el conjunto de datos, revelando diferentes patrones. Las variables de <strong>velocidad del viento</strong> (<code class="docutils literal notranslate"><span class="pre">VelViento100m_1</span></code>, <code class="docutils literal notranslate"><span class="pre">VelViento100m_2</span></code>, <code class="docutils literal notranslate"><span class="pre">VelViento80m_1</span></code>, <code class="docutils literal notranslate"><span class="pre">VelViento80m_2</span></code>, <code class="docutils literal notranslate"><span class="pre">VelViento60m</span></code>) presentan distribuciones asimétricas hacia la derecha, con la mayoría de los valores entre 10 y 15 m/s, indicando que las velocidades altas son menos comunes. Las variables de <strong>dirección del viento</strong> (<code class="docutils literal notranslate"><span class="pre">DirViento60m</span></code>, <code class="docutils literal notranslate"><span class="pre">DirViento100m</span></code>, <code class="docutils literal notranslate"><span class="pre">DirViento80m</span></code>) tienen una distribución casi uniforme, reflejando que las direcciones del viento están dispersas en un rango amplio de valores, aunque hay una ligera concentración en torno a los 50-100° (noreste). La <strong>presión atmosférica</strong> (<code class="docutils literal notranslate"><span class="pre">Presion</span></code>) muestra una distribución aproximadamente normal, centrada alrededor de 1006 hPa, lo que indica estabilidad en los valores de presión. La <strong>humedad relativa</strong> (<code class="docutils literal notranslate"><span class="pre">Humedad</span></code>) sigue una distribución normal, con la mayoría de los valores entre 80% y 90%, reflejando condiciones de alta humedad. Finalmente, las variables de <strong>temperatura</strong> (<code class="docutils literal notranslate"><span class="pre">Temp100m</span></code> y <code class="docutils literal notranslate"><span class="pre">Temp21m</span></code>) tienen una distribución bimodal con picos alrededor de 26-28 °C y 30-32 °C, sugiriendo posibles variaciones estacionales o influencias climáticas.</p>
@@ -2036,12 +2075,90 @@ dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/741ea7d66751f1c3a61baa8a6f8bf6c5d39c0b2d2513a861a2a9885db557e287.png" src="_images/741ea7d66751f1c3a61baa8a6f8bf6c5d39c0b2d2513a861a2a9885db557e287.png" />
+<img alt="_images/cc8314ebe0b904d062bc8c1882db763ab7355241ca29aba13e4dbdb89f55f9c9.png" src="_images/cc8314ebe0b904d062bc8c1882db763ab7355241ca29aba13e4dbdb89f55f9c9.png" />
 </div>
 </div>
 <p>Los diagramas de cajas y bigotes muestran la presencia de datos atípicos en varias de las variables analizadas. En las variables de <strong>dirección del viento</strong> (<code class="docutils literal notranslate"><span class="pre">DirViento60m</span></code>, <code class="docutils literal notranslate"><span class="pre">DirViento100m</span></code>, y <code class="docutils literal notranslate"><span class="pre">DirViento80m</span></code>), los atípicos son especialmente numerosos y están distribuidos en un amplio rango, lo cual es característico de este tipo de datos direccionales y su variabilidad. Las variables de <strong>velocidad del viento</strong> (<code class="docutils literal notranslate"><span class="pre">VelViento100m_1</span></code>, <code class="docutils literal notranslate"><span class="pre">VelViento100m_2</span></code>, <code class="docutils literal notranslate"><span class="pre">VelViento80m_1</span></code>, <code class="docutils literal notranslate"><span class="pre">VelViento80m_2</span></code>, <code class="docutils literal notranslate"><span class="pre">VelViento60m</span></code>) presentan pocos atípicos, la mayoría en valores bajos y altos, sugiriendo variaciones extremas en la intensidad del viento, aunque en un rango limitado.</p>
 <p>En la <strong>presión atmosférica</strong> (<code class="docutils literal notranslate"><span class="pre">Presion</span></code>), se observan algunos valores atípicos por encima de 1010 hPa, los cuales representan desviaciones de una distribución normal. En el caso de la <strong>humedad</strong> (<code class="docutils literal notranslate"><span class="pre">Humedad</span></code>), los valores atípicos son menos frecuentes y se concentran en los valores bajos, posiblemente reflejando eventos específicos de baja humedad. Por último, las variables de <strong>temperatura</strong> (<code class="docutils literal notranslate"><span class="pre">Temp100m</span></code> y <code class="docutils literal notranslate"><span class="pre">Temp21m</span></code>) muestran atípicos principalmente en los valores altos, sobre los 30 °C, lo que podría estar asociado a episodios de calentamiento extremo.</p>
 <p>Aunque se ha identificado la presencia de valores atípicos en las variables no se procederá a su imputación, ya que estos valores se consideran normales en el contexto específico de este fenómeno meteorológico. La velocidad del viento es inherentemente variable y puede presentar fluctuaciones significativas debido a factores locales, estacionales y climáticos, los cuales son naturales y esperados en el ámbito de estudios meteorológicos. Imputar estos datos podría distorsionar el análisis al suavizar artificialmente variaciones propias del comportamiento del viento. Cabe mencionar que la base de datos ya ha sido sometida a un proceso de limpieza en el cual se eliminaron los valores considerados erróneos bajo criterios definidos previamente, asegurando que únicamente se mantengan los datos válidos. De este modo, el análisis conserva tanto la integridad de los datos como la representatividad de las condiciones reales del entorno estudiado.</p>
+</section>
+<section id="analisis-bivariado">
+<h3><strong>Análisis Bivariado</strong><a class="headerlink" href="#analisis-bivariado" title="Link to this heading">#</a></h3>
+<p>En esta sección, se llevarán a cabo diversos análisis bivariados para explorar la relación entre las variables objetivo (velocidad del viento a diferentes alturas) y las variables explicativas.
+Inicialmente, veamos la matriz de correlación entre las variables.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dataf</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Fecha&#39;</span><span class="p">])</span>
+<span class="n">corr_matrix</span> <span class="o">=</span> <span class="n">dataf</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">triu</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">corr_matrix</span><span class="p">,</span> <span class="n">dtype</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">corr_matrix</span><span class="p">,</span> <span class="n">annot</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">mask</span> <span class="o">=</span> <span class="n">mask</span><span class="p">,</span> <span class="n">cmap</span> <span class="o">=</span> <span class="s1">&#39;Blues&#39;</span><span class="p">,</span> <span class="n">fmt</span> <span class="o">=</span> <span class="s1">&#39;.2f&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Matriz de Correlación de las variables&#39;</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">16</span><span class="p">,</span> <span class="n">fontweight</span> <span class="o">=</span> <span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/c73ddc4f19bbcd55160281a7d5cde1a0bf59c213f8e7d050672bee0733b2b8c8.png" src="_images/c73ddc4f19bbcd55160281a7d5cde1a0bf59c213f8e7d050672bee0733b2b8c8.png" />
+</div>
+</div>
+<p>La matriz de correlación refleja relaciones esperadas entre las variables climáticas, destacándose una fuerte correlación entre las velocidades del viento a diferentes alturas (100 m, 80 m y 60 m), lo cual es consistente con la dinámica del perfil de viento en zonas costeras, donde fenómenos atmosféricos similares afectan todas las alturas. Asimismo, la dirección del viento muestra una alta correlación entre los distintos niveles (0.97 a 0.99), indicando patrones predominantes homogéneos. Las variables como presión, humedad y temperatura presentan correlaciones más débiles con la velocidad y dirección del viento, aunque la temperatura a 100 m y 21 m muestra una relación notablemente alta (0.93), coherente con la influencia de condiciones ambientales compartidas. Dada la fuerte correlación entre las velocidades del viento, se desarrollará un modelo predictivo para cada altura, optimizando las predicciones específicas de cada nivel.</p>
+<p>Ahora, mediante el uso de gráficos <code class="docutils literal notranslate"><span class="pre">scatterplot()</span></code> y <code class="docutils literal notranslate"><span class="pre">regplot()</span></code> se explorará el comportamiento de las variables objetivos respecto a las variables explicativas. Estos análisis permitirán identificar patrones, tendencias y correlaciones significativas que pueden influir en la velocidad del viento. Por motivos del ejercicio solo se visualizarán los gráficos respecto a la variable objetivo <code class="docutils literal notranslate"><span class="pre">VelViento60m</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ejex</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;VelViento60m&#39;</span><span class="p">,</span> <span class="s1">&#39;VelViento100m_1&#39;</span><span class="p">,</span> <span class="s1">&#39;VelViento100m_2&#39;</span><span class="p">,</span> 
+                          <span class="s1">&#39;VelViento80m_1&#39;</span><span class="p">,</span> <span class="s1">&#39;VelViento80m_2&#39;</span><span class="p">,</span> <span class="s1">&#39;DirViento80m&#39;</span><span class="p">,</span> <span class="s1">&#39;DirViento100m&#39;</span><span class="p">])</span>
+
+<span class="n">ejey</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;VelViento60m&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span> <span class="n">ncols</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">18</span><span class="p">,</span> <span class="mi">12</span><span class="p">))</span>
+<span class="n">axs</span> <span class="o">=</span> <span class="n">axs</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">variable</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">ejex</span><span class="p">):</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">variable</span><span class="p">],</span> <span class="n">y</span> <span class="o">=</span> <span class="n">ejey</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">axs</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;darkblue&#39;</span><span class="p">)</span>
+    <span class="n">axs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Scatterplot entre: </span><span class="si">{</span><span class="n">variable</span><span class="si">}</span><span class="s1"> y VelViento60m&#39;</span><span class="p">)</span>
+    <span class="n">axs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="n">variable</span><span class="p">)</span>
+    <span class="n">axs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;vel_viento&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/e0987096aa2003dbf7092c14f39effdd399e25c8b9a670a8a7ba42f6628775c1.png" src="_images/e0987096aa2003dbf7092c14f39effdd399e25c8b9a670a8a7ba42f6628775c1.png" />
+</div>
+</div>
+<p>Los gráficos de dispersión muestran la relación entre la velocidad del viento a 60 m (variable dependiente) y otras variables climáticas como la fecha, dirección del viento, presión, humedad y temperatura. En el caso de la fecha, se observa un patrón cíclico de la velocidad del viento, posiblemente asociado con variaciones estacionales o meteorológicas. La relación con la dirección del viento muestra un comportamiento concentrado alrededor de ciertos ángulos, lo que sugiere una dirección predominante en la región. Las variables de presión y humedad no presentan relaciones lineales claras con la velocidad del viento, aunque la dispersión indica cierta estabilidad en los rangos de medición. Por otro lado, las temperaturas (a 100 m y 21 m) parecen mostrar una relación no lineal inversa, donde velocidades más altas suelen estar asociadas con temperaturas más bajas. Estas observaciones destacan patrones clave que pueden ser útiles para la construcción de modelos predictivos específicos.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">ejex</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">issubdtype</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">datetime64</span><span class="p">):</span>
+        <span class="n">data</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;int64&#39;</span><span class="p">)</span>  
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">18</span><span class="p">,</span> <span class="mi">12</span><span class="p">))</span>
+<span class="n">axs</span> <span class="o">=</span> <span class="n">axs</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">variable</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">ejex</span><span class="o">.</span><span class="n">columns</span><span class="p">):</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">regplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="n">variable</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">ejey</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axs</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;lightblue&#39;</span><span class="p">,</span> 
+                <span class="n">scatter_kws</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;s&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">},</span> <span class="n">line_kws</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="s1">&#39;darkblue&#39;</span><span class="p">})</span>
+    <span class="n">axs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Regplot entre </span><span class="si">{</span><span class="n">variable</span><span class="si">}</span><span class="s1"> y VelViento60m&#39;</span><span class="p">)</span>
+    <span class="n">axs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="n">variable</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/ecf0e7e56876321e7c0db4ee0fc2e6840df1f4c95fb0512369eb1ce63fa964a1.png" src="_images/ecf0e7e56876321e7c0db4ee0fc2e6840df1f4c95fb0512369eb1ce63fa964a1.png" />
+</div>
+</div>
+<p>Los gráficos de regresión muestran tendencias lineales en las relaciones entre la velocidad del viento a 60 m y diversas variables climáticas. Se observa una ligera disminución de la velocidad del viento con el tiempo, reflejando posibles cambios graduales en las condiciones atmosféricas. La dirección del viento muestra una relación negativa moderada, indicando que ciertas direcciones predominantes están asociadas con mayores velocidades. La presión atmosférica también presenta una relación negativa, coherente con sistemas de baja presión que suelen generar vientos más intensos. De manera similar, la humedad relativa muestra una ligera disminución de la velocidad del viento con su aumento, posiblemente debido a condiciones más estables en ambientes húmedos. Finalmente, la temperatura a 100 m y 21 m presenta una relación negativa notable, donde mayores velocidades se asocian con temperaturas más bajas, lo que concuerda con el enfriamiento generado por vientos más rápidos. Estas tendencias respaldan los patrones esperados y servirán como base para construir modelos predictivos más precisos.</p>
 </section>
 </section>
 <section id="base-de-datos-para-modelos">
@@ -2089,7 +2206,7 @@ dtype: float64
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="Intro.html"
+       href="inicio.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
@@ -2167,6 +2284,7 @@ dtype: float64
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variables-temperatura-a-100m-y-20m"><strong>Variables: Temperatura a 100m y 20m</strong></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prueba-de-estacionariedad-dickey-fuller"><strong>Prueba de estacionariedad: Dickey-Fuller</strong></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#valores-atipicos"><strong>Valores atípicos</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-bivariado"><strong>Análisis Bivariado</strong></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#base-de-datos-para-modelos"><strong>Base de datos para modelos</strong></a></li>

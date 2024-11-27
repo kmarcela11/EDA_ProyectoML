@@ -177,14 +177,17 @@
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="Intro.html">
-                    Contextualización del Proyecto
+                    Proyecto Final - Energía Eólica.
                 </a>
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="inicio.html"><strong>Contextualización del Proyecto</strong></a></li>
+
 <li class="toctree-l1"><a class="reference internal" href="eda.html"><strong>Análisis Exploratorio de Datos (EDA)</strong></a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>Modelos de regresión</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="original.html">Propuesta de modelo original</a></li>
+<li class="toctree-l1"><a class="reference internal" href="implementacion.html"><strong>Implementación del modelo original</strong></a></li>
 </ul>
 
     </div>
@@ -412,27 +415,26 @@ document.write(`
 <h2><strong>Librerías y modulos necesarios</strong><a class="headerlink" href="#librerias-y-modulos-necesarios" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">warnings</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="kn">import</span> <span class="n">SVR</span>
+<span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">skopt.space</span> <span class="kn">import</span> <span class="n">Integer</span>
+<span class="kn">from</span> <span class="nn">skopt</span> <span class="kn">import</span> <span class="n">BayesSearchCV</span>
+<span class="kn">from</span> <span class="nn">xgboost</span> <span class="kn">import</span> <span class="n">XGBRegressor</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">jarque_bera</span>
+<span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">Pipeline</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">Ridge</span><span class="p">,</span> <span class="n">Lasso</span>
+<span class="kn">from</span> <span class="nn">sklearn.tree</span> <span class="kn">import</span> <span class="n">DecisionTreeRegressor</span>
 <span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span>
 <span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <span class="n">KNeighborsRegressor</span>
-<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">Ridge</span><span class="p">,</span> <span class="n">Lasso</span>
 <span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestRegressor</span>
-<span class="kn">from</span> <span class="nn">sklearn.tree</span> <span class="kn">import</span> <span class="n">DecisionTreeRegressor</span>
-<span class="kn">from</span> <span class="nn">skopt</span> <span class="kn">import</span> <span class="n">BayesSearchCV</span>
-<span class="kn">from</span> <span class="nn">skopt.space</span> <span class="kn">import</span> <span class="n">Integer</span>
-<span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="kn">import</span> <span class="n">SVR</span>
-<span class="kn">from</span> <span class="nn">xgboost</span> <span class="kn">import</span> <span class="n">XGBRegressor</span>
-<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">jarque_bera</span>
 <span class="kn">from</span> <span class="nn">statsmodels.stats.diagnostic</span> <span class="kn">import</span> <span class="n">acorr_ljungbox</span>
-<span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
-<span class="kn">import</span> <span class="nn">warnings</span>
-<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
-<span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">Pipeline</span>
-<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
-<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">r2_score</span><span class="p">,</span> <span class="n">mean_absolute_percentage_error</span><span class="p">,</span> <span class="n">mean_squared_error</span>
 <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">GridSearchCV</span><span class="p">,</span> <span class="n">KFold</span><span class="p">,</span> <span class="n">train_test_split</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">r2_score</span><span class="p">,</span> <span class="n">mean_squared_error</span><span class="p">,</span> <span class="n">mean_absolute_error</span>
 </pre></div>
 </div>
 </div>
@@ -579,17 +581,142 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">tail</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Fecha</th>
+      <th>VelViento100m_1</th>
+      <th>VelViento100m_2</th>
+      <th>VelViento80m_1</th>
+      <th>VelViento80m_2</th>
+      <th>VelViento60m</th>
+      <th>DirViento60m</th>
+      <th>DirViento100m</th>
+      <th>DirViento80m</th>
+      <th>Presion</th>
+      <th>Humedad</th>
+      <th>Temp100m</th>
+      <th>Temp21m</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>19003</th>
+      <td>2022-05-16 23:10:00</td>
+      <td>5.667995</td>
+      <td>5.628245</td>
+      <td>5.501305</td>
+      <td>5.550207</td>
+      <td>5.388042</td>
+      <td>60.80</td>
+      <td>57.36</td>
+      <td>58.61</td>
+      <td>1007.863847</td>
+      <td>92.353821</td>
+      <td>27.701111</td>
+      <td>27.636290</td>
+    </tr>
+    <tr>
+      <th>19004</th>
+      <td>2022-05-16 23:20:00</td>
+      <td>5.523755</td>
+      <td>5.470902</td>
+      <td>5.401929</td>
+      <td>5.417549</td>
+      <td>5.340636</td>
+      <td>58.95</td>
+      <td>56.91</td>
+      <td>58.10</td>
+      <td>1007.677543</td>
+      <td>92.506409</td>
+      <td>27.662964</td>
+      <td>27.619222</td>
+    </tr>
+    <tr>
+      <th>19005</th>
+      <td>2022-05-16 23:30:00</td>
+      <td>5.627141</td>
+      <td>5.566218</td>
+      <td>5.544223</td>
+      <td>5.575709</td>
+      <td>5.540006</td>
+      <td>58.45</td>
+      <td>55.67</td>
+      <td>56.47</td>
+      <td>1007.547129</td>
+      <td>92.498779</td>
+      <td>27.632446</td>
+      <td>27.591912</td>
+    </tr>
+    <tr>
+      <th>19006</th>
+      <td>2022-05-16 23:40:00</td>
+      <td>5.590224</td>
+      <td>5.554034</td>
+      <td>5.480490</td>
+      <td>5.488771</td>
+      <td>5.404135</td>
+      <td>54.54</td>
+      <td>52.24</td>
+      <td>53.25</td>
+      <td>1007.304934</td>
+      <td>92.544556</td>
+      <td>27.624817</td>
+      <td>27.585085</td>
+    </tr>
+    <tr>
+      <th>19007</th>
+      <td>2022-05-16 23:50:00</td>
+      <td>5.825946</td>
+      <td>5.788715</td>
+      <td>5.683985</td>
+      <td>5.699682</td>
+      <td>5.602768</td>
+      <td>56.87</td>
+      <td>53.48</td>
+      <td>55.07</td>
+      <td>1007.230412</td>
+      <td>92.613220</td>
+      <td>27.609558</td>
+      <td>27.564603</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">shape</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(19083, 13)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(19008, 13)
 </pre></div>
 </div>
 </div>
 </div>
-<p>El conjunto de datos cuenta con <strong>13</strong> variables y <strong>19083</strong> observaciones.</p>
+<p>El conjunto de datos cuenta con <strong>13</strong> variables y <strong>19008</strong> observaciones.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">describe</span><span class="p">(</span><span class="n">include</span> <span class="o">=</span> <span class="s1">&#39;number&#39;</span><span class="p">)</span>
@@ -632,55 +759,55 @@ document.write(`
   <tbody>
     <tr>
       <th>count</th>
-      <td>19083.000000</td>
-      <td>19083.000000</td>
-      <td>19083.000000</td>
-      <td>19083.000000</td>
-      <td>19083.000000</td>
-      <td>19083.000000</td>
-      <td>19083.000000</td>
-      <td>19083.000000</td>
-      <td>19083.000000</td>
-      <td>19083.000000</td>
-      <td>19083.000000</td>
-      <td>19083.000000</td>
+      <td>19008.000000</td>
+      <td>19008.000000</td>
+      <td>19008.000000</td>
+      <td>19008.000000</td>
+      <td>19008.000000</td>
+      <td>19008.000000</td>
+      <td>19008.000000</td>
+      <td>19008.000000</td>
+      <td>19008.000000</td>
+      <td>19008.000000</td>
+      <td>19008.000000</td>
+      <td>19008.000000</td>
     </tr>
     <tr>
       <th>mean</th>
-      <td>12.312852</td>
-      <td>12.178773</td>
-      <td>11.935864</td>
-      <td>11.932547</td>
-      <td>11.607971</td>
-      <td>67.265740</td>
-      <td>65.990962</td>
-      <td>66.286775</td>
-      <td>1006.202742</td>
-      <td>84.492969</td>
-      <td>26.273377</td>
-      <td>26.493438</td>
+      <td>12.342915</td>
+      <td>12.208528</td>
+      <td>11.964910</td>
+      <td>11.961529</td>
+      <td>11.636214</td>
+      <td>66.866064</td>
+      <td>65.645194</td>
+      <td>65.904410</td>
+      <td>1006.196902</td>
+      <td>84.469273</td>
+      <td>26.265028</td>
+      <td>26.486346</td>
     </tr>
     <tr>
       <th>std</th>
-      <td>4.451743</td>
-      <td>4.403151</td>
-      <td>4.286567</td>
-      <td>4.276207</td>
-      <td>4.121395</td>
-      <td>48.492877</td>
-      <td>48.712525</td>
-      <td>48.584865</td>
-      <td>1.823561</td>
-      <td>4.303362</td>
-      <td>0.846383</td>
-      <td>0.951527</td>
+      <td>4.433466</td>
+      <td>4.385033</td>
+      <td>4.268770</td>
+      <td>4.258439</td>
+      <td>4.103487</td>
+      <td>47.736005</td>
+      <td>48.149888</td>
+      <td>47.909614</td>
+      <td>1.823613</td>
+      <td>4.292172</td>
+      <td>0.837681</td>
+      <td>0.946633</td>
     </tr>
     <tr>
       <th>min</th>
-      <td>0.532543</td>
-      <td>0.500556</td>
-      <td>0.500413</td>
-      <td>0.504115</td>
+      <td>0.251334</td>
+      <td>0.225181</td>
+      <td>0.236040</td>
+      <td>0.255526</td>
       <td>0.292860</td>
       <td>0.230000</td>
       <td>0.000000</td>
@@ -692,48 +819,48 @@ document.write(`
     </tr>
     <tr>
       <th>25%</th>
-      <td>9.794922</td>
-      <td>9.695314</td>
-      <td>9.577789</td>
-      <td>9.588132</td>
-      <td>9.416717</td>
-      <td>48.860000</td>
-      <td>47.860000</td>
-      <td>47.910000</td>
+      <td>9.837316</td>
+      <td>9.736328</td>
+      <td>9.612626</td>
+      <td>9.624122</td>
+      <td>9.451099</td>
+      <td>48.840000</td>
+      <td>47.840000</td>
+      <td>47.890000</td>
       <td>1004.901606</td>
-      <td>81.642151</td>
+      <td>81.634521</td>
       <td>25.709839</td>
-      <td>25.823634</td>
+      <td>25.820220</td>
     </tr>
     <tr>
       <th>50%</th>
-      <td>12.941995</td>
-      <td>12.808712</td>
-      <td>12.555704</td>
-      <td>12.558730</td>
-      <td>12.223383</td>
-      <td>56.480000</td>
-      <td>55.300000</td>
-      <td>55.580000</td>
+      <td>12.963534</td>
+      <td>12.826116</td>
+      <td>12.574976</td>
+      <td>12.572975</td>
+      <td>12.247453</td>
+      <td>56.420000</td>
+      <td>55.230000</td>
+      <td>55.525000</td>
       <td>1006.112585</td>
-      <td>84.640503</td>
-      <td>26.068420</td>
-      <td>26.328856</td>
+      <td>84.625244</td>
+      <td>26.060791</td>
+      <td>26.323735</td>
     </tr>
     <tr>
       <th>75%</th>
-      <td>15.559608</td>
-      <td>15.380787</td>
-      <td>15.031122</td>
-      <td>15.017974</td>
-      <td>14.560523</td>
-      <td>64.440000</td>
-      <td>63.005000</td>
-      <td>63.390000</td>
-      <td>1007.435347</td>
-      <td>87.669373</td>
-      <td>26.587219</td>
-      <td>26.997935</td>
+      <td>15.570065</td>
+      <td>15.395811</td>
+      <td>15.044143</td>
+      <td>15.026889</td>
+      <td>14.568282</td>
+      <td>64.360000</td>
+      <td>62.900000</td>
+      <td>63.312500</td>
+      <td>1007.421374</td>
+      <td>87.646484</td>
+      <td>26.571960</td>
+      <td>26.984280</td>
     </tr>
     <tr>
       <th>max</th>
@@ -793,7 +920,7 @@ document.write(`
 <p>En esta sección, se desarrollan métodos para generar gráficas de las predicciones y los residuos, con el propósito de optimizar el código para cada uno de los modelos a implementar.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">grafica</span><span class="p">(</span><span class="n">nombre_modelo</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_train_pred</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">y_test_pred</span><span class="p">,</span> <span class="n">xlim_train</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">xlim_test</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">grafica</span><span class="p">(</span><span class="n">nombre_modelo</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_train_pred</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">y_test_pred</span><span class="p">):</span>
     <span class="n">r2_train</span> <span class="o">=</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">y_train</span><span class="p">,</span> <span class="n">y_train_pred</span><span class="p">)</span>
     <span class="n">r2_test</span> <span class="o">=</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_test_pred</span><span class="p">)</span>
 
@@ -873,15 +1000,19 @@ document.write(`
     <span class="n">r2</span> <span class="o">=</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_knn_reg</span><span class="p">)</span>
     <span class="n">mape</span> <span class="o">=</span> <span class="n">MAPE</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_knn_reg</span><span class="p">)</span>
     <span class="n">rmse</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_knn_reg</span><span class="p">))</span>
-
+    <span class="n">mae</span> <span class="o">=</span> <span class="n">mean_absolute_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_knn_reg</span><span class="p">)</span>
+    <span class="n">mse</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_knn_reg</span><span class="p">)</span>
+    
     <span class="n">ljung_box_p_value</span> <span class="o">=</span> <span class="n">acorr_ljungbox</span><span class="p">(</span><span class="n">residuals</span><span class="p">,</span> <span class="n">lags</span> <span class="o">=</span> <span class="p">[</span><span class="mi">30</span><span class="p">],</span> <span class="n">return_df</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)[</span><span class="s1">&#39;lb_pvalue&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
     <span class="n">jarque_bera_p_value</span> <span class="o">=</span> <span class="n">jarque_bera</span><span class="p">(</span><span class="n">residuals</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>  
 
     <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
         <span class="s1">&#39;Modelo&#39;</span><span class="p">:</span> <span class="s1">&#39;K-NN Regressor&#39;</span><span class="p">,</span>
         <span class="s1">&#39;MAPE&#39;</span><span class="p">:</span> <span class="n">mape</span><span class="p">,</span>
+        <span class="s1">&#39;MAE&#39;</span><span class="p">:</span> <span class="n">mae</span><span class="p">,</span>
+        <span class="s1">&#39;MSE&#39;</span><span class="p">:</span> <span class="n">mse</span><span class="p">,</span>
         <span class="s1">&#39;RMSE&#39;</span><span class="p">:</span> <span class="n">rmse</span><span class="p">,</span>
-        <span class="s1">&#39;R^2&#39;</span><span class="p">:</span> <span class="n">r2</span><span class="p">,</span>
+        <span class="s1">&#39;R²&#39;</span><span class="p">:</span> <span class="n">r2</span><span class="p">,</span>
         <span class="s1">&#39;Ljung-Box p-value&#39;</span><span class="p">:</span> <span class="n">ljung_box_p_value</span><span class="p">,</span>
         <span class="s1">&#39;Jarque-Bera p-value&#39;</span><span class="p">:</span> <span class="n">jarque_bera_p_value</span>
     <span class="p">})</span>
@@ -917,16 +1048,19 @@ document.write(`
     <span class="n">r2</span> <span class="o">=</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_ridge</span><span class="p">)</span>
     <span class="n">mape</span> <span class="o">=</span> <span class="n">MAPE</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_ridge</span><span class="p">)</span>
     <span class="n">rmse</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_ridge</span><span class="p">))</span>
-
-
-    <span class="n">ljung_box_p_value</span> <span class="o">=</span> <span class="n">acorr_ljungbox</span><span class="p">(</span><span class="n">residuals</span><span class="p">,</span> <span class="n">lags</span><span class="o">=</span><span class="p">[</span><span class="mi">30</span><span class="p">],</span> <span class="n">return_df</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="s1">&#39;lb_pvalue&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="n">jarque_bera_p_value</span> <span class="o">=</span> <span class="n">jarque_bera</span><span class="p">(</span><span class="n">residuals</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">mae</span> <span class="o">=</span> <span class="n">mean_absolute_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_ridge</span><span class="p">)</span>
+    <span class="n">mse</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_ridge</span><span class="p">)</span>
+    
+    <span class="n">ljung_box_p_value</span> <span class="o">=</span> <span class="n">acorr_ljungbox</span><span class="p">(</span><span class="n">residuals</span><span class="p">,</span> <span class="n">lags</span> <span class="o">=</span> <span class="p">[</span><span class="mi">30</span><span class="p">],</span> <span class="n">return_df</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)[</span><span class="s1">&#39;lb_pvalue&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">jarque_bera_p_value</span> <span class="o">=</span> <span class="n">jarque_bera</span><span class="p">(</span><span class="n">residuals</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>  
 
     <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
         <span class="s1">&#39;Modelo&#39;</span><span class="p">:</span> <span class="s1">&#39;Ridge Regression&#39;</span><span class="p">,</span>
         <span class="s1">&#39;MAPE&#39;</span><span class="p">:</span> <span class="n">mape</span><span class="p">,</span>
+        <span class="s1">&#39;MAE&#39;</span><span class="p">:</span> <span class="n">mae</span><span class="p">,</span>
+        <span class="s1">&#39;MSE&#39;</span><span class="p">:</span> <span class="n">mse</span><span class="p">,</span>
         <span class="s1">&#39;RMSE&#39;</span><span class="p">:</span> <span class="n">rmse</span><span class="p">,</span>
-        <span class="s1">&#39;R^2&#39;</span><span class="p">:</span> <span class="n">r2</span><span class="p">,</span>
+        <span class="s1">&#39;R²&#39;</span><span class="p">:</span> <span class="n">r2</span><span class="p">,</span>
         <span class="s1">&#39;Ljung-Box p-value&#39;</span><span class="p">:</span> <span class="n">ljung_box_p_value</span><span class="p">,</span>
         <span class="s1">&#39;Jarque-Bera p-value&#39;</span><span class="p">:</span> <span class="n">jarque_bera_p_value</span>
     <span class="p">})</span>
@@ -962,15 +1096,19 @@ document.write(`
     <span class="n">r2</span> <span class="o">=</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_lasso</span><span class="p">)</span>
     <span class="n">mape</span> <span class="o">=</span> <span class="n">MAPE</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_lasso</span><span class="p">)</span>
     <span class="n">rmse</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_lasso</span><span class="p">))</span>
+    <span class="n">mae</span> <span class="o">=</span> <span class="n">mean_absolute_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_lasso</span><span class="p">)</span>
+    <span class="n">mse</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_lasso</span><span class="p">)</span>
     
-    <span class="n">ljung_box_p_value</span> <span class="o">=</span> <span class="n">acorr_ljungbox</span><span class="p">(</span><span class="n">residuals</span><span class="p">,</span> <span class="n">lags</span><span class="o">=</span><span class="p">[</span><span class="mi">30</span><span class="p">],</span> <span class="n">return_df</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="s1">&#39;lb_pvalue&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="n">jarque_bera_p_value</span> <span class="o">=</span> <span class="n">jarque_bera</span><span class="p">(</span><span class="n">residuals</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">ljung_box_p_value</span> <span class="o">=</span> <span class="n">acorr_ljungbox</span><span class="p">(</span><span class="n">residuals</span><span class="p">,</span> <span class="n">lags</span> <span class="o">=</span> <span class="p">[</span><span class="mi">30</span><span class="p">],</span> <span class="n">return_df</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)[</span><span class="s1">&#39;lb_pvalue&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">jarque_bera_p_value</span> <span class="o">=</span> <span class="n">jarque_bera</span><span class="p">(</span><span class="n">residuals</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>  
 
     <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
         <span class="s1">&#39;Modelo&#39;</span><span class="p">:</span> <span class="s1">&#39;Lasso Regression&#39;</span><span class="p">,</span>
         <span class="s1">&#39;MAPE&#39;</span><span class="p">:</span> <span class="n">mape</span><span class="p">,</span>
+        <span class="s1">&#39;MAE&#39;</span><span class="p">:</span> <span class="n">mae</span><span class="p">,</span>
+        <span class="s1">&#39;MSE&#39;</span><span class="p">:</span> <span class="n">mse</span><span class="p">,</span>
         <span class="s1">&#39;RMSE&#39;</span><span class="p">:</span> <span class="n">rmse</span><span class="p">,</span>
-        <span class="s1">&#39;R^2&#39;</span><span class="p">:</span> <span class="n">r2</span><span class="p">,</span>
+        <span class="s1">&#39;R²&#39;</span><span class="p">:</span> <span class="n">r2</span><span class="p">,</span>
         <span class="s1">&#39;Ljung-Box p-value&#39;</span><span class="p">:</span> <span class="n">ljung_box_p_value</span><span class="p">,</span>
         <span class="s1">&#39;Jarque-Bera p-value&#39;</span><span class="p">:</span> <span class="n">jarque_bera_p_value</span>
     <span class="p">})</span>
@@ -1002,20 +1140,23 @@ document.write(`
 
     <span class="n">r2</span> <span class="o">=</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
     <span class="n">mape</span> <span class="o">=</span> <span class="n">MAPE</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
-    <span class="n">rmse</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">squared</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
-
+    <span class="n">rmse</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
+    <span class="n">mae</span> <span class="o">=</span> <span class="n">mean_absolute_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+    <span class="n">mse</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+    
     <span class="n">ljung_box_p_value</span> <span class="o">=</span> <span class="n">acorr_ljungbox</span><span class="p">(</span><span class="n">residuals</span><span class="p">,</span> <span class="n">lags</span> <span class="o">=</span> <span class="p">[</span><span class="mi">30</span><span class="p">],</span> <span class="n">return_df</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)[</span><span class="s1">&#39;lb_pvalue&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
     <span class="n">jarque_bera_p_value</span> <span class="o">=</span> <span class="n">jarque_bera</span><span class="p">(</span><span class="n">residuals</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>  
 
     <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
         <span class="s1">&#39;Modelo&#39;</span><span class="p">:</span> <span class="s1">&#39;Linear Regression&#39;</span><span class="p">,</span>
         <span class="s1">&#39;MAPE&#39;</span><span class="p">:</span> <span class="n">mape</span><span class="p">,</span>
+        <span class="s1">&#39;MAE&#39;</span><span class="p">:</span> <span class="n">mae</span><span class="p">,</span>
+        <span class="s1">&#39;MSE&#39;</span><span class="p">:</span> <span class="n">mse</span><span class="p">,</span>
         <span class="s1">&#39;RMSE&#39;</span><span class="p">:</span> <span class="n">rmse</span><span class="p">,</span>
-        <span class="s1">&#39;R^2&#39;</span><span class="p">:</span> <span class="n">r2</span><span class="p">,</span>
+        <span class="s1">&#39;R²&#39;</span><span class="p">:</span> <span class="n">r2</span><span class="p">,</span>
         <span class="s1">&#39;Ljung-Box p-value&#39;</span><span class="p">:</span> <span class="n">ljung_box_p_value</span><span class="p">,</span>
         <span class="s1">&#39;Jarque-Bera p-value&#39;</span><span class="p">:</span> <span class="n">jarque_bera_p_value</span>
     <span class="p">})</span>
-    
     <span class="n">resultados_graficos</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
         <span class="s1">&#39;nombre_modelo&#39;</span><span class="p">:</span> <span class="s1">&#39;Regresión Lineal&#39;</span><span class="p">,</span>
         <span class="s1">&#39;y_train&#39;</span><span class="p">:</span> <span class="n">y_train</span><span class="p">,</span>
@@ -1044,18 +1185,23 @@ document.write(`
 
     <span class="n">residuals</span> <span class="o">=</span> <span class="n">y_test</span> <span class="o">-</span> <span class="n">y_pred_tree</span>
 
+ 
     <span class="n">r2</span> <span class="o">=</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_tree</span><span class="p">)</span>
     <span class="n">mape</span> <span class="o">=</span> <span class="n">MAPE</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_tree</span><span class="p">)</span>
     <span class="n">rmse</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_tree</span><span class="p">))</span>
-
-    <span class="n">ljung_box_p_value</span> <span class="o">=</span> <span class="n">acorr_ljungbox</span><span class="p">(</span><span class="n">residuals</span><span class="p">,</span> <span class="n">lags</span><span class="o">=</span><span class="p">[</span><span class="mi">30</span><span class="p">],</span> <span class="n">return_df</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="s1">&#39;lb_pvalue&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="n">jarque_bera_p_value</span> <span class="o">=</span> <span class="n">jarque_bera</span><span class="p">(</span><span class="n">residuals</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">mae</span> <span class="o">=</span> <span class="n">mean_absolute_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_tree</span><span class="p">)</span>
+    <span class="n">mse</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_tree</span><span class="p">)</span>
+    
+    <span class="n">ljung_box_p_value</span> <span class="o">=</span> <span class="n">acorr_ljungbox</span><span class="p">(</span><span class="n">residuals</span><span class="p">,</span> <span class="n">lags</span> <span class="o">=</span> <span class="p">[</span><span class="mi">30</span><span class="p">],</span> <span class="n">return_df</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)[</span><span class="s1">&#39;lb_pvalue&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">jarque_bera_p_value</span> <span class="o">=</span> <span class="n">jarque_bera</span><span class="p">(</span><span class="n">residuals</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>  
 
     <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
         <span class="s1">&#39;Modelo&#39;</span><span class="p">:</span> <span class="s1">&#39;Decision Tree Regressor&#39;</span><span class="p">,</span>
         <span class="s1">&#39;MAPE&#39;</span><span class="p">:</span> <span class="n">mape</span><span class="p">,</span>
+        <span class="s1">&#39;MAE&#39;</span><span class="p">:</span> <span class="n">mae</span><span class="p">,</span>
+        <span class="s1">&#39;MSE&#39;</span><span class="p">:</span> <span class="n">mse</span><span class="p">,</span>
         <span class="s1">&#39;RMSE&#39;</span><span class="p">:</span> <span class="n">rmse</span><span class="p">,</span>
-        <span class="s1">&#39;R^2&#39;</span><span class="p">:</span> <span class="n">r2</span><span class="p">,</span>
+        <span class="s1">&#39;R²&#39;</span><span class="p">:</span> <span class="n">r2</span><span class="p">,</span>
         <span class="s1">&#39;Ljung-Box p-value&#39;</span><span class="p">:</span> <span class="n">ljung_box_p_value</span><span class="p">,</span>
         <span class="s1">&#39;Jarque-Bera p-value&#39;</span><span class="p">:</span> <span class="n">jarque_bera_p_value</span>
     <span class="p">})</span>
@@ -1088,21 +1234,27 @@ document.write(`
 
     <span class="n">residuals</span> <span class="o">=</span> <span class="n">y_test</span> <span class="o">-</span> <span class="n">y_pred_rf</span>
 
+ 
     <span class="n">r2</span> <span class="o">=</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_rf</span><span class="p">)</span>
     <span class="n">mape</span> <span class="o">=</span> <span class="n">MAPE</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_rf</span><span class="p">)</span>
     <span class="n">rmse</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_rf</span><span class="p">))</span>
-
-    <span class="n">ljung_box_p_value</span> <span class="o">=</span> <span class="n">acorr_ljungbox</span><span class="p">(</span><span class="n">residuals</span><span class="p">,</span> <span class="n">lags</span><span class="o">=</span><span class="p">[</span><span class="mi">30</span><span class="p">],</span> <span class="n">return_df</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="s1">&#39;lb_pvalue&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="n">jarque_bera_p_value</span> <span class="o">=</span> <span class="n">jarque_bera</span><span class="p">(</span><span class="n">residuals</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">mae</span> <span class="o">=</span> <span class="n">mean_absolute_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_rf</span><span class="p">)</span>
+    <span class="n">mse</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_rf</span><span class="p">)</span>
+    
+    <span class="n">ljung_box_p_value</span> <span class="o">=</span> <span class="n">acorr_ljungbox</span><span class="p">(</span><span class="n">residuals</span><span class="p">,</span> <span class="n">lags</span> <span class="o">=</span> <span class="p">[</span><span class="mi">30</span><span class="p">],</span> <span class="n">return_df</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)[</span><span class="s1">&#39;lb_pvalue&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">jarque_bera_p_value</span> <span class="o">=</span> <span class="n">jarque_bera</span><span class="p">(</span><span class="n">residuals</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>  
 
     <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
         <span class="s1">&#39;Modelo&#39;</span><span class="p">:</span> <span class="s1">&#39;Random Forest Regressor&#39;</span><span class="p">,</span>
         <span class="s1">&#39;MAPE&#39;</span><span class="p">:</span> <span class="n">mape</span><span class="p">,</span>
+        <span class="s1">&#39;MAE&#39;</span><span class="p">:</span> <span class="n">mae</span><span class="p">,</span>
+        <span class="s1">&#39;MSE&#39;</span><span class="p">:</span> <span class="n">mse</span><span class="p">,</span>
         <span class="s1">&#39;RMSE&#39;</span><span class="p">:</span> <span class="n">rmse</span><span class="p">,</span>
-        <span class="s1">&#39;R^2&#39;</span><span class="p">:</span> <span class="n">r2</span><span class="p">,</span>
+        <span class="s1">&#39;R²&#39;</span><span class="p">:</span> <span class="n">r2</span><span class="p">,</span>
         <span class="s1">&#39;Ljung-Box p-value&#39;</span><span class="p">:</span> <span class="n">ljung_box_p_value</span><span class="p">,</span>
         <span class="s1">&#39;Jarque-Bera p-value&#39;</span><span class="p">:</span> <span class="n">jarque_bera_p_value</span>
     <span class="p">})</span>
+
 
     <span class="n">resultados_graficos</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
         <span class="s1">&#39;nombre_modelo&#39;</span><span class="p">:</span> <span class="s1">&#39;Random Forest Regressor&#39;</span><span class="p">,</span>
@@ -1135,19 +1287,23 @@ document.write(`
     <span class="n">r2</span> <span class="o">=</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_xgb</span><span class="p">)</span>
     <span class="n">mape</span> <span class="o">=</span> <span class="n">MAPE</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_xgb</span><span class="p">)</span>
     <span class="n">rmse</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_xgb</span><span class="p">))</span>
-    <span class="n">r2_train</span> <span class="o">=</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">y_train</span><span class="p">,</span> <span class="n">y_train_pred</span><span class="p">)</span>
-
-    <span class="n">ljung_box_p_value</span> <span class="o">=</span> <span class="n">acorr_ljungbox</span><span class="p">(</span><span class="n">residuals</span><span class="p">,</span> <span class="n">lags</span><span class="o">=</span><span class="p">[</span><span class="mi">30</span><span class="p">],</span> <span class="n">return_df</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="s1">&#39;lb_pvalue&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="n">jarque_bera_p_value</span> <span class="o">=</span> <span class="n">jarque_bera</span><span class="p">(</span><span class="n">residuals</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">mae</span> <span class="o">=</span> <span class="n">mean_absolute_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_xgb</span><span class="p">)</span>
+    <span class="n">mse</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_xgb</span><span class="p">)</span>
+    
+    <span class="n">ljung_box_p_value</span> <span class="o">=</span> <span class="n">acorr_ljungbox</span><span class="p">(</span><span class="n">residuals</span><span class="p">,</span> <span class="n">lags</span> <span class="o">=</span> <span class="p">[</span><span class="mi">30</span><span class="p">],</span> <span class="n">return_df</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)[</span><span class="s1">&#39;lb_pvalue&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">jarque_bera_p_value</span> <span class="o">=</span> <span class="n">jarque_bera</span><span class="p">(</span><span class="n">residuals</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>  
 
     <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
         <span class="s1">&#39;Modelo&#39;</span><span class="p">:</span> <span class="s1">&#39;XGBoost Regressor&#39;</span><span class="p">,</span>
         <span class="s1">&#39;MAPE&#39;</span><span class="p">:</span> <span class="n">mape</span><span class="p">,</span>
+        <span class="s1">&#39;MAE&#39;</span><span class="p">:</span> <span class="n">mae</span><span class="p">,</span>
+        <span class="s1">&#39;MSE&#39;</span><span class="p">:</span> <span class="n">mse</span><span class="p">,</span>
         <span class="s1">&#39;RMSE&#39;</span><span class="p">:</span> <span class="n">rmse</span><span class="p">,</span>
-        <span class="s1">&#39;R^2&#39;</span><span class="p">:</span> <span class="n">r2</span><span class="p">,</span>
+        <span class="s1">&#39;R²&#39;</span><span class="p">:</span> <span class="n">r2</span><span class="p">,</span>
         <span class="s1">&#39;Ljung-Box p-value&#39;</span><span class="p">:</span> <span class="n">ljung_box_p_value</span><span class="p">,</span>
         <span class="s1">&#39;Jarque-Bera p-value&#39;</span><span class="p">:</span> <span class="n">jarque_bera_p_value</span>
     <span class="p">})</span>
+
 
     <span class="n">resultados_graficos</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
         <span class="s1">&#39;nombre_modelo&#39;</span><span class="p">:</span> <span class="s1">&#39;XGBoost Regressor&#39;</span><span class="p">,</span>
@@ -1172,7 +1328,7 @@ document.write(`
         <span class="s1">&#39;svr__gamma&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;scale&#39;</span><span class="p">,</span> <span class="s1">&#39;auto&#39;</span><span class="p">]</span>
     <span class="p">}</span>
 
-    <span class="n">kf</span> <span class="o">=</span> <span class="n">KFold</span><span class="p">(</span><span class="n">n_splits</span>  <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="n">shuffle</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+    <span class="n">kf</span> <span class="o">=</span> <span class="n">KFold</span><span class="p">(</span><span class="n">n_splits</span>  <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="n">shuffle</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span>
 
     <span class="n">grid</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">pipeline</span><span class="p">,</span> <span class="n">param_grid</span><span class="p">,</span> <span class="n">cv</span> <span class="o">=</span> <span class="n">kf</span><span class="p">,</span> <span class="n">scoring</span> <span class="o">=</span> <span class="s1">&#39;r2&#39;</span><span class="p">)</span>
     <span class="n">grid</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
@@ -1181,19 +1337,23 @@ document.write(`
     <span class="n">residuals</span> <span class="o">=</span> <span class="n">y_test</span> <span class="o">-</span> <span class="n">y_pred</span>
 
     <span class="n">r2</span> <span class="o">=</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
-    <span class="n">mape</span> <span class="o">=</span> <span class="n">mean_absolute_percentage_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
-    <span class="n">rmse</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">squared</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
-    <span class="n">jb_test_stat</span><span class="p">,</span> <span class="n">jb_p_value</span> <span class="o">=</span> <span class="n">jarque_bera</span><span class="p">(</span><span class="n">residuals</span><span class="p">)</span>
-    <span class="n">lb_test</span> <span class="o">=</span> <span class="n">acorr_ljungbox</span><span class="p">(</span><span class="n">residuals</span><span class="p">,</span> <span class="n">lags</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">],</span> <span class="n">return_df</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">ljung_box_p_value</span> <span class="o">=</span> <span class="n">lb_test</span><span class="p">[</span><span class="s1">&#39;lb_pvalue&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">mape</span> <span class="o">=</span> <span class="n">MAPE</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+    <span class="n">rmse</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
+    <span class="n">mae</span> <span class="o">=</span> <span class="n">mean_absolute_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+    <span class="n">mse</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+    
+    <span class="n">ljung_box_p_value</span> <span class="o">=</span> <span class="n">acorr_ljungbox</span><span class="p">(</span><span class="n">residuals</span><span class="p">,</span> <span class="n">lags</span> <span class="o">=</span> <span class="p">[</span><span class="mi">30</span><span class="p">],</span> <span class="n">return_df</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)[</span><span class="s1">&#39;lb_pvalue&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">jarque_bera_p_value</span> <span class="o">=</span> <span class="n">jarque_bera</span><span class="p">(</span><span class="n">residuals</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>  
 
     <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
         <span class="s1">&#39;Modelo&#39;</span><span class="p">:</span> <span class="s1">&#39;SVR&#39;</span><span class="p">,</span>
         <span class="s1">&#39;MAPE&#39;</span><span class="p">:</span> <span class="n">mape</span><span class="p">,</span>
+        <span class="s1">&#39;MAE&#39;</span><span class="p">:</span> <span class="n">mae</span><span class="p">,</span>
+        <span class="s1">&#39;MSE&#39;</span><span class="p">:</span> <span class="n">mse</span><span class="p">,</span>
         <span class="s1">&#39;RMSE&#39;</span><span class="p">:</span> <span class="n">rmse</span><span class="p">,</span>
-        <span class="s1">&#39;R^2&#39;</span><span class="p">:</span> <span class="n">r2</span><span class="p">,</span>
+        <span class="s1">&#39;R²&#39;</span><span class="p">:</span> <span class="n">r2</span><span class="p">,</span>
         <span class="s1">&#39;Ljung-Box p-value&#39;</span><span class="p">:</span> <span class="n">ljung_box_p_value</span><span class="p">,</span>
-        <span class="s1">&#39;Jarque-Bera p-value&#39;</span><span class="p">:</span> <span class="n">jb_p_value</span>
+        <span class="s1">&#39;Jarque-Bera p-value&#39;</span><span class="p">:</span> <span class="n">jarque_bera_p_value</span>
     <span class="p">})</span>
     <span class="n">y_pred_train</span> <span class="o">=</span> <span class="n">grid</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
     
@@ -1290,8 +1450,10 @@ document.write(`
       <th></th>
       <th>Modelo</th>
       <th>MAPE</th>
+      <th>MAE</th>
+      <th>MSE</th>
       <th>RMSE</th>
-      <th>R^2</th>
+      <th>R²</th>
       <th>Ljung-Box p-value</th>
       <th>Jarque-Bera p-value</th>
     </tr>
@@ -1300,74 +1462,90 @@ document.write(`
     <tr>
       <th>0</th>
       <td>K-NN Regressor</td>
-      <td>17.283141</td>
-      <td>1.832996</td>
-      <td>0.833239</td>
-      <td>0.228503</td>
+      <td>16.915143</td>
+      <td>1.309740</td>
+      <td>3.396062</td>
+      <td>1.842841</td>
+      <td>0.821791</td>
+      <td>0.973834</td>
       <td>0.000000e+00</td>
     </tr>
     <tr>
       <th>1</th>
       <td>Ridge Regression</td>
-      <td>32.216900</td>
-      <td>2.983645</td>
-      <td>0.558159</td>
-      <td>0.358563</td>
-      <td>1.857820e-69</td>
+      <td>31.090062</td>
+      <td>2.332775</td>
+      <td>8.718002</td>
+      <td>2.952626</td>
+      <td>0.542522</td>
+      <td>0.673078</td>
+      <td>2.944947e-64</td>
     </tr>
     <tr>
       <th>2</th>
       <td>Lasso Regression</td>
-      <td>32.214455</td>
-      <td>2.983673</td>
-      <td>0.558151</td>
-      <td>0.357589</td>
-      <td>4.102541e-69</td>
+      <td>31.087165</td>
+      <td>2.333261</td>
+      <td>8.719191</td>
+      <td>2.952828</td>
+      <td>0.542460</td>
+      <td>0.672121</td>
+      <td>1.012739e-63</td>
     </tr>
     <tr>
       <th>3</th>
       <td>Linear Regression</td>
-      <td>32.212888</td>
-      <td>2.983655</td>
-      <td>0.558156</td>
-      <td>0.357182</td>
-      <td>4.019790e-69</td>
+      <td>31.084904</td>
+      <td>2.333242</td>
+      <td>8.719288</td>
+      <td>2.952844</td>
+      <td>0.542455</td>
+      <td>0.672154</td>
+      <td>9.826798e-64</td>
     </tr>
     <tr>
       <th>4</th>
       <td>Decision Tree Regressor</td>
-      <td>15.394982</td>
-      <td>1.896897</td>
-      <td>0.821409</td>
-      <td>0.538631</td>
+      <td>16.109259</td>
+      <td>1.402718</td>
+      <td>3.786779</td>
+      <td>1.945965</td>
+      <td>0.801289</td>
+      <td>0.592057</td>
       <td>0.000000e+00</td>
     </tr>
     <tr>
       <th>5</th>
       <td>Random Forest Regressor</td>
-      <td>11.892583</td>
-      <td>1.398689</td>
-      <td>0.902901</td>
-      <td>0.132393</td>
+      <td>12.207055</td>
+      <td>1.016497</td>
+      <td>2.096088</td>
+      <td>1.447787</td>
+      <td>0.890008</td>
+      <td>0.693849</td>
       <td>0.000000e+00</td>
     </tr>
     <tr>
       <th>6</th>
       <td>XGBoost Regressor</td>
-      <td>10.994054</td>
-      <td>1.344034</td>
-      <td>0.910341</td>
-      <td>0.186563</td>
+      <td>11.533058</td>
+      <td>0.972239</td>
+      <td>2.006025</td>
+      <td>1.416342</td>
+      <td>0.894734</td>
+      <td>0.199568</td>
       <td>0.000000e+00</td>
     </tr>
     <tr>
       <th>7</th>
       <td>SVR</td>
-      <td>0.234688</td>
-      <td>2.104995</td>
-      <td>0.780075</td>
-      <td>0.600444</td>
-      <td>8.729734e-187</td>
+      <td>21.782665</td>
+      <td>1.536131</td>
+      <td>4.331848</td>
+      <td>2.081309</td>
+      <td>0.772686</td>
+      <td>0.925772</td>
+      <td>3.915347e-207</td>
     </tr>
   </tbody>
 </table>
@@ -1375,7 +1553,150 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">resultado</span> <span class="ow">in</span> <span class="n">resultados_graficos1</span><span class="p">:</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">resultados1</span><span class="o">.</span><span class="n">to_pickle</span><span class="p">(</span><span class="s1">&#39;resultados1.pkl&#39;</span><span class="p">)</span>
+<span class="n">df_cargado</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_pickle</span><span class="p">(</span><span class="s1">&#39;resultados1.pkl&#39;</span><span class="p">)</span>
+<span class="n">df_cargado</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Modelo</th>
+      <th>MAPE</th>
+      <th>MAE</th>
+      <th>MSE</th>
+      <th>RMSE</th>
+      <th>R²</th>
+      <th>Ljung-Box p-value</th>
+      <th>Jarque-Bera p-value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>K-NN Regressor</td>
+      <td>16.915143</td>
+      <td>1.309740</td>
+      <td>3.396062</td>
+      <td>1.842841</td>
+      <td>0.821791</td>
+      <td>0.973834</td>
+      <td>0.000000e+00</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Ridge Regression</td>
+      <td>31.090062</td>
+      <td>2.332775</td>
+      <td>8.718002</td>
+      <td>2.952626</td>
+      <td>0.542522</td>
+      <td>0.673078</td>
+      <td>2.944947e-64</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Lasso Regression</td>
+      <td>31.087165</td>
+      <td>2.333261</td>
+      <td>8.719191</td>
+      <td>2.952828</td>
+      <td>0.542460</td>
+      <td>0.672121</td>
+      <td>1.012739e-63</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Linear Regression</td>
+      <td>31.084904</td>
+      <td>2.333242</td>
+      <td>8.719288</td>
+      <td>2.952844</td>
+      <td>0.542455</td>
+      <td>0.672154</td>
+      <td>9.826798e-64</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Decision Tree Regressor</td>
+      <td>16.109259</td>
+      <td>1.402718</td>
+      <td>3.786779</td>
+      <td>1.945965</td>
+      <td>0.801289</td>
+      <td>0.592057</td>
+      <td>0.000000e+00</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Random Forest Regressor</td>
+      <td>12.207055</td>
+      <td>1.016497</td>
+      <td>2.096088</td>
+      <td>1.447787</td>
+      <td>0.890008</td>
+      <td>0.693849</td>
+      <td>0.000000e+00</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>XGBoost Regressor</td>
+      <td>11.533058</td>
+      <td>0.972239</td>
+      <td>2.006025</td>
+      <td>1.416342</td>
+      <td>0.894734</td>
+      <td>0.199568</td>
+      <td>0.000000e+00</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>SVR</td>
+      <td>21.782665</td>
+      <td>1.536131</td>
+      <td>4.331848</td>
+      <td>2.081309</td>
+      <td>0.772686</td>
+      <td>0.925772</td>
+      <td>3.915347e-207</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pickle</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;resultados_graficos1.pkl&#39;</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+    <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">resultados_graficos1</span><span class="p">,</span> <span class="n">file</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;resultados_graficos1.pkl&#39;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+    <span class="n">resultados_graficos1_cargado</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+    
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">resultado</span> <span class="ow">in</span> <span class="n">resultados_graficos1_cargado</span><span class="p">:</span>
     <span class="c1"># Gráfica de predicciones</span>
     <span class="n">grafica</span><span class="p">(</span>
         <span class="n">resultado</span><span class="p">[</span><span class="s1">&#39;nombre_modelo&#39;</span><span class="p">],</span>
@@ -1386,19 +1707,19 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/4f6d6c4627f639f9ecb29acb6aa9087950b844ae9a4549801e161f4b5b477388.png" src="_images/4f6d6c4627f639f9ecb29acb6aa9087950b844ae9a4549801e161f4b5b477388.png" />
-<img alt="_images/3e2af3e07d9c5375d3a7fe7d9e509fccef5756fa52b590e9e545cfaf2453c8ec.png" src="_images/3e2af3e07d9c5375d3a7fe7d9e509fccef5756fa52b590e9e545cfaf2453c8ec.png" />
-<img alt="_images/df28b832696855fb36c4ee5535aff38cdf81ede1b2fdb69221f3ab999b30a297.png" src="_images/df28b832696855fb36c4ee5535aff38cdf81ede1b2fdb69221f3ab999b30a297.png" />
-<img alt="_images/c765b71d5f4fe08fa49bfdb159b0a893092364a41e89b24baef8d3de29a9d77d.png" src="_images/c765b71d5f4fe08fa49bfdb159b0a893092364a41e89b24baef8d3de29a9d77d.png" />
-<img alt="_images/67baf46115492ff2ee81b24ab6173a50e7240a5f348258abf9d8a0718fc086bf.png" src="_images/67baf46115492ff2ee81b24ab6173a50e7240a5f348258abf9d8a0718fc086bf.png" />
-<img alt="_images/da0eef3dfbad2f05eb2f03fb14c0321f1d072c04adbdce7151b0af50b5e5885a.png" src="_images/da0eef3dfbad2f05eb2f03fb14c0321f1d072c04adbdce7151b0af50b5e5885a.png" />
-<img alt="_images/0c5fc2e2f346ed44b6a5fd86692a0636c9c96e8a9ad32cd5a0bd6c94c0dc324c.png" src="_images/0c5fc2e2f346ed44b6a5fd86692a0636c9c96e8a9ad32cd5a0bd6c94c0dc324c.png" />
-<img alt="_images/dcfa3fc5097af23f1ee610d57545d32e0c10d81567fd72129d3128e56c4e4553.png" src="_images/dcfa3fc5097af23f1ee610d57545d32e0c10d81567fd72129d3128e56c4e4553.png" />
+<img alt="_images/56b44be4dd55b91d758c1ed019d4d64ba8bb160f39c01854d3210ac47dd2ad97.png" src="_images/56b44be4dd55b91d758c1ed019d4d64ba8bb160f39c01854d3210ac47dd2ad97.png" />
+<img alt="_images/7d1e8fc9103e290404cc48d50a23d282f759cf7adbfcf5b150af6375e01ce8e6.png" src="_images/7d1e8fc9103e290404cc48d50a23d282f759cf7adbfcf5b150af6375e01ce8e6.png" />
+<img alt="_images/426ebb67f4695357d756f4f337293a12718543f60ce205a36bd949b7d181f887.png" src="_images/426ebb67f4695357d756f4f337293a12718543f60ce205a36bd949b7d181f887.png" />
+<img alt="_images/602c36cdd450fcd714c5a72a41f49087820b9926b26d301a8aa567e85db67b76.png" src="_images/602c36cdd450fcd714c5a72a41f49087820b9926b26d301a8aa567e85db67b76.png" />
+<img alt="_images/1a7f676090d69c7fd8ff2858c6e953d1a9fe6de9ed5dadbb2f5ce4b92656ee38.png" src="_images/1a7f676090d69c7fd8ff2858c6e953d1a9fe6de9ed5dadbb2f5ce4b92656ee38.png" />
+<img alt="_images/76b4cd42bc05b47424349bed556f09439a4b54a6557fc64ae5631c9ed9d731f4.png" src="_images/76b4cd42bc05b47424349bed556f09439a4b54a6557fc64ae5631c9ed9d731f4.png" />
+<img alt="_images/586f5fe008254f3271d6b9327529e2dc62958ac45bb3d8a1844b059323c8f7ba.png" src="_images/586f5fe008254f3271d6b9327529e2dc62958ac45bb3d8a1844b059323c8f7ba.png" />
+<img alt="_images/c124c9c08708ec93fc32fb9751315fd99579894d76996a7538dec93d766898d4.png" src="_images/c124c9c08708ec93fc32fb9751315fd99579894d76996a7538dec93d766898d4.png" />
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">resultado</span> <span class="ow">in</span> <span class="n">resultados_graficos1</span><span class="p">:</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">resultado</span> <span class="ow">in</span> <span class="n">resultados_graficos1_cargado</span><span class="p">:</span>
     <span class="n">grafica_residuos</span><span class="p">(</span>
         <span class="n">resultado</span><span class="p">[</span><span class="s1">&#39;nombre_modelo&#39;</span><span class="p">],</span>
         <span class="n">resultado</span><span class="p">[</span><span class="s1">&#39;residuos&#39;</span><span class="p">]</span>
@@ -1407,14 +1728,14 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/0d80fdfbd8256db316158f866eefabebbd354ee30c2fdbf32b04e632d45d2ba7.png" src="_images/0d80fdfbd8256db316158f866eefabebbd354ee30c2fdbf32b04e632d45d2ba7.png" />
-<img alt="_images/cebb67b43a991b2f00728b7b9c5ff09022e695d67ff1838abfcf21027128f120.png" src="_images/cebb67b43a991b2f00728b7b9c5ff09022e695d67ff1838abfcf21027128f120.png" />
-<img alt="_images/cfc3a267e9822ad1b57b0cbeaf09994fe3d5882a7218fefe5f25a502e080a7eb.png" src="_images/cfc3a267e9822ad1b57b0cbeaf09994fe3d5882a7218fefe5f25a502e080a7eb.png" />
-<img alt="_images/bdb350e4b0f0f52aeeb38b75c87118765cad8c58e8c11e4a8717c6e0a642fa44.png" src="_images/bdb350e4b0f0f52aeeb38b75c87118765cad8c58e8c11e4a8717c6e0a642fa44.png" />
-<img alt="_images/921a863add7cc81a62ae36c0f6665a88453219870358f68492b3702a6dd75c29.png" src="_images/921a863add7cc81a62ae36c0f6665a88453219870358f68492b3702a6dd75c29.png" />
-<img alt="_images/84c558ed29634300557140b9c02318958564f813b2a29fe47bbecee81c177336.png" src="_images/84c558ed29634300557140b9c02318958564f813b2a29fe47bbecee81c177336.png" />
-<img alt="_images/898b70b5ed30d4479aff074df1424d8257ab72765ce6e16f90cff6c369d54d05.png" src="_images/898b70b5ed30d4479aff074df1424d8257ab72765ce6e16f90cff6c369d54d05.png" />
-<img alt="_images/72fd9750bf2b614c6f3e7499c1846b359b7cc1a092481cdcc06c8b6d694155a5.png" src="_images/72fd9750bf2b614c6f3e7499c1846b359b7cc1a092481cdcc06c8b6d694155a5.png" />
+<img alt="_images/de757a841707bfdb75b9ab037f9950122a0d2e7874edfa70b00ca60be0c6d445.png" src="_images/de757a841707bfdb75b9ab037f9950122a0d2e7874edfa70b00ca60be0c6d445.png" />
+<img alt="_images/12dbd07d976a97c5b38578645360d8f3d5a0b79b017907efe42acc65ba388dc6.png" src="_images/12dbd07d976a97c5b38578645360d8f3d5a0b79b017907efe42acc65ba388dc6.png" />
+<img alt="_images/4f15d1a074210ccc2064c18561269ab7e84969e5c06063405c07689a8fabeffb.png" src="_images/4f15d1a074210ccc2064c18561269ab7e84969e5c06063405c07689a8fabeffb.png" />
+<img alt="_images/b4d7bbbafd27e4d8cd7a0a19e13681667726e518dfd97fdc28e75360f0df6554.png" src="_images/b4d7bbbafd27e4d8cd7a0a19e13681667726e518dfd97fdc28e75360f0df6554.png" />
+<img alt="_images/c9038f766a5de64aae595973e032a5bfba168c125d082a7287f23288b0437bce.png" src="_images/c9038f766a5de64aae595973e032a5bfba168c125d082a7287f23288b0437bce.png" />
+<img alt="_images/c4ace64361b2003942c7623a042e3227122cfe9b75922c6cf2f074af02406036.png" src="_images/c4ace64361b2003942c7623a042e3227122cfe9b75922c6cf2f074af02406036.png" />
+<img alt="_images/947ed6c2dcb6bfe3d8e2752c5eb29a0805b99cb72b3b24f86152c09e598fcfb0.png" src="_images/947ed6c2dcb6bfe3d8e2752c5eb29a0805b99cb72b3b24f86152c09e598fcfb0.png" />
+<img alt="_images/a908b9c84a21cd2274c2f6176977f48f1e05fb2dc9c8fcff0bb93f95d9ab7b91.png" src="_images/a908b9c84a21cd2274c2f6176977f48f1e05fb2dc9c8fcff0bb93f95d9ab7b91.png" />
 </div>
 </div>
 </section>
@@ -1474,8 +1795,10 @@ document.write(`
       <th></th>
       <th>Modelo</th>
       <th>MAPE</th>
+      <th>MAE</th>
+      <th>MSE</th>
       <th>RMSE</th>
-      <th>R^2</th>
+      <th>R²</th>
       <th>Ljung-Box p-value</th>
       <th>Jarque-Bera p-value</th>
     </tr>
@@ -1484,78 +1807,237 @@ document.write(`
     <tr>
       <th>0</th>
       <td>K-NN Regressor</td>
-      <td>17.425535</td>
-      <td>1.815518</td>
-      <td>0.832765</td>
-      <td>0.228043</td>
+      <td>17.156660</td>
+      <td>1.297249</td>
+      <td>3.333846</td>
+      <td>1.825882</td>
+      <td>0.821263</td>
+      <td>0.977747</td>
       <td>0.000000e+00</td>
     </tr>
     <tr>
       <th>1</th>
       <td>Ridge Regression</td>
-      <td>32.352281</td>
-      <td>2.949706</td>
-      <td>0.558548</td>
-      <td>0.344230</td>
-      <td>7.571024e-70</td>
+      <td>31.496217</td>
+      <td>2.307212</td>
+      <td>8.534063</td>
+      <td>2.921312</td>
+      <td>0.542465</td>
+      <td>0.688427</td>
+      <td>1.256372e-65</td>
     </tr>
     <tr>
       <th>2</th>
       <td>Lasso Regression</td>
-      <td>32.350785</td>
-      <td>2.949733</td>
-      <td>0.558540</td>
-      <td>0.343562</td>
-      <td>1.417559e-69</td>
+      <td>31.493014</td>
+      <td>2.307772</td>
+      <td>8.535395</td>
+      <td>2.921540</td>
+      <td>0.542393</td>
+      <td>0.687315</td>
+      <td>5.342889e-65</td>
     </tr>
     <tr>
       <th>3</th>
       <td>Linear Regression</td>
-      <td>32.349087</td>
-      <td>2.949714</td>
-      <td>0.558546</td>
-      <td>0.343160</td>
-      <td>1.392381e-69</td>
+      <td>31.490396</td>
+      <td>2.307756</td>
+      <td>8.535517</td>
+      <td>2.921561</td>
+      <td>0.542387</td>
+      <td>0.687359</td>
+      <td>5.155424e-65</td>
     </tr>
     <tr>
       <th>4</th>
       <td>Decision Tree Regressor</td>
-      <td>16.866256</td>
-      <td>1.922205</td>
-      <td>0.812533</td>
-      <td>0.584720</td>
+      <td>15.536023</td>
+      <td>1.338224</td>
+      <td>3.623538</td>
+      <td>1.903559</td>
+      <td>0.805732</td>
+      <td>0.933306</td>
       <td>0.000000e+00</td>
     </tr>
     <tr>
       <th>5</th>
       <td>Random Forest Regressor</td>
-      <td>12.199308</td>
-      <td>1.389319</td>
-      <td>0.902067</td>
-      <td>0.260927</td>
+      <td>12.465904</td>
+      <td>1.010014</td>
+      <td>2.054484</td>
+      <td>1.433347</td>
+      <td>0.889853</td>
+      <td>0.778901</td>
       <td>0.000000e+00</td>
     </tr>
     <tr>
       <th>6</th>
       <td>XGBoost Regressor</td>
-      <td>11.555407</td>
-      <td>1.360267</td>
-      <td>0.906120</td>
-      <td>0.204078</td>
+      <td>11.756692</td>
+      <td>0.971493</td>
+      <td>1.979446</td>
+      <td>1.406928</td>
+      <td>0.893876</td>
+      <td>0.200606</td>
       <td>0.000000e+00</td>
     </tr>
     <tr>
       <th>7</th>
       <td>SVR</td>
-      <td>0.236795</td>
-      <td>2.083249</td>
-      <td>0.779805</td>
-      <td>0.602634</td>
-      <td>3.242233e-186</td>
+      <td>22.084803</td>
+      <td>1.519178</td>
+      <td>4.240540</td>
+      <td>2.059257</td>
+      <td>0.772653</td>
+      <td>0.938894</td>
+      <td>4.307807e-209</td>
     </tr>
   </tbody>
 </table>
 </div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">resultados2</span><span class="o">.</span><span class="n">to_pickle</span><span class="p">(</span><span class="s1">&#39;resultados2.pkl&#39;</span><span class="p">)</span>
+<span class="n">df_cargado</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_pickle</span><span class="p">(</span><span class="s1">&#39;resultados2.pkl&#39;</span><span class="p">)</span>
+<span class="n">df_cargado</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Modelo</th>
+      <th>MAPE</th>
+      <th>MAE</th>
+      <th>MSE</th>
+      <th>RMSE</th>
+      <th>R²</th>
+      <th>Ljung-Box p-value</th>
+      <th>Jarque-Bera p-value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>K-NN Regressor</td>
+      <td>17.156660</td>
+      <td>1.297249</td>
+      <td>3.333846</td>
+      <td>1.825882</td>
+      <td>0.821263</td>
+      <td>0.977747</td>
+      <td>0.000000e+00</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Ridge Regression</td>
+      <td>31.496217</td>
+      <td>2.307212</td>
+      <td>8.534063</td>
+      <td>2.921312</td>
+      <td>0.542465</td>
+      <td>0.688427</td>
+      <td>1.256372e-65</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Lasso Regression</td>
+      <td>31.493014</td>
+      <td>2.307772</td>
+      <td>8.535395</td>
+      <td>2.921540</td>
+      <td>0.542393</td>
+      <td>0.687315</td>
+      <td>5.342889e-65</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Linear Regression</td>
+      <td>31.490396</td>
+      <td>2.307756</td>
+      <td>8.535517</td>
+      <td>2.921561</td>
+      <td>0.542387</td>
+      <td>0.687359</td>
+      <td>5.155424e-65</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Decision Tree Regressor</td>
+      <td>15.536023</td>
+      <td>1.338224</td>
+      <td>3.623538</td>
+      <td>1.903559</td>
+      <td>0.805732</td>
+      <td>0.933306</td>
+      <td>0.000000e+00</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Random Forest Regressor</td>
+      <td>12.465904</td>
+      <td>1.010014</td>
+      <td>2.054484</td>
+      <td>1.433347</td>
+      <td>0.889853</td>
+      <td>0.778901</td>
+      <td>0.000000e+00</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>XGBoost Regressor</td>
+      <td>11.756692</td>
+      <td>0.971493</td>
+      <td>1.979446</td>
+      <td>1.406928</td>
+      <td>0.893876</td>
+      <td>0.200606</td>
+      <td>0.000000e+00</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>SVR</td>
+      <td>22.084803</td>
+      <td>1.519178</td>
+      <td>4.240540</td>
+      <td>2.059257</td>
+      <td>0.772653</td>
+      <td>0.938894</td>
+      <td>4.307807e-209</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pickle</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;resultados_graficos2.pkl&#39;</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+    <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">resultados_graficos2</span><span class="p">,</span> <span class="n">file</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;resultados_graficos2.pkl&#39;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+    <span class="n">resultados_graficos2_cargado</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+    
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1570,14 +2052,14 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/ce3b6ef4caf736854bc14ba4a0cd60d8449f246458934270b32c94bea26d094a.png" src="_images/ce3b6ef4caf736854bc14ba4a0cd60d8449f246458934270b32c94bea26d094a.png" />
-<img alt="_images/effaf090fef34f2a23a2bc81135cd6033fbf04e357aac0ae5510bdac501c65b9.png" src="_images/effaf090fef34f2a23a2bc81135cd6033fbf04e357aac0ae5510bdac501c65b9.png" />
-<img alt="_images/e0c7d02077c6297adf540f48857f84acd373542ad93b86eb356c2d0d36e24747.png" src="_images/e0c7d02077c6297adf540f48857f84acd373542ad93b86eb356c2d0d36e24747.png" />
-<img alt="_images/c2dad46d392352f530159b7bacdf80176e2cf6b57e0d3c09550144bc9fe21809.png" src="_images/c2dad46d392352f530159b7bacdf80176e2cf6b57e0d3c09550144bc9fe21809.png" />
-<img alt="_images/49c39bbb1c012d03f0931d1bb6ec5ec104f225693e0ef3be5c0899ea359344a1.png" src="_images/49c39bbb1c012d03f0931d1bb6ec5ec104f225693e0ef3be5c0899ea359344a1.png" />
-<img alt="_images/7aeee59b7d18223d05ef54623d72525b0455b61aefdf2fdc80137f45f27d5d3f.png" src="_images/7aeee59b7d18223d05ef54623d72525b0455b61aefdf2fdc80137f45f27d5d3f.png" />
-<img alt="_images/1193aff7aeef71e405e0be1ac06697e442b8498af8f20e9d7fe551c16a89aac8.png" src="_images/1193aff7aeef71e405e0be1ac06697e442b8498af8f20e9d7fe551c16a89aac8.png" />
-<img alt="_images/e6ccdd42e8f03d04df4dfddb805d5df83142fe9526c55cc1d5b8157ac288548d.png" src="_images/e6ccdd42e8f03d04df4dfddb805d5df83142fe9526c55cc1d5b8157ac288548d.png" />
+<img alt="_images/8fa8f443da4ca8c3feb64e32845b42685ee499f4f31cf854bec38f83a086c66e.png" src="_images/8fa8f443da4ca8c3feb64e32845b42685ee499f4f31cf854bec38f83a086c66e.png" />
+<img alt="_images/e10275f968d8b1454532dfa20d11866a84e87721a746e48cb2df9a3bdededb82.png" src="_images/e10275f968d8b1454532dfa20d11866a84e87721a746e48cb2df9a3bdededb82.png" />
+<img alt="_images/553f0dfa7812df4f7a405ff5fba5d4e3f028d920e3fa326945a20046fbb477d7.png" src="_images/553f0dfa7812df4f7a405ff5fba5d4e3f028d920e3fa326945a20046fbb477d7.png" />
+<img alt="_images/0b0ef2b5b9f6e57547f17db0d572272040b38aa9a3a5f0426dc01911c3f7673a.png" src="_images/0b0ef2b5b9f6e57547f17db0d572272040b38aa9a3a5f0426dc01911c3f7673a.png" />
+<img alt="_images/1c13e6f1fc8cba4c30e596d1160d2aa915f91ae2edbb882907fbf09caa704064.png" src="_images/1c13e6f1fc8cba4c30e596d1160d2aa915f91ae2edbb882907fbf09caa704064.png" />
+<img alt="_images/844ba8f8bb7e07d6e6076d3a1100f4ee99cc28feaf1e499ddacc59f837bc427d.png" src="_images/844ba8f8bb7e07d6e6076d3a1100f4ee99cc28feaf1e499ddacc59f837bc427d.png" />
+<img alt="_images/8f366123a400ea26082cdc60b1f0b00ffa7c4002ba59483290cae3b69f4ae617.png" src="_images/8f366123a400ea26082cdc60b1f0b00ffa7c4002ba59483290cae3b69f4ae617.png" />
+<img alt="_images/7580c890bd328691f69ee5c2924fb171c7f3e66ef19b4f8612e09a516304f970.png" src="_images/7580c890bd328691f69ee5c2924fb171c7f3e66ef19b4f8612e09a516304f970.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1591,14 +2073,14 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/a6d6d274befc087d5cd56344ac38e1aee8f882cb20ce414f1c939a4ab560069e.png" src="_images/a6d6d274befc087d5cd56344ac38e1aee8f882cb20ce414f1c939a4ab560069e.png" />
-<img alt="_images/8665e13cd3e33430c49606f2d96745360351908c40a61361d7bfa799ed8d1bcd.png" src="_images/8665e13cd3e33430c49606f2d96745360351908c40a61361d7bfa799ed8d1bcd.png" />
-<img alt="_images/25fb5940a4d1a6c1ef6766862186ed9bcba60990918712bd64a4e49a93ab69cd.png" src="_images/25fb5940a4d1a6c1ef6766862186ed9bcba60990918712bd64a4e49a93ab69cd.png" />
-<img alt="_images/b0ea9a94079c8edddbbda1979feb4a7fcfe9cf15214d5339df59c89e3e34a4c4.png" src="_images/b0ea9a94079c8edddbbda1979feb4a7fcfe9cf15214d5339df59c89e3e34a4c4.png" />
-<img alt="_images/ddce342ed278628f0a8e7643cf1b6259d7415b4ffb4ec5dec3ba6f920e823c0a.png" src="_images/ddce342ed278628f0a8e7643cf1b6259d7415b4ffb4ec5dec3ba6f920e823c0a.png" />
-<img alt="_images/79fd47d9497a14116da13a0e995f5339b8b45216c5b13fe45fe21dce4f24a017.png" src="_images/79fd47d9497a14116da13a0e995f5339b8b45216c5b13fe45fe21dce4f24a017.png" />
-<img alt="_images/346353a418f610684bebc8abfdceafb6ac1b659727bca6e8506b69f3335acb1d.png" src="_images/346353a418f610684bebc8abfdceafb6ac1b659727bca6e8506b69f3335acb1d.png" />
-<img alt="_images/a318c6b29653ba4b1c16fd2338f5c6b940724d4033139deecd1431e69bb4887e.png" src="_images/a318c6b29653ba4b1c16fd2338f5c6b940724d4033139deecd1431e69bb4887e.png" />
+<img alt="_images/1680d77898ebcdf0652f29f219f64d704cc16ddff37aaf9a31109263f4b7af78.png" src="_images/1680d77898ebcdf0652f29f219f64d704cc16ddff37aaf9a31109263f4b7af78.png" />
+<img alt="_images/d791f0b6522f9aa724d48e39f1201968a618bfcaa5bd752dbeef8e795bd2361c.png" src="_images/d791f0b6522f9aa724d48e39f1201968a618bfcaa5bd752dbeef8e795bd2361c.png" />
+<img alt="_images/a80ee44dab46b3d64ef6302eded225ff092e31e182a45f8c333bec1a9ba79ec0.png" src="_images/a80ee44dab46b3d64ef6302eded225ff092e31e182a45f8c333bec1a9ba79ec0.png" />
+<img alt="_images/192fe49909cfe71e7df832123f2fdb9b82f740da631de2c2819b78df60bd1e3c.png" src="_images/192fe49909cfe71e7df832123f2fdb9b82f740da631de2c2819b78df60bd1e3c.png" />
+<img alt="_images/34f0ff48097c2bd88474d9de3b260af862b923473ca9c736aed697e72618bd9d.png" src="_images/34f0ff48097c2bd88474d9de3b260af862b923473ca9c736aed697e72618bd9d.png" />
+<img alt="_images/b70e05a93cd021c7e80e7dd38c43cba98b34f3a0acf9922e4fc29a4c616f0d1a.png" src="_images/b70e05a93cd021c7e80e7dd38c43cba98b34f3a0acf9922e4fc29a4c616f0d1a.png" />
+<img alt="_images/adf9f2f6309873e84115a10a60aa357fa70fb1612ac4d29d0580315ebc2125f7.png" src="_images/adf9f2f6309873e84115a10a60aa357fa70fb1612ac4d29d0580315ebc2125f7.png" />
+<img alt="_images/16360a6bc00a17bd922a93fa20aa14f20d4c5f61faf6fe0bcbffbe6b1d7e56e2.png" src="_images/16360a6bc00a17bd922a93fa20aa14f20d4c5f61faf6fe0bcbffbe6b1d7e56e2.png" />
 </div>
 </div>
 </section>
@@ -1658,8 +2140,10 @@ document.write(`
       <th></th>
       <th>Modelo</th>
       <th>MAPE</th>
+      <th>MAE</th>
+      <th>MSE</th>
       <th>RMSE</th>
-      <th>R^2</th>
+      <th>R²</th>
       <th>Ljung-Box p-value</th>
       <th>Jarque-Bera p-value</th>
     </tr>
@@ -1668,74 +2152,90 @@ document.write(`
     <tr>
       <th>0</th>
       <td>K-NN Regressor</td>
-      <td>18.056679</td>
-      <td>1.799872</td>
-      <td>0.826614</td>
-      <td>0.009001</td>
+      <td>17.977263</td>
+      <td>1.293825</td>
+      <td>3.323768</td>
+      <td>1.823120</td>
+      <td>0.811731</td>
+      <td>0.950805</td>
       <td>0.000000e+00</td>
     </tr>
     <tr>
       <th>1</th>
       <td>Ridge Regression</td>
-      <td>32.311663</td>
-      <td>2.872244</td>
-      <td>0.558457</td>
-      <td>0.458802</td>
-      <td>4.262188e-68</td>
+      <td>31.783680</td>
+      <td>2.247780</td>
+      <td>8.092424</td>
+      <td>2.844719</td>
+      <td>0.541620</td>
+      <td>0.671389</td>
+      <td>1.696945e-60</td>
     </tr>
     <tr>
       <th>2</th>
       <td>Lasso Regression</td>
-      <td>32.309821</td>
-      <td>2.872276</td>
-      <td>0.558448</td>
-      <td>0.457919</td>
-      <td>8.775526e-68</td>
+      <td>31.780676</td>
+      <td>2.248291</td>
+      <td>8.093520</td>
+      <td>2.844911</td>
+      <td>0.541558</td>
+      <td>0.670542</td>
+      <td>5.773811e-60</td>
     </tr>
     <tr>
       <th>3</th>
       <td>Linear Regression</td>
-      <td>32.307985</td>
-      <td>2.872257</td>
-      <td>0.558453</td>
-      <td>0.457430</td>
-      <td>8.671614e-68</td>
+      <td>31.777409</td>
+      <td>2.248286</td>
+      <td>8.093641</td>
+      <td>2.844933</td>
+      <td>0.541551</td>
+      <td>0.670594</td>
+      <td>5.926368e-60</td>
     </tr>
     <tr>
       <th>4</th>
       <td>Decision Tree Regressor</td>
-      <td>15.499414</td>
-      <td>1.826902</td>
-      <td>0.821368</td>
-      <td>0.577910</td>
+      <td>16.343108</td>
+      <td>1.348298</td>
+      <td>3.559427</td>
+      <td>1.886644</td>
+      <td>0.798383</td>
+      <td>0.268804</td>
       <td>0.000000e+00</td>
     </tr>
     <tr>
       <th>5</th>
       <td>Random Forest Regressor</td>
-      <td>12.049813</td>
-      <td>1.355316</td>
-      <td>0.901687</td>
-      <td>0.339361</td>
+      <td>12.582782</td>
+      <td>0.988731</td>
+      <td>1.978584</td>
+      <td>1.406622</td>
+      <td>0.887927</td>
+      <td>0.711169</td>
       <td>0.000000e+00</td>
     </tr>
     <tr>
       <th>6</th>
       <td>XGBoost Regressor</td>
-      <td>11.355959</td>
-      <td>1.332096</td>
-      <td>0.905027</td>
-      <td>0.562679</td>
+      <td>12.158019</td>
+      <td>0.965521</td>
+      <td>1.940244</td>
+      <td>1.392926</td>
+      <td>0.890099</td>
+      <td>0.520237</td>
       <td>0.000000e+00</td>
     </tr>
     <tr>
       <th>7</th>
       <td>SVR</td>
-      <td>0.237329</td>
-      <td>2.038345</td>
-      <td>0.777625</td>
-      <td>0.531900</td>
-      <td>3.018409e-193</td>
+      <td>22.246015</td>
+      <td>1.480558</td>
+      <td>4.023526</td>
+      <td>2.005873</td>
+      <td>0.772095</td>
+      <td>0.792934</td>
+      <td>2.234988e-269</td>
     </tr>
   </tbody>
 </table>
@@ -1743,7 +2243,157 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">resultado</span> <span class="ow">in</span> <span class="n">resultados_graficos3</span><span class="p">:</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">resultados3</span><span class="o">.</span><span class="n">to_pickle</span><span class="p">(</span><span class="s1">&#39;resultados3.pkl&#39;</span><span class="p">)</span>
+<span class="n">df_cargado</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_pickle</span><span class="p">(</span><span class="s1">&#39;resultados3.pkl&#39;</span><span class="p">)</span>
+<span class="n">df_cargado</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Modelo</th>
+      <th>MAPE</th>
+      <th>MAE</th>
+      <th>MSE</th>
+      <th>RMSE</th>
+      <th>R²</th>
+      <th>Ljung-Box p-value</th>
+      <th>Jarque-Bera p-value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>K-NN Regressor</td>
+      <td>17.977263</td>
+      <td>1.293825</td>
+      <td>3.323768</td>
+      <td>1.823120</td>
+      <td>0.811731</td>
+      <td>0.950805</td>
+      <td>0.000000e+00</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Ridge Regression</td>
+      <td>31.783680</td>
+      <td>2.247780</td>
+      <td>8.092424</td>
+      <td>2.844719</td>
+      <td>0.541620</td>
+      <td>0.671389</td>
+      <td>1.696945e-60</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Lasso Regression</td>
+      <td>31.780676</td>
+      <td>2.248291</td>
+      <td>8.093520</td>
+      <td>2.844911</td>
+      <td>0.541558</td>
+      <td>0.670542</td>
+      <td>5.773811e-60</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Linear Regression</td>
+      <td>31.777409</td>
+      <td>2.248286</td>
+      <td>8.093641</td>
+      <td>2.844933</td>
+      <td>0.541551</td>
+      <td>0.670594</td>
+      <td>5.926368e-60</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Decision Tree Regressor</td>
+      <td>16.343108</td>
+      <td>1.348298</td>
+      <td>3.559427</td>
+      <td>1.886644</td>
+      <td>0.798383</td>
+      <td>0.268804</td>
+      <td>0.000000e+00</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Random Forest Regressor</td>
+      <td>12.582782</td>
+      <td>0.988731</td>
+      <td>1.978584</td>
+      <td>1.406622</td>
+      <td>0.887927</td>
+      <td>0.711169</td>
+      <td>0.000000e+00</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>XGBoost Regressor</td>
+      <td>12.158019</td>
+      <td>0.965521</td>
+      <td>1.940244</td>
+      <td>1.392926</td>
+      <td>0.890099</td>
+      <td>0.520237</td>
+      <td>0.000000e+00</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>SVR</td>
+      <td>22.246015</td>
+      <td>1.480558</td>
+      <td>4.023526</td>
+      <td>2.005873</td>
+      <td>0.772095</td>
+      <td>0.792934</td>
+      <td>2.234988e-269</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pickle</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;resultados_graficos3.pkl&#39;</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+    <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">resultados_graficos3</span><span class="p">,</span> <span class="n">file</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;resultados_graficos3.pkl&#39;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+    <span class="n">resultados_graficos3_cargado</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+    
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">resultados</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_pickle</span><span class="p">(</span><span class="s1">&#39;resultados_graficos3.pkl&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">resultado</span> <span class="ow">in</span> <span class="n">resultados</span><span class="p">:</span>
     <span class="c1"># Gráfica de predicciones</span>
     <span class="n">grafica</span><span class="p">(</span>
         <span class="n">resultado</span><span class="p">[</span><span class="s1">&#39;nombre_modelo&#39;</span><span class="p">],</span>
@@ -1754,14 +2404,14 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/6b582ea334a22ba04233ade2f97578f879576b4efc385ef7033604e86510ba38.png" src="_images/6b582ea334a22ba04233ade2f97578f879576b4efc385ef7033604e86510ba38.png" />
-<img alt="_images/6560283c85e715ad118bc9370dc3d7d6ead32e82ccf1eb1b85e4bdc09c6f284a.png" src="_images/6560283c85e715ad118bc9370dc3d7d6ead32e82ccf1eb1b85e4bdc09c6f284a.png" />
-<img alt="_images/bece8e852c4387b6dbc435d2ad42abbcaeb9e5c40b925f72e28dcdfb6f5b2d3e.png" src="_images/bece8e852c4387b6dbc435d2ad42abbcaeb9e5c40b925f72e28dcdfb6f5b2d3e.png" />
-<img alt="_images/9f4377e3ca4ac3d2f85ad5f40f06f3d3cc34da017af38b5cb957010022dbf4fc.png" src="_images/9f4377e3ca4ac3d2f85ad5f40f06f3d3cc34da017af38b5cb957010022dbf4fc.png" />
-<img alt="_images/5c81062eaf5ca351c304223fc8603eff0658d81970c4acb6c3dd76cedf34c4a2.png" src="_images/5c81062eaf5ca351c304223fc8603eff0658d81970c4acb6c3dd76cedf34c4a2.png" />
-<img alt="_images/2544a8eae57e425e88fd7d3142eed69920ecd987c85ccdbd7e2943c67084a468.png" src="_images/2544a8eae57e425e88fd7d3142eed69920ecd987c85ccdbd7e2943c67084a468.png" />
-<img alt="_images/c5f15817dd46bbdd259bbecae5e4cc3e4f95b4a8b30f0e935e917b78e19f7689.png" src="_images/c5f15817dd46bbdd259bbecae5e4cc3e4f95b4a8b30f0e935e917b78e19f7689.png" />
-<img alt="_images/b6616421ece6e923fce72f75a4512c794fa809af042f33e5b677b956c0ffa662.png" src="_images/b6616421ece6e923fce72f75a4512c794fa809af042f33e5b677b956c0ffa662.png" />
+<img alt="_images/0d24889f2f5c4bb9cd4ab16cd133039a5bb40c7babec9b12f26c29090c479b7c.png" src="_images/0d24889f2f5c4bb9cd4ab16cd133039a5bb40c7babec9b12f26c29090c479b7c.png" />
+<img alt="_images/0b9a651d0f93715db4425a3bdeb7a9dd7e49679bc54c24c2b993ab4e8303cf5d.png" src="_images/0b9a651d0f93715db4425a3bdeb7a9dd7e49679bc54c24c2b993ab4e8303cf5d.png" />
+<img alt="_images/c6f35d45b2c7c98b4327f5da2af1781d5157f939848b4d1ceed2b779c5f31250.png" src="_images/c6f35d45b2c7c98b4327f5da2af1781d5157f939848b4d1ceed2b779c5f31250.png" />
+<img alt="_images/c8cb3d0629835596f563fec751bbc2d5e694f11e54c7fa4ae7300eeb81d61a9a.png" src="_images/c8cb3d0629835596f563fec751bbc2d5e694f11e54c7fa4ae7300eeb81d61a9a.png" />
+<img alt="_images/819da9a33bc092ee7b7c427815583eba9bb78c4ef9a80c90c8e6aa9636480e30.png" src="_images/819da9a33bc092ee7b7c427815583eba9bb78c4ef9a80c90c8e6aa9636480e30.png" />
+<img alt="_images/b7c9d6d3f4d830f78df0c884264505268f85dbe70fc2dd12fa4a83b2e1446c48.png" src="_images/b7c9d6d3f4d830f78df0c884264505268f85dbe70fc2dd12fa4a83b2e1446c48.png" />
+<img alt="_images/f6d94257379b763d2553bbf7366d1a29b2c1245bb9803968971e7c43bd01e0bf.png" src="_images/f6d94257379b763d2553bbf7366d1a29b2c1245bb9803968971e7c43bd01e0bf.png" />
+<img alt="_images/f296216e6ba3a96573ee47ec32c6a42d53d5f5ed778f655e8a05e4c2b1d496ca.png" src="_images/f296216e6ba3a96573ee47ec32c6a42d53d5f5ed778f655e8a05e4c2b1d496ca.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1775,14 +2425,14 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/6b2004b5d41f69880ee82d8fb8fc711482b1758a2cab5fad196cb647c6e62971.png" src="_images/6b2004b5d41f69880ee82d8fb8fc711482b1758a2cab5fad196cb647c6e62971.png" />
-<img alt="_images/94ced3cfaf21a4ccf2bab1b8d81722030792a21a05bc67ed2e9978660d413c0c.png" src="_images/94ced3cfaf21a4ccf2bab1b8d81722030792a21a05bc67ed2e9978660d413c0c.png" />
-<img alt="_images/b7244dcf27524d4d87473f41705574fd7734abad1ae4d5cb9e9a3e8cf42d14e8.png" src="_images/b7244dcf27524d4d87473f41705574fd7734abad1ae4d5cb9e9a3e8cf42d14e8.png" />
-<img alt="_images/b60cbcd762661976a8850c40fcbcb58ccafc8f21fd8bc23c58aede600bc5663f.png" src="_images/b60cbcd762661976a8850c40fcbcb58ccafc8f21fd8bc23c58aede600bc5663f.png" />
-<img alt="_images/d1aba38293cd7209627066b7bbea1cbf4f8eab95dd0fb0f262bf1c0614d364fc.png" src="_images/d1aba38293cd7209627066b7bbea1cbf4f8eab95dd0fb0f262bf1c0614d364fc.png" />
-<img alt="_images/1512f5fba6dca7d1afa24e9de689af10b5e4e687e837b0a24b8d6ba8243708f3.png" src="_images/1512f5fba6dca7d1afa24e9de689af10b5e4e687e837b0a24b8d6ba8243708f3.png" />
-<img alt="_images/36af33c30a6970de969dc892e5a336306be88ec446f3ae7f0f651538f2cb7df5.png" src="_images/36af33c30a6970de969dc892e5a336306be88ec446f3ae7f0f651538f2cb7df5.png" />
-<img alt="_images/68ce601d3eca7a67a570239800c8d1f78d2869da706106fc1eb32969d6f808ed.png" src="_images/68ce601d3eca7a67a570239800c8d1f78d2869da706106fc1eb32969d6f808ed.png" />
+<img alt="_images/7e76d23419af1c6a82007d60e158b5312350dfd13d1478b1b597f59e8a699009.png" src="_images/7e76d23419af1c6a82007d60e158b5312350dfd13d1478b1b597f59e8a699009.png" />
+<img alt="_images/b71ac69cba717f2a235002c3e4493ccad6624afc9f1d4ce92c87c2a90d20dda9.png" src="_images/b71ac69cba717f2a235002c3e4493ccad6624afc9f1d4ce92c87c2a90d20dda9.png" />
+<img alt="_images/c4a0781e088423d36d8691cd3d05580b15c26fd8065ed1a731df8ab3a58d20df.png" src="_images/c4a0781e088423d36d8691cd3d05580b15c26fd8065ed1a731df8ab3a58d20df.png" />
+<img alt="_images/7f384304d44ad39b94b13d7a427422d1fa196cfa75aab5c006e0eab851c63f0a.png" src="_images/7f384304d44ad39b94b13d7a427422d1fa196cfa75aab5c006e0eab851c63f0a.png" />
+<img alt="_images/390269c64e73611ddabffc3211a83ffce2d7cc330f79504f422084ec9955e437.png" src="_images/390269c64e73611ddabffc3211a83ffce2d7cc330f79504f422084ec9955e437.png" />
+<img alt="_images/114e96f359fed85b260990c185feb833637149615a6a05230d3c0096108bc476.png" src="_images/114e96f359fed85b260990c185feb833637149615a6a05230d3c0096108bc476.png" />
+<img alt="_images/ae8d824e05761df7931c77f13076577016f7451b999a036e464c7f4d17374eb5.png" src="_images/ae8d824e05761df7931c77f13076577016f7451b999a036e464c7f4d17374eb5.png" />
+<img alt="_images/b99750b2a9b528d2f9b800952cfb4d801bced4b1fc5f9f1ced329defbbe52a72.png" src="_images/b99750b2a9b528d2f9b800952cfb4d801bced4b1fc5f9f1ced329defbbe52a72.png" />
 </div>
 </div>
 </section>
@@ -1842,8 +2492,10 @@ document.write(`
       <th></th>
       <th>Modelo</th>
       <th>MAPE</th>
+      <th>MAE</th>
+      <th>MSE</th>
       <th>RMSE</th>
-      <th>R^2</th>
+      <th>R²</th>
       <th>Ljung-Box p-value</th>
       <th>Jarque-Bera p-value</th>
     </tr>
@@ -1852,78 +2504,237 @@ document.write(`
     <tr>
       <th>0</th>
       <td>K-NN Regressor</td>
-      <td>17.955293</td>
-      <td>1.796312</td>
-      <td>0.826355</td>
-      <td>0.010794</td>
+      <td>17.924334</td>
+      <td>1.292000</td>
+      <td>3.315724</td>
+      <td>1.820913</td>
+      <td>0.811322</td>
+      <td>0.954135</td>
       <td>0.000000e+00</td>
     </tr>
     <tr>
       <th>1</th>
       <td>Ridge Regression</td>
-      <td>31.999951</td>
-      <td>2.859510</td>
-      <td>0.559971</td>
-      <td>0.433718</td>
-      <td>1.524338e-68</td>
+      <td>31.564093</td>
+      <td>2.238500</td>
+      <td>8.035084</td>
+      <td>2.834622</td>
+      <td>0.542771</td>
+      <td>0.677657</td>
+      <td>1.720563e-61</td>
     </tr>
     <tr>
       <th>2</th>
       <td>Lasso Regression</td>
-      <td>31.997537</td>
-      <td>2.859544</td>
-      <td>0.559961</td>
-      <td>0.432626</td>
-      <td>3.533504e-68</td>
+      <td>31.559884</td>
+      <td>2.239107</td>
+      <td>8.036423</td>
+      <td>2.834858</td>
+      <td>0.542694</td>
+      <td>0.676636</td>
+      <td>7.815810e-61</td>
     </tr>
     <tr>
       <th>3</th>
       <td>Linear Regression</td>
-      <td>31.995739</td>
-      <td>2.859525</td>
-      <td>0.559966</td>
-      <td>0.432138</td>
-      <td>3.492348e-68</td>
+      <td>31.556736</td>
+      <td>2.239106</td>
+      <td>8.036552</td>
+      <td>2.834881</td>
+      <td>0.542687</td>
+      <td>0.676705</td>
+      <td>8.028344e-61</td>
     </tr>
     <tr>
       <th>4</th>
       <td>Decision Tree Regressor</td>
-      <td>15.732693</td>
-      <td>1.869437</td>
-      <td>0.811930</td>
-      <td>0.129926</td>
+      <td>16.070356</td>
+      <td>1.339225</td>
+      <td>3.589581</td>
+      <td>1.894619</td>
+      <td>0.795738</td>
+      <td>0.722140</td>
       <td>0.000000e+00</td>
     </tr>
     <tr>
       <th>5</th>
       <td>Random Forest Regressor</td>
-      <td>12.044173</td>
-      <td>1.357483</td>
-      <td>0.900833</td>
-      <td>0.325376</td>
+      <td>12.603654</td>
+      <td>0.988063</td>
+      <td>1.971787</td>
+      <td>1.404203</td>
+      <td>0.887797</td>
+      <td>0.924713</td>
       <td>0.000000e+00</td>
     </tr>
     <tr>
       <th>6</th>
       <td>XGBoost Regressor</td>
-      <td>11.040679</td>
-      <td>1.296130</td>
-      <td>0.909594</td>
-      <td>0.269406</td>
+      <td>12.249097</td>
+      <td>0.978894</td>
+      <td>1.992706</td>
+      <td>1.411632</td>
+      <td>0.886607</td>
+      <td>0.504419</td>
       <td>0.000000e+00</td>
     </tr>
     <tr>
       <th>7</th>
       <td>SVR</td>
-      <td>0.236028</td>
-      <td>2.034317</td>
-      <td>0.777292</td>
-      <td>0.574872</td>
-      <td>1.125601e-193</td>
+      <td>22.156858</td>
+      <td>1.477805</td>
+      <td>4.010497</td>
+      <td>2.002623</td>
+      <td>0.771786</td>
+      <td>0.805015</td>
+      <td>1.853042e-270</td>
     </tr>
   </tbody>
 </table>
 </div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">resultados4</span><span class="o">.</span><span class="n">to_pickle</span><span class="p">(</span><span class="s1">&#39;resultados4.pkl&#39;</span><span class="p">)</span>
+<span class="n">df_cargado</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_pickle</span><span class="p">(</span><span class="s1">&#39;resultados4.pkl&#39;</span><span class="p">)</span>
+<span class="n">df_cargado</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Modelo</th>
+      <th>MAPE</th>
+      <th>MAE</th>
+      <th>MSE</th>
+      <th>RMSE</th>
+      <th>R²</th>
+      <th>Ljung-Box p-value</th>
+      <th>Jarque-Bera p-value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>K-NN Regressor</td>
+      <td>17.924334</td>
+      <td>1.292000</td>
+      <td>3.315724</td>
+      <td>1.820913</td>
+      <td>0.811322</td>
+      <td>0.954135</td>
+      <td>0.000000e+00</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Ridge Regression</td>
+      <td>31.564093</td>
+      <td>2.238500</td>
+      <td>8.035084</td>
+      <td>2.834622</td>
+      <td>0.542771</td>
+      <td>0.677657</td>
+      <td>1.720563e-61</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Lasso Regression</td>
+      <td>31.559884</td>
+      <td>2.239107</td>
+      <td>8.036423</td>
+      <td>2.834858</td>
+      <td>0.542694</td>
+      <td>0.676636</td>
+      <td>7.815810e-61</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Linear Regression</td>
+      <td>31.556736</td>
+      <td>2.239106</td>
+      <td>8.036552</td>
+      <td>2.834881</td>
+      <td>0.542687</td>
+      <td>0.676705</td>
+      <td>8.028344e-61</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Decision Tree Regressor</td>
+      <td>16.070356</td>
+      <td>1.339225</td>
+      <td>3.589581</td>
+      <td>1.894619</td>
+      <td>0.795738</td>
+      <td>0.722140</td>
+      <td>0.000000e+00</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Random Forest Regressor</td>
+      <td>12.603654</td>
+      <td>0.988063</td>
+      <td>1.971787</td>
+      <td>1.404203</td>
+      <td>0.887797</td>
+      <td>0.924713</td>
+      <td>0.000000e+00</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>XGBoost Regressor</td>
+      <td>12.249097</td>
+      <td>0.978894</td>
+      <td>1.992706</td>
+      <td>1.411632</td>
+      <td>0.886607</td>
+      <td>0.504419</td>
+      <td>0.000000e+00</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>SVR</td>
+      <td>22.156858</td>
+      <td>1.477805</td>
+      <td>4.010497</td>
+      <td>2.002623</td>
+      <td>0.771786</td>
+      <td>0.805015</td>
+      <td>1.853042e-270</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pickle</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;resultados_graficos4.pkl&#39;</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+    <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">resultados_graficos4</span><span class="p">,</span> <span class="n">file</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;resultados_graficos4.pkl&#39;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+    <span class="n">resultados_graficos4_cargado</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+    
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1938,14 +2749,14 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/b1afca4497f42ed98232d5d58295bed61d9defb7ed214b8b7261ff7919dcebf4.png" src="_images/b1afca4497f42ed98232d5d58295bed61d9defb7ed214b8b7261ff7919dcebf4.png" />
-<img alt="_images/66c230b23b37949cf36a7eed0452d269d41a6937dcf8a4e4439a11643df9201d.png" src="_images/66c230b23b37949cf36a7eed0452d269d41a6937dcf8a4e4439a11643df9201d.png" />
-<img alt="_images/ffef47f1bc4c5ea987b94507395130a70859df8e826726c1a61012e337451ccf.png" src="_images/ffef47f1bc4c5ea987b94507395130a70859df8e826726c1a61012e337451ccf.png" />
-<img alt="_images/6c5d9ce222f674fedc967a1b25d6d2797c9f84c1e460c78a2e3c1dbeca44e7e5.png" src="_images/6c5d9ce222f674fedc967a1b25d6d2797c9f84c1e460c78a2e3c1dbeca44e7e5.png" />
-<img alt="_images/ecf77d59a7114381dbb80fd11c788724756480ff7c53be8c9278a36de8cbdf20.png" src="_images/ecf77d59a7114381dbb80fd11c788724756480ff7c53be8c9278a36de8cbdf20.png" />
-<img alt="_images/c10605585f52ecc526389042e869b110da4d0d000ba0e08271b673283838baa2.png" src="_images/c10605585f52ecc526389042e869b110da4d0d000ba0e08271b673283838baa2.png" />
-<img alt="_images/9e90f526f602b3d754f27c6c21e667068dadceadb178778ec1f85c58f702e0e7.png" src="_images/9e90f526f602b3d754f27c6c21e667068dadceadb178778ec1f85c58f702e0e7.png" />
-<img alt="_images/898c7ef501d31e3de751d602277b1f0ca7cf1c7dfb1c1fc9f0ce2c52e59ea206.png" src="_images/898c7ef501d31e3de751d602277b1f0ca7cf1c7dfb1c1fc9f0ce2c52e59ea206.png" />
+<img alt="_images/baf7fa40dc5019beff939b2551a4742300e7844ca4c578eb76c29c5f9cbbc5f4.png" src="_images/baf7fa40dc5019beff939b2551a4742300e7844ca4c578eb76c29c5f9cbbc5f4.png" />
+<img alt="_images/6cda14749a4f222cf096cd44f6ad6f74a3646bea6daf98811491140f091c3e52.png" src="_images/6cda14749a4f222cf096cd44f6ad6f74a3646bea6daf98811491140f091c3e52.png" />
+<img alt="_images/f360c3e3c262924267c93f612922c3c8ea4d064891e21e31bbcb925f51770093.png" src="_images/f360c3e3c262924267c93f612922c3c8ea4d064891e21e31bbcb925f51770093.png" />
+<img alt="_images/5e1bb81e246e2a431b44f1f6f892dec5d3880b5bd84d154e8f69a5c8bfe45e86.png" src="_images/5e1bb81e246e2a431b44f1f6f892dec5d3880b5bd84d154e8f69a5c8bfe45e86.png" />
+<img alt="_images/a52c111e0f3f26a7e5eb028faa18b2e7105a6a9c6d9925e631a2ab16433ca4d9.png" src="_images/a52c111e0f3f26a7e5eb028faa18b2e7105a6a9c6d9925e631a2ab16433ca4d9.png" />
+<img alt="_images/2b738adf625827c4bf85a66b3d16438ededadbc881a7d7ed8b746f1675849485.png" src="_images/2b738adf625827c4bf85a66b3d16438ededadbc881a7d7ed8b746f1675849485.png" />
+<img alt="_images/69dc45b168341327fe347d21dcee066eb337eacaa194e370233236d97bb85284.png" src="_images/69dc45b168341327fe347d21dcee066eb337eacaa194e370233236d97bb85284.png" />
+<img alt="_images/c49b60cc04b79611d89f80b9650c8f55e321b404d429819d87774eb9cd88ee0c.png" src="_images/c49b60cc04b79611d89f80b9650c8f55e321b404d429819d87774eb9cd88ee0c.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1959,14 +2770,14 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/c8a10459d6ee676037340f27bd28ec0861a1ecb80ec2ea14113987ddfef58a9d.png" src="_images/c8a10459d6ee676037340f27bd28ec0861a1ecb80ec2ea14113987ddfef58a9d.png" />
-<img alt="_images/182880cde6faed49e5a0fe87ca6442751bcfac1d02c40da97e0cff657878c613.png" src="_images/182880cde6faed49e5a0fe87ca6442751bcfac1d02c40da97e0cff657878c613.png" />
-<img alt="_images/03def89c662aa822bda073daad20717d11c296274d78b0c3ea7f394bbbf7ae9d.png" src="_images/03def89c662aa822bda073daad20717d11c296274d78b0c3ea7f394bbbf7ae9d.png" />
-<img alt="_images/37e8a9a93911d91fd45a0c3fb51bc0de47615101a38e37e64f385dd4d74aaff6.png" src="_images/37e8a9a93911d91fd45a0c3fb51bc0de47615101a38e37e64f385dd4d74aaff6.png" />
-<img alt="_images/668cfb7476485249534958e6bb09bf2fcb7c8f11cc71deb71f8fd29b0527f065.png" src="_images/668cfb7476485249534958e6bb09bf2fcb7c8f11cc71deb71f8fd29b0527f065.png" />
-<img alt="_images/64757d7ae2aeab298bfb412413a094bbe746b381dd15ac4c422b73c90866cb66.png" src="_images/64757d7ae2aeab298bfb412413a094bbe746b381dd15ac4c422b73c90866cb66.png" />
-<img alt="_images/bf3626e5ba197ca932ac4b20df952ddf60b55776c574daba1f9649f8d11772aa.png" src="_images/bf3626e5ba197ca932ac4b20df952ddf60b55776c574daba1f9649f8d11772aa.png" />
-<img alt="_images/67d41bb77500dbb1174b6ebb4348beacef3d7efdb5d7544e62895b029f817b41.png" src="_images/67d41bb77500dbb1174b6ebb4348beacef3d7efdb5d7544e62895b029f817b41.png" />
+<img alt="_images/b7df6c8e6f784f26339abccb27f8bc0805b395206bbdd56a71d3cd67065b5d75.png" src="_images/b7df6c8e6f784f26339abccb27f8bc0805b395206bbdd56a71d3cd67065b5d75.png" />
+<img alt="_images/2e679fb43d90ae1e8b458bfc9e325ac6c004b7dc662bc5ceccda46a818bd6234.png" src="_images/2e679fb43d90ae1e8b458bfc9e325ac6c004b7dc662bc5ceccda46a818bd6234.png" />
+<img alt="_images/ee2c65b33a8f3d2c0e1137f469e7feb213ff41cf47728445a02a49b6fd7bb0b0.png" src="_images/ee2c65b33a8f3d2c0e1137f469e7feb213ff41cf47728445a02a49b6fd7bb0b0.png" />
+<img alt="_images/4fdc32f2f06aab6c6817a3fa383d09c0bd79d7468aca7ee0c595279840237b91.png" src="_images/4fdc32f2f06aab6c6817a3fa383d09c0bd79d7468aca7ee0c595279840237b91.png" />
+<img alt="_images/b43dfe5b0861258e518f711daf3dc7b1f0a1c3eebc0150d218b5ea7734a48f6b.png" src="_images/b43dfe5b0861258e518f711daf3dc7b1f0a1c3eebc0150d218b5ea7734a48f6b.png" />
+<img alt="_images/1bda6cc47b6ec9ecb30558fc8fdf3a350da77e0c8122128fc83092b0c229f724.png" src="_images/1bda6cc47b6ec9ecb30558fc8fdf3a350da77e0c8122128fc83092b0c229f724.png" />
+<img alt="_images/85dd7e593fbc09286363813133b04b6a65e8f98192a9d9dff0e023faa57e58cd.png" src="_images/85dd7e593fbc09286363813133b04b6a65e8f98192a9d9dff0e023faa57e58cd.png" />
+<img alt="_images/3040386807fb3bd87ea61fbb10581c30d8f3cac3ecd378241f5c84806fc537ad.png" src="_images/3040386807fb3bd87ea61fbb10581c30d8f3cac3ecd378241f5c84806fc537ad.png" />
 </div>
 </div>
 </section>
@@ -2027,8 +2838,10 @@ document.write(`
       <th></th>
       <th>Modelo</th>
       <th>MAPE</th>
+      <th>MAE</th>
+      <th>MSE</th>
       <th>RMSE</th>
-      <th>R^2</th>
+      <th>R²</th>
       <th>Ljung-Box p-value</th>
       <th>Jarque-Bera p-value</th>
     </tr>
@@ -2037,74 +2850,90 @@ document.write(`
     <tr>
       <th>0</th>
       <td>K-NN Regressor</td>
-      <td>18.071042</td>
-      <td>1.757999</td>
-      <td>0.821058</td>
-      <td>0.382512</td>
+      <td>16.918266</td>
+      <td>1.244779</td>
+      <td>3.060801</td>
+      <td>1.749514</td>
+      <td>0.812379</td>
+      <td>0.710789</td>
       <td>0.000000e+00</td>
     </tr>
     <tr>
       <th>1</th>
       <td>Ridge Regression</td>
-      <td>32.392141</td>
-      <td>2.776435</td>
-      <td>0.553675</td>
-      <td>0.543730</td>
-      <td>4.158995e-67</td>
+      <td>30.933485</td>
+      <td>2.163685</td>
+      <td>7.468285</td>
+      <td>2.732816</td>
+      <td>0.542209</td>
+      <td>0.701590</td>
+      <td>2.554196e-45</td>
     </tr>
     <tr>
       <th>2</th>
       <td>Lasso Regression</td>
-      <td>32.391206</td>
-      <td>2.776469</td>
-      <td>0.553664</td>
-      <td>0.543174</td>
-      <td>7.603221e-67</td>
+      <td>30.976225</td>
+      <td>2.161208</td>
+      <td>7.462718</td>
+      <td>2.731798</td>
+      <td>0.542550</td>
+      <td>0.704423</td>
+      <td>9.581820e-48</td>
     </tr>
     <tr>
       <th>3</th>
       <td>Linear Regression</td>
-      <td>32.388608</td>
-      <td>2.776441</td>
-      <td>0.553673</td>
-      <td>0.542471</td>
-      <td>7.883555e-67</td>
+      <td>30.927257</td>
+      <td>2.164199</td>
+      <td>7.469554</td>
+      <td>2.733048</td>
+      <td>0.542131</td>
+      <td>0.700981</td>
+      <td>7.157022e-45</td>
     </tr>
     <tr>
       <th>4</th>
       <td>Decision Tree Regressor</td>
-      <td>15.573285</td>
-      <td>1.806128</td>
-      <td>0.811126</td>
-      <td>0.339878</td>
+      <td>15.736202</td>
+      <td>1.311297</td>
+      <td>3.328465</td>
+      <td>1.824408</td>
+      <td>0.795972</td>
+      <td>0.619859</td>
       <td>0.000000e+00</td>
     </tr>
     <tr>
       <th>5</th>
       <td>Random Forest Regressor</td>
-      <td>12.282860</td>
-      <td>1.330840</td>
-      <td>0.897452</td>
-      <td>0.126853</td>
+      <td>11.725405</td>
+      <td>0.960242</td>
+      <td>1.787630</td>
+      <td>1.337023</td>
+      <td>0.890422</td>
+      <td>0.718514</td>
       <td>0.000000e+00</td>
     </tr>
     <tr>
       <th>6</th>
       <td>XGBoost Regressor</td>
-      <td>11.698853</td>
-      <td>1.307149</td>
-      <td>0.901070</td>
-      <td>0.487035</td>
+      <td>11.350189</td>
+      <td>0.933894</td>
+      <td>1.732134</td>
+      <td>1.316106</td>
+      <td>0.893824</td>
+      <td>0.739564</td>
       <td>0.000000e+00</td>
     </tr>
     <tr>
       <th>7</th>
       <td>SVR</td>
-      <td>0.234403</td>
-      <td>1.973021</td>
-      <td>0.774607</td>
-      <td>0.403373</td>
-      <td>1.385592e-209</td>
+      <td>21.464075</td>
+      <td>1.426849</td>
+      <td>3.712218</td>
+      <td>1.926712</td>
+      <td>0.772448</td>
+      <td>0.651853</td>
+      <td>1.109584e-165</td>
     </tr>
   </tbody>
 </table>
@@ -2112,7 +2941,150 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">resultado</span> <span class="ow">in</span> <span class="n">resultados_graficos5</span><span class="p">:</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">resultados5</span><span class="o">.</span><span class="n">to_pickle</span><span class="p">(</span><span class="s1">&#39;resultados5.pkl&#39;</span><span class="p">)</span>
+<span class="n">df_cargado</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_pickle</span><span class="p">(</span><span class="s1">&#39;resultados5.pkl&#39;</span><span class="p">)</span>
+<span class="n">df_cargado</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Modelo</th>
+      <th>MAPE</th>
+      <th>MAE</th>
+      <th>MSE</th>
+      <th>RMSE</th>
+      <th>R²</th>
+      <th>Ljung-Box p-value</th>
+      <th>Jarque-Bera p-value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>K-NN Regressor</td>
+      <td>16.918266</td>
+      <td>1.244779</td>
+      <td>3.060801</td>
+      <td>1.749514</td>
+      <td>0.812379</td>
+      <td>0.710789</td>
+      <td>0.000000e+00</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Ridge Regression</td>
+      <td>30.933485</td>
+      <td>2.163685</td>
+      <td>7.468285</td>
+      <td>2.732816</td>
+      <td>0.542209</td>
+      <td>0.701590</td>
+      <td>2.554196e-45</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Lasso Regression</td>
+      <td>30.976225</td>
+      <td>2.161208</td>
+      <td>7.462718</td>
+      <td>2.731798</td>
+      <td>0.542550</td>
+      <td>0.704423</td>
+      <td>9.581820e-48</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Linear Regression</td>
+      <td>30.927257</td>
+      <td>2.164199</td>
+      <td>7.469554</td>
+      <td>2.733048</td>
+      <td>0.542131</td>
+      <td>0.700981</td>
+      <td>7.157022e-45</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Decision Tree Regressor</td>
+      <td>15.736202</td>
+      <td>1.311297</td>
+      <td>3.328465</td>
+      <td>1.824408</td>
+      <td>0.795972</td>
+      <td>0.619859</td>
+      <td>0.000000e+00</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Random Forest Regressor</td>
+      <td>11.725405</td>
+      <td>0.960242</td>
+      <td>1.787630</td>
+      <td>1.337023</td>
+      <td>0.890422</td>
+      <td>0.718514</td>
+      <td>0.000000e+00</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>XGBoost Regressor</td>
+      <td>11.350189</td>
+      <td>0.933894</td>
+      <td>1.732134</td>
+      <td>1.316106</td>
+      <td>0.893824</td>
+      <td>0.739564</td>
+      <td>0.000000e+00</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>SVR</td>
+      <td>21.464075</td>
+      <td>1.426849</td>
+      <td>3.712218</td>
+      <td>1.926712</td>
+      <td>0.772448</td>
+      <td>0.651853</td>
+      <td>1.109584e-165</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pickle</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;resultados_graficos5.pkl&#39;</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+    <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">resultados_graficos5</span><span class="p">,</span> <span class="n">file</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;resultados_graficos5.pkl&#39;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+    <span class="n">resultados_graficos5_cargado</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+    
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">resultado</span> <span class="ow">in</span> <span class="n">resultados_graficos5_cargado</span><span class="p">:</span>
     <span class="c1"># Gráfica de predicciones</span>
     <span class="n">grafica</span><span class="p">(</span>
         <span class="n">resultado</span><span class="p">[</span><span class="s1">&#39;nombre_modelo&#39;</span><span class="p">],</span>
@@ -2123,14 +3095,14 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/d84d2163009b6a6c3c77f156664e58fa935e0ae737f6924af782a3a710fb3991.png" src="_images/d84d2163009b6a6c3c77f156664e58fa935e0ae737f6924af782a3a710fb3991.png" />
-<img alt="_images/c26096a5235a51c52b8af9fbe6715ebafafe4e7c117848ed34ba8833146a05cf.png" src="_images/c26096a5235a51c52b8af9fbe6715ebafafe4e7c117848ed34ba8833146a05cf.png" />
-<img alt="_images/d384857dc16bf6a56db96a14e50bf79ebfe752f64503167ba468ef8a60c13882.png" src="_images/d384857dc16bf6a56db96a14e50bf79ebfe752f64503167ba468ef8a60c13882.png" />
-<img alt="_images/6826cb7c8aa30e1225bc786d2bd4042af96e544c63837fb9a7cde981e1c3c312.png" src="_images/6826cb7c8aa30e1225bc786d2bd4042af96e544c63837fb9a7cde981e1c3c312.png" />
-<img alt="_images/24b51bc3db3f3565ad75f56dacae681078a7eb98602b5d85b59ea9d1dbad994b.png" src="_images/24b51bc3db3f3565ad75f56dacae681078a7eb98602b5d85b59ea9d1dbad994b.png" />
-<img alt="_images/07f3c34d3814783beec58716f10515939278ffe46f94c8b6e467d63305bb2040.png" src="_images/07f3c34d3814783beec58716f10515939278ffe46f94c8b6e467d63305bb2040.png" />
-<img alt="_images/a5fc2ded9249dfc0588453d42f455a4ddc244037774769e9aacee197c890806b.png" src="_images/a5fc2ded9249dfc0588453d42f455a4ddc244037774769e9aacee197c890806b.png" />
-<img alt="_images/19913595dfdbaabc3719242c29f95dea3aa1155385739eead2ea3b11627cdbc2.png" src="_images/19913595dfdbaabc3719242c29f95dea3aa1155385739eead2ea3b11627cdbc2.png" />
+<img alt="_images/f372199b552bbfa9e005c2f70df106fce1a29f849ee9f06345dc772fb57f1c9f.png" src="_images/f372199b552bbfa9e005c2f70df106fce1a29f849ee9f06345dc772fb57f1c9f.png" />
+<img alt="_images/645cbb7a00371d7bfa1926e8149bedb7ddc33ab9c640dfca96c27a2265842e3a.png" src="_images/645cbb7a00371d7bfa1926e8149bedb7ddc33ab9c640dfca96c27a2265842e3a.png" />
+<img alt="_images/cf4b911c5837ebf0ec86cb9002b7a206471106e3632330b4ad266af17c4605e9.png" src="_images/cf4b911c5837ebf0ec86cb9002b7a206471106e3632330b4ad266af17c4605e9.png" />
+<img alt="_images/8dcd6e2144f14a91d27adad323bc18c7adda78b51bf358caf039303934a74745.png" src="_images/8dcd6e2144f14a91d27adad323bc18c7adda78b51bf358caf039303934a74745.png" />
+<img alt="_images/63dd8ec4333f06473cd39d8db19bfe931cfa91f1eca7a313fd896ef93a98ffed.png" src="_images/63dd8ec4333f06473cd39d8db19bfe931cfa91f1eca7a313fd896ef93a98ffed.png" />
+<img alt="_images/a91e0d3478d40002af7a2a51936d2544bf03fc957f4aa9f05e5826bad630c95a.png" src="_images/a91e0d3478d40002af7a2a51936d2544bf03fc957f4aa9f05e5826bad630c95a.png" />
+<img alt="_images/d97a59fe8f04ffecb9d54253f5a516774121bc069dbb14d1a61d5b3793f5e9af.png" src="_images/d97a59fe8f04ffecb9d54253f5a516774121bc069dbb14d1a61d5b3793f5e9af.png" />
+<img alt="_images/674c27da4bd610f77a737f003a201de9e04b26046b729bd493a57feeeb04a68f.png" src="_images/674c27da4bd610f77a737f003a201de9e04b26046b729bd493a57feeeb04a68f.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2144,14 +3116,14 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/dd476356c8b9ae31515767c3e0d3589f4e11b098cea485b55726c9515710d161.png" src="_images/dd476356c8b9ae31515767c3e0d3589f4e11b098cea485b55726c9515710d161.png" />
-<img alt="_images/ad399627a5d80be6f31742882646617c918dc527cb32b36031d03818a90d9e17.png" src="_images/ad399627a5d80be6f31742882646617c918dc527cb32b36031d03818a90d9e17.png" />
-<img alt="_images/f281bf2ebbd23c80de1cb7e0e975bede602fcbe99efd092c69b6497a74e9e0e3.png" src="_images/f281bf2ebbd23c80de1cb7e0e975bede602fcbe99efd092c69b6497a74e9e0e3.png" />
-<img alt="_images/a8ad28247273857df54d05d5bbeeae00d89ac369ca322cbb2ef0fc74e4cedf78.png" src="_images/a8ad28247273857df54d05d5bbeeae00d89ac369ca322cbb2ef0fc74e4cedf78.png" />
-<img alt="_images/4270561c0b350e881784fd2084dee31755bd98b47ad7c6b55c470ef4f9d4e689.png" src="_images/4270561c0b350e881784fd2084dee31755bd98b47ad7c6b55c470ef4f9d4e689.png" />
-<img alt="_images/b88ea8432199127581433dcb5aa7dc29c2a87042ad71b86199039a7d7c1b9ca0.png" src="_images/b88ea8432199127581433dcb5aa7dc29c2a87042ad71b86199039a7d7c1b9ca0.png" />
-<img alt="_images/48decba97be5852ab40654aaa158942a8343cd54a79398510e8afae9cb56a894.png" src="_images/48decba97be5852ab40654aaa158942a8343cd54a79398510e8afae9cb56a894.png" />
-<img alt="_images/bf972787601c243892c57cdff7cb4a3fc46b84ea8140fe6f8fc20203a5868c89.png" src="_images/bf972787601c243892c57cdff7cb4a3fc46b84ea8140fe6f8fc20203a5868c89.png" />
+<img alt="_images/d7b68d92d759dfcdd2725aeb682087704f1b1a73ca9a97f3363ec19d1eb7f2ec.png" src="_images/d7b68d92d759dfcdd2725aeb682087704f1b1a73ca9a97f3363ec19d1eb7f2ec.png" />
+<img alt="_images/fa4a73934cdcba90eea82dfc0de0a2995c16dba007ff2b8f663d9d76f39670af.png" src="_images/fa4a73934cdcba90eea82dfc0de0a2995c16dba007ff2b8f663d9d76f39670af.png" />
+<img alt="_images/3db3cea4ea51730488a349df87f20e7ab2a8ced164dee279a72957af70dcd502.png" src="_images/3db3cea4ea51730488a349df87f20e7ab2a8ced164dee279a72957af70dcd502.png" />
+<img alt="_images/200844533edff815cde37a9fa954bcbccc39e32344c9026214d7d903f40764fb.png" src="_images/200844533edff815cde37a9fa954bcbccc39e32344c9026214d7d903f40764fb.png" />
+<img alt="_images/718f5e926fabdc4ff2e849a7e96e34a7ade30123f68051e27fca175889598279.png" src="_images/718f5e926fabdc4ff2e849a7e96e34a7ade30123f68051e27fca175889598279.png" />
+<img alt="_images/1a80a9dc5a2f4b29cc6a74460dfa562aec60225e1cd76ad9e07c5a64277b46df.png" src="_images/1a80a9dc5a2f4b29cc6a74460dfa562aec60225e1cd76ad9e07c5a64277b46df.png" />
+<img alt="_images/df0fd55505d57cb48c1a44e1b3fda9f7fd6e01509487127912d1ca13ccd7e897.png" src="_images/df0fd55505d57cb48c1a44e1b3fda9f7fd6e01509487127912d1ca13ccd7e897.png" />
+<img alt="_images/3ddcaae56a89c96802ef5acde24b24c22005cea5076f282acc834c0de792551d.png" src="_images/3ddcaae56a89c96802ef5acde24b24c22005cea5076f282acc834c0de792551d.png" />
 </div>
 </div>
 </section>
