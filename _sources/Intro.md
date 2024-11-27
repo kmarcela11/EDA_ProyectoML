@@ -1,11 +1,11 @@
 # **Proyecto Final - Energía Eólica.**
 
 ## **Estudiantes**
-    - **Kanery Marcela Camargo Rodríguez**
-    - **Emanuel de Jesús Carbonell Naranjo**
+- **Kanery Marcela Camargo Rodríguez**
+- **Emanuel de Jesús Carbonell Naranjo**
 
 ## **Profesor**
-    - **Dr. Lihki Rubio**
+- **Dr. Lihki Rubio**
 
 ## **Ciencia de Datos**
 
