@@ -7,14 +7,9 @@
 ## **Profesor**
 - **Dr. Lihki Rubio**
 
-## **Curso**
-- Ciencia de Datos
-
-## **Universidad**
-- Universidad del Norte
-
-## **Año**
-- **2024**
+## **Ciencia de Datos**
+## **Universidad del Norte**
+## **Noviembre 2024**
 
 ---
 
