@@ -1,16 +1,14 @@
 # **Proyecto Final - Energía Eólica.**
 
-## **Estudiantes**
+## **Estudiantes:**
 - **Kanery Marcela Camargo Rodríguez**
 - **Emanuel de Jesús Carbonell Naranjo**
 
-## **Profesor**
+## **Profesor:**
 - **Dr. Lihki Rubio**
 
 ## **Ciencia de Datos**
-
 ## **Universidad del Norte**
-
 ## **Noviembre 2024**
 
 
