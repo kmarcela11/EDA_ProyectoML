@@ -1,0 +1,1448 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Comparación de modelos &#8212; Proyecto final - Energía eólica</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'comparacion';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Conclusiones y recomendaciones" href="conclusiones.html" />
+    <link rel="prev" title="Implementación del modelo original" href="implementacion.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="Intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.jpeg" class="logo__image only-light" alt="Proyecto final - Energía eólica - Home"/>
+    <script>document.write(`<img src="_static/logo.jpeg" class="logo__image only-dark" alt="Proyecto final - Energía eólica - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="Intro.html">
+                    Proyecto Final - Energía Eólica.
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="inicio.html"><strong>Contextualización del Proyecto</strong></a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="eda.html"><strong>Análisis Exploratorio de Datos (EDA)</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="modelos.html"><strong>Modelos de regresión.</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="original.html"><strong>Propuesta de modelo original</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="mates.html"><strong>Matemáticas del modelo original</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="implementacion.html"><strong>Implementación del modelo original</strong></a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>Comparación de modelos</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="conclusiones.html"><strong>Conclusiones y recomendaciones</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html"><strong>Bibliografía</strong></a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/kmarcela11/ProyectoFinal_EnergiaEolica/tree/gh-pages" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/kmarcela11/ProyectoFinal_EnergiaEolica/tree/gh-pages/issues/new?title=Issue%20on%20page%20%2Fcomparacion.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/comparacion.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Comparación de modelos</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#librerias-y-modulos-necesarios"><strong>Líbrerias y modulos necesarios</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-1-wind-speed-100-metros-sensor-1"><strong>Modelo 1: Wind speed 100 metros (Sensor 1)</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-2-wind-speed-100-metros-sensor-2"><strong>Modelo 2: Wind speed 100 metros (Sensor 2)</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-3-wind-speed-80-metros-sensor-1"><strong>Modelo 3: Wind speed 80 metros (Sensor 1)</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-4-wind-speed-80-metros-sensor-2"><strong>Modelo 4: Wind speed 80 metros (Sensor 2)</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-5-wind-speed-60-metros"><strong>Modelo 5: Wind speed 60 metros</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion"><strong>Conclusión</strong></a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="comparacion-de-modelos">
+<h1><strong>Comparación de modelos</strong><a class="headerlink" href="#comparacion-de-modelos" title="Link to this heading">#</a></h1>
+<section id="librerias-y-modulos-necesarios">
+<h2><strong>Líbrerias y modulos necesarios</strong><a class="headerlink" href="#librerias-y-modulos-necesarios" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="modelo-1-wind-speed-100-metros-sensor-1">
+<h2><strong>Modelo 1: Wind speed 100 metros (Sensor 1)</strong><a class="headerlink" href="#modelo-1-wind-speed-100-metros-sensor-1" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">resultados_benchmark</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_pickle</span><span class="p">(</span><span class="s1">&#39;resultados1.pkl&#39;</span><span class="p">)</span>
+<span class="n">resultados_original</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_pickle</span><span class="p">(</span><span class="s1">&#39;resultados1_original.pkl&#39;</span><span class="p">)</span>
+<span class="n">resultados_modelo1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">resultados_benchmark</span><span class="p">,</span> <span class="n">resultados_original</span><span class="p">],</span> <span class="n">ignore_index</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">resultados_modelo1</span> <span class="o">=</span> <span class="n">resultados_modelo1</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;R²&#39;</span><span class="p">,</span> <span class="n">ascending</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+<span class="n">resultados_modelo1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Modelo</th>
+      <th>MAPE</th>
+      <th>MAE</th>
+      <th>MSE</th>
+      <th>RMSE</th>
+      <th>R²</th>
+      <th>Ljung-Box p-value</th>
+      <th>Jarque-Bera p-value</th>
+      <th>Tiempo de ejecución (s)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>10</th>
+      <td>WOA - XGBoost</td>
+      <td>11.407745</td>
+      <td>0.968984</td>
+      <td>1.954404</td>
+      <td>1.398000</td>
+      <td>0.897443</td>
+      <td>0.497641</td>
+      <td>0.000000e+00</td>
+      <td>585.209728</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>GWO - XGBoost</td>
+      <td>11.505909</td>
+      <td>0.975128</td>
+      <td>1.964152</td>
+      <td>1.401482</td>
+      <td>0.896931</td>
+      <td>0.346250</td>
+      <td>0.000000e+00</td>
+      <td>508.732630</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>BO - XGBoost</td>
+      <td>11.533089</td>
+      <td>0.974594</td>
+      <td>1.987667</td>
+      <td>1.409847</td>
+      <td>0.895697</td>
+      <td>0.386591</td>
+      <td>0.000000e+00</td>
+      <td>48.980989</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>XGBoost Regressor</td>
+      <td>11.475852</td>
+      <td>0.972034</td>
+      <td>2.008381</td>
+      <td>1.417173</td>
+      <td>0.894610</td>
+      <td>0.402368</td>
+      <td>0.000000e+00</td>
+      <td>2308.316762</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Random Forest Regressor</td>
+      <td>12.227584</td>
+      <td>1.019278</td>
+      <td>2.102635</td>
+      <td>1.450046</td>
+      <td>0.889664</td>
+      <td>0.699450</td>
+      <td>0.000000e+00</td>
+      <td>780.819043</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>K-NN Regressor</td>
+      <td>16.915143</td>
+      <td>1.309740</td>
+      <td>3.396062</td>
+      <td>1.842841</td>
+      <td>0.821791</td>
+      <td>0.973834</td>
+      <td>0.000000e+00</td>
+      <td>4.880810</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Decision Tree Regressor</td>
+      <td>14.921594</td>
+      <td>1.286196</td>
+      <td>3.766052</td>
+      <td>1.940632</td>
+      <td>0.802376</td>
+      <td>0.371857</td>
+      <td>0.000000e+00</td>
+      <td>369.826796</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>SVR</td>
+      <td>21.782665</td>
+      <td>1.536131</td>
+      <td>4.331848</td>
+      <td>2.081309</td>
+      <td>0.772686</td>
+      <td>0.925772</td>
+      <td>3.915347e-207</td>
+      <td>587.211124</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Ridge Regression</td>
+      <td>31.092871</td>
+      <td>2.332523</td>
+      <td>8.717321</td>
+      <td>2.952511</td>
+      <td>0.542558</td>
+      <td>0.673576</td>
+      <td>1.529324e-64</td>
+      <td>0.370451</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Lasso Regression</td>
+      <td>31.086646</td>
+      <td>2.333257</td>
+      <td>8.719212</td>
+      <td>2.952831</td>
+      <td>0.542459</td>
+      <td>0.672128</td>
+      <td>1.005781e-63</td>
+      <td>0.483886</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Linear Regression</td>
+      <td>31.084904</td>
+      <td>2.333242</td>
+      <td>8.719288</td>
+      <td>2.952844</td>
+      <td>0.542455</td>
+      <td>0.672154</td>
+      <td>9.826798e-64</td>
+      <td>0.011860</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="modelo-2-wind-speed-100-metros-sensor-2">
+<h2><strong>Modelo 2: Wind speed 100 metros (Sensor 2)</strong><a class="headerlink" href="#modelo-2-wind-speed-100-metros-sensor-2" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">resultados_benchmark2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_pickle</span><span class="p">(</span><span class="s1">&#39;resultados2.pkl&#39;</span><span class="p">)</span>
+<span class="n">resultados_original2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_pickle</span><span class="p">(</span><span class="s1">&#39;resultados2_original.pkl&#39;</span><span class="p">)</span>
+<span class="n">resultados_modelo2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">resultados_benchmark2</span><span class="p">,</span> <span class="n">resultados_original2</span><span class="p">],</span><span class="n">ignore_index</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">resultados_modelo2</span> <span class="o">=</span> <span class="n">resultados_modelo2</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;R²&#39;</span><span class="p">,</span> <span class="n">ascending</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+<span class="n">resultados_modelo2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Modelo</th>
+      <th>MAPE</th>
+      <th>MAE</th>
+      <th>MSE</th>
+      <th>RMSE</th>
+      <th>R²</th>
+      <th>Ljung-Box p-value</th>
+      <th>Jarque-Bera p-value</th>
+      <th>Tiempo de ejecución (s)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>10</th>
+      <td>WOA - XGBoost</td>
+      <td>11.474580</td>
+      <td>0.957150</td>
+      <td>1.918378</td>
+      <td>1.385055</td>
+      <td>0.897150</td>
+      <td>0.199882</td>
+      <td>0.000000e+00</td>
+      <td>441.804543</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>GWO - XGBoost</td>
+      <td>11.583920</td>
+      <td>0.949993</td>
+      <td>1.938268</td>
+      <td>1.392217</td>
+      <td>0.896084</td>
+      <td>0.191063</td>
+      <td>0.000000e+00</td>
+      <td>194.137552</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>XGBoost Regressor</td>
+      <td>11.642434</td>
+      <td>0.961439</td>
+      <td>1.966114</td>
+      <td>1.402182</td>
+      <td>0.894591</td>
+      <td>0.442446</td>
+      <td>0.000000e+00</td>
+      <td>1992.054617</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>BO - XGBoost</td>
+      <td>11.665009</td>
+      <td>0.960555</td>
+      <td>1.985226</td>
+      <td>1.408980</td>
+      <td>0.893566</td>
+      <td>0.268434</td>
+      <td>0.000000e+00</td>
+      <td>55.526932</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Random Forest Regressor</td>
+      <td>12.393786</td>
+      <td>1.008061</td>
+      <td>2.045976</td>
+      <td>1.430376</td>
+      <td>0.890309</td>
+      <td>0.782362</td>
+      <td>0.000000e+00</td>
+      <td>587.976190</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>K-NN Regressor</td>
+      <td>17.156660</td>
+      <td>1.297249</td>
+      <td>3.333846</td>
+      <td>1.825882</td>
+      <td>0.821263</td>
+      <td>0.977747</td>
+      <td>0.000000e+00</td>
+      <td>3.457123</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Decision Tree Regressor</td>
+      <td>14.943384</td>
+      <td>1.284665</td>
+      <td>3.652780</td>
+      <td>1.911225</td>
+      <td>0.804164</td>
+      <td>0.750433</td>
+      <td>0.000000e+00</td>
+      <td>351.452217</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>SVR</td>
+      <td>22.084803</td>
+      <td>1.519178</td>
+      <td>4.240540</td>
+      <td>2.059257</td>
+      <td>0.772653</td>
+      <td>0.938894</td>
+      <td>4.307807e-209</td>
+      <td>559.137865</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Ridge Regression</td>
+      <td>31.498183</td>
+      <td>2.307029</td>
+      <td>8.533583</td>
+      <td>2.921230</td>
+      <td>0.542491</td>
+      <td>0.688785</td>
+      <td>7.792992e-66</td>
+      <td>0.251976</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Lasso Regression</td>
+      <td>31.492038</td>
+      <td>2.307766</td>
+      <td>8.535439</td>
+      <td>2.921547</td>
+      <td>0.542391</td>
+      <td>0.687331</td>
+      <td>5.271714e-65</td>
+      <td>0.370305</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Linear Regression</td>
+      <td>31.490396</td>
+      <td>2.307756</td>
+      <td>8.535517</td>
+      <td>2.921561</td>
+      <td>0.542387</td>
+      <td>0.687359</td>
+      <td>5.155424e-65</td>
+      <td>0.010072</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="modelo-3-wind-speed-80-metros-sensor-1">
+<h2><strong>Modelo 3: Wind speed 80 metros (Sensor 1)</strong><a class="headerlink" href="#modelo-3-wind-speed-80-metros-sensor-1" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">resultados_benchmark3</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_pickle</span><span class="p">(</span><span class="s1">&#39;resultados3.pkl&#39;</span><span class="p">)</span>
+<span class="n">resultados_original3</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_pickle</span><span class="p">(</span><span class="s1">&#39;resultados3_original.pkl&#39;</span><span class="p">)</span>
+<span class="n">resultados_modelo3</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">resultados_benchmark3</span><span class="p">,</span> <span class="n">resultados_original3</span><span class="p">],</span><span class="n">ignore_index</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">resultados_modelo3</span> <span class="o">=</span> <span class="n">resultados_modelo3</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;R²&#39;</span><span class="p">,</span> <span class="n">ascending</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+<span class="n">resultados_modelo3</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Modelo</th>
+      <th>MAPE</th>
+      <th>MAE</th>
+      <th>MSE</th>
+      <th>RMSE</th>
+      <th>R²</th>
+      <th>Ljung-Box p-value</th>
+      <th>Jarque-Bera p-value</th>
+      <th>Tiempo de ejecución (s)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>9</th>
+      <td>GWO - XGBoost</td>
+      <td>12.076212</td>
+      <td>0.952756</td>
+      <td>1.862555</td>
+      <td>1.364754</td>
+      <td>0.894499</td>
+      <td>0.555796</td>
+      <td>0.000000e+00</td>
+      <td>157.250019</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>WOA - XGBoost</td>
+      <td>11.842134</td>
+      <td>0.955850</td>
+      <td>1.884984</td>
+      <td>1.372947</td>
+      <td>0.893229</td>
+      <td>0.589736</td>
+      <td>0.000000e+00</td>
+      <td>281.519942</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>BO - XGBoost</td>
+      <td>12.042949</td>
+      <td>0.970808</td>
+      <td>1.893165</td>
+      <td>1.375923</td>
+      <td>0.892765</td>
+      <td>0.560461</td>
+      <td>0.000000e+00</td>
+      <td>48.603204</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>XGBoost Regressor</td>
+      <td>12.131289</td>
+      <td>0.958473</td>
+      <td>1.942430</td>
+      <td>1.393711</td>
+      <td>0.889975</td>
+      <td>0.604302</td>
+      <td>0.000000e+00</td>
+      <td>2121.849303</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Random Forest Regressor</td>
+      <td>12.677809</td>
+      <td>0.991537</td>
+      <td>1.977538</td>
+      <td>1.406250</td>
+      <td>0.887986</td>
+      <td>0.810194</td>
+      <td>0.000000e+00</td>
+      <td>630.311983</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>K-NN Regressor</td>
+      <td>17.977263</td>
+      <td>1.293825</td>
+      <td>3.323768</td>
+      <td>1.823120</td>
+      <td>0.811731</td>
+      <td>0.950805</td>
+      <td>0.000000e+00</td>
+      <td>3.381298</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Decision Tree Regressor</td>
+      <td>15.357703</td>
+      <td>1.261490</td>
+      <td>3.514775</td>
+      <td>1.874773</td>
+      <td>0.800912</td>
+      <td>0.266846</td>
+      <td>0.000000e+00</td>
+      <td>307.217874</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>SVR</td>
+      <td>22.246015</td>
+      <td>1.480558</td>
+      <td>4.023526</td>
+      <td>2.005873</td>
+      <td>0.772095</td>
+      <td>0.792934</td>
+      <td>2.234988e-269</td>
+      <td>833.756794</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Ridge Regression</td>
+      <td>31.786477</td>
+      <td>2.247559</td>
+      <td>8.091899</td>
+      <td>2.844626</td>
+      <td>0.541650</td>
+      <td>0.671737</td>
+      <td>9.738547e-61</td>
+      <td>0.255511</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Lasso Regression</td>
+      <td>31.779554</td>
+      <td>2.248289</td>
+      <td>8.093561</td>
+      <td>2.844918</td>
+      <td>0.541556</td>
+      <td>0.670560</td>
+      <td>5.825831e-60</td>
+      <td>0.345939</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Linear Regression</td>
+      <td>31.777409</td>
+      <td>2.248286</td>
+      <td>8.093641</td>
+      <td>2.844933</td>
+      <td>0.541551</td>
+      <td>0.670594</td>
+      <td>5.926368e-60</td>
+      <td>0.002099</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="modelo-4-wind-speed-80-metros-sensor-2">
+<h2><strong>Modelo 4: Wind speed 80 metros (Sensor 2)</strong><a class="headerlink" href="#modelo-4-wind-speed-80-metros-sensor-2" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">resultados_benchmark4</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_pickle</span><span class="p">(</span><span class="s1">&#39;resultados4.pkl&#39;</span><span class="p">)</span>
+<span class="n">resultados_original4</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_pickle</span><span class="p">(</span><span class="s1">&#39;resultados4_original.pkl&#39;</span><span class="p">)</span>
+<span class="n">resultados_modelo4</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">resultados_benchmark4</span><span class="p">,</span> <span class="n">resultados_original4</span><span class="p">],</span><span class="n">ignore_index</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">resultados_modelo4</span> <span class="o">=</span> <span class="n">resultados_modelo4</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;R²&#39;</span><span class="p">,</span> <span class="n">ascending</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+<span class="n">resultados_modelo4</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Modelo</th>
+      <th>MAPE</th>
+      <th>MAE</th>
+      <th>MSE</th>
+      <th>RMSE</th>
+      <th>R²</th>
+      <th>Ljung-Box p-value</th>
+      <th>Jarque-Bera p-value</th>
+      <th>Tiempo de ejecución (s)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>9</th>
+      <td>GWO - XGBoost</td>
+      <td>12.076600</td>
+      <td>0.966446</td>
+      <td>1.865466</td>
+      <td>1.365821</td>
+      <td>0.893847</td>
+      <td>0.779159</td>
+      <td>0.000000e+00</td>
+      <td>395.892206</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>WOA - XGBoost</td>
+      <td>12.053123</td>
+      <td>0.969825</td>
+      <td>1.894104</td>
+      <td>1.376265</td>
+      <td>0.892218</td>
+      <td>0.827329</td>
+      <td>0.000000e+00</td>
+      <td>129.163316</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>BO - XGBoost</td>
+      <td>12.194524</td>
+      <td>0.966684</td>
+      <td>1.920801</td>
+      <td>1.385929</td>
+      <td>0.890699</td>
+      <td>0.182821</td>
+      <td>0.000000e+00</td>
+      <td>52.236629</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>XGBoost Regressor</td>
+      <td>12.089063</td>
+      <td>0.955874</td>
+      <td>1.944173</td>
+      <td>1.394336</td>
+      <td>0.889369</td>
+      <td>0.622203</td>
+      <td>0.000000e+00</td>
+      <td>2139.429260</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Random Forest Regressor</td>
+      <td>12.599720</td>
+      <td>0.991317</td>
+      <td>1.991380</td>
+      <td>1.411162</td>
+      <td>0.886682</td>
+      <td>0.803388</td>
+      <td>0.000000e+00</td>
+      <td>627.299740</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>K-NN Regressor</td>
+      <td>17.924334</td>
+      <td>1.292000</td>
+      <td>3.315724</td>
+      <td>1.820913</td>
+      <td>0.811322</td>
+      <td>0.954135</td>
+      <td>0.000000e+00</td>
+      <td>3.661639</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Decision Tree Regressor</td>
+      <td>15.322764</td>
+      <td>1.283045</td>
+      <td>3.500257</td>
+      <td>1.870897</td>
+      <td>0.800821</td>
+      <td>0.657102</td>
+      <td>0.000000e+00</td>
+      <td>322.270330</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>SVR</td>
+      <td>22.156858</td>
+      <td>1.477805</td>
+      <td>4.010497</td>
+      <td>2.002623</td>
+      <td>0.771786</td>
+      <td>0.805015</td>
+      <td>1.853042e-270</td>
+      <td>572.558218</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Ridge Regression</td>
+      <td>31.565541</td>
+      <td>2.238382</td>
+      <td>8.034803</td>
+      <td>2.834573</td>
+      <td>0.542787</td>
+      <td>0.677842</td>
+      <td>1.271009e-61</td>
+      <td>0.272501</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Lasso Regression</td>
+      <td>31.558762</td>
+      <td>2.239107</td>
+      <td>8.036467</td>
+      <td>2.834866</td>
+      <td>0.542692</td>
+      <td>0.676661</td>
+      <td>7.890101e-61</td>
+      <td>0.334058</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Linear Regression</td>
+      <td>31.556736</td>
+      <td>2.239106</td>
+      <td>8.036552</td>
+      <td>2.834881</td>
+      <td>0.542687</td>
+      <td>0.676705</td>
+      <td>8.028344e-61</td>
+      <td>0.003003</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="modelo-5-wind-speed-60-metros">
+<h2><strong>Modelo 5: Wind speed 60 metros</strong><a class="headerlink" href="#modelo-5-wind-speed-60-metros" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">resultados_benchmark5</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_pickle</span><span class="p">(</span><span class="s1">&#39;resultados5.pkl&#39;</span><span class="p">)</span>
+<span class="n">resultados_original5</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_pickle</span><span class="p">(</span><span class="s1">&#39;resultados5_original.pkl&#39;</span><span class="p">)</span>
+<span class="n">resultados_modelo5</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">resultados_benchmark5</span><span class="p">,</span> <span class="n">resultados_original5</span><span class="p">],</span><span class="n">ignore_index</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">resultados_modelo5</span> <span class="o">=</span> <span class="n">resultados_modelo5</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;R²&#39;</span><span class="p">,</span> <span class="n">ascending</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+<span class="n">resultados_modelo5</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Modelo</th>
+      <th>MAPE</th>
+      <th>MAE</th>
+      <th>MSE</th>
+      <th>RMSE</th>
+      <th>R²</th>
+      <th>Ljung-Box p-value</th>
+      <th>Jarque-Bera p-value</th>
+      <th>Tiempo de ejecución (s)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>10</th>
+      <td>WOA - XGBoost</td>
+      <td>11.274699</td>
+      <td>0.927149</td>
+      <td>1.688396</td>
+      <td>1.299383</td>
+      <td>0.896505</td>
+      <td>0.703850</td>
+      <td>0.000000e+00</td>
+      <td>950.474232</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>GWO - XGBoost</td>
+      <td>11.242660</td>
+      <td>0.926778</td>
+      <td>1.704697</td>
+      <td>1.305640</td>
+      <td>0.895505</td>
+      <td>0.409678</td>
+      <td>0.000000e+00</td>
+      <td>622.426271</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>BO - XGBoost</td>
+      <td>11.168980</td>
+      <td>0.925260</td>
+      <td>1.710543</td>
+      <td>1.307877</td>
+      <td>0.895147</td>
+      <td>0.588636</td>
+      <td>0.000000e+00</td>
+      <td>85.352890</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>XGBoost Regressor</td>
+      <td>11.301538</td>
+      <td>0.926977</td>
+      <td>1.741365</td>
+      <td>1.319608</td>
+      <td>0.893258</td>
+      <td>0.537477</td>
+      <td>0.000000e+00</td>
+      <td>2616.222193</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Random Forest Regressor</td>
+      <td>11.660752</td>
+      <td>0.957866</td>
+      <td>1.767702</td>
+      <td>1.329550</td>
+      <td>0.891643</td>
+      <td>0.826495</td>
+      <td>0.000000e+00</td>
+      <td>777.434427</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>K-NN Regressor</td>
+      <td>16.918266</td>
+      <td>1.244779</td>
+      <td>3.060801</td>
+      <td>1.749514</td>
+      <td>0.812379</td>
+      <td>0.710789</td>
+      <td>0.000000e+00</td>
+      <td>3.452404</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Decision Tree Regressor</td>
+      <td>14.962153</td>
+      <td>1.277188</td>
+      <td>3.318428</td>
+      <td>1.821655</td>
+      <td>0.796587</td>
+      <td>0.346885</td>
+      <td>0.000000e+00</td>
+      <td>396.606344</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>SVR</td>
+      <td>21.464075</td>
+      <td>1.426849</td>
+      <td>3.712218</td>
+      <td>1.926712</td>
+      <td>0.772448</td>
+      <td>0.651853</td>
+      <td>1.109584e-165</td>
+      <td>867.076097</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Lasso Regression</td>
+      <td>30.976198</td>
+      <td>2.161207</td>
+      <td>7.462717</td>
+      <td>2.731797</td>
+      <td>0.542550</td>
+      <td>0.704426</td>
+      <td>9.573643e-48</td>
+      <td>0.298123</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Ridge Regression</td>
+      <td>30.936798</td>
+      <td>2.163415</td>
+      <td>7.467630</td>
+      <td>2.732696</td>
+      <td>0.542249</td>
+      <td>0.701908</td>
+      <td>1.476396e-45</td>
+      <td>0.242612</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Linear Regression</td>
+      <td>30.927257</td>
+      <td>2.164199</td>
+      <td>7.469554</td>
+      <td>2.733048</td>
+      <td>0.542131</td>
+      <td>0.700981</td>
+      <td>7.157022e-45</td>
+      <td>0.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="conclusion">
+<h2><strong>Conclusión</strong><a class="headerlink" href="#conclusion" title="Link to this heading">#</a></h2>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="implementacion.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><strong>Implementación del modelo original</strong></p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="conclusiones.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><strong>Conclusiones y recomendaciones</strong></p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#librerias-y-modulos-necesarios"><strong>Líbrerias y modulos necesarios</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-1-wind-speed-100-metros-sensor-1"><strong>Modelo 1: Wind speed 100 metros (Sensor 1)</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-2-wind-speed-100-metros-sensor-2"><strong>Modelo 2: Wind speed 100 metros (Sensor 2)</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-3-wind-speed-80-metros-sensor-1"><strong>Modelo 3: Wind speed 80 metros (Sensor 1)</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-4-wind-speed-80-metros-sensor-2"><strong>Modelo 4: Wind speed 80 metros (Sensor 2)</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-5-wind-speed-60-metros"><strong>Modelo 5: Wind speed 60 metros</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion"><strong>Conclusión</strong></a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Kanery Marcela Camargo Rodríguez y Emanuel de Jesús Carbonell Naranjo.
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Análisis Exploratorio de Datos (EDA) &#8212; EDA PROYECTO FINAL</title>
+    <title>Análisis Exploratorio de Datos (EDA) &#8212; Proyecto final - Energía eólica</title>
   
   
   
@@ -60,7 +60,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'eda';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Modelos de regresión" href="modelos.html" />
+    <link rel="next" title="Modelos de regresión." href="modelos.html" />
     <link rel="prev" title="Contextualización del Proyecto" href="inicio.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -153,8 +153,8 @@
       
     
     
-    <img src="_static/logo.jpeg" class="logo__image only-light" alt="EDA PROYECTO FINAL - Home"/>
-    <script>document.write(`<img src="_static/logo.jpeg" class="logo__image only-dark" alt="EDA PROYECTO FINAL - Home"/>`);</script>
+    <img src="_static/logo.jpeg" class="logo__image only-light" alt="Proyecto final - Energía eólica - Home"/>
+    <script>document.write(`<img src="_static/logo.jpeg" class="logo__image only-dark" alt="Proyecto final - Energía eólica - Home"/>`);</script>
   
   
 </a></div>
@@ -183,9 +183,13 @@
 <li class="toctree-l1"><a class="reference internal" href="inicio.html"><strong>Contextualización del Proyecto</strong></a></li>
 
 <li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>Análisis Exploratorio de Datos (EDA)</strong></a></li>
-<li class="toctree-l1"><a class="reference internal" href="modelos.html"><strong>Modelos de regresión</strong></a></li>
-<li class="toctree-l1"><a class="reference internal" href="original.html">Propuesta de modelo original</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modelos.html"><strong>Modelos de regresión.</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="original.html"><strong>Propuesta de modelo original</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="mates.html"><strong>Matemáticas del modelo original</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="implementacion.html"><strong>Implementación del modelo original</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="comparacion.html"><strong>Comparación de modelos</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="conclusiones.html"><strong>Conclusiones y recomendaciones</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html"><strong>Bibliografía</strong></a></li>
 </ul>
 
     </div>
@@ -240,7 +244,7 @@
       
       
       
-      <li><a href="https://github.com/kmarcela11/ProyectoFinal_EnergiaEolica" target="_blank"
+      <li><a href="https://github.com/kmarcela11/ProyectoFinal_EnergiaEolica/tree/gh-pages" target="_blank"
    class="btn btn-sm btn-source-repository-button dropdown-item"
    title="Source repository"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -257,7 +261,7 @@
       
       
       
-      <li><a href="https://github.com/kmarcela11/ProyectoFinal_EnergiaEolica/issues/new?title=Issue%20on%20page%20%2Feda.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/kmarcela11/ProyectoFinal_EnergiaEolica/tree/gh-pages/issues/new?title=Issue%20on%20page%20%2Feda.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -443,20 +447,22 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="analisis-exploratorio-de-datos-eda">
 <h1><strong>Análisis Exploratorio de Datos (EDA)</strong><a class="headerlink" href="#analisis-exploratorio-de-datos-eda" title="Link to this heading">#</a></h1>
-<section id="librerias-y-modulos-necesarios">
+<div style="text-align: justify; margin-bottom: 20px;">
+    En esta parte del proyecto, se realiza un análisis exploratorio de datos (EDA) para comprender las características principales del conjunto de datos meteorológicos. Este análisis incluye la visualización y evaluación de variables clave, como la dirección del viento, la temperatura, la presión y la humedad, con el objetivo de identificar patrones, relaciones y posibles anomalías en los datos. Además, se emplean técnicas descriptivas y gráficas para resumir la distribución y variabilidad de las variables, proporcionando una base sólida para el posterior desarrollo de modelos predictivos y asegurando la calidad de los datos utilizados en el análisis.
+</div><section id="librerias-y-modulos-necesarios">
 <h2><strong>Librerías y modulos necesarios</strong><a class="headerlink" href="#librerias-y-modulos-necesarios" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">matplotlib.cm</span> <span class="k">as</span> <span class="nn">cm</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">warnings</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">windrose</span> <span class="kn">import</span> <span class="n">WindroseAxes</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
-<span class="kn">from</span> <span class="nn">statsmodels.tsa.seasonal</span> <span class="kn">import</span> <span class="n">seasonal_decompose</span>
+<span class="kn">import</span> <span class="nn">matplotlib.cm</span> <span class="k">as</span> <span class="nn">cm</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">windrose</span> <span class="kn">import</span> <span class="n">WindroseAxes</span>
 <span class="kn">from</span> <span class="nn">statsmodels.tsa.stattools</span> <span class="kn">import</span> <span class="n">adfuller</span>
+<span class="kn">from</span> <span class="nn">statsmodels.tsa.seasonal</span> <span class="kn">import</span> <span class="n">seasonal_decompose</span>
 <span class="kn">from</span> <span class="nn">statsmodels.graphics.tsaplots</span> <span class="kn">import</span> <span class="n">plot_acf</span><span class="p">,</span> <span class="n">plot_pacf</span>
-<span class="kn">import</span> <span class="nn">warnings</span>
 <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -2219,7 +2225,7 @@ Inicialmente, veamos la matriz de correlación entre las variables.</p>
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><strong>Modelos de regresión</strong></p>
+        <p class="prev-next-title"><strong>Modelos de regresión.</strong></p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -2302,7 +2308,7 @@ Inicialmente, veamos la matriz de correlación entre las variables.</p>
   <div class="footer-item">
     
 <p class="component-author">
-By Kanery Camargo y Emanuel Carbonell
+By Kanery Marcela Camargo Rodríguez y Emanuel de Jesús Carbonell Naranjo.
 </p>
 
   </div>

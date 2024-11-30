@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Propuesta de modelo original &#8212; EDA PROYECTO FINAL</title>
+    <title>Propuesta de modelo original &#8212; Proyecto final - Energía eólica</title>
   
   
   
@@ -60,8 +60,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'original';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Implementación del modelo original" href="implementacion.html" />
-    <link rel="prev" title="Modelos de regresión" href="modelos.html" />
+    <link rel="next" title="Matemáticas del modelo original" href="mates.html" />
+    <link rel="prev" title="Modelos de regresión." href="modelos.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -153,8 +153,8 @@
       
     
     
-    <img src="_static/logo.jpeg" class="logo__image only-light" alt="EDA PROYECTO FINAL - Home"/>
-    <script>document.write(`<img src="_static/logo.jpeg" class="logo__image only-dark" alt="EDA PROYECTO FINAL - Home"/>`);</script>
+    <img src="_static/logo.jpeg" class="logo__image only-light" alt="Proyecto final - Energía eólica - Home"/>
+    <script>document.write(`<img src="_static/logo.jpeg" class="logo__image only-dark" alt="Proyecto final - Energía eólica - Home"/>`);</script>
   
   
 </a></div>
@@ -183,9 +183,13 @@
 <li class="toctree-l1"><a class="reference internal" href="inicio.html"><strong>Contextualización del Proyecto</strong></a></li>
 
 <li class="toctree-l1"><a class="reference internal" href="eda.html"><strong>Análisis Exploratorio de Datos (EDA)</strong></a></li>
-<li class="toctree-l1"><a class="reference internal" href="modelos.html"><strong>Modelos de regresión</strong></a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Propuesta de modelo original</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modelos.html"><strong>Modelos de regresión.</strong></a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>Propuesta de modelo original</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="mates.html"><strong>Matemáticas del modelo original</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="implementacion.html"><strong>Implementación del modelo original</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="comparacion.html"><strong>Comparación de modelos</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="conclusiones.html"><strong>Conclusiones y recomendaciones</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html"><strong>Bibliografía</strong></a></li>
 </ul>
 
     </div>
@@ -240,7 +244,7 @@
       
       
       
-      <li><a href="https://github.com/kmarcela11/ProyectoFinal_EnergiaEolica" target="_blank"
+      <li><a href="https://github.com/kmarcela11/ProyectoFinal_EnergiaEolica/tree/gh-pages" target="_blank"
    class="btn btn-sm btn-source-repository-button dropdown-item"
    title="Source repository"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -257,7 +261,7 @@
       
       
       
-      <li><a href="https://github.com/kmarcela11/ProyectoFinal_EnergiaEolica/issues/new?title=Issue%20on%20page%20%2Foriginal.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/kmarcela11/ProyectoFinal_EnergiaEolica/tree/gh-pages/issues/new?title=Issue%20on%20page%20%2Foriginal.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -358,9 +362,7 @@ document.write(`
   </button>
 `);
 </script>
-<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="fa-solid fa-list"></span>
-</button>
+
 </div></div>
       
     </div>
@@ -376,23 +378,6 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
-            <div>
-                <h2> Contents </h2>
-            </div>
-            <nav aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduccion">Introducción</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#puntos-clave-del-enfoque">Puntos clave del enfoque</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#propuesta-del-modelo">Propuesta del modelo</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#caracteristicas-de-los-datos">Características de los datos</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocesamiento-de-datos">Preprocesamiento de datos</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#implementacion-del-modelo">Implementación del modelo</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluacion-y-metricas">Evaluación y métricas</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion-esperada">Conclusión esperada</a></li>
-</ul>
-            </nav>
         </div>
     </div>
 </div>
@@ -403,141 +388,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="propuesta-de-modelo-original">
-<h1>Propuesta de modelo original<a class="headerlink" href="#propuesta-de-modelo-original" title="Link to this heading">#</a></h1>
-<section id="introduccion">
-<h2>Introducción<a class="headerlink" href="#introduccion" title="Link to this heading">#</a></h2>
-<p>El objetivo de esta propuesta es desarrollar un modelo predictivo para estimar la <strong>velocidad del viento</strong> en función de características ambientales y contextuales específicas. El modelo utilizará <strong>Regresión de Soporte Vectorial (SVR)</strong> optimizado con algoritmos metaheurísticos como <strong>GWO (Gray Wolf Optimizer)</strong>, <strong>BA (Bat Algorithm)</strong> y <strong>COA (Cuckoo Optimization Algorithm)</strong>. Este enfoque busca garantizar una alta precisión en las predicciones, aprovechando técnicas avanzadas de aprendizaje automático para datos no lineales y multidimensionales.</p>
-</section>
-<hr class="docutils" />
-<section id="puntos-clave-del-enfoque">
-<h2>Puntos clave del enfoque<a class="headerlink" href="#puntos-clave-del-enfoque" title="Link to this heading">#</a></h2>
-<ol class="arabic simple">
-<li><p><strong>Uso de SVR como base del modelo</strong>:</p>
-<ul class="simple">
-<li><p>La <strong>Regresión de Soporte Vectorial (SVR)</strong> es una herramienta poderosa para modelar relaciones complejas entre variables, particularmente en datasets con alta dimensionalidad o relaciones no lineales.</p></li>
-</ul>
-</li>
-<li><p><strong>Optimización con algoritmos metaheurísticos</strong>:</p>
-<ul class="simple">
-<li><p><strong>Gray Wolf Optimizer (GWO):</strong> optimización inspirada en la jerarquía social de los lobos grises.</p></li>
-<li><p><strong>Bat Algorithm (BA):</strong> basado en la ecolocación de los murciélagos.</p></li>
-<li><p><strong>Cuckoo Optimization Algorithm (COA):</strong> optimización fundamentada en la estrategia reproductiva de los cucos.</p></li>
-<li><p>Estos algoritmos ajustan los hiperparámetros del SVR (e.g., kernel, regularización y margen) para mejorar su desempeño.</p></li>
-</ul>
-</li>
-<li><p><strong>Validación del modelo</strong>:</p>
-<ul class="simple">
-<li><p>Evaluación mediante métricas como <strong>RMSE</strong> y <strong>MAE</strong> para medir la precisión y el error medio de las predicciones.</p></li>
-</ul>
-</li>
-</ol>
-</section>
-<hr class="docutils" />
-<section id="propuesta-del-modelo">
-<h2>Propuesta del modelo<a class="headerlink" href="#propuesta-del-modelo" title="Link to this heading">#</a></h2>
-<section id="caracteristicas-de-los-datos">
-<h3>Características de los datos<a class="headerlink" href="#caracteristicas-de-los-datos" title="Link to this heading">#</a></h3>
-<p>En este caso, los datos provienen de un dataset que incluye las características relevantes para la predicción de la velocidad del viento en un punto específico. Las variables incluyen:</p>
-<ol class="arabic simple">
-<li><p><strong>Variables climáticas:</strong></p>
-<ul class="simple">
-<li><p>Temperatura (°C).</p></li>
-<li><p>Humedad relativa (%).</p></li>
-<li><p>Presión atmosférica (hPa).</p></li>
-</ul>
-</li>
-<li><p><strong>Variables geográficas:</strong></p>
-<ul class="simple">
-<li><p>Coordenadas geográficas del punto.</p></li>
-<li><p>Altitud (m).</p></li>
-</ul>
-</li>
-<li><p><strong>Variable objetivo:</strong></p>
-<ul class="simple">
-<li><p>Velocidad del viento (m/s).</p></li>
-</ul>
-</li>
-</ol>
-</section>
-<hr class="docutils" />
-<section id="preprocesamiento-de-datos">
-<h3>Preprocesamiento de datos<a class="headerlink" href="#preprocesamiento-de-datos" title="Link to this heading">#</a></h3>
-<ol class="arabic simple">
-<li><p><strong>Estandarización y normalización:</strong></p>
-<ul class="simple">
-<li><p>Transformar las variables predictoras para que todas estén en un rango comparable y evitar sesgos en el modelo.</p></li>
-</ul>
-</li>
-<li><p><strong>Manejo de valores faltantes:</strong></p>
-<ul class="simple">
-<li><p>Imputar valores ausentes mediante técnicas como media, mediana o interpolación según la variable.</p></li>
-</ul>
-</li>
-<li><p><strong>Estructura de los datos:</strong></p>
-<ul class="simple">
-<li><p>Dividir los datos en conjuntos de entrenamiento (70%) y prueba (30%) para validar el modelo.</p></li>
-</ul>
-</li>
-</ol>
-</section>
-<hr class="docutils" />
-<section id="implementacion-del-modelo">
-<h3>Implementación del modelo<a class="headerlink" href="#implementacion-del-modelo" title="Link to this heading">#</a></h3>
-<ol class="arabic simple">
-<li><p><strong>SVR como modelo base:</strong></p>
-<ul class="simple">
-<li><p>Selección de un kernel adecuado (e.g., radial basis function - RBF) para capturar relaciones no lineales.</p></li>
-<li><p>Configuración inicial de parámetros como <code class="docutils literal notranslate"><span class="pre">C</span></code> (regularización) y <code class="docutils literal notranslate"><span class="pre">epsilon</span></code> (margen).</p></li>
-</ul>
-</li>
-<li><p><strong>Optimización con algoritmos metaheurísticos:</strong></p>
-<ul class="simple">
-<li><p>Implementar cada algoritmo (GWO, BA, COA) para ajustar los hiperparámetros del modelo SVR:</p>
-<ul>
-<li><p>Kernel.</p></li>
-<li><p>Regularización (C).</p></li>
-<li><p>Epsilon.</p></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p><strong>Validación del modelo:</strong></p>
-<ul class="simple">
-<li><p>Evaluar el desempeño mediante validación cruzada para medir la consistencia de las predicciones.</p></li>
-</ul>
-</li>
-</ol>
-</section>
-</section>
-<hr class="docutils" />
-<section id="evaluacion-y-metricas">
-<h2>Evaluación y métricas<a class="headerlink" href="#evaluacion-y-metricas" title="Link to this heading">#</a></h2>
-<ol class="arabic simple">
-<li><p><strong>Indicadores de rendimiento:</strong></p>
-<ul class="simple">
-<li><p><strong>RMSE (Root Mean Squared Error):</strong> mide el error promedio en las predicciones.</p></li>
-<li><p><strong>MAE (Mean Absolute Error):</strong> evalúa la magnitud del error absoluto.</p></li>
-<li><p><strong>R² (Coeficiente de Determinación):</strong> mide la proporción de la varianza explicada por el modelo.</p></li>
-</ul>
-</li>
-<li><p><strong>Comparación de modelos:</strong></p>
-<ul class="simple">
-<li><p>Analizar el desempeño del modelo SVR base frente a los híbridos optimizados (SVR-GWO, SVR-BA, SVR-COA).</p></li>
-</ul>
-</li>
-</ol>
-</section>
-<hr class="docutils" />
-<section id="conclusion-esperada">
-<h2>Conclusión esperada<a class="headerlink" href="#conclusion-esperada" title="Link to this heading">#</a></h2>
-<p>La implementación de un modelo SVR optimizado con algoritmos metaheurísticos permitirá:</p>
-<ul class="simple">
-<li><p>Incrementar la precisión en la predicción de la velocidad del viento.</p></li>
-<li><p>Adaptarse a las características específicas del dataset disponible.</p></li>
-<li><p>Proporcionar un enfoque robusto y replicable para otros contextos climáticos o geográficos.</p></li>
-</ul>
-<p>Este modelo se propone como una herramienta práctica para el análisis y la gestión de datos meteorológicos, asegurando predicciones precisas y confiables.</p>
-</section>
+<h1><strong>Propuesta de modelo original</strong><a class="headerlink" href="#propuesta-de-modelo-original" title="Link to this heading">#</a></h1>
 </section>
 
     <script type="text/x-thebe-config">
@@ -576,15 +427,15 @@ document.write(`
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><strong>Modelos de regresión</strong></p>
+        <p class="prev-next-title"><strong>Modelos de regresión.</strong></p>
       </div>
     </a>
     <a class="right-next"
-       href="implementacion.html"
+       href="mates.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><strong>Implementación del modelo original</strong></p>
+        <p class="prev-next-title"><strong>Matemáticas del modelo original</strong></p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -595,30 +446,6 @@ document.write(`
             
             
               
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> Contents
-  </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduccion">Introducción</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#puntos-clave-del-enfoque">Puntos clave del enfoque</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#propuesta-del-modelo">Propuesta del modelo</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#caracteristicas-de-los-datos">Características de los datos</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocesamiento-de-datos">Preprocesamiento de datos</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#implementacion-del-modelo">Implementación del modelo</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluacion-y-metricas">Evaluación y métricas</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion-esperada">Conclusión esperada</a></li>
-</ul>
-  </nav></div>
-
-</div></div>
-              
             
           </div>
           <footer class="bd-footer-content">
@@ -628,7 +455,7 @@ document.write(`
   <div class="footer-item">
     
 <p class="component-author">
-By Kanery Camargo y Emanuel Carbonell
+By Kanery Marcela Camargo Rodríguez y Emanuel de Jesús Carbonell Naranjo.
 </p>
 
   </div>
