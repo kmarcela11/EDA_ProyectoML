@@ -175,7 +175,7 @@
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="Intro.html">
-                    Proyecto Final - Energía Eólica.
+                    Proyecto Final - Energía Eólica
                 </a>
             </li>
         </ul>
@@ -183,7 +183,7 @@
 <li class="toctree-l1"><a class="reference internal" href="inicio.html"><strong>Contextualización del Proyecto</strong></a></li>
 
 <li class="toctree-l1"><a class="reference internal" href="eda.html"><strong>Análisis Exploratorio de Datos (EDA)</strong></a></li>
-<li class="toctree-l1"><a class="reference internal" href="modelos.html"><strong>Modelos de regresión.</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="modelos.html"><strong>Modelos de regresión</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="original.html"><strong>Propuesta de modelo original</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="mates.html"><strong>Matemáticas del modelo original</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="implementacion.html"><strong>Implementación del modelo original</strong></a></li>
@@ -405,6 +405,7 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="comparacion-de-modelos">
 <h1><strong>Comparación de modelos</strong><a class="headerlink" href="#comparacion-de-modelos" title="Link to this heading">#</a></h1>
+<p>En esta sección se presentan los resultados finales de los modelos aplicados a cada velocidad del viento, considerando distintas alturas. El objetivo es evaluar el desempeño de los modelos y determinar cuál es el más adecuado para el conjunto de datos analizado. Para realizar la comparación entre los modelos aplicados a los diferentes conjuntos de datos, se muestra la tabla de errores ordenada de mayor a menor según el valor de R². El primer modelo es el que mejor ajusta los datos.</p>
 <section id="librerias-y-modulos-necesarios">
 <h2><strong>Líbrerias y modulos necesarios</strong><a class="headerlink" href="#librerias-y-modulos-necesarios" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
@@ -594,6 +595,13 @@ document.write(`
 </table>
 </div></div></div>
 </div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">resultados_modelo1</span><span class="o">.</span><span class="n">to_pickle</span><span class="p">(</span><span class="s1">&#39;final1.pkl&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 <section id="modelo-2-wind-speed-100-metros-sensor-2">
 <h2><strong>Modelo 2: Wind speed 100 metros (Sensor 2)</strong><a class="headerlink" href="#modelo-2-wind-speed-100-metros-sensor-2" title="Link to this heading">#</a></h2>
@@ -773,6 +781,13 @@ document.write(`
   </tbody>
 </table>
 </div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">resultados_modelo2</span><span class="o">.</span><span class="n">to_pickle</span><span class="p">(</span><span class="s1">&#39;final2.pkl&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 <section id="modelo-3-wind-speed-80-metros-sensor-1">
@@ -954,6 +969,13 @@ document.write(`
 </table>
 </div></div></div>
 </div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">resultados_modelo3</span><span class="o">.</span><span class="n">to_pickle</span><span class="p">(</span><span class="s1">&#39;final3.pkl&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 <section id="modelo-4-wind-speed-80-metros-sensor-2">
 <h2><strong>Modelo 4: Wind speed 80 metros (Sensor 2)</strong><a class="headerlink" href="#modelo-4-wind-speed-80-metros-sensor-2" title="Link to this heading">#</a></h2>
@@ -1133,6 +1155,13 @@ document.write(`
   </tbody>
 </table>
 </div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">resultados_modelo4</span><span class="o">.</span><span class="n">to_pickle</span><span class="p">(</span><span class="s1">&#39;final4.pkl&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 <section id="modelo-5-wind-speed-60-metros">
@@ -1314,9 +1343,18 @@ document.write(`
 </table>
 </div></div></div>
 </div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">resultados_modelo5</span><span class="o">.</span><span class="n">to_pickle</span><span class="p">(</span><span class="s1">&#39;final5.pkl&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 <section id="conclusion">
 <h2><strong>Conclusión</strong><a class="headerlink" href="#conclusion" title="Link to this heading">#</a></h2>
+<p>Al observar los resultados, se concluye que la aplicación del modelo XGBoost, combinado con métodos de optimización como GWO y WOA, si bien no mejora drásticamente la precisión, sí genera una mejora notable en los tiempos de ejecución en comparación con el uso de GridSearch con XGBoost. Además, los modelos optimizados con GWO y WOA superan a los demás modelos en cuanto a las métricas evaluadas y cumplen con los supuestos del modelo, lo que indica que los modelos <strong>no lineales</strong>, como XGBoost, son los más adecuados para este conjunto de datos. Este análisis resalta la importancia de considerar tanto la precisión como la eficiencia en los tiempos de ejecución, lo que hace que los modelos no lineales sean una opción más robusta y escalable para este tipo de problemas.</p>
+<p>Recordemos que, XGBoost al ser un <strong>boosting</strong> de árboles de decisión, aprovecha la capacidad de los árboles para capturar relaciones no lineales complejas en los datos. Además, al ser un modelo basado en árboles, no está restringido a un espacio de soluciones lineales, lo que le permite ajustarse a datos más complejos y no lineales. Por lo tanto, al implementarlo con algoritmos de optimización se espera que genere resultados más óptimos y eso fue lo que se obtuvo, confirmando así que la implementación de estos modelos fue acertada.</p>
 </section>
 </section>
 

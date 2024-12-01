@@ -1,4 +1,4 @@
-# **Proyecto Final - Energía Eólica.**
+# **Proyecto Final - Energía Eólica**
 
 ## **Estudiantes:**
 - **Kanery Marcela Camargo Rodríguez**
