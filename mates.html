@@ -471,11 +471,12 @@ La función objetivo de XGBoost se compone de dos términos: la <strong>pérdida
 </ul>
 </li>
 <li><p><strong>Regularización:</strong>
-La regularización en XGBoost se realiza a través de dos términos:
-$<span class="math notranslate nohighlight">\(
-\Omega(f) = \gamma T + \frac{1}{2} \lambda \sum_{j=1}^T w_j^2
-\)</span>$
-donde:</p>
+La regularización en XGBoost se realiza a través de dos términos:</p>
+<div class="math notranslate nohighlight">
+\[ 
+   \Omega(f) = \gamma T + \frac{1}{2} \lambda \sum_{j=1}^T w_j^2 
+   \]</div>
+<p>donde:</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\( T \)</span> es el número de hojas del árbol.</p></li>
 <li><p><span class="math notranslate nohighlight">\( w_j \)</span> es el peso de la <span class="math notranslate nohighlight">\( j \)</span>-ésima hoja.</p></li>
@@ -490,11 +491,12 @@ XGBoost emplea un proceso de <strong>boosting</strong>, donde cada árbol poster
 <li><p><strong>Paso 2:</strong> Un nuevo árbol es entrenado para predecir los errores residuales.</p></li>
 <li><p><strong>Paso 3:</strong> El árbol se agrega al modelo, y el proceso se repite hasta que se alcanza un número máximo de árboles o una mejora mínima en la función objetivo.</p></li>
 </ul>
-<p>La actualización de la predicción del modelo en cada iteración es:
-$<span class="math notranslate nohighlight">\(
-\hat{y}_i^{(t)} = \hat{y}_i^{(t-1)} + \eta \cdot f_t(x_i)
-\)</span>$
-donde:</p>
+<p>La actualización de la predicción del modelo en cada iteración es:</p>
+<div class="math notranslate nohighlight">
+\[ 
+   \hat{y}_i^{(t)} = \hat{y}_i^{(t-1)} + \eta \cdot f_t(x_i) 
+   \]</div>
+<p>donde:</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\( \hat{y}_i^{(t)} \)</span> es la predicción del <span class="math notranslate nohighlight">\(i\)</span>-ésimo ejemplo en la <span class="math notranslate nohighlight">\(t\)</span>-ésima iteración.</p></li>
 <li><p><span class="math notranslate nohighlight">\( \eta \)</span> es la tasa de aprendizaje (un hiperparámetro que controla la magnitud de la actualización).</p></li>
@@ -526,7 +528,7 @@ donde:</p>
 <p><strong>Bayesian Optimization (BO)</strong> es un algoritmo de optimización basado en un enfoque probabilístico, utilizado principalmente para encontrar el conjunto óptimo de hiperparámetros en modelos de aprendizaje automático con una cantidad limitada de evaluaciones de la función objetivo, que en este caso es la función de pérdida de XGBoost.</p>
 <section id="id1">
 <h3><strong>Funcionamiento general</strong><a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
-<ol class="arabic simple">
+<ol class="arabic">
 <li><p><strong>Modelo Probabilístico:</strong>
 BO construye un modelo probabilístico, generalmente un <strong>proceso Gaussiano</strong> (GP), que aproxima la función de la cual se desea optimizar los hiperparámetros. Este modelo tiene una distribución sobre las posibles funciones objetivo, basada en las observaciones anteriores.</p>
 <ul class="simple">
@@ -536,14 +538,15 @@ BO construye un modelo probabilístico, generalmente un <strong>proceso Gaussian
 </li>
 <li><p><strong>Función de Adquisición:</strong>
 Para decidir qué conjunto de hiperparámetros probar a continuación, BO utiliza una <strong>función de adquisición</strong> que evalúa la ganancia esperada de la próxima muestra. Una de las más comunes es la <strong>Expected Improvement (EI)</strong>, que balancea la exploración de áreas no muestreadas con la explotación de áreas que ya se sabe que producen buenos resultados.</p>
-<ul class="simple">
-<li><p><strong>Expected Improvement (EI):</strong>
-$<span class="math notranslate nohighlight">\( 
-EI(x) = \mathbb{E}[\max(0, f(x) - f_\text{best})]
-\)</span>$<br />
-Donde:</p>
 <ul>
-<li><p><span class="math notranslate nohighlight">\(f(x)\)</span> es la predicción de la función objetivo en el punto ( x ).</p></li>
+<li><p><strong>Expected Improvement (EI):</strong></p>
+<div class="math notranslate nohighlight">
+\[ 
+     EI(x) = \mathbb{E}[\max(0, f(x) - f_\text{best})]
+     \]</div>
+<p>Donde:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(f(x)\)</span> es la predicción de la función objetivo en el punto <span class="math notranslate nohighlight">\(x\)</span>.</p></li>
 <li><p><span class="math notranslate nohighlight">\(f_\text{best}\)</span> es el mejor valor observado de la función objetivo hasta el momento.</p></li>
 <li><p><span class="math notranslate nohighlight">\(\mathbb{E}\)</span> representa la esperanza matemática (promedio).</p></li>
 </ul>
@@ -563,13 +566,14 @@ Después de calcular la función de adquisición, BO selecciona el siguiente con
 </section>
 <section id="matematicas-del-proceso">
 <h3><strong>Matemáticas del Proceso</strong><a class="headerlink" href="#matematicas-del-proceso" title="Link to this heading">#</a></h3>
-<ul class="simple">
-<li><p><strong>Modelo de Regresión Probabilística:</strong> En BO, el proceso Gaussiano utilizado para modelar la función objetivo tiene una forma general de:
-$<span class="math notranslate nohighlight">\(
-f(x) \sim \mathcal{GP}(\mu(x), k(x, x'))
-\)</span>$
-donde:</p>
 <ul>
+<li><p><strong>Modelo de Regresión Probabilística:</strong> En BO, el proceso Gaussiano utilizado para modelar la función objetivo tiene una forma general de:</p>
+<div class="math notranslate nohighlight">
+\[
+  f(x) \sim \mathcal{GP}(\mu(x), k(x, x'))
+  \]</div>
+<p>donde:</p>
+<ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(\mu(x)\)</span> es la media de la distribución posterior en el punto <span class="math notranslate nohighlight">\(x\)</span>.</p></li>
 <li><p><span class="math notranslate nohighlight">\( k(x, x')\)</span> es la función de covarianza que describe la relación entre los puntos <span class="math notranslate nohighlight">\( x \)</span> y <span class="math notranslate nohighlight">\( x' \)</span>.</p></li>
 </ul>
@@ -608,11 +612,11 @@ donde:</p>
 <section id="modelo-de-liderazgo">
 <h4><strong>1. Modelo de Liderazgo:</strong><a class="headerlink" href="#modelo-de-liderazgo" title="Link to this heading">#</a></h4>
 <p>Cada lobo ajusta su posición en relación con las soluciones líderes (<span class="math notranslate nohighlight">\(\alpha\)</span>, <span class="math notranslate nohighlight">\(\beta\)</span> y <span class="math notranslate nohighlight">\(\delta\)</span>). Esto asegura que las nuevas posiciones estén influenciadas por las mejores soluciones conocidas.</p>
-<p><strong>Ecuación matemática:</strong>
-$<span class="math notranslate nohighlight">\(
+<div class="math notranslate nohighlight">
+\[
    \vec{X}(t+1) = \frac{\vec{X}_\alpha + \vec{X}_\beta + \vec{X}_\delta}{3}
-   \)</span>$
-Donde:</p>
+   \]</div>
+<p>Donde:</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\( \vec{X}_\alpha \)</span>, <span class="math notranslate nohighlight">\( \vec{X}_\beta \)</span>, <span class="math notranslate nohighlight">\( \vec{X}_\delta \)</span>: posiciones de las tres mejores soluciones.</p></li>
 <li><p><span class="math notranslate nohighlight">\( \vec{X}(t+1) \)</span>: nueva posición de un lobo.</p></li>
@@ -621,16 +625,19 @@ Donde:</p>
 <section id="ajuste-de-posiciones">
 <h4><strong>2. Ajuste de Posiciones:</strong><a class="headerlink" href="#ajuste-de-posiciones" title="Link to this heading">#</a></h4>
 <p>Cada lobo actualiza su posición individual utilizando fórmulas que representan su proximidad a las mejores soluciones (<span class="math notranslate nohighlight">\(\alpha\)</span>, <span class="math notranslate nohighlight">\(\beta\)</span>, <span class="math notranslate nohighlight">\(\delta\)</span>):</p>
-<p><strong>Ecuaciones para actualizar posiciones:</strong>
-$<span class="math notranslate nohighlight">\(
+<p><strong>Ecuaciones para actualizar posiciones:</strong></p>
+<div class="math notranslate nohighlight">
+\[
    \vec{D}_\alpha = |\vec{C}_1 \cdot \vec{X}_\alpha - \vec{X}(t)|, \quad \vec{X}_1 = \vec{X}_\alpha - \vec{A}_1 \cdot \vec{D}_\alpha
-   \)</span><span class="math notranslate nohighlight">\(
-   \)</span><span class="math notranslate nohighlight">\(
+   \]</div>
+<div class="math notranslate nohighlight">
+\[
    \vec{D}_\beta = |\vec{C}_2 \cdot \vec{X}_\beta - \vec{X}(t)|, \quad \vec{X}_2 = \vec{X}_\beta - \vec{A}_2 \cdot \vec{D}_\beta
-   \)</span><span class="math notranslate nohighlight">\(
-   \)</span><span class="math notranslate nohighlight">\(
+   \]</div>
+<div class="math notranslate nohighlight">
+\[
    \vec{D}_\delta = |\vec{C}_3 \cdot \vec{X}_\delta - \vec{X}(t)|, \quad \vec{X}_3 = \vec{X}_\delta - \vec{A}_3 \cdot \vec{D}_\delta
-   \)</span>$</p>
+   \]</div>
 <p>Donde:</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\( \vec{D}_\alpha \)</span>, <span class="math notranslate nohighlight">\( \vec{D}_\beta \)</span>, <span class="math notranslate nohighlight">\( \vec{D}_\delta \)</span>: distancias de un lobo a las soluciones líderes.</p></li>
@@ -642,10 +649,11 @@ $<span class="math notranslate nohighlight">\(
 </section>
 <section id="combinacion-de-posiciones">
 <h4><strong>3. Combinación de Posiciones:</strong><a class="headerlink" href="#combinacion-de-posiciones" title="Link to this heading">#</a></h4>
-<p>La nueva posición de un lobo se calcula como un promedio ponderado de las soluciones <span class="math notranslate nohighlight">\(\alpha\)</span>, <span class="math notranslate nohighlight">\(\beta\)</span> y <span class="math notranslate nohighlight">\(\delta\)</span>:
-$<span class="math notranslate nohighlight">\(
+<p>La nueva posición de un lobo se calcula como un promedio ponderado de las soluciones <span class="math notranslate nohighlight">\(\alpha\)</span>, <span class="math notranslate nohighlight">\(\beta\)</span> y <span class="math notranslate nohighlight">\(\delta\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
    \vec{X}(t+1) = \frac{\vec{X}_1 + \vec{X}_2 + \vec{X}_3}{3}
-   \)</span>$</p>
+   \]</div>
 </section>
 </section>
 <section id="etapas-del-gwo">
@@ -707,20 +715,24 @@ Las ballenas se acercan a la mejor solución conocida en el espacio de búsqueda
    \vec{X}(t+1) = \vec{X}_\text{best} - \vec{A} \cdot |\vec{C} \cdot \vec{X}_\text{best} - \vec{X}(t)|
    \]</div>
 <p>Donde:</p>
-<ul class="simple">
+<ul>
 <li><p><span class="math notranslate nohighlight">\( \vec{X}(t+1) \)</span> es la nueva posición.</p></li>
 <li><p><span class="math notranslate nohighlight">\( \vec{X}_\text{best} \)</span> es la mejor solución conocida hasta ahora.</p></li>
 <li><p><span class="math notranslate nohighlight">\( \vec{X}(t) \)</span> es la posición actual.</p></li>
-<li><p><span class="math notranslate nohighlight">\( \vec{A} \)</span> es el vector de contracción, calculado como:
-$<span class="math notranslate nohighlight">\(
-\vec{A} = 2 \cdot a \cdot \vec{r}_1 - a
-\)</span><span class="math notranslate nohighlight">\(
-donde \)</span>a<span class="math notranslate nohighlight">\( decrece linealmente de 2 a 0 durante las iteraciones, y \)</span> \vec{r}_1 <span class="math notranslate nohighlight">\( es un número aleatorio en \)</span>[0, 1]$.</p></li>
-<li><p><span class="math notranslate nohighlight">\( \vec{C} \)</span> es otro vector de ajuste aleatorio:
-$<span class="math notranslate nohighlight">\(
-\vec{C} = 2 \cdot \vec{r}_2
-\)</span><span class="math notranslate nohighlight">\(
-donde \)</span> \vec{r}_2 <span class="math notranslate nohighlight">\( es un número aleatorio en \)</span>[0, 1]$.</p></li>
+<li><p><span class="math notranslate nohighlight">\( \vec{A} \)</span> es el vector de contracción, calculado como:</p>
+<div class="math notranslate nohighlight">
+\[
+     \vec{A} = 2 \cdot a \cdot \vec{r}_1 - a
+     \]</div>
+<p>donde <span class="math notranslate nohighlight">\(a\)</span> decrece linealmente de 2 a 0 durante las iteraciones, y <span class="math notranslate nohighlight">\( \vec{r}_1 \)</span> es un número aleatorio en <span class="math notranslate nohighlight">\([0, 1]\)</span>.</p>
+</li>
+<li><p><span class="math notranslate nohighlight">\( \vec{C} \)</span> es otro vector de ajuste aleatorio:</p>
+<div class="math notranslate nohighlight">
+\[
+     \vec{C} = 2 \cdot \vec{r}_2
+     \]</div>
+<p>donde <span class="math notranslate nohighlight">\( \vec{r}_2 \)</span> es un número aleatorio en <span class="math notranslate nohighlight">\([0, 1]\)</span>.</p>
+</li>
 </ul>
 </li>
 <li><p><strong>Movimiento en espiral (exploración global):</strong>

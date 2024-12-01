@@ -60,7 +60,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'comparacion';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Conclusiones y recomendaciones" href="conclusiones.html" />
+    <link rel="next" title="Conclusiones" href="conclusiones.html" />
     <link rel="prev" title="Implementación del modelo original" href="implementacion.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -185,10 +185,11 @@
 <li class="toctree-l1"><a class="reference internal" href="eda.html"><strong>Análisis Exploratorio de Datos (EDA)</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="modelos.html"><strong>Modelos de regresión</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="original.html"><strong>Propuesta de modelo original</strong></a></li>
-<li class="toctree-l1"><a class="reference internal" href="mates.html"><strong>Matemáticas del modelo original</strong></a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="mates.html"><strong>Explicación de algoritmos</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="implementacion.html"><strong>Implementación del modelo original</strong></a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>Comparación de modelos</strong></a></li>
-<li class="toctree-l1"><a class="reference internal" href="conclusiones.html"><strong>Conclusiones y recomendaciones</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="conclusiones.html"><strong>Conclusiones</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="references.html"><strong>Bibliografía</strong></a></li>
 </ul>
 
@@ -391,7 +392,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-3-wind-speed-80-metros-sensor-1"><strong>Modelo 3: Wind speed 80 metros (Sensor 1)</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-4-wind-speed-80-metros-sensor-2"><strong>Modelo 4: Wind speed 80 metros (Sensor 2)</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-5-wind-speed-60-metros"><strong>Modelo 5: Wind speed 60 metros</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion"><strong>Conclusión</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretacion-general"><strong>Interpretación general</strong></a></li>
 </ul>
             </nav>
         </div>
@@ -1351,8 +1352,8 @@ document.write(`
 </div>
 </div>
 </section>
-<section id="conclusion">
-<h2><strong>Conclusión</strong><a class="headerlink" href="#conclusion" title="Link to this heading">#</a></h2>
+<section id="interpretacion-general">
+<h2><strong>Interpretación general</strong><a class="headerlink" href="#interpretacion-general" title="Link to this heading">#</a></h2>
 <p>Al observar los resultados, se concluye que la aplicación del modelo XGBoost, combinado con métodos de optimización como GWO y WOA, si bien no mejora drásticamente la precisión, sí genera una mejora notable en los tiempos de ejecución en comparación con el uso de GridSearch con XGBoost. Además, los modelos optimizados con GWO y WOA superan a los demás modelos en cuanto a las métricas evaluadas y cumplen con los supuestos del modelo, lo que indica que los modelos <strong>no lineales</strong>, como XGBoost, son los más adecuados para este conjunto de datos. Este análisis resalta la importancia de considerar tanto la precisión como la eficiencia en los tiempos de ejecución, lo que hace que los modelos no lineales sean una opción más robusta y escalable para este tipo de problemas.</p>
 <p>Recordemos que, XGBoost al ser un <strong>boosting</strong> de árboles de decisión, aprovecha la capacidad de los árboles para capturar relaciones no lineales complejas en los datos. Además, al ser un modelo basado en árboles, no está restringido a un espacio de soluciones lineales, lo que le permite ajustarse a datos más complejos y no lineales. Por lo tanto, al implementarlo con algoritmos de optimización se espera que genere resultados más óptimos y eso fue lo que se obtuvo, confirmando así que la implementación de estos modelos fue acertada.</p>
 </section>
@@ -1402,7 +1403,7 @@ document.write(`
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><strong>Conclusiones y recomendaciones</strong></p>
+        <p class="prev-next-title"><strong>Conclusiones</strong></p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1428,7 +1429,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-3-wind-speed-80-metros-sensor-1"><strong>Modelo 3: Wind speed 80 metros (Sensor 1)</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-4-wind-speed-80-metros-sensor-2"><strong>Modelo 4: Wind speed 80 metros (Sensor 2)</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-5-wind-speed-60-metros"><strong>Modelo 5: Wind speed 60 metros</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion"><strong>Conclusión</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretacion-general"><strong>Interpretación general</strong></a></li>
 </ul>
   </nav></div>
 
