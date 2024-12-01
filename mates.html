@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Matemáticas del modelo original &#8212; Proyecto final - Energía eólica</title>
+    <title>Explicación de algoritmos &#8212; Proyecto final - Energía eólica</title>
   
   
   
@@ -57,6 +57,8 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'mates';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -175,7 +177,7 @@
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="Intro.html">
-                    Proyecto Final - Energía Eólica.
+                    Proyecto Final - Energía Eólica
                 </a>
             </li>
         </ul>
@@ -183,12 +185,13 @@
 <li class="toctree-l1"><a class="reference internal" href="inicio.html"><strong>Contextualización del Proyecto</strong></a></li>
 
 <li class="toctree-l1"><a class="reference internal" href="eda.html"><strong>Análisis Exploratorio de Datos (EDA)</strong></a></li>
-<li class="toctree-l1"><a class="reference internal" href="modelos.html"><strong>Modelos de regresión.</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="modelos.html"><strong>Modelos de regresión</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="original.html"><strong>Propuesta de modelo original</strong></a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>Matemáticas del modelo original</strong></a></li>
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>Explicación de algoritmos</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="implementacion.html"><strong>Implementación del modelo original</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="comparacion.html"><strong>Comparación de modelos</strong></a></li>
-<li class="toctree-l1"><a class="reference internal" href="conclusiones.html"><strong>Conclusiones y recomendaciones</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="conclusiones.html"><strong>Conclusiones</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="references.html"><strong>Bibliografía</strong></a></li>
 </ul>
 
@@ -362,7 +365,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -373,11 +378,57 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Matemáticas del modelo original</h1>
+    <h1>Explicación de algoritmos</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#concepto-clave-optimizacion-metaheuristica"><strong>Concepto clave: optimización metaheurística</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#xgboost"><strong>XGBoost</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#funcionamiento-general"><strong>Funcionamiento General</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#matematicas-de-xgboost"><strong>Matemáticas de XGBoost</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optimizacion-de-xgboost"><strong>Optimización de XGBoost</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ventajas-de-xgboost"><strong>Ventajas de XGBoost</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bayesian-optimization-bo-xgboost"><strong>Bayesian Optimization (BO - XGBoost)</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"><strong>Funcionamiento general</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#matematicas-del-proceso"><strong>Matemáticas del Proceso</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ventajas-de-bo"><strong>Ventajas de BO</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aplicacion-en-xgboost"><strong>Aplicación en XGBoost</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gray-wolf-optimization-gwo-xgboost"><strong>Gray Wolf Optimization (GWO - XGBoost)</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2"><strong>Funcionamiento general</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-de-liderazgo"><strong>1. Modelo de Liderazgo:</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ajuste-de-posiciones"><strong>2. Ajuste de Posiciones:</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#combinacion-de-posiciones"><strong>3. Combinación de Posiciones:</strong></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#etapas-del-gwo"><strong>Etapas del GWO</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ventajas-del-gwo"><strong>Ventajas del GWO</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3"><strong>Aplicación en XGBoost</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#whale-optimization-algorithm-woa-xgboost"><strong>Whale Optimization Algorithm (WOA - XGBoost)</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4"><strong>Funcionamiento general</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#etapas-del-woa"><strong>Etapas del WOA</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ventajas-del-woa"><strong>Ventajas del WOA</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5"><strong>Aplicación en XGBoost</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparacion-de-los-algoritmos"><strong>Comparación de los Algoritmos</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#diferencia-entre-exploracion-y-explotacion"><strong>Diferencia entre exploración y explotación</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-practico-en-optimizacion-metaheuristica"><strong>Ejemplo práctico en optimización metaheurística</strong></a></li>
+</ul>
+</li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -387,8 +438,430 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="matematicas-del-modelo-original">
-<h1><strong>Matemáticas del modelo original</strong><a class="headerlink" href="#matematicas-del-modelo-original" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="explicacion-de-algoritmos">
+<h1><strong>Explicación de algoritmos</strong><a class="headerlink" href="#explicacion-de-algoritmos" title="Link to this heading">#</a></h1>
+<section id="concepto-clave-optimizacion-metaheuristica">
+<h2><strong>Concepto clave: optimización metaheurística</strong><a class="headerlink" href="#concepto-clave-optimizacion-metaheuristica" title="Link to this heading">#</a></h2>
+<p>La <strong>optimización metaheurística</strong> es una rama de la inteligencia artificial y las matemáticas aplicadas que se centra en resolver problemas de optimización complejos mediante algoritmos inspirados en procesos naturales, biológicos o sociales. Estas técnicas son especialmente útiles para problemas donde los métodos tradicionales, como la programación matemática, no son prácticos debido a la dimensionalidad, la no linealidad o la falta de información sobre la función objetivo.</p>
+</section>
+<section id="xgboost">
+<h2><strong>XGBoost</strong><a class="headerlink" href="#xgboost" title="Link to this heading">#</a></h2>
+<p><strong>XGBoost (Extreme Gradient Boosting)</strong> es un algoritmo de aprendizaje automático basado en árboles de decisión, específicamente en una variante del <strong>Gradient Boosting Machine (GBM)</strong>, que se ha popularizado por su eficiencia y efectividad en problemas de predicción.</p>
+<section id="funcionamiento-general">
+<h3><strong>Funcionamiento General</strong><a class="headerlink" href="#funcionamiento-general" title="Link to this heading">#</a></h3>
+<p>XGBoost se utiliza principalmente para tareas de regresión y clasificación. La idea principal es construir modelos a partir de varios árboles de decisión, donde cada árbol posterior trata de corregir los errores de los árboles anteriores.</p>
+<ul class="simple">
+<li><p><strong>Modelo Aditivo:</strong> XGBoost construye una predicción combinando múltiples árboles de decisión de manera secuencial. En cada iteración, un nuevo árbol se ajusta a los residuos (errores) del modelo previo, buscando reducir el error general.</p></li>
+<li><p><strong>Optimización:</strong> XGBoost no solo minimiza el error de predicción (como RMSE o MAE), sino que también incluye un término de regularización que penaliza la complejidad de los árboles, ayudando a evitar el sobreajuste (overfitting).</p></li>
+</ul>
+</section>
+<section id="matematicas-de-xgboost">
+<h3><strong>Matemáticas de XGBoost</strong><a class="headerlink" href="#matematicas-de-xgboost" title="Link to this heading">#</a></h3>
+<ol class="arabic">
+<li><p><strong>Función Objetivo:</strong>
+La función objetivo de XGBoost se compone de dos términos: la <strong>pérdida</strong> y la <strong>regularización</strong>. La pérdida mide el error del modelo, mientras que la regularización penaliza la complejidad de los árboles.</p>
+<div class="math notranslate nohighlight">
+\[
+   L(\theta) = \sum_{i=1}^{N} \ell(y_i, \hat{y}_i) + \sum_{k=1}^{K} \Omega(f_k)
+   \]</div>
+<p>donde:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\( \ell(y_i, \hat{y}_i) \)</span> es la función de pérdida, que mide el error entre el valor real <span class="math notranslate nohighlight">\(y_i\)</span> y la predicción <span class="math notranslate nohighlight">\( \hat{y}_i \)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\( \Omega(f_k) \)</span> es el término de regularización del <span class="math notranslate nohighlight">\( k \)</span>-ésimo árbol, que penaliza la complejidad del modelo.</p></li>
+</ul>
+</li>
+<li><p><strong>Regularización:</strong>
+La regularización en XGBoost se realiza a través de dos términos:
+$<span class="math notranslate nohighlight">\(
+\Omega(f) = \gamma T + \frac{1}{2} \lambda \sum_{j=1}^T w_j^2
+\)</span>$
+donde:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\( T \)</span> es el número de hojas del árbol.</p></li>
+<li><p><span class="math notranslate nohighlight">\( w_j \)</span> es el peso de la <span class="math notranslate nohighlight">\( j \)</span>-ésima hoja.</p></li>
+<li><p><span class="math notranslate nohighlight">\( \gamma \)</span> y <span class="math notranslate nohighlight">\( \lambda \)</span> son hiperparámetros de regularización que controlan la complejidad del árbol.</p></li>
+</ul>
+<p>Esto asegura que el modelo no crezca demasiado y se mantenga generalizable, evitando el sobreajuste.</p>
+</li>
+<li><p><strong>Entrenamiento Incremental (Boosting):</strong>
+XGBoost emplea un proceso de <strong>boosting</strong>, donde cada árbol posterior intenta corregir los errores del árbol anterior. Esto se realiza utilizando el <strong>gradiente descendente</strong> para minimizar la función objetivo.</p>
+<ul class="simple">
+<li><p><strong>Paso 1:</strong> Para cada instancia en el conjunto de datos, se calcula la <strong>predicción residual</strong> (el error entre la predicción actual y el valor real).</p></li>
+<li><p><strong>Paso 2:</strong> Un nuevo árbol es entrenado para predecir los errores residuales.</p></li>
+<li><p><strong>Paso 3:</strong> El árbol se agrega al modelo, y el proceso se repite hasta que se alcanza un número máximo de árboles o una mejora mínima en la función objetivo.</p></li>
+</ul>
+<p>La actualización de la predicción del modelo en cada iteración es:
+$<span class="math notranslate nohighlight">\(
+\hat{y}_i^{(t)} = \hat{y}_i^{(t-1)} + \eta \cdot f_t(x_i)
+\)</span>$
+donde:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\( \hat{y}_i^{(t)} \)</span> es la predicción del <span class="math notranslate nohighlight">\(i\)</span>-ésimo ejemplo en la <span class="math notranslate nohighlight">\(t\)</span>-ésima iteración.</p></li>
+<li><p><span class="math notranslate nohighlight">\( \eta \)</span> es la tasa de aprendizaje (un hiperparámetro que controla la magnitud de la actualización).</p></li>
+<li><p><span class="math notranslate nohighlight">\( f_t(x_i) \)</span> es la predicción del árbol <span class="math notranslate nohighlight">\(t\)</span> para el ejemplo <span class="math notranslate nohighlight">\(x_i\)</span>.</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="optimizacion-de-xgboost">
+<h3><strong>Optimización de XGBoost</strong><a class="headerlink" href="#optimizacion-de-xgboost" title="Link to this heading">#</a></h3>
+<p>XGBoost se entrena utilizando un enfoque de optimización basado en <strong>gradiente</strong> para ajustar los hiperparámetros del modelo. En cada paso, el modelo ajusta los árboles de acuerdo con el gradiente de la función de pérdida, de manera que el modelo mejora progresivamente.</p>
+<ul class="simple">
+<li><p><strong>Tasa de aprendizaje (<span class="math notranslate nohighlight">\(\eta\)</span>):</strong> Controla el tamaño de las actualizaciones en cada iteración. Un valor más bajo reduce el riesgo de sobreajuste, pero puede requerir más iteraciones.</p></li>
+<li><p><strong>Número de iteraciones (número de árboles):</strong> Controla cuántos árboles se añaden al modelo. Demasiados árboles pueden llevar a sobreajuste.</p></li>
+</ul>
+</section>
+<section id="ventajas-de-xgboost">
+<h3><strong>Ventajas de XGBoost</strong><a class="headerlink" href="#ventajas-de-xgboost" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Eficiencia computacional:</strong> XGBoost es muy eficiente en términos de tiempo y memoria. Utiliza técnicas como el paralelismo en el entrenamiento y la <strong>optimización de columnas</strong> (para manejar grandes volúmenes de datos).</p></li>
+<li><p><strong>Capacidad para manejar datos dispersos:</strong> Gracias a su optimización, puede trabajar bien con conjuntos de datos grandes y dispersos (como los datos meteorológicos).</p></li>
+<li><p><strong>Robustez:</strong> Ofrece una alta precisión y generalización en comparación con otros modelos, debido a la regularización y su capacidad para manejar interacciones no lineales entre las características.</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="bayesian-optimization-bo-xgboost">
+<h2><strong>Bayesian Optimization (BO - XGBoost)</strong><a class="headerlink" href="#bayesian-optimization-bo-xgboost" title="Link to this heading">#</a></h2>
+<p><strong>Bayesian Optimization (BO)</strong> es un algoritmo de optimización basado en un enfoque probabilístico, utilizado principalmente para encontrar el conjunto óptimo de hiperparámetros en modelos de aprendizaje automático con una cantidad limitada de evaluaciones de la función objetivo, que en este caso es la función de pérdida de XGBoost.</p>
+<section id="id1">
+<h3><strong>Funcionamiento general</strong><a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Modelo Probabilístico:</strong>
+BO construye un modelo probabilístico, generalmente un <strong>proceso Gaussiano</strong> (GP), que aproxima la función de la cual se desea optimizar los hiperparámetros. Este modelo tiene una distribución sobre las posibles funciones objetivo, basada en las observaciones anteriores.</p>
+<ul class="simple">
+<li><p>La función objetivo (en este caso, la pérdida del modelo XGBoost) es tratada como una función desconocida y costosa de evaluar.</p></li>
+<li><p>A partir de un número limitado de muestras, BO aprende una distribución de probabilidad sobre la función objetivo.</p></li>
+</ul>
+</li>
+<li><p><strong>Función de Adquisición:</strong>
+Para decidir qué conjunto de hiperparámetros probar a continuación, BO utiliza una <strong>función de adquisición</strong> que evalúa la ganancia esperada de la próxima muestra. Una de las más comunes es la <strong>Expected Improvement (EI)</strong>, que balancea la exploración de áreas no muestreadas con la explotación de áreas que ya se sabe que producen buenos resultados.</p>
+<ul class="simple">
+<li><p><strong>Expected Improvement (EI):</strong>
+$<span class="math notranslate nohighlight">\( 
+EI(x) = \mathbb{E}[\max(0, f(x) - f_\text{best})]
+\)</span>$<br />
+Donde:</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(f(x)\)</span> es la predicción de la función objetivo en el punto ( x ).</p></li>
+<li><p><span class="math notranslate nohighlight">\(f_\text{best}\)</span> es el mejor valor observado de la función objetivo hasta el momento.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbb{E}\)</span> representa la esperanza matemática (promedio).</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>Selección de Hiperparámetros:</strong>
+Después de calcular la función de adquisición, BO selecciona el siguiente conjunto de hiperparámetros que maximiza esta función de adquisición, lo que significa que el algoritmo elegirá los puntos en el espacio de búsqueda que tienen la mayor probabilidad de mejorar el rendimiento del modelo.</p></li>
+<li><p><strong>Iteración y Optimización:</strong></p>
+<ul class="simple">
+<li><p>Una vez que se selecciona un nuevo conjunto de hiperparámetros, se evalúa la función objetivo (el error del modelo XGBoost).</p></li>
+<li><p>El modelo probabilístico se actualiza con esta nueva información, y el proceso se repite.</p></li>
+<li><p>Este ciclo continúa hasta que se alcanza un criterio de parada, como un número predefinido de iteraciones o cuando la mejora de la función objetivo es marginal.</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="matematicas-del-proceso">
+<h3><strong>Matemáticas del Proceso</strong><a class="headerlink" href="#matematicas-del-proceso" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Modelo de Regresión Probabilística:</strong> En BO, el proceso Gaussiano utilizado para modelar la función objetivo tiene una forma general de:
+$<span class="math notranslate nohighlight">\(
+f(x) \sim \mathcal{GP}(\mu(x), k(x, x'))
+\)</span>$
+donde:</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(\mu(x)\)</span> es la media de la distribución posterior en el punto <span class="math notranslate nohighlight">\(x\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\( k(x, x')\)</span> es la función de covarianza que describe la relación entre los puntos <span class="math notranslate nohighlight">\( x \)</span> y <span class="math notranslate nohighlight">\( x' \)</span>.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="ventajas-de-bo">
+<h3><strong>Ventajas de BO</strong><a class="headerlink" href="#ventajas-de-bo" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Eficiencia en el número de evaluaciones:</strong> BO es particularmente útil cuando las evaluaciones de la función objetivo son costosas, como es el caso de ajustar hiperparámetros en modelos de machine learning complejos, como XGBoost.</p></li>
+<li><p><strong>Optimización de funciones no diferenciables:</strong> Es capaz de optimizar funciones que no son fáciles de derivar, lo cual es común cuando se trabaja con modelos de aprendizaje automático.</p></li>
+<li><p><strong>Exploración y Explotación balanceadas:</strong> Gracias a su enfoque probabilístico, BO maneja de forma eficiente el equilibrio entre explorar nuevas áreas del espacio de hiperparámetros y explotar las áreas que ya se sabe que son prometedoras.</p></li>
+</ul>
+</section>
+<section id="aplicacion-en-xgboost">
+<h3><strong>Aplicación en XGBoost</strong><a class="headerlink" href="#aplicacion-en-xgboost" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>BO-XGBoost</strong> utiliza Bayesian Optimization para ajustar los hiperparámetros del modelo XGBoost, como la tasa de aprendizaje <span class="math notranslate nohighlight">\(( \eta )\)</span>, el número de árboles (boosting rounds), y la regularización <span class="math notranslate nohighlight">\(( \lambda)\)</span>, de manera eficiente. BO selecciona los hiperparámetros que maximizan el rendimiento del modelo mientras minimiza la función de pérdida.</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="gray-wolf-optimization-gwo-xgboost">
+<h2><strong>Gray Wolf Optimization (GWO - XGBoost)</strong><a class="headerlink" href="#gray-wolf-optimization-gwo-xgboost" title="Link to this heading">#</a></h2>
+<p>El <strong>Gray Wolf Optimization (GWO)</strong> es un algoritmo metaheurístico inspirado en el comportamiento social y de caza de los lobos grises. Este enfoque organiza la población en una jerarquía y simula su estrategia de caza, que incluye el rastreo, el acoso y el ataque a la presa. En el caso de <strong>GWO-XGBoost</strong>, este algoritmo se utiliza para optimizar los hiperparámetros del modelo XGBoost, mejorando el rendimiento predictivo.</p>
+<section id="id2">
+<h3><strong>Funcionamiento general</strong><a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<p>El GWO organiza las soluciones (posibles configuraciones de hiperparámetros) en una jerarquía basada en su desempeño, clasificándolas en:</p>
+<ol class="arabic simple">
+<li><p><strong>Alfa (<span class="math notranslate nohighlight">\(\alpha\)</span>):</strong> La mejor solución conocida (líder de la manada).</p></li>
+<li><p><strong>Beta (<span class="math notranslate nohighlight">\(\beta\)</span>):</strong> La segunda mejor solución.</p></li>
+<li><p><strong>Delta (<span class="math notranslate nohighlight">\(\delta\)</span>):</strong> La tercera mejor solución.</p></li>
+<li><p><strong>Omega (<span class="math notranslate nohighlight">\(\omega\)</span>):</strong> Las soluciones restantes, que siguen a los líderes.</p></li>
+</ol>
+<p>Cada iteración del GWO se basa en la interacción de estas posiciones para actualizar las soluciones.</p>
+<section id="modelo-de-liderazgo">
+<h4><strong>1. Modelo de Liderazgo:</strong><a class="headerlink" href="#modelo-de-liderazgo" title="Link to this heading">#</a></h4>
+<p>Cada lobo ajusta su posición en relación con las soluciones líderes (<span class="math notranslate nohighlight">\(\alpha\)</span>, <span class="math notranslate nohighlight">\(\beta\)</span> y <span class="math notranslate nohighlight">\(\delta\)</span>). Esto asegura que las nuevas posiciones estén influenciadas por las mejores soluciones conocidas.</p>
+<p><strong>Ecuación matemática:</strong>
+$<span class="math notranslate nohighlight">\(
+   \vec{X}(t+1) = \frac{\vec{X}_\alpha + \vec{X}_\beta + \vec{X}_\delta}{3}
+   \)</span>$
+Donde:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\( \vec{X}_\alpha \)</span>, <span class="math notranslate nohighlight">\( \vec{X}_\beta \)</span>, <span class="math notranslate nohighlight">\( \vec{X}_\delta \)</span>: posiciones de las tres mejores soluciones.</p></li>
+<li><p><span class="math notranslate nohighlight">\( \vec{X}(t+1) \)</span>: nueva posición de un lobo.</p></li>
+</ul>
+</section>
+<section id="ajuste-de-posiciones">
+<h4><strong>2. Ajuste de Posiciones:</strong><a class="headerlink" href="#ajuste-de-posiciones" title="Link to this heading">#</a></h4>
+<p>Cada lobo actualiza su posición individual utilizando fórmulas que representan su proximidad a las mejores soluciones (<span class="math notranslate nohighlight">\(\alpha\)</span>, <span class="math notranslate nohighlight">\(\beta\)</span>, <span class="math notranslate nohighlight">\(\delta\)</span>):</p>
+<p><strong>Ecuaciones para actualizar posiciones:</strong>
+$<span class="math notranslate nohighlight">\(
+   \vec{D}_\alpha = |\vec{C}_1 \cdot \vec{X}_\alpha - \vec{X}(t)|, \quad \vec{X}_1 = \vec{X}_\alpha - \vec{A}_1 \cdot \vec{D}_\alpha
+   \)</span><span class="math notranslate nohighlight">\(
+   \)</span><span class="math notranslate nohighlight">\(
+   \vec{D}_\beta = |\vec{C}_2 \cdot \vec{X}_\beta - \vec{X}(t)|, \quad \vec{X}_2 = \vec{X}_\beta - \vec{A}_2 \cdot \vec{D}_\beta
+   \)</span><span class="math notranslate nohighlight">\(
+   \)</span><span class="math notranslate nohighlight">\(
+   \vec{D}_\delta = |\vec{C}_3 \cdot \vec{X}_\delta - \vec{X}(t)|, \quad \vec{X}_3 = \vec{X}_\delta - \vec{A}_3 \cdot \vec{D}_\delta
+   \)</span>$</p>
+<p>Donde:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\( \vec{D}_\alpha \)</span>, <span class="math notranslate nohighlight">\( \vec{D}_\beta \)</span>, <span class="math notranslate nohighlight">\( \vec{D}_\delta \)</span>: distancias de un lobo a las soluciones líderes.</p></li>
+<li><p><span class="math notranslate nohighlight">\( \vec{A}_i = 2 \cdot a \cdot r_1 - a \)</span>: vector de ajuste que decrece linealmente.</p></li>
+<li><p><span class="math notranslate nohighlight">\( \vec{C}_i = 2 \cdot r_2 \)</span>: vector aleatorio que controla la exploración.</p></li>
+<li><p><span class="math notranslate nohighlight">\( r_1, r_2 \)</span>: números aleatorios en <span class="math notranslate nohighlight">\( [0, 1] \)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\( a \)</span>: parámetro que decrece de <span class="math notranslate nohighlight">\( 2 \)</span> a <span class="math notranslate nohighlight">\( 0 \)</span> para equilibrar exploración y explotación.</p></li>
+</ul>
+</section>
+<section id="combinacion-de-posiciones">
+<h4><strong>3. Combinación de Posiciones:</strong><a class="headerlink" href="#combinacion-de-posiciones" title="Link to this heading">#</a></h4>
+<p>La nueva posición de un lobo se calcula como un promedio ponderado de las soluciones <span class="math notranslate nohighlight">\(\alpha\)</span>, <span class="math notranslate nohighlight">\(\beta\)</span> y <span class="math notranslate nohighlight">\(\delta\)</span>:
+$<span class="math notranslate nohighlight">\(
+   \vec{X}(t+1) = \frac{\vec{X}_1 + \vec{X}_2 + \vec{X}_3}{3}
+   \)</span>$</p>
+</section>
+</section>
+<section id="etapas-del-gwo">
+<h3><strong>Etapas del GWO</strong><a class="headerlink" href="#etapas-del-gwo" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Inicialización:</strong></p>
+<ul class="simple">
+<li><p>Se genera una población inicial aleatoria de soluciones.</p></li>
+<li><p>Se evalúa cada solución usando la función objetivo (en este caso, la métrica de error del modelo XGBoost).</p></li>
+</ul>
+</li>
+<li><p><strong>Actualización de Posiciones:</strong></p>
+<ul class="simple">
+<li><p>Cada solución ajusta su posición en función de las soluciones <span class="math notranslate nohighlight">\(\alpha\)</span>, <span class="math notranslate nohighlight">\(\beta\)</span> y <span class="math notranslate nohighlight">\(\delta\)</span>.</p></li>
+</ul>
+</li>
+<li><p><strong>Criterio de Parada:</strong></p>
+<ul class="simple">
+<li><p>El proceso se repite hasta que se alcanza un número máximo de iteraciones o una mejora mínima en la función objetivo.</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="ventajas-del-gwo">
+<h3><strong>Ventajas del GWO</strong><a class="headerlink" href="#ventajas-del-gwo" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Exploración y Explotación Balanceadas:</strong><br />
+GWO alterna entre buscar nuevas áreas del espacio de búsqueda (exploración) y refinar las soluciones encontradas (explotación), gracias al parámetro <span class="math notranslate nohighlight">\(a\)</span> que decrece durante las iteraciones.</p></li>
+<li><p><strong>Eficiencia Computacional:</strong><br />
+El algoritmo es ligero y puede manejar problemas de alta dimensionalidad.</p></li>
+<li><p><strong>Flexibilidad:</strong><br />
+Es fácil de implementar y se adapta a diversas funciones objetivo.</p></li>
+</ol>
+</section>
+<section id="id3">
+<h3><strong>Aplicación en XGBoost</strong><a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<p>En <strong>GWO-XGBoost</strong>, este algoritmo se utiliza para ajustar hiperparámetros como:</p>
+<ul class="simple">
+<li><p>Tasa de aprendizaje (<span class="math notranslate nohighlight">\(\eta\)</span>).</p></li>
+<li><p>Profundidad máxima de los árboles.</p></li>
+<li><p>Número de iteraciones de boosting.</p></li>
+<li><p>Parámetros de regularización (<span class="math notranslate nohighlight">\(\lambda\)</span>, <span class="math notranslate nohighlight">\(\gamma\)</span>).</p></li>
+</ul>
+<p>El objetivo es encontrar configuraciones óptimas que minimicen el error (como RMSE o MAE) mientras se mantienen tiempos de ejecución razonables.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="whale-optimization-algorithm-woa-xgboost">
+<h2><strong>Whale Optimization Algorithm (WOA - XGBoost)</strong><a class="headerlink" href="#whale-optimization-algorithm-woa-xgboost" title="Link to this heading">#</a></h2>
+<p>El <strong>Whale Optimization Algorithm (WOA)</strong> es un algoritmo metaheurístico inspirado en el comportamiento de alimentación de las ballenas jorobadas, particularmente su técnica de “caza por burbujas”, donde se mueven en espiral alrededor de sus presas. Este enfoque se combina con <strong>XGBoost</strong> para ajustar los hiperparámetros del modelo, mejorando tanto la precisión como la eficiencia computacional.</p>
+<section id="id4">
+<h3><strong>Funcionamiento general</strong><a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<p>El WOA combina dos comportamientos principales para explorar y explotar el espacio de búsqueda:</p>
+<ol class="arabic">
+<li><p><strong>Encerramiento de la presa (explotación local):</strong>
+Las ballenas se acercan a la mejor solución conocida en el espacio de búsqueda, simulando el movimiento hacia la presa.</p>
+<div class="math notranslate nohighlight">
+\[
+   \vec{X}(t+1) = \vec{X}_\text{best} - \vec{A} \cdot |\vec{C} \cdot \vec{X}_\text{best} - \vec{X}(t)|
+   \]</div>
+<p>Donde:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\( \vec{X}(t+1) \)</span> es la nueva posición.</p></li>
+<li><p><span class="math notranslate nohighlight">\( \vec{X}_\text{best} \)</span> es la mejor solución conocida hasta ahora.</p></li>
+<li><p><span class="math notranslate nohighlight">\( \vec{X}(t) \)</span> es la posición actual.</p></li>
+<li><p><span class="math notranslate nohighlight">\( \vec{A} \)</span> es el vector de contracción, calculado como:
+$<span class="math notranslate nohighlight">\(
+\vec{A} = 2 \cdot a \cdot \vec{r}_1 - a
+\)</span><span class="math notranslate nohighlight">\(
+donde \)</span>a<span class="math notranslate nohighlight">\( decrece linealmente de 2 a 0 durante las iteraciones, y \)</span> \vec{r}_1 <span class="math notranslate nohighlight">\( es un número aleatorio en \)</span>[0, 1]$.</p></li>
+<li><p><span class="math notranslate nohighlight">\( \vec{C} \)</span> es otro vector de ajuste aleatorio:
+$<span class="math notranslate nohighlight">\(
+\vec{C} = 2 \cdot \vec{r}_2
+\)</span><span class="math notranslate nohighlight">\(
+donde \)</span> \vec{r}_2 <span class="math notranslate nohighlight">\( es un número aleatorio en \)</span>[0, 1]$.</p></li>
+</ul>
+</li>
+<li><p><strong>Movimiento en espiral (exploración global):</strong>
+Simula el movimiento helicoidal de las ballenas alrededor de la presa. Este movimiento es generado mediante una ecuación basada en coordenadas polares.</p>
+<div class="math notranslate nohighlight">
+\[
+   \vec{X}(t+1) = |\vec{D}| \cdot e^{b \cdot l} \cdot \cos(2 \pi l) + \vec{X}_\text{best}
+   \]</div>
+<p>Donde:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\( \vec{D} = \vec{X}_\text{best} - \vec{X}(t) \)</span> mide la distancia entre la ballena y la presa.</p></li>
+<li><p><span class="math notranslate nohighlight">\( b \)</span> es una constante que define la forma del espiral.</p></li>
+<li><p><span class="math notranslate nohighlight">\( l \)</span> es un número aleatorio en <span class="math notranslate nohighlight">\([-1, 1]\)</span>.</p></li>
+</ul>
+</li>
+<li><p><strong>Selección Probabilística:</strong>
+En cada iteración, con una probabilidad del 50%, el algoritmo elige entre:</p>
+<ul class="simple">
+<li><p>Encerramiento de la presa (explotación local).</p></li>
+<li><p>Movimiento en espiral (exploración global).</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="etapas-del-woa">
+<h3><strong>Etapas del WOA</strong><a class="headerlink" href="#etapas-del-woa" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Inicialización:</strong> Se genera una población inicial de soluciones aleatorias (valores de hiperparámetros).</p></li>
+<li><p><strong>Evaluación:</strong> Cada solución se evalúa utilizando la función objetivo de XGBoost (como RMSE o MAE en un conjunto de validación).</p></li>
+<li><p><strong>Actualización:</strong> Las posiciones de las “ballenas” (soluciones) se ajustan iterativamente utilizando las fórmulas de encerramiento y espirales.</p></li>
+<li><p><strong>Convergencia:</strong> El algoritmo se detiene cuando se alcanza un criterio de parada, como un número máximo de iteraciones o una mejora mínima en la función objetivo.</p></li>
+</ol>
+</section>
+<section id="ventajas-del-woa">
+<h3><strong>Ventajas del WOA</strong><a class="headerlink" href="#ventajas-del-woa" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Exploración y explotación balanceadas:</strong> El WOA combina efectivamente la búsqueda global (espirales) con la local (encerramiento), lo que lo hace adecuado para optimizar espacios de búsqueda complejos como los hiperparámetros de XGBoost.</p></li>
+<li><p><strong>Simplicidad y eficiencia:</strong> El algoritmo es relativamente simple de implementar y no requiere muchas configuraciones adicionales.</p></li>
+<li><p><strong>Adaptabilidad:</strong> Puede ajustarse para trabajar con diferentes tipos de problemas gracias a su naturaleza aleatoria y dinámica.</p></li>
+</ul>
+</section>
+<section id="id5">
+<h3><strong>Aplicación en XGBoost</strong><a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
+<p>En el contexto de <strong>WOA-XGBoost</strong>, el WOA se utiliza para optimizar los hiperparámetros clave de XGBoost, como:</p>
+<ul class="simple">
+<li><p>Tasa de aprendizaje (<span class="math notranslate nohighlight">\(\eta\)</span>).</p></li>
+<li><p>Profundidad máxima de los árboles.</p></li>
+<li><p>Número de iteraciones de boosting.</p></li>
+<li><p>Parámetros de regularización (<span class="math notranslate nohighlight">\(\lambda\)</span>, <span class="math notranslate nohighlight">\(\gamma\)</span>).</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="comparacion-de-los-algoritmos">
+<h2><strong>Comparación de los Algoritmos</strong><a class="headerlink" href="#comparacion-de-los-algoritmos" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Algoritmo</p></th>
+<th class="head"><p>Exploración global</p></th>
+<th class="head"><p>Explotación local</p></th>
+<th class="head"><p>Velocidad de convergencia</p></th>
+<th class="head"><p>Robustez en problemas complejos</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>BO-XGBoost</p></td>
+<td><p>Baja</p></td>
+<td><p>Muy alta</p></td>
+<td><p>Alta</p></td>
+<td><p>Media</p></td>
+</tr>
+<tr class="row-odd"><td><p>GWO-XGBoost</p></td>
+<td><p>Alta</p></td>
+<td><p>Moderada</p></td>
+<td><p>Media</p></td>
+<td><p>Alta</p></td>
+</tr>
+<tr class="row-even"><td><p>WOA-XGBoost</p></td>
+<td><p>Moderada</p></td>
+<td><p>Alta</p></td>
+<td><p>Media</p></td>
+<td><p>Alta</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Donde:</p>
+<ol class="arabic simple">
+<li><p><strong>Exploración global</strong>:</p>
+<ul class="simple">
+<li><p>Indica la capacidad del algoritmo para buscar soluciones en diferentes partes del espacio de búsqueda. Una <strong>alta exploración global</strong> significa que el algoritmo es eficaz para evitar quedarse atrapado en mínimos o máximos locales y puede encontrar regiones prometedoras en el espacio de soluciones.</p></li>
+</ul>
+</li>
+<li><p><strong>Explotación local</strong>:</p>
+<ul class="simple">
+<li><p>Representa la habilidad del algoritmo para refinar soluciones cercanas a las mejores encontradas. Una <strong>alta explotación local</strong> implica que el algoritmo se centra en optimizar alrededor de las soluciones ya identificadas como prometedoras.</p></li>
+</ul>
+</li>
+<li><p><strong>Velocidad de convergencia</strong>:</p>
+<ul class="simple">
+<li><p>Se refiere a qué tan rápido el algoritmo converge hacia una solución óptima o cercana a ella. Una <strong>alta velocidad de convergencia</strong> significa que el algoritmo necesita menos iteraciones para encontrar una buena solución.</p></li>
+</ul>
+</li>
+<li><p><strong>Robustez en problemas complejos</strong>:</p>
+<ul class="simple">
+<li><p>Evalúa la capacidad del algoritmo para manejar problemas con relaciones no lineales, múltiples variables y posibles ruidos en los datos. Una <strong>alta robustez</strong> indica que el algoritmo es confiable y efectivo en problemas desafiantes como la predicción de fenómenos meteorológicos.</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="diferencia-entre-exploracion-y-explotacion">
+<h2><strong>Diferencia entre exploración y explotación</strong><a class="headerlink" href="#diferencia-entre-exploracion-y-explotacion" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p><strong>Exploración global</strong>:</p>
+<ul class="simple">
+<li><p>El algoritmo busca en todo el espacio de soluciones posibles, incluso en áreas que no parecen prometedoras inicialmente, con el objetivo de evitar quedarse atrapado en mínimos o máximos locales.</p></li>
+</ul>
+</li>
+<li><p><strong>Explotación local</strong>:</p>
+<ul class="simple">
+<li><p>Una vez identificada una región prometedora (una buena solución inicial), el algoritmo se enfoca en refinar esa solución o encontrar soluciones ligeramente mejores dentro de esa área específica.</p></li>
+</ul>
+</li>
+</ol>
+<section id="ejemplo-practico-en-optimizacion-metaheuristica">
+<h3><strong>Ejemplo práctico en optimización metaheurística</strong><a class="headerlink" href="#ejemplo-practico-en-optimizacion-metaheuristica" title="Link to this heading">#</a></h3>
+<p>Imagina que estás buscando la cima más alta de una montaña en un paisaje lleno de colinas (el espacio de búsqueda):</p>
+<ul class="simple">
+<li><p><strong>Exploración global</strong>:<br />
+Es como caminar por todo el terreno para encontrar las colinas más altas, incluso si están lejos entre sí. Esto asegura que no se pase por alto una colina más alta que las que inicialmente parecen mejores.</p></li>
+<li><p><strong>Explotación local</strong>:<br />
+Una vez que encuentras una colina alta, comienzas a buscar alrededor de su cima para determinar el punto exacto más alto.</p></li>
+</ul>
+<p>En los algoritmos como GWO, WOA y BO:</p>
+<ul class="simple">
+<li><p>GWO tiende a equilibrar exploración y explotación, pero su enfoque está más inclinado hacia la exploración.</p></li>
+<li><p>WOA tiene una explotación local más pronunciada, especialmente cuando utiliza el mecanismo de contracción y el movimiento en espiral.</p></li>
+<li><p>BO sobresale en explotación local al ajustar soluciones en las áreas con mayor probabilidad de mejora basada en modelos probabilísticos.</p></li>
+</ul>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -445,6 +918,59 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#concepto-clave-optimizacion-metaheuristica"><strong>Concepto clave: optimización metaheurística</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#xgboost"><strong>XGBoost</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#funcionamiento-general"><strong>Funcionamiento General</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#matematicas-de-xgboost"><strong>Matemáticas de XGBoost</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optimizacion-de-xgboost"><strong>Optimización de XGBoost</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ventajas-de-xgboost"><strong>Ventajas de XGBoost</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bayesian-optimization-bo-xgboost"><strong>Bayesian Optimization (BO - XGBoost)</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"><strong>Funcionamiento general</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#matematicas-del-proceso"><strong>Matemáticas del Proceso</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ventajas-de-bo"><strong>Ventajas de BO</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aplicacion-en-xgboost"><strong>Aplicación en XGBoost</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gray-wolf-optimization-gwo-xgboost"><strong>Gray Wolf Optimization (GWO - XGBoost)</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2"><strong>Funcionamiento general</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-de-liderazgo"><strong>1. Modelo de Liderazgo:</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ajuste-de-posiciones"><strong>2. Ajuste de Posiciones:</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#combinacion-de-posiciones"><strong>3. Combinación de Posiciones:</strong></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#etapas-del-gwo"><strong>Etapas del GWO</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ventajas-del-gwo"><strong>Ventajas del GWO</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3"><strong>Aplicación en XGBoost</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#whale-optimization-algorithm-woa-xgboost"><strong>Whale Optimization Algorithm (WOA - XGBoost)</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4"><strong>Funcionamiento general</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#etapas-del-woa"><strong>Etapas del WOA</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ventajas-del-woa"><strong>Ventajas del WOA</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5"><strong>Aplicación en XGBoost</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparacion-de-los-algoritmos"><strong>Comparación de los Algoritmos</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#diferencia-entre-exploracion-y-explotacion"><strong>Diferencia entre exploración y explotación</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-practico-en-optimizacion-metaheuristica"><strong>Ejemplo práctico en optimización metaheurística</strong></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
